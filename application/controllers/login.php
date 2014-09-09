@@ -11,39 +11,40 @@ class Login extends MY_Controller {
 	function post(){
 		$code = $this->input->post('code');
 		$pass = $this->input->post('password');
+		var_dump(empty($code));
 
 		$this->load->model('login_model');
-		$account = $this->login_model->chec_account($code,$pass);
+		$account = $this->login_model->check_account($code,$pass);
 
-		$redirect = $this->input->post('redirect');
-		$reurl = isset($redirect) ? site_url($redirect) : site_url('login');
-
-		if(empty($code)){
+		if(empty($code) or empty($pass)){
 			$this->session->set_flashdata('error', 'Kullanıcı Kodunu Giriniz');
-			redirect($reurl);
-			exit;
+			redirect(site_url('login'));
+			die;
 		}
 
 		if(empty($pass)){
 			$this->session->set_flashdata('error', 'Şifrenizi Giriniz!');
-			exit;
+			redirect(site_url('login'));
+			die;
 		}
 
 		if(!$account){
 			$this->session->set_flashdata('error', 'Kullanıcı Bilgileri Hatalı!');
-			redirect($reurl);
+			redirect(site_url('login'));
 		}else{
 
-			$hotel_id  = $this->login_model->default_hotel($check->code);
-			$user_data =  array('name' 		=> $check->name,
-								'surname'	=> $check->surname,
-								'username' 	=> $check->username,
-								'status'	=> $check->status,
+			$hotel_id  = $this->login_model->default_hotel($account->code);
+
+			$user_data =  array('user_id'	=> $account->id,
+								'name' 		=> $account->name,
+								'surname'	=> $account->surname,
+								'status'	=> $account->status,
+								'code'		=> $account->code,
 								'hotel_id'  => $hotel_id);
 			
 			$this->session->set_userdata($user_data);
-
-			redirect($reurl);
+			//print_r($this->session->userdata);
+			redirect(site_url('dashboard'));
 		}
 	}
 

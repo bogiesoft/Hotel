@@ -59,7 +59,9 @@
                 <form method="post" action="<?php echo site_url('login/post'); ?>">
                     <h4 class="nomargin">Sign In</h4>
                     <p class="mt5 mb20">Login to access your account.</p>
-                
+                    <?php if($this->session->flashdata('error')){
+                    echo '<div class="alert alert-danger">'.$this->session->flashdata('error').'</div>';
+                    }?>
                     <input type="text" name="code" class="form-control uname" placeholder="User Code" />
                     <input type="password" name="password" class="form-control pword" placeholder="Password" />
                     <a href="#"><small>Forgot Your Password?</small></a>
