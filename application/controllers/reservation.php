@@ -8,6 +8,10 @@ class Reservation extends MY_Controller {
 		if(empty($this->session->userdata('user_id'))){
 			redirect(site_url('login'));
 		}
+
+
+		//load reservation model
+		$this->load->model('reservation_model');
 		
 	}
 
@@ -20,16 +24,17 @@ class Reservation extends MY_Controller {
 		$uri = $this->uri->segment('3');
 		if ($uri=='add_new') {
 
-			$this->load->view('reservation/hotels_add');
+			$data['countries'] = $this->reservation_model->countries();
+
+			$this->load->view('reservation/hotels_add',$data);
 
 		}elseif($uri=='edit'){
 
 			$id = $this->uri->segment('4');
 
-			//load reservation model
-			$this->load->model('reservation_model');
 			//get hotel detail
 			$data['hotel'] = $this->reservation_model->hotel_details($id);
+			$data['countries'] = $this->reservation_model->countries();
 
 			$this->load->view('reservation/hotels_edit',$data);
 

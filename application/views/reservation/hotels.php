@@ -12,14 +12,19 @@
     
     <div class="contentpanel">
       <div class="row">
-       <div class="panel panel-default">
+        <a href="<?php echo site_url('reservation/hotels/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle </a>
+      </div>
+    
+      <div class="row">
+        <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
             <div id="hotels"></div>
             </div>
-            </div>
           </div>
-        </div><!-- row -->
+        </div>
+      </div><!-- row -->
+
     </div><!-- contentpanel -->
 
 <script src="<?php echo site_url('assets'); ?>/jtable/jquery.jtable.min.js"></script>
@@ -57,7 +62,7 @@
 
         $('#hotels').jtable({
             messages: turkishMessages, //Lozalize
-            title: 'Üye listesi',
+            title: 'Hotels',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
