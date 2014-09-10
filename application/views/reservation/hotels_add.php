@@ -58,14 +58,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Telefon</label>
                 <div class="col-sm-6">
-                  <input type="text" name="phone" placeholder="Telefon" class="form-control input-sm">
+                <input type="text" name="phone" id="phone" placeholder="Telefon" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Telefon 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="phone2" placeholder="Telefon 2" class="form-control input-sm">
+                <input type="text" name="phone2" id="phone2" placeholder="Telefon 2" class="form-control input-sm">
                 </div>
               </div>
 
@@ -120,40 +120,10 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Para Birimi</label>
                 <div class="col-sm-6">
-                    <select name="currency" size="1" class="form-control input-sm mb15">
-                      <option value="AUD">AUD</option>
-                      <option value="BGN">BGN</option>
-                      <option value="BRL">BRL</option>
-                      <option value="CAD">CAD</option>
-                      <option value="CHF">CHF</option>
-                      <option value="CNY">CNY</option>
-                      <option value="CZK">CZK</option>
-                      <option value="DKK">DKK</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
-                      <option value="HKD">HKD</option>
-                      <option value="HRK">HRK</option>
-                      <option value="HUF">HUF</option>
-                      <option value="IDR">IDR</option>
-                      <option value="ILS">ILS</option>
-                      <option value="INR">INR</option>
-                      <option value="JPY">JPY</option>
-                      <option value="KRW">KRW</option>
-                      <option value="LTL">LTL</option>
-                      <option value="MXN">MXN</option>
-                      <option value="MYR">MYR</option>
-                      <option value="NOK">NOK</option>
-                      <option value="NZD">NZD</option>
-                      <option value="PHP">PHP</option>
-                      <option value="PLN">PLN</option>
-                      <option value="RON">RON</option>
-                      <option value="RUB">RUB</option>
-                      <option value="SEK">SEK</option>
-                      <option value="SGD">SGD</option>
-                      <option value="THB">THB</option>
-                      <option value="TRY">TRY</option>
-                      <option value="USD">USD</option>
-                      <option value="ZAR">ZAR</option>
+                    <select name="bank_currency2" size="1" class="form-control input-sm">
+                    <?php foreach (currencies() as $key => $value) {
+                      echo '<option value="'.$value.'">'.$value.'</option>';
+                    } ?>
                     </select>
                 </div>
               </div>
@@ -162,6 +132,28 @@
             
 
             <div class="tab-pane" id="info">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                Varsayılan Açıklama 
+                <div  data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="Çoklu dil aktif değilse varsayılan açıklama. Diğer Diller için açıklamalar sayfasına bakınız.">
+                <i class="fa fa-info"></i>
+                </div>
+
+                </label>
+                <div class="col-sm-6">
+                <textarea name="description" class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Otel özellikleri</label>
+                <div class="col-sm-6">
+                <?php foreach (hotel_specs() as $k => $v) {
+                  # code...
+                } ?>
+                </div>
+              </div>
+
 
             </div> <!-- info end -->
             
@@ -172,6 +164,110 @@
             
 
             <div class="tab-pane" id="accounts">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Adı 1</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_name1" placeholder="Banka Adı" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Şube 1</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_office1" placeholder="Banka Şube" class="form-control input-sm">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Swift Kodu 1</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_swift1" placeholder="Swift Kodu" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Bank Hesap No 1</label>
+                <div class="col-sm-2">
+                    <select name="bank_currency2" size="1" class="form-control input-sm">
+                    <?php foreach (currencies() as $key => $value) {
+                      echo '<option value="'.$value.'">'.$value.'</option>';
+                    } ?>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" name="bank_account1" placeholder="Banka Hesap No" class="form-control input-sm">
+                </div>
+               
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Lehdar 1</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_beneficiary1" placeholder="Lehdar" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Iban 1</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_iban1" placeholder="Iban 1" class="form-control input-sm">
+                </div>
+              </div>
+
+              <hr> <!-- 1 - 2 arası -->
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Adı 2</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_name2" placeholder="Banka Adı" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Şube 2</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_office2" placeholder="Banka Şube" class="form-control input-sm">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Swift Kodu 2</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_swift2" placeholder="Swift Kodu" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Bank Hesap No 2</label>
+                <div class="col-sm-2">
+                    <select name="bank_currency2" size="1" class="form-control input-sm">
+                    <?php foreach (currencies() as $key => $value) {
+                      echo '<option value="'.$value.'">'.$value.'</option>';
+                    } ?>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" name="bank_account2" placeholder="Banka Hesap No" class="form-control input-sm">
+                </div>
+               
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Lehdar 2</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_beneficiary2" placeholder="Lehdar" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Banka Iban 2</label>
+                <div class="col-sm-6">
+                  <input type="text" name="bank_iban2" placeholder="Iban" class="form-control input-sm">
+                </div>
+              </div>
+
 
             </div>
           
@@ -188,10 +284,21 @@
 
 </div><!-- contentpanel -->
 
+<script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function(){
   // Chosen Select
   jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
+
+  // Tooltip
+  jQuery('.tooltips').tooltip({ container: 'body'});
+
+  // Input Masks
+  jQuery("#date").mask("99/99/9999");
+  jQuery("#phone").mask("(999) 999-9999");
+  jQuery("#phone2").mask("(999) 999-9999");
+  jQuery("#ssn").mask("999-99-9999");
 
 });
 </script>

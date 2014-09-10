@@ -22,6 +22,9 @@ class Reservation extends MY_Controller {
 	function hotels(){
 
 		$uri = $this->uri->segment('3');
+
+		$this->load->helper('specs');
+		
 		if ($uri=='add_new') {
 
 			$data['countries'] = $this->reservation_model->countries();
