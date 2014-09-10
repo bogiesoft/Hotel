@@ -224,9 +224,9 @@
 
             <div class="tab-pane" id="description">
              
-              <a href="#" class="btn btn-success add_field_button pull-right">Add More Fields</a>
+              <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
               <div class="input_fields_wrap">
-              <div>
+              <div id="item">
                <div class="form-group">
                   <label class="col-sm-3 control-label">Dil</label>
                   <div class="col-sm-2">
@@ -236,7 +236,9 @@
                       } ?>
                       </select>
                   </div>
-                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4">
+                    <a class="btn btn-xs btn-danger remove_field" href="#">Remove</a>
+                  </div>
                 </div>
 
                 <div class="form-group">
