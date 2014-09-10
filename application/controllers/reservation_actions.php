@@ -18,4 +18,14 @@ class Reservation_actions extends MY_Controller {
 	}
 
 
+	function save_hotel(){
+		$specs = $this->input->post('description');
+
+		//$specs = implode(',', $specs);
+		echo '<pre>';
+		print_r($specs);
+
+	}
+
+
 }

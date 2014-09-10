@@ -23,7 +23,7 @@
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
            
-           <form id="save_hotel_details">
+           <form id="save_hotel_details" method="POST" action="<?php echo site_url('reservation_actions/save_hotel'); ?>">
             <div class="tab-content mb30">
             
             <div class="tab-pane active" id="general">
@@ -38,6 +38,7 @@
                 <label class="col-sm-3 control-label">Kategori</label>
                 <div class="col-sm-6">
                   <select name="category" class="form-control input-sm mb15">
+                    <option value="0">Belirtilmemiş</option>
                     <option value="1">1 Yıldız</option>
                     <option value="2">2 Yıldız</option>
                     <option value="3">3 Yıldız</option>
@@ -128,6 +129,27 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Yönetici</label>
+                <div class="col-sm-6">
+                  <input type="text" name="administrator" placeholder="Yönetici Adı" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Ön Büro Telefon</label>
+                <div class="col-sm-6">
+                  <input type="text" name="reception_phone" placeholder="Ön Büro Telefon" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Ön Büro Email</label>
+                <div class="col-sm-6">
+                  <input type="text" name="reception_email" placeholder="Ön Büro Email" class="form-control input-sm">
+                </div>
+              </div>
+
             </div> <!-- general end -->
             
 
@@ -202,6 +224,33 @@
 
             <div class="tab-pane" id="description">
              
+              <a href="#" class="btn btn-success add_field_button pull-right">Add More Fields</a>
+              <div class="input_fields_wrap">
+              <div>
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">Dil</label>
+                  <div class="col-sm-2">
+                    <select name="description[1][lang]" size="1" class="form-control input-sm">
+                      <?php foreach (languages() as $key => $value) {
+                        echo '<option value="'.$value['code'].'">'.$value['name'].'</option>';
+                      } ?>
+                      </select>
+                  </div>
+                  <div class="col-sm-4"></div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Açıklama</label>
+                  <div class="col-sm-6">
+                    <textarea name="description[1][desc]"  class="form-control"></textarea>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              
+              
+              </div>
+
             </div> <!-- description end -->
             
 
@@ -342,6 +391,26 @@ jQuery(document).ready(function(){
   jQuery("#phone2").mask("(999) 999-9999");
   jQuery("#ssn").mask("999-99-9999");
 
+
+  var max_fields      = 10; //maximum input boxes allowed
+  var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+  var add_button      = $(".add_field_button"); //Add button ID
+  
+  var x = 1; //initlal text box count
+  $(add_button).click(function(e){ //on add input button click
+      e.preventDefault();
+      if(x < max_fields){ //max input box allowed
+          x++; //text box increment
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">Dil</label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#">Remove</a></div></div><div class="form-group"><label class="col-sm-3 control-label">Açıklama</label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          $(wrapper).append(html); //add input box
+      }
+  });
+  
+  $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+      e.preventDefault(); $(this).closest('#item').remove(); x--;
+  })
+
 });
+
 </script>
 <?php $this->load->view('footer'); ?>
