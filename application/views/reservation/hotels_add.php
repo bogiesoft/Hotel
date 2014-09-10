@@ -148,12 +148,54 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Otel özellikleri</label>
                 <div class="col-sm-6">
-                <?php foreach (hotel_specs() as $k => $v) {
-                  # code...
-                } ?>
+                <table>
+                  <tbody>
+                    <tr>
+                    <?php $i=0; foreach (hotel_specs() as $k => $v) { $i++;
+                      echo '<td width="5%"><input type="checkbox" name="hotel_specs[]" value="'.$k.'"/></td>';
+                      echo '<td width="40%">'.$v.'</td>';
+                      if($i%2==0) echo '</tr><tr>';
+                    } ?>
+                  </tr>
+                  </tbody>
+                </table>
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Restourant</label>
+                <div class="col-sm-6">
+                <table>
+                  <tbody>
+                    <tr>
+                    <?php $i=0; foreach (restourant_specs() as $k => $v) { $i++;
+                      echo '<td width="5%"><input type="checkbox" name="restourant_specs[]" value="'.$k.'"/></td>';
+                      echo '<td width="40%">'.$v.'</td>';
+                      if($i%2==0) echo '</tr><tr>';
+                    } ?>
+                  </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Spor ve Eğlence</label>
+                <div class="col-sm-6">
+                <table>
+                  <tbody>
+                    <tr>
+                    <?php $i=0; foreach (sport_specs() as $k => $v) { $i++;
+                      echo '<td width="5%"><input type="checkbox" name="sport_specs[]" value="'.$k.'"/></td>';
+                      echo '<td width="40%">'.$v.'</td>';
+                      if($i%2==0) echo '</tr><tr>';
+                    } ?>
+                  </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
 
             </div> <!-- info end -->
             
