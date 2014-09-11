@@ -12,4 +12,8 @@ class Reservation_Model extends CI_Model
 	function countries(){
 		return $this->db->query("SELECT * FROM countries")->result();
 	}
+
+	function hotel_description($id){
+		return $this->db->query("SELECT * FROM hotel_contents WHERE hotel_id='$id'")->result();
+	}
 }

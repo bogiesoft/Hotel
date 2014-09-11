@@ -39,7 +39,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Otel adı</label>
                 <div class="col-sm-6">
-                  <input type="text" name="name" placeholder="Otel adı" class="form-control input-sm">
+                  <input type="text" name="name" value="<?php echo $hotel->name; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -47,12 +47,10 @@
                 <label class="col-sm-3 control-label">Kategori</label>
                 <div class="col-sm-6">
                   <select name="category" class="form-control input-sm mb15">
-                    <option value="0">Belirtilmemiş</option>
-                    <option value="1">1 Yıldız</option>
-                    <option value="2">2 Yıldız</option>
-                    <option value="3">3 Yıldız</option>
-                    <option value="4">4 Yıldız</option>
-                    <option value="5">5 Yıldız</option>
+                  <?php foreach (hotel_category() as $key => $value) {
+                    $selected = $hotel->category == $key ? 'selected="selected"' : '';
+                    echo  '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+                  } ?>
                   </select>
                 </div>
               </div>
@@ -60,7 +58,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Adres</label>
                 <div class="col-sm-6">
-                  <input type="text" name="adress" placeholder="Adres" class="form-control input-sm">
+                  <input type="text" name="adress" value="<?php echo $hotel->adress; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -68,35 +66,35 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Telefon</label>
                 <div class="col-sm-6">
-                <input type="text" name="phone" id="phone" placeholder="Telefon" class="form-control input-sm">
+                <input type="text" name="phone" id="phone" value="<?php echo $hotel->phone; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Telefon 2</label>
                 <div class="col-sm-6">
-                <input type="text" name="phone2" id="phone2" placeholder="Telefon 2" class="form-control input-sm">
+                <input type="text" name="phone2" id="phone2" value="<?php echo $hotel->phone2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Fax</label>
                 <div class="col-sm-6">
-                  <input type="text" name="fax" placeholder="Fax" class="form-control input-sm">
+                  <input type="text" name="fax" value="<?php echo $hotel->fax; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">E-Mail</label>
                 <div class="col-sm-6">
-                  <input type="text" name="email" placeholder="E-Mail" class="form-control input-sm">
+                  <input type="text" name="email" value="<?php echo $hotel->email; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Website</label>
                 <div class="col-sm-6">
-                  <input type="text" name="website" placeholder="http://www.site.com" class="form-control input-sm">
+                  <input type="text" name="website" value="<?php echo $hotel->website; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -106,7 +104,8 @@
                 <div class="col-sm-6">
                   <select name="country" id="country" class="form-control choosen-select input-sm mb15">
                   <?php foreach ($countries as $key => $c) {
-                    echo '<option value="'.$c->id.'">'.$c->name.'</option>';
+                    $selected = $hotel->country == $key ? 'selected="selected"' : ''; 
+                    echo '<option value="'.$c->id.'" '.$selected.'>'.$c->name.'</option>';
                   } ?>
                   </select>
                 </div>
@@ -115,7 +114,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Şehir</label>
                 <div class="col-sm-6">
-                  <input type="text" name="city" placeholder="Şehir" class="form-control input-sm">
+                  <input type="text" name="city" value="<?php echo $hotel->city; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -123,7 +122,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">ZIP Posta Kodu</label>
                 <div class="col-sm-6">
-                  <input type="text" name="postcode" placeholder="ZIP Posta Kodu" class="form-control input-sm">
+                  <input type="text" name="postcode" value="<?php echo $hotel->postcode; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -132,7 +131,8 @@
                 <div class="col-sm-6">
                     <select name="currency" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
-                      echo '<option value="'.$value.'">'.$value.'</option>';
+                      $selected = $hotel->currency == $value ? 'selected="selected"' : '';
+                      echo '<option value="'.$value.'" '.$selected.'>'.$value.'</option>';
                     } ?>
                     </select>
                 </div>
@@ -141,21 +141,21 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Yönetici</label>
                 <div class="col-sm-6">
-                  <input type="text" name="administrator" placeholder="Yönetici Adı" class="form-control input-sm">
+                  <input type="text" name="administrator" value="<?php echo $hotel->administrator; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Ön Büro Telefon</label>
                 <div class="col-sm-6">
-                  <input type="text" name="reception_phone" placeholder="Ön Büro Telefon" class="form-control input-sm">
+                  <input type="text" name="reception_phone" value="<?php echo $hotel->reception_phone; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Ön Büro Email</label>
                 <div class="col-sm-6">
-                  <input type="text" name="reception_email" placeholder="Ön Büro Email" class="form-control input-sm">
+                  <input type="text" name="reception_email" value="<?php echo $hotel->reception_email; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -172,7 +172,7 @@
 
                 </label>
                 <div class="col-sm-6">
-                <textarea name="default_desc" class="form-control"></textarea>
+                <textarea name="default_desc" class="form-control"><?php echo $hotel->description; ?></textarea>
                 </div>
               </div>
 
@@ -183,7 +183,11 @@
                   <tbody>
                     <tr>
                     <?php $i=0; foreach (hotel_specs() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="hotel_specs[]" value="'.$k.'"/></td>';
+
+                      $hotel_specs = explode(',', $hotel->hotel_specs);
+                      $checked = isset($hotel_specs[$k]) ? 'checked' : '';
+
+                      echo '<td width="5%"><input type="checkbox" name="hotel_specs[]" '.$checked.' value="'.$k.'"/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
@@ -200,7 +204,11 @@
                   <tbody>
                     <tr>
                     <?php $i=0; foreach (restourant_specs() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="restourant_specs[]" value="'.$k.'"/></td>';
+
+                      $restourant_specs = explode(',', $hotel->restourant_specs);
+                      $checked = isset($restourant_specs[$k]) ? 'checked' : '';
+
+                      echo '<td width="5%"><input type="checkbox" name="restourant_specs[]" '.$checked.' value="'.$k.'"/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
@@ -218,7 +226,11 @@
                   <tbody>
                     <tr>
                     <?php $i=0; foreach (sport_specs() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="sport_specs[]" value="'.$k.'"/></td>';
+
+                      $sport_specs = explode(',', $hotel->sport_specs);
+                      $checked = isset($sport_specs[$k]) ? 'checked' : '';
+
+                      echo '<td width="5%"><input type="checkbox" name="sport_specs[]" '.$checked.' value="'.$k.'"/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
@@ -235,13 +247,17 @@
              
               <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
               <div class="input_fields_wrap">
+
+              <?php foreach ($description as $k => $desc) : ?>
+            
               <div id="item">
                <div class="form-group">
                   <label class="col-sm-3 control-label">Dil</label>
                   <div class="col-sm-2">
-                    <select name="description[1][lang]" size="1" class="form-control input-sm">
+                    <select name="description[<?php echo $k; ?>][lang]" size="1" class="form-control input-sm">
                       <?php foreach (languages() as $key => $value) {
-                        echo '<option value="'.$value['code'].'">'.$value['name'].'</option>';
+                        $selected = $desc->lang == $value['code'] ? 'selected="selected"' : '';
+                        echo '<option value="'.$value['code'].'" '.$selected.'>'.$value['name'].'</option>';
                       } ?>
                       </select>
                   </div>
@@ -253,11 +269,13 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Açıklama</label>
                   <div class="col-sm-6">
-                    <textarea name="description[1][desc]"  class="form-control"></textarea>
+                    <textarea name="description[<?php echo $k; ?>][desc]"  class="form-control"><?php echo $desc->content; ?></textarea>
                   </div>
                 </div>
                 <hr>
               </div>
+
+            <?php endforeach; ?>
               
               
               </div>
@@ -269,14 +287,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Adı 1</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_name1" placeholder="Banka Adı" class="form-control input-sm">
+                  <input type="text" name="bank_name1" value="<?php echo $hotel->bank_name1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Şube 1</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_office1" placeholder="Banka Şube" class="form-control input-sm">
+                  <input type="text" name="bank_office1" value="<?php echo $hotel->bank_office1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -284,7 +302,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Swift Kodu 1</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_swift1" placeholder="Swift Kodu" class="form-control input-sm">
+                  <input type="text" name="bank_swift1" value="<?php echo $hotel->bank_swift1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -293,12 +311,13 @@
                 <div class="col-sm-2">
                     <select name="bank_currency1" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
-                      echo '<option value="'.$value.'">'.$value.'</option>';
+                      $selected = $hotel->bank_currency1 == $value ? 'selected="selected"' : '';
+                      echo '<option value="'.$value.'" '.$selected.'>'.$value.'</option>';
                     } ?>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" name="bank_account1" placeholder="Banka Hesap No" class="form-control input-sm">
+                    <input type="text" name="bank_account1" value="<?php echo $hotel->bank_account1; ?>" class="form-control input-sm">
                 </div>
                
               </div>
@@ -306,14 +325,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Lehdar 1</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_beneficiary1" placeholder="Lehdar" class="form-control input-sm">
+                  <input type="text" name="bank_beneficiary1" value="<?php echo $hotel->bank_beneficiary1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Iban 1</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_iban1" placeholder="Iban 1" class="form-control input-sm">
+                  <input type="text" name="bank_iban1" value="<?php echo $hotel->bank_iban1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -322,14 +341,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Adı 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_name2" placeholder="Banka Adı" class="form-control input-sm">
+                  <input type="text" name="bank_name2" value="<?php echo $hotel->bank_name2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Şube 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_office2" placeholder="Banka Şube" class="form-control input-sm">
+                  <input type="text" name="bank_office2" value="<?php echo $hotel->bank_office2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -337,7 +356,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Swift Kodu 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_swift2" placeholder="Swift Kodu" class="form-control input-sm">
+                  <input type="text" name="bank_swift2" value="<?php echo $hotel->bank_swift2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -346,12 +365,13 @@
                 <div class="col-sm-2">
                     <select name="bank_currency2" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
-                      echo '<option value="'.$value.'">'.$value.'</option>';
+                      $selected =  $hotel->bank_currency2 == $value ? 'selected="selected"' : '';
+                      echo '<option value="'.$value.'" '.$selected.'>'.$value.'</option>';
                     } ?>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" name="bank_account2" placeholder="Banka Hesap No" class="form-control input-sm">
+                    <input type="text" name="bank_account2" value="<?php echo $hotel->bank_account2; ?>" class="form-control input-sm">
                 </div>
                
               </div>
@@ -359,14 +379,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Lehdar 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_beneficiary2" placeholder="Lehdar" class="form-control input-sm">
+                  <input type="text" name="bank_beneficiary2" value="<?php echo $hotel->bank_beneficiary2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Banka Iban 2</label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_iban2" placeholder="Iban" class="form-control input-sm">
+                  <input type="text" name="bank_iban2" value="<?php echo $hotel->bank_iban2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -375,7 +395,8 @@
           
             </div> <!-- tab content end -->
 
-            <input type="hidden" name="update" value="0" />
+            <input type="hidden" name="update" value="1" />
+            <input type="hidden" name="hotel_id" value="<?php echo $this->uri->segment('4'); ?>" />
 
             <div class="row">
               <div class="col-sm-2">
@@ -412,11 +433,11 @@ jQuery(document).ready(function(){
   jQuery("#ssn").mask("999-99-9999");
 
 
-  var max_fields      = 10; //maximum input boxes allowed
+  var max_fields      = 30; //maximum input boxes allowed
   var wrapper         = $(".input_fields_wrap"); //Fields wrapper
   var add_button      = $(".add_field_button"); //Add button ID
   
-  var x = 1; //initlal text box count
+  var x = 20; //initlal text box count
   $(add_button).click(function(e){ //on add input button click
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
@@ -429,42 +450,6 @@ jQuery(document).ready(function(){
   $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
       e.preventDefault(); $(this).closest('#item').remove(); x--;
   })
-
-
-  $("#save_hotel_details").submit(function(event) {
-  /* stop form from submitting normally */
-  event.preventDefault();
-  /*clear result div*/
-  $("#result").html('');
-  /* get some values from elements on the page: */
-  var val = $(this).serialize();
-  /* Send the data using post and put the results in a div */
-  $.ajax({
-      url: base_url + "reservation_actions/save_hotel",
-      type: "post",
-      data: val,
-      dataType: 'json',
-      success: function(data){ 
-        $('#result').html(data.message);
-        $("#result").removeClass('alert-error'); 
-        $("#result").removeClass('alert-success'); 
-        $("#result").addClass('alert-'+data.status);
-        $("#result").fadeIn(1000);
-        setTimeout(function(){ 
-             $("#result").fadeOut(500); }, 3000); 
-                  
-      },
-      error:function(){
-        $('#result').html('Something went wrong!');
-        $("#result").removeClass('alert-danger'); 
-        $("#result").removeClass('alert-success');      
-        $("#result").addClass('alert-danger');
-        $("#result").fadeIn(1000);
-      }   
-    }); 
-  });
-
-
 
 
 });

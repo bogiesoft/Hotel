@@ -114,3 +114,19 @@ function currencies($id=0){
 	}
 
 }
+
+function hotel_category($id){
+	$cats = array(
+		'0' => 'Belirtilmemiş',
+		'1' => '1 Yıldız',
+		'2' => '2 Yıldız',
+		'3' => '3 Yıldız',
+		'4' => '4 Yıldız',
+		'5' => '5 Yıldız');
+
+	if ($id > 0) {
+		return $cats[$id];
+	}else{
+		return $cats;
+	}
+}
