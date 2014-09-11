@@ -85,7 +85,7 @@
                   title: '',
                   sorting: false,
                   display: function (data) {
-                      return $('<a href="'+base_url+'reservation/hotels/edit/' + data.record.id + '"><i class="fa fa-edit"></i></a>');
+                      return $('<a href="'+base_url+'reservation/hotels/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }
                 }
 
