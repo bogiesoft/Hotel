@@ -11,6 +11,14 @@
     </div>
     
     <div class="contentpanel">
+
+    <?php if ($room->hotel_id != $this->session->userdata('hotel_id')) :?>
+      <div id="result" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      UYARI! Bu Oda şuanki işlem yaptığınız otele ait değil. Değişiklikler <b><?php echo $this->session->userdata('hotel_name'); ?></b> adına kayıt edilecektir.
+      </div>
+    <?php endif; ?>
+
     <?php if($this->session->flashdata('success')): ?>
       <div id="result" class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -25,6 +33,12 @@
       </div>
     <?php endif; ?>
 
+    <?php if ($room->code != $this->session->userdata('code')) : ?>
+      <div id="result" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      Başkalarının odalarını değiştirmeye mi çalışıyorsun?
+      </div>
+    <?php else: ?>
 
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
@@ -206,7 +220,8 @@
           </div>
       </div>
   </div><!-- row -->
-
+  
+  <?php endif; ?>
 </div><!-- contentpanel -->
 
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>

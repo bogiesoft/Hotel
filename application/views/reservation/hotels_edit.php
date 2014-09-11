@@ -25,6 +25,12 @@
       </div>
     <?php endif; ?>
 
+    <?php if ($hotel->code != $this->session->userdata('code')) : ?>
+      <div id="result" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      Başkalarının odalarını değiştirmeye mi çalışıyorsun?
+      </div>
+    <?php else: ?>
 
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
@@ -422,7 +428,7 @@
           </div>
       </div>
   </div><!-- row -->
-
+<?php endif; ?>
 </div><!-- contentpanel -->
 
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>

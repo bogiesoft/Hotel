@@ -145,7 +145,8 @@ class Reservation_actions extends MY_Controller {
 			'max_child' 	=> $this->input->post('max_child'),
 			'child_age' 	=> $this->input->post('child_age'),
 			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
-			'hotel_id'		=> $hotel_id);
+			'hotel_id'		=> $hotel_id,
+			'code'			=> $code);
 
 		//update mi yeni mi?
 		if ($this->input->post('update') == 1) {
