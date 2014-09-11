@@ -62,7 +62,30 @@ class Reservation_actions extends MY_Controller {
 		//update mi yeni mi?
 		if ($this->input->post('update') == 1) {
 			$hotel_id = $this->input->post('hotel_id');
-			echo $hotel_id;
+
+			$update = $this->db->update('hotels',$arr,array('id' => $hotel_id));
+			//diğer dillerdeki açıklamalar
+			$this->db->delete('hotel_contents',array('hotel_id'=>$hotel_id,'code'=>$code));
+			$description	= $this->input->post('description');
+
+			foreach ($description as $key => $value) {
+				$this->db->insert('hotel_contents',array(
+					'lang'		=>$value['lang'],
+					'content'	=> $value['desc'],
+					'hotel_id'	=> $hotel_id,
+					'code'		=> $code));
+			}
+
+			if ($update) {
+				$this->session->set_flashdata('success','Otel başarıyla düzenlendi.');
+				redirect('reservation/hotels/edit/'.$hotel_id);
+			}else{
+				$this->session->set_flashdata('error','Otel Düzenlenemedi, Lütfen Tekrar Deneyin.');
+				redirect('reservation/hotels/edit/'.$hotel_id);
+
+				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
+			}
+
 
 		}else{
 
@@ -82,10 +105,10 @@ class Reservation_actions extends MY_Controller {
 			}
 
 			if ($insert) {
-				$this->session->flashdata('success','Otel başarıyla eklendi.');
+				$this->session->set_flashdata('success','Otel başarıyla eklendi.');
 				redirect('reservation/hotels/edit/'.$hotel_id);
 			}else{
-				$this->session->flashdata('error','Otel Eklenemedi, Lütfen Tekrar Deneyin.');
+				$this->session->set_flashdata('error','Otel Eklenemedi, Lütfen Tekrar Deneyin.');
 				redirect('reservation/hotels/add_new');
 
 				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
