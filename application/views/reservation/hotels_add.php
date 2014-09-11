@@ -12,11 +12,17 @@
     
     <div class="contentpanel">
     <?php if($this->session->flashdata('success')): ?>
-      <div id="result" class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
+      <div id="result" class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <?php echo $this->session->flashdata('success'); ?>
+      </div>
     <?php endif; ?>
 
     <?php if($this->session->flashdata('error')): ?>
-      <div id="result" class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
+      <div id="result" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <?php echo $this->session->flashdata('error'); ?>
+      </div>
     <?php endif; ?>
 
 
