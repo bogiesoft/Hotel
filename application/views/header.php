@@ -87,7 +87,7 @@
 
           <li>
             <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                <?php echo $this->session->userdata('hotel_name'); ?>
                 <span class="caret"></span>
               </button>
@@ -105,7 +105,7 @@
 
           <li>
             <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                <?php echo $this->session->userdata('name'); ?> <?php echo $this->session->userdata('surname'); ?>
                 <span class="caret"></span>
               </button>
