@@ -116,7 +116,7 @@
                 <div class="col-sm-6">
                   <select name="country" id="country" class="form-control choosen-select input-sm mb15">
                   <?php foreach ($countries as $key => $c) {
-                    $selected = $hotel->country == $key ? 'selected="selected"' : ''; 
+                    $selected = $hotel->country == $c->id ? 'selected="selected"' : ''; 
                     echo '<option value="'.$c->id.'" '.$selected.'>'.$c->name.'</option>';
                   } ?>
                   </select>
