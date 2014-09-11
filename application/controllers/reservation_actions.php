@@ -22,6 +22,7 @@ class Reservation_actions extends MY_Controller {
 
 		$code = $this->session->userdata('code');
 
+
 		$arr = array(
 		'name' 			=> $this->input->post('name'),
 		'category' 		=> $this->input->post('category'),
@@ -39,9 +40,9 @@ class Reservation_actions extends MY_Controller {
 		'reception_phone'=> $this->input->post('reception_phone'),
 		'reception_email'=> $this->input->post('reception_email'),
 		'description'	=> $this->input->post('default_desc'),
-		'hotel_specs'	=> $this->input->post('hotel_specs') ? implode(',',$this->input->post('hotel_specs')) : '0',
-		'restourant_specs'=> $this->input->post('restourant_specs') ? implode(',',$this->input->post('restourant_specs')) :'0',
-		'sport_specs'	=> $this->input->post('sport_specs') ? implode(',',$this->input->post('sport_specs')) : '0',
+		'hotel_specs'	=> null!==$this->input->post('hotel_specs') ? implode(',',$this->input->post('hotel_specs')) : '0',
+		'restourant_specs'=> null!==$this->input->post('restourant_specs') ? implode(',',$this->input->post('restourant_specs')) :'0',
+		'sport_specs'	=> null!==$this->input->post('sport_specs') ? implode(',',$this->input->post('sport_specs')) : '0',
 		'bank_name1'	=> $this->input->post('bank_name1'),
 		'bank_office1'	=> $this->input->post('bank_office1'),
 		'bank_swift1'	=> $this->input->post('bank_swift1'),

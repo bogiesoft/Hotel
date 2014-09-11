@@ -185,6 +185,7 @@
                     <?php $i=0; foreach (hotel_specs() as $k => $v) { $i++;
 
                       $hotel_specs = explode(',', $hotel->hotel_specs);
+                      $hotel_specs = arr_val_to_key($hotel_specs);
                       $checked = isset($hotel_specs[$k]) ? 'checked' : '';
 
                       echo '<td width="5%"><input type="checkbox" name="hotel_specs[]" '.$checked.' value="'.$k.'"/></td>';
@@ -206,6 +207,7 @@
                     <?php $i=0; foreach (restourant_specs() as $k => $v) { $i++;
 
                       $restourant_specs = explode(',', $hotel->restourant_specs);
+                      $restourant_specs = arr_val_to_key($restourant_specs);
                       $checked = isset($restourant_specs[$k]) ? 'checked' : '';
 
                       echo '<td width="5%"><input type="checkbox" name="restourant_specs[]" '.$checked.' value="'.$k.'"/></td>';
@@ -228,6 +230,7 @@
                     <?php $i=0; foreach (sport_specs() as $k => $v) { $i++;
 
                       $sport_specs = explode(',', $hotel->sport_specs);
+                      $sport_specs = arr_val_to_key($sport_specs);
                       $checked = isset($sport_specs[$k]) ? 'checked' : '';
 
                       echo '<td width="5%"><input type="checkbox" name="sport_specs[]" '.$checked.' value="'.$k.'"/></td>';
