@@ -130,5 +130,80 @@ class Reservation_actions extends MY_Controller {
 		print json_encode($result);
 	}
 
+	function save_room(){
+		$code 		= $this->session->userdata('code');
+		$hotel_id 	= $this->session->userdata('hotel_id');
+
+		$arr = array(
+			'name' 			=> $this->input->post('name'),
+			'capacity' 		=> $this->input->post('capacity'),
+			'min_capacity' 	=> $this->input->post('min_capacity'),
+			'max_capacity' 	=> $this->input->post('max_capacity'),
+			'min_adult' 	=> $this->input->post('min_adult'),
+			'max_adult' 	=> $this->input->post('max_adult'),
+			'min_child' 	=> $this->input->post('min_child'),
+			'max_child' 	=> $this->input->post('max_child'),
+			'child_age' 	=> $this->input->post('child_age'),
+			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
+			'hotel_id'		=> $hotel_id);
+
+		//update mi yeni mi?
+		if ($this->input->post('update') == 1) {
+			$room_id = $this->input->post('room_id');
+
+			$update = $this->db->update('rooms',$arr,array('id' => $hotel_id));
+			//diğer dillerdeki açıklamalar
+			$this->db->delete('room_contents',array('room_id'=>$room_id));
+			$description	= $this->input->post('description');
+
+			foreach ($description as $key => $value) {
+				$this->db->insert('room_contents',array(
+					'lang'		=> $value['lang'],
+					'content'	=> $value['desc'],
+					'title'		=> $value['title'],
+					'room_id'	=> $room_id,
+					'hotel_id'	=> $hotel_id));
+			}
+
+			if ($update) {
+				$this->session->set_flashdata('success','Oda başarıyla düzenlendi.');
+				redirect('reservation/rooms/edit/'.$room_id);
+			}else{
+				$this->session->set_flashdata('error','Oda Düzenlenemedi, Lütfen Tekrar Deneyin.');
+				redirect('reservation/rooms/edit/'.$room_id);
+
+				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
+			}
+
+		//update değilse yeni ekle
+		}else{
+			$insert = $this->db->insert('rooms',$arr);
+			$room_id = $this->db->insert_id();
+
+			//diğer dillerdeki açıklamalar
+			$this->db->delete('room_contents',array('room_id'=>$room_id));
+			$description	= $this->input->post('description');
+
+			foreach ($description as $key => $value) {
+				$this->db->insert('room_contents',array(
+					'lang'		=> $value['lang'],
+					'content'	=> $value['desc'],
+					'title'		=> $value['title'],
+					'room_id'	=> $room_id,
+					'hotel_id'	=> $hotel_id));
+			}
+
+			if ($insert) {
+				$this->session->set_flashdata('success','Oda başarıyla eklendi.');
+				redirect('reservation/rooms/edit/'.$room_id);
+			}else{
+				$this->session->set_flashdata('error','Oda Eklenemedi, Lütfen Tekrar Deneyin.');
+				redirect('reservation/rooms/add_new');
+
+				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
+			}
+		}
+
+	}
 
 }

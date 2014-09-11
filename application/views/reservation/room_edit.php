@@ -43,14 +43,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Oda Adı</label>
                 <div class="col-sm-6">
-                  <input type="text" name="name" placeholder="Oda adı" class="form-control input-sm">
+                  <input type="text" name="name" value="<?php echo $room->name;?>" class="form-control input-sm">
                 </div>
               </div>
               
               <div class="form-group">
                 <label class="col-sm-3 control-label">Standart Kapasite</label>
                 <div class="col-sm-6">
-                  <input type="text" name="capacity" value="2" class="form-control input-sm">
+                  <input type="text" name="capacity" value="<?php echo $room->capacity;?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -60,13 +60,13 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label">Min. Kapasite</label>
-                    <input type="text" name="min_capacity" class="form-control input-sm">
+                    <input type="text" name="min_capacity" value="<?php echo $room->min_capacity;?>" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label">Max. Kapasite</label>
-                    <input type="text" name="max_capacity" class="form-control input-sm">
+                    <input type="text" name="max_capacity" value="<?php echo $room->max_capacity;?>" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
               </div>
@@ -78,13 +78,13 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label">Min. Yetişkin</label>
-                    <input type="text" name="min_adult" class="form-control input-sm">
+                    <input type="text" name="min_adult" value="<?php echo $room->min_adult;?>" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label">Max. Yetişkin</label>
-                    <input type="text" name="max_adult" class="form-control input-sm">
+                    <input type="text" name="max_adult" value="<?php echo $room->max_adult;?>" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
               </div>
@@ -96,21 +96,22 @@
                   <div class="col-sm-2">
                     <div class="form-group">
                       <label class="control-label">Min. Çocuk</label>
-                      <input type="text" name="min_child" value="0" class="form-control input-sm">
+                      <input type="text" name="min_child" value="<?php echo $room->min_child;?>" value="0" class="form-control input-sm">
                     </div>
                   </div><!-- col-sm-6 -->
                   <div class="col-sm-2">
                     <div class="form-group">
                       <label class="control-label">Max. Çocuk</label>
-                      <input type="text" name="max_child" value="0" class="form-control input-sm">
+                      <input type="text" name="max_child" value="<?php echo $room->max_child;?>" class="form-control input-sm">
                     </div>
                   </div><!-- col-sm-6 -->
                   <div class="col-sm-2">
                     <div class="form-group">
                       <label class="control-label">Max. Çocuk Yaş</label>
                       <select name="child_age" class="form-control input-sm">
-                      <?php for ($i=0; $i <=18 ; $i++) { 
-                        echo '<option value="'.$i.'">'.$i.'</option>';
+                      <?php for ($i=0; $i <=18 ; $i++) {
+                        $selected = $room->child_age == $i ? 'selected="selected"' :'';
+                        echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
                       }
                       ?>
                       </select>
@@ -126,7 +127,13 @@
                   <tbody>
                     <tr>
                     <?php $i=0; foreach (room_specs() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="room_units[]]" value="'.$k.'"/></td>';
+
+                      $room_specs = explode(',', $room->room_units);
+                      $room_specs = arr_val_to_key($room_specs);
+                      $checked = isset($room_specs[$k]) ? 'checked' : '';
+
+
+                      echo '<td width="5%"><input type="checkbox" name="room_units[]]" value="'.$k.'" '.$checked.'/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
@@ -142,13 +149,15 @@
                
                 <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
                 <div class="input_fields_wrap">
+                <?php foreach ($description as $k => $desc) : ?>
                 <div id="item">
                  <div class="form-group">
                     <label class="col-sm-3 control-label">Dil</label>
                     <div class="col-sm-2">
-                      <select name="description[1][lang]" size="1" class="form-control input-sm">
+                      <select name="description[<?php echo $k; ?>][lang]" size="1" class="form-control input-sm">
                         <?php foreach (languages() as $key => $value) {
-                          echo '<option value="'.$value['code'].'">'.$value['name'].'</option>';
+                           $selected = $desc->lang == $value['code'] ? 'selected="selected"' : '';
+                          echo '<option value="'.$value['code'].'" '.$selected.'>'.$value['name'].'</option>';
                         } ?>
                         </select>
                     </div>
@@ -159,29 +168,29 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Adı</label>
                     <div class="col-sm-6">
-                      <input type="text" name="description[1][title]" placeholder="Name" class="form-control input-sm"/>
+                      <input type="text" name="description[<?php echo $k; ?>][title]" value="<?php echo $desc->title;?>" class="form-control input-sm"/>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Açıklama</label>
                     <div class="col-sm-6">
-                      <textarea name="description[1][desc]"  class="form-control"></textarea>
+                      <textarea name="description[<?php echo $k; ?>][desc]"  class="form-control"><?php echo $desc->content;?></textarea>
                     </div>
                   </div>
 
                   
                   <hr>
                 </div>
-                
+                <?php endforeach; ?>
                 </div>
 
               </div> <!-- description end -->
             
             </div> <!-- tab content end -->
 
-            <input type="hidden" name="update" value="0" />
-
+            <input type="hidden" name="update" value="1" />
+            <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
             <div class="row">
               <div class="col-sm-2">
               <input type="submit" class="btn btn-primary" value="Kaydet">
