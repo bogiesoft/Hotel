@@ -37,8 +37,8 @@ class Reservation extends MY_Controller {
 
 			//get hotel detail
 			$data['hotel'] 		 = $this->reservation_model->hotel_details($id);
-			$data['description'] = $this->reservation_model->hotel_description($data['hotel']->id);
-			$data['countries'] = $this->reservation_model->countries();
+			$data['description'] = $this->reservation_model->hotel_description($id);
+			$data['countries'] 	 = $this->reservation_model->countries();
 
 			$this->load->view('reservation/hotels_edit',$data);
 
@@ -49,4 +49,28 @@ class Reservation extends MY_Controller {
 		
 	}
 	
+
+	function rooms(){
+		$uri = $this->uri->segment('3');
+
+		$this->load->helper('room');
+		if ($uri=='add_new') {
+
+			$this->load->view('reservation/room_add');
+
+		}elseif($uri=='edit'){
+			$id = $this->uri->segment('4');
+
+			//get hotel detail
+			$data['room'] 		 = $this->reservation_model->room_details($id);
+			$data['description'] = $this->reservation_model->room_description($id);
+			$this->load->view('reservation/room_edit',$data);
+
+		}else{
+
+			$this->load->view('reservation/room_types');
+		}
+
+		
+	}
 }

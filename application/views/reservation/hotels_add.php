@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Hotels </h2>
+      <h2><i class="fa fa-building-o"></i>Add New Hotel </h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">

@@ -22,3 +22,14 @@ function get_hotels(){
 
 	return $hotels->result();
 }
+
+/*
+* For specs. Changes the value of spec to array key
+*/
+function arr_val_to_key($arr){
+	$new = array();
+	foreach ($arr as $key => $value) {
+		$new[$value] = $value;
+	}
+	return $new;
+}

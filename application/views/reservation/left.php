@@ -5,7 +5,7 @@
 <li class="nav-parent"><a href="#"><i class="fa fa-building-o"></i> <span>Tesis</span></a>
   <ul class="children">
     <li><a href="<?php echo site_url('reservation/hotels'); ?>"><i class="fa fa-caret-right"></i> Tesisler</a></li>
-    <li><a href="#"><i class="fa fa-caret-right"></i> Oda Tipleri</a></li>
+    <li><a href="<?php echo site_url('reservation/rooms'); ?>"><i class="fa fa-caret-right"></i> Oda Tipleri</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Sezonlar</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> İndirimler</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Hizmetler</a></li>

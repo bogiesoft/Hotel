@@ -119,5 +119,16 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	function list_rooms(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$query = $this->db->query("SELECT * FROM rooms WHERE hotel_id='$hotel_id'");
+
+		$result = array();
+		$result['Result'] = "OK";
+		$result['TotalRecordCount'] = $query->num_rows();
+		$result['Records'] = $query->result();
+		print json_encode($result);
+	}
+
 
 }
