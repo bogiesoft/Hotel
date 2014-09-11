@@ -33,14 +33,15 @@ class Login extends MY_Controller {
 			redirect(site_url('login'));
 		}else{
 
-			$hotel_id  = $this->login_model->default_hotel($account->code);
+			$hotel = $this->login_model->default_hotel($account->code);
 
 			$user_data =  array('user_id'	=> $account->id,
 								'name' 		=> $account->name,
 								'surname'	=> $account->surname,
 								'status'	=> $account->status,
 								'code'		=> $account->code,
-								'hotel_id'  => $hotel_id);
+								'hotel_id'  => $hotel->id,
+								'hotel_name'=> $hotel->name);
 			
 			$this->session->set_userdata($user_data);
 			//print_r($this->session->userdata);

@@ -19,11 +19,12 @@ class Login_Model extends CI_Model
 	}
 
 	function default_hotel($code){
-		$check = $this->db->query("SELECT * From hotels where code='$code' and is_default=1");
+		$check = $this->db->query("SELECT id,name From hotels where code='$code' and is_default=1");
 		if ($check->num_rows()>0) {
-			return $check->id;
+			return $check->row();
 		}else{
 			return false;
 		}
 	}
+
 }

@@ -85,6 +85,23 @@
       <div class="header-right">
         <ul class="headermenu">
 
+          <li>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+               <?php echo $this->session->userdata('hotel_name'); ?>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+              <?php foreach (get_hotels() as $key => $value) : ?>
+                <li>
+                  <a href="<?php echo site_url('dashboard/set_hotel/?id='.$value->id.'&redirect='.$this->uri->uri_string); ?>">
+                  <?php echo $value->name; ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+              </ul>
+            </div>
+          </li>
 
           <li>
             <div class="btn-group">
