@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Add New Room </h2>
+      <h2><i class="fa fa-building-o"></i> Edit room </h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Add new hotel</li>
+          <li class="active">Edit Room</li>
         </ol>
       </div>
     </div>

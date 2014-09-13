@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <link rel="shortcut icon" href="<?php echo site_url('assets/back'); ?>/images/favicon.png" type="image/png">
 
-  <title>Bracket Responsive Bootstrap3 Admin</title>
+  <title>Reservation Online Login</title>
 
   <link href="<?php echo site_url('assets/back'); ?>/css/style.default.css" rel="stylesheet">
 
