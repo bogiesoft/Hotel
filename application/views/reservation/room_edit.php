@@ -43,6 +43,7 @@
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong>Açıklamalar</strong></a></li>
+          <li class=""><a href="#photos" data-toggle="tab"><strong>Fotoğraflar</strong></a></li>
       </ul>
     
       <div class="row">
@@ -201,6 +202,29 @@
 
               </div> <!-- description end -->
             
+              <link rel="stylesheet" href="<?php echo site_url('assets/back'); ?>/css/dropzone.css" />
+              <script src="<?php echo site_url('assets/back'); ?>/js/dropzone.min.js"></script>
+              <div class="tab-pane" id="photos">
+
+              <h4 class="panel-title">Oda fotoğrafları yükle</h4>
+              <p>Dosyaları aşağıdaki alana sürükleyerek kolayca yükleyebilirsiniz</p>
+
+                <div id="dropzone">
+                <form class="dropzone" id="demo-upload"></form>
+                </div>
+
+                <div id="dropzone">
+                <form id="myDropzone" action="<?php echo site_url('photos/room_photos'); ?>" class="dropzone" id="demo-upload">
+                  <div class="dropzone-previews"></div> 
+                  <div class="fallback"> <!-- this is the fallback if JS isn't working -->
+                  <input name="file" type="file" multiple />
+                  </div>
+
+                <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
+                </form>
+                </div>
+
+              </div> <!-- photos end -->
             </div> <!-- tab content end -->
 
             <input type="hidden" name="update" value="1" />
