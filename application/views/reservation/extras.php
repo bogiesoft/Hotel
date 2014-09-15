@@ -80,7 +80,7 @@
                     width: '4%'
                 },
                 name: {
-                    title: 'Oda Adı',
+                    title: 'Hizmet Adı',
                     width: '23%'
                 },
                 price:{
