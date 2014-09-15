@@ -152,12 +152,12 @@
                
                 <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
                 <div class="input_fields_wrap">
-                <?php foreach ($description as $key => $desc) : ?>
+                <?php foreach ($description as $k => $desc) : ?>
                 <div id="item">
                  <div class="form-group">
                     <label class="col-sm-3 control-label">Dil</label>
                     <div class="col-sm-2">
-                      <select name="description[<?php echo $key; ?>][lang]" size="1" class="form-control input-sm">
+                      <select name="description[<?php echo $k; ?>][lang]" size="1" class="form-control input-sm">
                         <?php foreach (languages() as $key => $value) {
                            $selected = $desc->lang == $value['code'] ? 'selected="selected"' : '';
                           echo '<option value="'.$value['code'].'" '.$selected.'>'.$value['name'].'</option>';
@@ -171,14 +171,14 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Adı</label>
                     <div class="col-sm-6">
-                      <input type="text" name="description[<?php echo $key; ?>][title]" value="<?php echo $desc->title; ?>" class="form-control input-sm"/>
+                      <input type="text" name="description[<?php echo $k; ?>][title]" value="<?php echo $desc->title; ?>" class="form-control input-sm"/>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Açıklama</label>
                     <div class="col-sm-6">
-                      <textarea name="description[<?php echo $key; ?>][desc]"  class="form-control"><?php echo $desc->content; ?></textarea>
+                      <textarea name="description[<?php echo $k; ?>][desc]"  class="form-control"><?php echo $desc->content; ?></textarea>
                     </div>
                   </div>
 
@@ -193,8 +193,9 @@
             
             </div> <!-- tab content end -->
 
-            <input type="hidden" name="update" value="0" />
-
+            <input type="hidden" name="update" value="1" />
+            <input type="hidden" name="extra_id" value="<?php echo $this->uri->segment('4'); ?>" />
+           
             <div class="row">
               <div class="col-sm-2">
               <input type="submit" class="btn btn-primary" value="Kaydet">

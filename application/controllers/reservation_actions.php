@@ -256,10 +256,10 @@ class Reservation_actions extends MY_Controller {
 
 			if ($update) {
 				$this->session->set_flashdata('success','Extra başarıyla düzenlendi.');
-				redirect('reservation/extras/edit/'.$room_id);
+				redirect('reservation/extras/edit/'.$extra_id);
 			}else{
 				$this->session->set_flashdata('error','Extra Düzenlenemedi, Lütfen Tekrar Deneyin.');
-				redirect('reservation/extras/edit/'.$room_id);
+				redirect('reservation/extras/edit/'.$extra_id);
 
 				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
 			}
@@ -285,7 +285,7 @@ class Reservation_actions extends MY_Controller {
 
 			if ($insert) {
 				$this->session->set_flashdata('success','Oda başarıyla eklendi.');
-				redirect('reservation/extras/edit/'.$room_id);
+				redirect('reservation/extras/edit/'.$extra_id);
 			}else{
 				$this->session->set_flashdata('error','Oda Eklenemedi, Lütfen Tekrar Deneyin.');
 				redirect('reservation/extras/add_new');
