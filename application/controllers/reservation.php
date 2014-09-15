@@ -73,4 +73,29 @@ class Reservation extends MY_Controller {
 
 		
 	}
+
+	function extras(){
+		$uri = $this->uri->segment('3');
+
+		$this->load->helper('room');
+		if ($uri=='add_new') {
+
+			$this->load->view('reservation/extras_add');
+
+		}elseif($uri=='edit'){
+			$id = $this->uri->segment('4');
+
+			//get hotel detail
+			$data['extra'] 		 = $this->reservation_model->extra_details($id);
+			$data['description'] = $this->reservation_model->extra_description($id);
+			$this->load->view('reservation/extras_edit',$data);
+
+		}else{
+
+			$this->load->view('reservation/extras');
+		}
+
+		
+	}
+
 }

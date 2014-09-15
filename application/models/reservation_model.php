@@ -24,4 +24,12 @@ class Reservation_Model extends CI_Model
 	function room_description($id){
 		return $this->db->query("SELECT * FROM room_contents WHERE room_id='$id'")->result();
 	}
+
+	function extra_details($id){
+		return $this->db->query("SELECT * FROM extras WHERE id = '$id'")->row();
+	}
+
+	function extra_description($id){
+		return $this->db->query("SELECT * FROM extras_contents WHERE extra_id='$id'")->result();
+	}
 }

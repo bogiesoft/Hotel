@@ -207,4 +207,95 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	function list_extras(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$query = $this->db->query("SELECT * FROM extras WHERE hotel_id='$hotel_id'");
+
+		$result = array();
+		$result['Result'] = "OK";
+		$result['TotalRecordCount'] = $query->num_rows();
+		$result['Records'] = $query->result();
+		print json_encode($result);
+	}
+
+
+	function save_extra(){
+		$code 		= $this->session->userdata('code');
+		$hotel_id 	= $this->session->userdata('hotel_id');
+
+		$arr = array(
+			'name' 			=> $this->input->post('name'),
+			'description' 	=> $this->input->post('basic_desc'),
+			'per' 			=> $this->input->post('per'),
+			'price' 		=> $this->input->post('price'),
+			'start_date' 	=> $this->input->post('start_date'),
+			'end_date' 		=> $this->input->post('end_date'),
+			'available_days'=> null!==$this->input->post('available_days') ? implode(',',$this->input->post('available_days')) : '0',
+			'status'		=> $this->input->post('status'),
+			'hotel_id'		=> $hotel_id,
+			'code'			=> $code);
+
+		//update mi yeni mi?
+		if ($this->input->post('update') == 1) {
+			$extra_id = $this->input->post('extra_id');
+
+			$update = $this->db->update('extras',$arr,array('id' => $hotel_id));
+			//diğer dillerdeki açıklamalar
+			$this->db->delete('extras_contents',array('extra_id'=>$extra_id));
+			$description	= $this->input->post('description');
+
+			foreach ($description as $key => $value) {
+				$this->db->insert('extras_contents',array(
+					'lang'		=> $value['lang'],
+					'content'	=> $value['desc'],
+					'title'		=> $value['title'],
+					'extra_id'	=> $extra_id,
+					'hotel_id'	=> $hotel_id,
+					'code'		=> $code));
+			}
+
+			if ($update) {
+				$this->session->set_flashdata('success','Extra başarıyla düzenlendi.');
+				redirect('reservation/extras/edit/'.$room_id);
+			}else{
+				$this->session->set_flashdata('error','Extra Düzenlenemedi, Lütfen Tekrar Deneyin.');
+				redirect('reservation/extras/edit/'.$room_id);
+
+				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
+			}
+
+		//update değilse yeni ekle
+		}else{
+			$insert = $this->db->insert('extras',$arr);
+			$extra_id = $this->db->insert_id();
+
+			//diğer dillerdeki açıklamalar
+			$this->db->delete('extras_contents',array('extra_id'=>$extra_id));
+			$description	= $this->input->post('description');
+
+			foreach ($description as $key => $value) {
+				$this->db->insert('extras_contents',array(
+					'lang'		=> $value['lang'],
+					'content'	=> $value['desc'],
+					'title'		=> $value['title'],
+					'extra_id'	=> $extra_id,
+					'hotel_id'	=> $hotel_id,
+					'code'		=> $code));
+			}
+
+			if ($insert) {
+				$this->session->set_flashdata('success','Oda başarıyla eklendi.');
+				redirect('reservation/extras/edit/'.$room_id);
+			}else{
+				$this->session->set_flashdata('error','Oda Eklenemedi, Lütfen Tekrar Deneyin.');
+				redirect('reservation/extras/add_new');
+
+				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
+			}
+		}
+
+	}
+
+
+
 }

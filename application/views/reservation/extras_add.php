@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Add New Room > <?php echo $this->session->userdata('hotel_name'); ?></h2>
+      <h2><i class="fa fa-building-o"></i> Add Extras > <?php echo $this->session->userdata('hotel_name'); ?></h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Add new room to <?php echo $this->session->userdata('hotel_name'); ?> </li>
+          <li class="active">Add Extras to <?php echo $this->session->userdata('hotel_name'); ?> </li>
         </ol>
       </div>
     </div>
@@ -36,106 +36,95 @@
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
            
-           <form id="save_hotel_details2" method="POST" action="<?php echo site_url('reservation_actions/save_room'); ?>">
+           <form id="save_hotel_details2" method="POST" action="<?php echo site_url('reservation_actions/save_extra'); ?>">
             <div class="tab-content mb30">
             
             <div class="tab-pane active" id="general">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Oda Adı</label>
+                <label class="col-sm-3 control-label">Adı</label>
                 <div class="col-sm-6">
-                  <input type="text" name="name" placeholder="Oda adı" class="form-control input-sm">
+                  <input type="text" name="name" placeholder="Extra Adı" class="form-control input-sm">
                 </div>
               </div>
               
               <div class="form-group">
-                <label class="col-sm-3 control-label">Standart Kapasite</label>
-                <div class="col-sm-6">
-                  <input type="text" name="capacity" value="2" class="form-control input-sm">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Kapasite</label>
+                <label class="col-sm-3 control-label">Pricing</label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Min. Kapasite</label>
-                    <input type="text" name="min_capacity" class="form-control input-sm">
+                    <label class="control-label">per</label>
+                    <select name="per" class="form-control input-sm">
+                      <option value="1">Person</option>
+                      <option value="2">Unit</option>
+                      <option value="3">Day</option>
+                      <option value="4">Child</option>
+                    </select>
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Max. Kapasite</label>
-                    <input type="text" name="max_capacity" class="form-control input-sm">
+                    <label class="control-label">Price</label>
+                    <input type="text" name="price" placeholder="örn: 99.00" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
               </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Yetişkin Sayısı</label>
+                <label class="col-sm-3 control-label">Limit to period
+                  <div data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="If you set '0' there will be no limitation.">
+                  <i class="fa fa-info"></i>
+                  </div>
+                </label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Min. Yetişkin</label>
-                    <input type="text" name="min_adult" class="form-control input-sm">
+                    <label class="control-label">From</label>
+                    <input type="text" name="start_date" class="form-control input-sm" placeholder="yyyy-mm-dd" id="from_date">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Max. Yetişkin</label>
-                    <input type="text" name="max_adult" class="form-control input-sm">
+                    <label class="control-label">To</label>
+                    <input type="text" name="end_date" class="form-control input-sm" placeholder="yyyy-mm-dd" id="to_date">
                   </div>
                 </div><!-- col-sm-6 -->
               </div>
-              </div>
-
-               <div class="form-group">
-                <label class="col-sm-3 control-label">Çocuk Sayısı</label>
-                 <div class="row">
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label">Min. Çocuk</label>
-                      <input type="text" name="min_child" value="0" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label">Max. Çocuk</label>
-                      <input type="text" name="max_child" value="0" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label">Max. Çocuk Yaş</label>
-                      <select name="child_age" class="form-control input-sm">
-                      <?php for ($i=0; $i <=18 ; $i++) { 
-                        echo '<option value="'.$i.'">'.$i.'</option>';
-                      }
-                      ?>
-                      </select>
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel özellikleri</label>
+                <label class="col-sm-3 control-label">Available Days</label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
                     <tr>
-                    <?php $i=0; foreach (room_specs() as $k => $v) { $i++;
+                      <?php $i=0; foreach (days_checkbox() as $k => $v) { $i++;
                       echo '<td width="5%"><input type="checkbox" name="room_units[]" value="'.$k.'"/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
-                  </tr>
+                    </tr>
                   </tbody>
                 </table>
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Basic Description</label>
+                <div class="col-sm-6">
+                <textarea class="form-control" name="basic_desc"></textarea>
+                   
+                </div>
+              </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Status</label>
+                <div class="col-sm-6">
+                  <select name="status" class="form-control input-sm">
+                      <option value="1">Active</option>
+                      <option value="0">Passive</option>
+                  </select>
+                </div>
+              </div>
             </div> <!-- general end -->
 
               <div class="tab-pane" id="description">
@@ -206,7 +195,10 @@
 jQuery(document).ready(function(){
   // Chosen Select
   jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
-
+  
+  //datepicker
+  jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
   // Tooltip
   jQuery('.tooltips').tooltip({ container: 'body'});
 

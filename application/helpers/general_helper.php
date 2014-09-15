@@ -33,3 +33,21 @@ function arr_val_to_key($arr){
 	}
 	return $new;
 }
+
+
+function days_checkbox($id=''){
+	$days = array(
+		'sun'	=> 'Sunday',
+		'mon' 	=> 'Monday',
+		'tue' 	=> 'Tuesday',
+		'wed' 	=> 'Wednesday',
+		'thu' 	=> 'Thursday',
+		'fri' 	=> 'Friday',
+		'sat'	=> 'Saturday');
+
+	if ($id > 0) {
+		return $days[$id];
+	}else{
+		return $days;
+	}
+}
