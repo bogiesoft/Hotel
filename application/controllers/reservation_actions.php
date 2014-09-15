@@ -239,7 +239,7 @@ class Reservation_actions extends MY_Controller {
 		if ($this->input->post('update') == 1) {
 			$extra_id = $this->input->post('extra_id');
 
-			$update = $this->db->update('extras',$arr,array('id' => $hotel_id));
+			$update = $this->db->update('extras',$arr,array('id' => $extra_id));
 			//diğer dillerdeki açıklamalar
 			$this->db->delete('extras_contents',array('extra_id'=>$extra_id));
 			$description	= $this->input->post('description');

@@ -44,7 +44,7 @@
               addNewRecord: '+ Yeni kayıt ekle',
               editRecord: 'Kayıt düzenle',
               areYouSure: 'Emin misiniz?',
-              deleteConfirmation: 'Bu odaya ait tüm veriler silinecektir. Emin misiniz?',
+              deleteConfirmation: 'Bu hizmete ait tüm veriler silinecektir. Emin misiniz?',
               save: 'Kaydet',
               saving: 'Kaydediyor',
               cancel: 'İptal',
@@ -107,7 +107,7 @@
                     title: 'Status',
                     width: '12%',
                     display: function (data) {
-                      if(data.record.id =='0'){
+                      if(data.record.status ==0){
                         return $('<font color="red">Passive</font>');
                       }else{
                         return $('<font color="green">Active</font>');
