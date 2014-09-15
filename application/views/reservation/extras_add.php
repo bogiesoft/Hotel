@@ -99,7 +99,7 @@
                   <tbody>
                     <tr>
                       <?php $i=0; foreach (days_checkbox() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="room_units[]" value="'.$k.'"/></td>';
+                      echo '<td width="5%"><input type="checkbox" name="room_units[]" value="'.$k.'" checked/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
