@@ -14,7 +14,7 @@ class Reservation_Model extends CI_Model
 	}
 
 	function hotel_description($id){
-		return $this->db->query("SELECT * FROM hotel_contents WHERE hotel_id='$id'")->result();
+		return $this->db->query("SELECT * FROM hotel_contents WHERE hotel_id='$id' ORDER BY lang")->result();
 	}
 
 	function room_details($id){
@@ -22,7 +22,7 @@ class Reservation_Model extends CI_Model
 	}
 
 	function room_description($id){
-		return $this->db->query("SELECT * FROM room_contents WHERE room_id='$id'")->result();
+		return $this->db->query("SELECT * FROM room_contents WHERE room_id='$id' ORDER BY lang")->result();
 	}
 
 	function extra_details($id){
@@ -30,6 +30,6 @@ class Reservation_Model extends CI_Model
 	}
 
 	function extra_description($id){
-		return $this->db->query("SELECT * FROM extras_contents WHERE extra_id='$id'")->result();
+		return $this->db->query("SELECT * FROM extras_contents WHERE extra_id='$id' ORDER BY lang")->result();
 	}
 }
