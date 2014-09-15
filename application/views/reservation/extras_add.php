@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Add Extras > <?php echo $this->session->userdata('hotel_name'); ?></h2>
+      <h2><i class="fa fa-building-o"></i> Add Extra > <?php echo $this->session->userdata('hotel_name'); ?></h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Add Extras to <?php echo $this->session->userdata('hotel_name'); ?> </li>
+          <li class="active">Add Extra to <?php echo $this->session->userdata('hotel_name'); ?> </li>
         </ol>
       </div>
     </div>
