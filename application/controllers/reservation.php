@@ -98,4 +98,9 @@ class Reservation extends MY_Controller {
 		
 	}
 
+
+	function seasons(){
+		$this->load->view('reservation/seasons');
+	}
+
 }

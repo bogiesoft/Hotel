@@ -296,6 +296,173 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	function seasons(){
+		$hotel_id 	= $this->session->userdata('hotel_id');
+		$code	 	= $this->session->userdata('code');
+
+		$action = $this->input->get('action');
+
+		switch ($action) {
+			case 'list':
+				
+				$query = $this->db->query("SELECT * FROM seasons WHERE hotel_id='$hotel_id'");
+
+				$result = array();
+				$result['Result'] = "OK";
+				$result['TotalRecordCount'] = $query->num_rows();
+				$result['Records'] = $query->result();
+				print json_encode($result);
+
+				break;
+			case 'create':
+				
+				$arr = array(
+				'name' 			=> $this->input->post('name'),
+				'start_date' 	=> $this->input->post('start_date'),
+				'end_date' 		=> $this->input->post('end_date'),
+				'price' 		=> $this->input->post('price'),
+				'hotel_id' 		=> $this->session->userdata('hotel_id'),
+				'code' 			=> $this->session->userdata('code')
+				);
+
+				$this->db->insert('seasons',$arr);
+				$id = $this->db->insert_id();
+
+				$row = $this->db->query("SELECT * FROM seasons where id='$id'")->row();
+				//Return result to jTable
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				$jTableResult['Record'] = $row;
+				print json_encode($jTableResult);
+
+				break;
+
+			case 'update':
+				$id = $this->input->post('id');
+
+				$arr = array(
+				'name' 			=> $this->input->post('name'),
+				'start_date' 	=> $this->input->post('start_date'),
+				'end_date' 		=> $this->input->post('end_date'),
+				'price' 		=> $this->input->post('price'),
+				'hotel_id' 		=> $this->session->userdata('hotel_id'),
+				'code' 			=> $this->session->userdata('code')
+				);
+
+				$this->db->update('seasons',$arr,array('id'=>$id));
+
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				print json_encode($jTableResult);
+
+				break;
+
+			case 'delete':
+				$this->db->delete('seasons',array('id' =>$this->input->post('id')));
+				$this->db->delete('season_prices',array('season_id' =>$this->input->post('id')));
+				//Return result to jTable
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				print json_encode($jTableResult);
+				break;
+			default:
+				# code...
+				break;
+		}
+		
+	}
+
+	/*
+	* Room Adları option
+	* Jtable child bölümünde
+	*
+	*/
+	function hotel_rooms(){
+		$this->load->model('reservation_model');
+		$rooms = $this->reservation_model->jtable_hotel_rooms();
+		
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Options'] = $rooms;
+		print json_encode($jTableResult);
+
+	}
+
+	function season_price(){
+		$this->load->model('reservation_model');
+		$season_id 	= $this->input->get('season_id');
+		$action 	= $this->input->get('action');
+
+		switch ($action) {
+			case 'list':
+				$prices 	= $this->reservation_model->get_season_prices($season_id);
+	
+				$result = array();
+				$result['Result'] = "OK";
+				$result['Records'] = $prices;
+				print json_encode($result);
+				break;
+			case 'create':
+
+				$arr = array(
+					'room_id' 		=> $this->input->post('room_id'),
+					'season_id' 	=> $this->input->post('season_id'),
+					'base_price'	=> $this->input->post('base_price'),
+					'double_price'	=> $this->input->post('double_price'),
+					'triple_price'	=> $this->input->post('triple_price'),
+					'extra_adult'	=> $this->input->post('extra_adult'),
+					'child_price'	=> $this->input->post('child_price'),
+					'extra_child'	=> $this->input->post('extra_child'),
+					);
+
+				$this->db->insert('season_prices',$arr);
+				$id = $this->db->insert_id();
+
+				$row = $this->db->query("SELECT * FROM season_prices where id='$id'")->row();
+				//Return result to jTable
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				$jTableResult['Record'] = $row;
+				print json_encode($jTableResult);
+
+
+
+				break;
+			case 'update':
+				$id = $this->input->post('id');
+				$arr = array(
+					'room_id' 		=> $this->input->post('room_id'),
+					'season_id' 	=> $this->input->post('season_id'),
+					'base_price'	=> $this->input->post('base_price'),
+					'double_price'	=> $this->input->post('double_price'),
+					'triple_price'	=> $this->input->post('triple_price'),
+					'extra_adult'	=> $this->input->post('extra_adult'),
+					'child_price'	=> $this->input->post('child_price'),
+					'extra_child'	=> $this->input->post('extra_child'),
+					);
+				$this->db->update('season_prices',$arr,array('id'=>$id));
+
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				print json_encode($jTableResult);
+
+
+				break;
+
+			case 'delete':
+				$this->db->delete('season_prices',array('season_id' =>$this->input->post('id')));
+				//Return result to jTable
+				$jTableResult = array();
+				$jTableResult['Result'] = "OK";
+				print json_encode($jTableResult);
+				break;
+			default:
+				# code...
+				break;
+		}
+
+		
+	}
 
 
 }
