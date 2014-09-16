@@ -448,7 +448,7 @@ class Reservation_actions extends MY_Controller {
 				break;
 
 			case 'delete':
-				$this->db->delete('season_prices',array('season_id' =>$this->input->post('id')));
+				$this->db->delete('season_prices',array('id' =>$this->input->post('id')));
 				//Return result to jTable
 				$jTableResult = array();
 				$jTableResult['Result'] = "OK";
