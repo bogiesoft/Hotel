@@ -320,7 +320,6 @@ class Reservation_actions extends MY_Controller {
 				'name' 			=> $this->input->post('name'),
 				'start_date' 	=> $this->input->post('start_date'),
 				'end_date' 		=> $this->input->post('end_date'),
-				'price' 		=> $this->input->post('price'),
 				'hotel_id' 		=> $this->session->userdata('hotel_id'),
 				'code' 			=> $this->session->userdata('code')
 				);
@@ -344,7 +343,6 @@ class Reservation_actions extends MY_Controller {
 				'name' 			=> $this->input->post('name'),
 				'start_date' 	=> $this->input->post('start_date'),
 				'end_date' 		=> $this->input->post('end_date'),
-				'price' 		=> $this->input->post('price'),
 				'hotel_id' 		=> $this->session->userdata('hotel_id'),
 				'code' 			=> $this->session->userdata('code')
 				);

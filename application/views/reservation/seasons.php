@@ -184,10 +184,6 @@
                     title: 'End Date',
                     width: '23%',
                     type : 'date'
-                },
-                price:{
-                    title: 'Price',
-                    width: '12%'
                 }
 
             }
