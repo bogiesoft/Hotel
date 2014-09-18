@@ -33,9 +33,16 @@ class Reservation_Model extends CI_Model
 		return $this->db->query("SELECT * FROM extras_contents WHERE extra_id='$id' ORDER BY lang")->result();
 	}
 
+	function get_hotel_rooms(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$rooms = $this->db->query("SELECT * FROM rooms WHERE hotel_id=$hotel_id order by id")->result();
+
+		return $rooms;
+	}
+
 	function jtable_hotel_rooms(){
 		$hotel_id = $this->session->userdata('hotel_id');
-		$rooms = $this->db->query("SELECT id as Value,name as DisplayText FROM rooms WHERE hotel_id=$hotel_id")->result();
+		$rooms = $this->db->query("SELECT id as Value,name as DisplayText FROM rooms WHERE hotel_id=$hotel_id order by Value")->result();
 
 		return $rooms;
 
@@ -48,5 +55,15 @@ class Reservation_Model extends CI_Model
 		return $prices->result();
 	}
 
+	function check_bar($hotel_id){
+		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id'";
+		$query = $this->db->query($sql);
+
+		if ($query->num_rows() < 1) {
+			return false;
+		}else{
+			return $query->result();
+		}
+	}
 		
 }

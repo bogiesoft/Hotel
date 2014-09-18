@@ -185,6 +185,10 @@
                     width: '10%',
                     type : 'date'
                 },
+                early_reservation_days :{
+                  title: 'Early Reservation Days',
+                    width: '18%'
+                },
                 cancel_days :{
                   title: 'Cancel days',
                     width: '10%'

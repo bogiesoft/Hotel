@@ -103,4 +103,22 @@ class Reservation extends MY_Controller {
 		$this->load->view('reservation/seasons');
 	}
 
+	function prices(){
+		//fiyatlar girilmiş mi?
+
+		$check = $this->reservation_model->check_bar($this->session->userdata('hotel_id'));
+
+		if (!$check) {
+			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+			$this->load->view('reservation/prices_add',$data);
+		}else{
+			$data['prices'] = $check;
+			$this->load->view('reservation/prices');
+		}
+	}
+
+	function set_prices(){
+		$this->load->view('reservation/prices_add');
+	}
+
 }
