@@ -83,7 +83,7 @@
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
             defaultSorting: 'name ASC', //Set default sorting
-            openChildAsAccordion: true,
+            //openChildAsAccordion: true,
             actions: {
                 listAction: '<?php echo site_url("reservation_actions/seasons?action=list"); ?>',
                 deleteAction : '<?php echo site_url("reservation_actions/seasons?action=delete"); ?>',
@@ -98,7 +98,7 @@
                     list: false,
                     width: '4%'
                 },
-                rooms: {
+                /*rooms: {
                     title: '',
                     width: '5%',
                     sorting: false,
@@ -170,20 +170,32 @@
                         //Return image to show on the person row
                         return $img;
                     }
-                },
+                },*/
                 name:{
                     title : 'Name',
                     width: '23%'
                 },
                 start_date: {
                     title: 'Start Date',
-                    width: '23%',
+                    width: '10%',
                     type : 'date'
                 },
                 end_date:{
                     title: 'End Date',
-                    width: '23%',
+                    width: '10%',
                     type : 'date'
+                },
+                cancel_days :{
+                  title: 'Cancel days',
+                    width: '10%'
+                },
+                min_stay :{
+                  title: 'Min. Stay',
+                    width: '10%'
+                },
+                max_stay :{
+                  title: 'Max. Stay',
+                    width: '10%'
                 }
 
             }
