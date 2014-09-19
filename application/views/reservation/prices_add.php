@@ -69,7 +69,7 @@
             <div class="col-sm-3">
               <div class="form-group" id="price_type">
                 <label class="control-label">Price Type</label>
-                <select class="form-control" name="price_type" onchange="price_type(<?php echo $room->id; ?>,this.value)" id="price_type<?php echo $room->id; ?>">
+                <select class="form-control" name="price_type" id="price_type_val">
                   <option value="1">Unit</option>
                   <option value="2" selected="selected">Person</option>
                 </select>
@@ -326,7 +326,6 @@ jQuery(document).ready(function(){
     }
   });
 
-
   $('#daily_range_check').click(function () {
     var daily_range_check = $('#daily_range_check').is(':checked')?true:false;
     if (daily_range_check){
@@ -338,8 +337,21 @@ jQuery(document).ready(function(){
     };
   });
 
+  $('#price_type_val').on('change', function(){
+    var val = this.value;
+    //alert(val);
+      if (val==1) 
+      {
+        $('.person_price').hide();
+        $('.child_price').hide();
+        //$("div.extra_prices0_"+id+", div.extra_prices1_"+id+", div.extra_prices2_"+id+"").hide();
 
-
+      }else {
+        $('.person_price').show();
+        $('.child_price').show();
+        //$("div.extra_prices0_"+id+", div.extra_prices1_"+id+", div.extra_prices2_"+id+"").show();
+      };
+  });
 
 });
 
@@ -361,7 +373,7 @@ function room_type(id){
 
 }
 
-function price_type(id,value){
+function price_type(value){
   if (value==1) 
   {
     $('.person_price').hide();
