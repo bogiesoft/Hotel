@@ -496,6 +496,12 @@ class Reservation_actions extends MY_Controller {
 		$max_stay		= $this->input->post('max_stay');
 		$available		= $this->input->post('available');
 
+		//salaklar start date'i end date'den sonrası bir tarihe girer falan
+		if (strtotime($start_date) > strtotime($end_date)) {
+			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			exit;
+		}
+
 		foreach (date_range($start_date,$end_date) as $key => $date) {
 	
 			//get the day
