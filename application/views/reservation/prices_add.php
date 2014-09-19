@@ -279,6 +279,40 @@ jQuery(document).ready(function(){
     },
     success: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-error');
+
+     /* settings password update */
+      $("#form_by_date").submit(function(event) {
+        /* stop form from submitting normally */
+        event.preventDefault();
+        /*clear result div*/
+        $("#result").html('');
+        /* get some values from elements on the page: */
+        var val = $(this).serialize();
+        /* Send the data using post and put the results in a div */
+        $.ajax({
+            url: base_url + "reservation_actions/add_prices",
+            type: "POST",
+            data: val,
+            dataType: 'json',
+            success: function(data){ 
+              $('#result').html(data.message);
+              $("#result").removeClass('alert-danger'); 
+              $("#result").removeClass('alert-success'); 
+              $("#result").addClass('alert-'+data.status);
+              $("#result").fadeIn(1000);
+              setTimeout(function(){ 
+                   $("#result").fadeOut(500); }, 3000); 
+                        
+            },
+            error:function(){
+              $('#result').html('Something went wrong!');
+              $("#result").removeClass('alert-error'); 
+              $("#result").removeClass('alert-success');      
+              $("#result").addClass('alert-error');
+              $("#result").fadeIn(1000);
+            }   
+          }); 
+      }); /* ajax end */
     }
   });
 
@@ -295,39 +329,6 @@ jQuery(document).ready(function(){
   });
 
 
- /* settings password update */
-  $("#form_by_date").submit(function(event) {
-    /* stop form from submitting normally */
-    event.preventDefault();
-    /*clear result div*/
-    $("#result").html('');
-    /* get some values from elements on the page: */
-    var val = $(this).serialize();
-    /* Send the data using post and put the results in a div */
-    $.ajax({
-        url: base_url + "reservation_actions/add_prices",
-        type: "POST",
-        data: val,
-        dataType: 'json',
-        success: function(data){ 
-          $('#result').html(data.message);
-          $("#result").removeClass('alert-danger'); 
-          $("#result").removeClass('alert-success'); 
-          $("#result").addClass('alert-'+data.status);
-          $("#result").fadeIn(1000);
-          setTimeout(function(){ 
-               $("#result").fadeOut(500); }, 3000); 
-                    
-        },
-        error:function(){
-          $('#result').html('Something went wrong!');
-          $("#result").removeClass('alert-error'); 
-          $("#result").removeClass('alert-success');      
-          $("#result").addClass('alert-error');
-          $("#result").fadeIn(1000);
-        }   
-      }); 
-  });
 
 
 });
