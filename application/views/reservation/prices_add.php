@@ -240,11 +240,16 @@
 
         <div class="form-group">
           <label class="col-sm-3 control-label">
-            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="submit" id="savebutton" class="btn btn-primary">Kaydet</button>
           </label>
           <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
+            
+              <div id="loading" class="alert" style="display:none">
+                <img src="<?php echo site_url('assets/back/images/loaders'); ?>/loader6.gif" />
+              </div>
+
               <div id="result" class="alert" style="display:none"></div>
             </div>
           </div>
@@ -286,6 +291,9 @@ jQuery(document).ready(function(){
         event.preventDefault();
         /*clear result div*/
         $("#result").html('');
+        $('#loading').show();
+        $('#savebutton').addClass('disabled');
+
         /* get some values from elements on the page: */
         var val = $(this).serialize();
         /* Send the data using post and put the results in a div */
@@ -294,7 +302,9 @@ jQuery(document).ready(function(){
             type: "POST",
             data: val,
             dataType: 'json',
-            success: function(data){ 
+            success: function(data){
+              $('#loading').hide();
+              $('#savebutton').removeClass('disabled');
               $('#result').html(data.message);
               $("#result").removeClass('alert-danger'); 
               $("#result").removeClass('alert-success'); 
