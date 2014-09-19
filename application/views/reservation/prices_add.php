@@ -277,7 +277,7 @@ jQuery(document).ready(function(){
   jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
 
   //form validate
-  // Basic Form
+  $.validator.messages.required = 'Bu Alan Gerekli';
   jQuery(".validate-form").validate({
     highlight: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
