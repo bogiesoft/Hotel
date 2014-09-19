@@ -472,6 +472,11 @@ class Reservation_actions extends MY_Controller {
 
 
 	function add_prices(){
+		if (!$this->input->is_ajax_request()) {
+		   exit('No direct script access allowed');
+		}
+		$this->output->set_content_type('application/json');
+		
 		$hotel_id		= $this->session->userdata('hotel_id');
 		$code			= $this->session->userdata('code');
 		$start_date		= $this->input->post('start_date');
@@ -535,7 +540,9 @@ class Reservation_actions extends MY_Controller {
 
 
 		if ($insert) {
-			echo 'Fiyatlar Eklendi';
+			echo json_encode(array('status' => 'success','message' => 'Fiyatlar Eklendi'));
+		}else{
+			echo json_encode(array('status' => 'danger','message' => 'Fiyatlar Eklenemedi! Lütfen Formu Kontrol Edit tekrar deneyin.'));
 		}
 
 	}

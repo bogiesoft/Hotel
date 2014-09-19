@@ -27,20 +27,20 @@
         <!-- By Date tab start -->
         <div class="tab-pane active" id="by_date">
     
-        <form name="by_date" action="<?php echo site_url('reservation_actions/add_prices'); ?>" method="POST">
+        <form id="form_by_date" class="validate-form">
           <div class="form-group">
             <label class="col-sm-3 control-label">Select Date Range</label>
             <div class="row">
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label">From</label>
-                <input type="text" name="start_date" class="form-control input-sm" id="from_date">
+                <input required type="text" name="start_date" class="form-control input-sm" id="from_date">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label">To</label>
-                <input type="text" name="end_date" class="form-control input-sm" id="to_date">
+                <input required type="text" name="end_date" class="form-control input-sm" id="to_date">
               </div>
             </div><!-- col-sm-6 -->
             </div>
@@ -110,7 +110,7 @@
             <div class="col-sm-1">
               <div class="form-group">
                 <label class="control-label">Base</label>
-                <input type="text" name="base_price" class="form-control input-sm">
+                <input required type="text" name="base_price" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
             <div class="person_price">
@@ -235,11 +235,24 @@
 
             </div>
             </div> 
-        <?php endforeach; ?>
+          <?php endforeach; ?>
           </div> <!-- daily range price end -->
 
+        <div class="form-group">
+          <label class="col-sm-3 control-label">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+          </label>
+          <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div id="result" class="alert" style="display:none"></div>
+            </div>
+          </div>
+          </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Gönder">
+
+        </div>
+        
         </form>
       </div> <!-- tab pane by date -->
   </div>
@@ -251,11 +264,24 @@
 
 </div>
 
+<script src="<?php echo site_url('assets/back'); ?>/js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
   //datepicker
   jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
   jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
+
+  //form validate
+  // Basic Form
+  jQuery(".validate-form").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+    }
+  });
+
 
   $('#daily_range_check').click(function () {
     var daily_range_check = $('#daily_range_check').is(':checked')?true:false;
@@ -266,6 +292,41 @@ jQuery(document).ready(function(){
       $("#daily_range_prices").hide();  // unchecked
       $("#static_price").toggle('slow');
     };
+  });
+
+
+ /* settings password update */
+  $("#form_by_date").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    /*clear result div*/
+    $("#result").html('');
+    /* get some values from elements on the page: */
+    var val = $(this).serialize();
+    /* Send the data using post and put the results in a div */
+    $.ajax({
+        url: base_url + "reservation_actions/add_prices",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){ 
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+                    
+        },
+        error:function(){
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-error'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-error');
+          $("#result").fadeIn(1000);
+        }   
+      }); 
   });
 
 

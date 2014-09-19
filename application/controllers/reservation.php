@@ -118,7 +118,8 @@ class Reservation extends MY_Controller {
 	}
 
 	function set_prices(){
-		$this->load->view('reservation/prices_add');
+		$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+		$this->load->view('reservation/prices_add',$data);
 	}
 
 }
