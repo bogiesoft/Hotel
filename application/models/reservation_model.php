@@ -65,5 +65,26 @@ class Reservation_Model extends CI_Model
 			return $query->result();
 		}
 	}
+
+	function insert_prices($arr){
+
+		$room_id  	= $arr['room_id'];
+		$date 		= $arr['price_date'];
+		//var mı?
+		$check = $this->db->query("
+			SELECT count(id) as total FROM prices 
+			WHERE price_date='$date' and room_id='$room_id'
+		");
+
+		if ($check->row()->total > 0) {
+			$insert = $this->db->update('prices',$arr,array('room_id' => $room_id, 'price_date'=> $date));
+		}else{
+			$insert = $this->db->insert('prices',$arr);
+		}
+
+		return $insert;
+
+
+	}
 		
 }

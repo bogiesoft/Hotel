@@ -471,4 +471,74 @@ class Reservation_actions extends MY_Controller {
 	}
 
 
+	function add_prices(){
+		$hotel_id		= $this->session->userdata('hotel_id');
+		$code			= $this->session->userdata('code');
+		$start_date		= $this->input->post('start_date');
+		$end_date		= $this->input->post('end_date');
+		$room_id		= $this->input->post('room_id');
+		$price_type 	= $this->input->post('price_type');
+
+		//Set prices
+		$base_price		= $this->input->post('base_price');
+		$single_price	= $this->input->post('single_price');
+		$double_price	= $this->input->post('double_price');
+		$triple_price	= $this->input->post('triple_price');
+		$extra_adult	= $this->input->post('extra_adult');
+		$child_price	= $this->input->post('child_price');
+
+		$min_stay		= $this->input->post('min_stay');
+		$max_stay		= $this->input->post('max_stay');
+		$available		= $this->input->post('available');
+
+		foreach (date_range($start_date,$end_date) as $key => $date) {
+	
+			//get the day
+			$day = strtotime($date);
+			$dayName = date('D',$day);
+
+			//if daily range is set, change the price's values by day name
+			if ($this->input->post('daily_range_val') == 'on') {
+				$daily_range = $this->input->post('daily_range');
+
+				$base_price		= $daily_range[$dayName]['base_price'];
+				$single_price	= $daily_range[$dayName]['single_price'];
+				$double_price	= $daily_range[$dayName]['double_price'];
+				$triple_price	= $daily_range[$dayName]['triple_price'];
+				$extra_adult	= $daily_range[$dayName]['extra_adult'];
+				$child_price	= $daily_range[$dayName]['child_price'];
+
+			}
+
+			$arr = array(
+				'room_id' 		=> $room_id,
+				'hotel_id' 		=> $hotel_id,
+				'price_date'	=> $date,
+				'price_type'	=> $price_type,
+				'available'		=> $available,
+				'base_price'	=> $base_price,
+				'single_price'	=> $single_price,
+				'double_price'	=> $double_price,
+				'triple_price'	=> $triple_price,
+				'extra_adult'	=> $extra_adult,
+				'child_price'	=> $child_price,
+				'min_stay'		=> $min_stay,
+				'max_stay'		=> $max_stay,
+				'code'			=> $code);
+
+			//load the model
+			$this->load->model('reservation_model');
+			$insert = $this->reservation_model->insert_prices($arr);
+
+
+		}
+
+
+		if ($insert) {
+			echo 'Fiyatlar Eklendi';
+		}
+
+	}
+
+
 }
