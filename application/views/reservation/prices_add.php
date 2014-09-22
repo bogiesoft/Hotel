@@ -17,7 +17,7 @@
 ?>
 
   <ul class="nav nav-tabs">
-      <li <?php echo $by=='date' ? 'class="active"' : ''; ?>><a href="?by=date"><strong>By Date</strong></a></li>
+      <li <?php echo (empty($by) or $by=='date') ? 'class="active"' : ''; ?>><a href="?by=date"><strong>By Date</strong></a></li>
       <li <?php echo $by=='season' ? 'class="active"' : ''; ?>><a href="?by=season"><strong>By Seasons</strong></a></li>
   </ul>
 
