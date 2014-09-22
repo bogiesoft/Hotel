@@ -20,7 +20,7 @@
  <li class="nav-parent"><a href="#"><i class="fa fa-edit"></i> <span>Fiyatlar</span></a>
   <ul class="children">
     <li><a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Fiyatlar</a></li>
-    <li><a href="#"><i class="fa fa-caret-right"></i> Fiyat Ekle & Değiştir</a></li>
+    <li><a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Fiyat Ekle & Değiştir</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Günlük Fiyatlar</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Paketler ve Promosyonlar</a></li>
   </ul>

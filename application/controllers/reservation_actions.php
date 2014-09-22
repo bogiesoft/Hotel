@@ -494,8 +494,6 @@ class Reservation_actions extends MY_Controller {
 
 		}
 
-		
-
 		//Set prices
 		$base_price		= $this->input->post('base_price');
 		$single_price	= $this->input->post('single_price');

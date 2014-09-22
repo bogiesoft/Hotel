@@ -32,7 +32,7 @@
     
         <form id="form_by_date" class="validate-form">
 
-        <?php if ($by=='date') : ?>
+        <?php if ($by=='date' or empty($by)) : ?>
           <div class="form-group">
             <label class="col-sm-3 control-label">Select Date Range</label>
             <div class="row">
