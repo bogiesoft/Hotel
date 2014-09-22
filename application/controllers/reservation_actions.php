@@ -512,6 +512,13 @@ class Reservation_actions extends MY_Controller {
 			exit;
 		}
 
+		/*
+		echo $start_date;
+		echo '<br>';
+		echo $end_date;
+		print_r(date_range($start_date,$end_date));
+		exit;
+		*/
 		foreach (date_range($start_date,$end_date) as $key => $date) {
 	
 			//get the day
