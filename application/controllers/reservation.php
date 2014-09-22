@@ -109,6 +109,7 @@ class Reservation extends MY_Controller {
 		$check = $this->reservation_model->check_bar($this->session->userdata('hotel_id'));
 
 		if (!$check) {
+			$data['seasons'] = $this->reservation_model->get_hotel_seasons();
 			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
 			$this->load->view('reservation/prices_add',$data);
 		}else{
@@ -118,6 +119,7 @@ class Reservation extends MY_Controller {
 	}
 
 	function set_prices(){
+		$data['seasons'] = $this->reservation_model->get_hotel_seasons();
 		$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
 		$this->load->view('reservation/prices_add',$data);
 	}

@@ -40,6 +40,22 @@ class Reservation_Model extends CI_Model
 		return $rooms;
 	}
 
+	function get_hotel_seasons($id=''){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$whr = '';
+		if ($id>0) {
+			$whr .= " and id='$id'";
+		}
+		$sql = "SELECT id,name,start_date,end_date FROM seasons WHERE hotel_id=$hotel_id $whr order by id";
+		if ($id > 0) {
+			$season = $this->db->query($sql)->row();
+		}else{
+			$season = $this->db->query($sql)->result();
+		}
+
+		return $season;
+	}
+
 	function jtable_hotel_rooms(){
 		$hotel_id = $this->session->userdata('hotel_id');
 		$rooms = $this->db->query("SELECT id as Value,name as DisplayText FROM rooms WHERE hotel_id=$hotel_id order by Value")->result();

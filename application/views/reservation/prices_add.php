@@ -1,21 +1,24 @@
 <?php $this->load->view('header'); ?>
 <div class="pageheader">
-  <h2><i class="fa fa-home"></i> Set <abbr title="Base Avalaible Rate">BAR</abbr> Prices</h2>
+  <h2><i class="fa fa-home"></i> Set <abbr title="Best Avalaible Rate">BAR</abbr> Prices</h2>
   <div class="breadcrumb-wrapper">
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
       <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-      <li class="active">Set <abbr title="Base Avalaible Rate">BAR</abbr> Prices</li>
+      <li class="active">Set <abbr title="Best Avalaible Rate">BAR</abbr> Prices</li>
     </ol>
   </div>
 </div>
 
 <div class="contentpanel">
     
+<?php
+  $by = $this->input->get('by');
+?>
 
   <ul class="nav nav-tabs">
-      <li class="active"><a href="#by_date" data-toggle="tab"><strong>By Date</strong></a></li>
-      <li class=""><a href="#info" data-toggle="tab"><strong>By Seasons</strong></a></li>
+      <li <?php echo $by=='date' ? 'class="active"' : ''; ?>><a href="?by=date"><strong>By Date</strong></a></li>
+      <li <?php echo $by=='season' ? 'class="active"' : ''; ?>><a href="?by=season"><strong>By Seasons</strong></a></li>
   </ul>
 
   <div class="row">
@@ -28,6 +31,8 @@
         <div class="tab-pane active" id="by_date">
     
         <form id="form_by_date" class="validate-form">
+
+        <?php if ($by=='date') : ?>
           <div class="form-group">
             <label class="col-sm-3 control-label">Select Date Range</label>
             <div class="row">
@@ -45,6 +50,25 @@
             </div><!-- col-sm-6 -->
             </div>
           </div>
+          <input type="hidden" name="by" value="date">
+        <?php else : ?>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Select Season</label>
+            <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <select class="form-control" name='season'>
+                  <?php foreach ($seasons as $key => $s) {
+                    echo '<option value="'.$s->id.'">'.$s->name.'</option>';
+                  }?>
+                </select>
+              </div>
+            </div><!-- col-sm-6 -->
+            </div>
+          </div>
+          <input type="hidden" name="by" value="season">
+        <?php endif; ?>
 
           <div class="form-group">
             <label class="col-sm-3 control-label"></label>

@@ -476,13 +476,25 @@ class Reservation_actions extends MY_Controller {
 		   exit('No direct script access allowed');
 		}
 		$this->output->set_content_type('application/json');
-		
+		//load the model
+		$this->load->model('reservation_model');
+
 		$hotel_id		= $this->session->userdata('hotel_id');
 		$code			= $this->session->userdata('code');
-		$start_date		= $this->input->post('start_date');
-		$end_date		= $this->input->post('end_date');
 		$room_id		= $this->input->post('room_id');
 		$price_type 	= $this->input->post('price_type');
+
+		if ($this->input->post('by') == 'date') {
+			$start_date		= $this->input->post('start_date');
+			$end_date		= $this->input->post('end_date');
+		}else{
+			$season  		= $this->reservation_model->get_hotel_seasons($this->input->post('season'));
+			$start_date		= $season->start_date;
+			$end_date		= $season->end_date;
+
+		}
+
+		
 
 		//Set prices
 		$base_price		= $this->input->post('base_price');
@@ -537,8 +549,7 @@ class Reservation_actions extends MY_Controller {
 				'max_stay'		=> $max_stay,
 				'code'			=> $code);
 
-			//load the model
-			$this->load->model('reservation_model');
+		
 			$insert = $this->reservation_model->insert_prices($arr);
 
 
