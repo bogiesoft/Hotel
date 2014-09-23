@@ -45,7 +45,7 @@ function days_checkbox($id=''){
 		'Fri' 	=> 'Friday',
 		'Sat'	=> 'Saturday');
 
-	if ($id > 0) {
+	if ($id != '') {
 		return $days[$id];
 	}else{
 		return $days;

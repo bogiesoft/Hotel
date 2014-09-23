@@ -104,17 +104,37 @@ class Reservation extends MY_Controller {
 	}
 
 	function prices(){
-		//fiyatlar girilmiş mi?
 
-		$check = $this->reservation_model->check_bar($this->session->userdata('hotel_id'));
-
-		if (!$check) {
-			$data['seasons'] = $this->reservation_model->get_hotel_seasons();
-			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
-			$this->load->view('reservation/prices_add',$data);
+		//set start date
+		if (empty($this->input->get('start_date'))) {
+			$start_date = date('Y-m-d', strtotime('-1 day', time()));
 		}else{
-			$data['prices'] = $check;
-			$this->load->view('reservation/prices');
+			$start_date	= $this->input->get('start_date');
+		}
+
+		//set end date
+		if (empty($this->input->get('end_date'))) {
+			$end_date = date('Y-m-d', strtotime('+14 day', time()));
+		}else{
+			$end_date	= $this->input->get('end_date');
+		}
+
+		$rooms = $this->reservation_model->get_hotel_rooms();
+		$arr = array();
+		foreach ($rooms as $key => $r) {
+			$arr[$r->id]['name'] = $r->name;
+			$arr[$r->id]['prices'] = $this->reservation_model->check_bar($this->session->userdata('hotel_id'),$start_date,$end_date,$r->id);
+		}
+
+		//fiyatlar girilmiş mi?
+		if (count($arr) < 1) {
+			$this->set_prices();
+		}else{
+			$data['start_date'] = $start_date;
+			$data['end_date']	= $end_date;
+			$data['prices'] 	= $arr;
+
+			$this->load->view('reservation/prices',$data);
 		}
 	}
 

@@ -71,8 +71,13 @@ class Reservation_Model extends CI_Model
 		return $prices->result();
 	}
 
-	function check_bar($hotel_id){
-		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id'";
+	function check_bar($hotel_id,$start,$end,$room=''){
+		$whr = '';
+		if ($room>0) {
+			$whr .=" and room_id='$room'";
+		}
+
+		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' $whr and price_date >= '$start' and price_date <= '$end' order by price_date";
 		$query = $this->db->query($sql);
 
 		if ($query->num_rows() < 1) {

@@ -3860,3 +3860,24 @@ div.error label.error:before {
    }
    
 }
+
+
+.tdGreen{
+   background:#1caf9a;
+   color:#fff;
+}
+
+.tdGreen:hover{
+   background:#1CD1B7;
+   color:#fff;
+}
+
+.tdRed{
+   background:#F61E1E;
+   color:#fff;
+}
+
+.tdRed:hover{
+   background:#F34B4B;
+   color:#fff;
+}
