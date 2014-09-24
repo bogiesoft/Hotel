@@ -70,9 +70,9 @@
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['base_price']) {
                     $stoped = $price['stoped'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.' data-name="'.$room['name'].'" data-id="'.$price['room_id'].'" data-day="'.$day.'">'.@$price['base_price'].'</td>';
+                    echo '<td '.$stoped.' data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-day="'.$day.'">'.@$price['base_price'].'</td>';
                   }else{
-                    echo '<td data-id="'.$price['room_id'].'" data-name="'.$room['name'].'" data-day="'.$day.'">N/A</td>';
+                    echo '<td data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
@@ -128,8 +128,8 @@ $(function() {
             var day     = $(this).data('day');
             days.push(day);
          });
-         var room_id   = $('.ui-selected').data('id');
-         var room_name = $('.ui-selected').data('name');
+         var room_id   = $('.ui-selected').data('room-id');
+         var room_name = $('.ui-selected').data('room-name');
 
          var start_date = days['0'];
          var end_date   = days[days.length-1];
