@@ -51,15 +51,14 @@
         </thead>
 
         <tbody>
-        <?php //print_r($data); exit;?>
             <?php foreach ($data['rooms'] as $k => $room): ?>
               <tr>
                 <th colspan="2" class="tdRoomName" data-name="<?php echo $room['name']; ?>"><?php echo $room['name']; ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   //print_r($price); exit;
-                  if ($price) {
-                    $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<th '.$stoped.'>'.@$price->reserved.'/'.@$price->available.'</th>';
+                  if (@$price['base_price']) {
+                    $stoped = $price['stoped'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<th '.$stoped.'>'.@$price['reserved'].'/'.$price['available'].'</th>';
                   }else{
                     echo '<th>N/A</th>';
                   }
@@ -69,11 +68,11 @@
               <tr>
                 <th colspan="2">Best Available Rate</th>
                 <?php foreach ($room['prices'] as $day => $price) {
-                  if ($price) {
-                    $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.' data-id="'.@$price->room_id.'" data-day="'.$day.'">'.@$price->base_price.'</td>';
+                  if (@$price['base_price']) {
+                    $stoped = $price['stoped'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<td '.$stoped.' data-name="'.$room['name'].'" data-id="'.$price['room_id'].'" data-day="'.$day.'">'.@$price['base_price'].'</td>';
                   }else{
-                    echo '<td>N/A</td>';
+                    echo '<td data-id="'.$price['room_id'].'" data-name="'.$room['name'].'" data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
@@ -130,11 +129,12 @@ $(function() {
             days.push(day);
          });
          var room_id   = $('.ui-selected').data('id');
-         var room_name = $('.ui-selected').closest('.tdRoomName').data('name');
+         var room_name = $('.ui-selected').data('name');
 
          var start_date = days['0'];
          var end_date   = days[days.length-1];
-         console.log(room_name),
+         console.log(room_name);
+         $('#roomname').html(room_name);
          $('#modal').modal();
      }
   });

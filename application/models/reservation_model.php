@@ -90,7 +90,7 @@ class Reservation_Model extends CI_Model
 	function get_bar_by_room($date,$room_id){
 		$hotel_id 	= $this->session->userdata('hotel_id');
 		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' and room_id='$room_id' and date(price_date) = '$date' order by price_date";
-		return  $this->db->query($sql)->row();
+		return  $this->db->query($sql)->row_array();
 	}
 
 	function insert_prices($arr){
