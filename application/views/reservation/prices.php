@@ -41,7 +41,7 @@
             <?php foreach ($data['dates'] as $key => $date): 
             $day = date('D',strtotime($date)); ?>
 
-            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFCC33"' : ''; ?>>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6"' : ''; ?>>
             <?php echo $day; ?><br />
             <?php echo date('m',strtotime($date)); ?>/
             <?php echo date('d',strtotime($date)); ?>
