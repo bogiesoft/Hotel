@@ -120,11 +120,28 @@ class Reservation extends MY_Controller {
 		}
 
 		$rooms = $this->reservation_model->get_hotel_rooms();
+		//$this->reservation_model->check_bar($this->session->userdata('hotel_id'),$start_date,$end_date,$r->id);
+		$arr = array();
+		foreach (date_range($start_date,$end_date) as $k => $d) {
+
+			$arr['dates'][$d] = $d;
+		
+			foreach ($rooms as $key => $r) {
+				$arr['rooms'][$r->id]['name'] 		= $r->name;
+				$arr['rooms'][$r->id]['prices'][$d] = $this->reservation_model->get_bar_by_room($d,$r->id);
+				//$arr['rooms'][$r->id] 	= $r->name;
+			}
+
+		}
+		/*
 		$arr = array();
 		foreach ($rooms as $key => $r) {
 			$arr[$r->id]['name'] = $r->name;
 			$arr[$r->id]['prices'] = $this->reservation_model->check_bar($this->session->userdata('hotel_id'),$start_date,$end_date,$r->id);
 		}
+		*/
+
+		//print_r($arr); exit;
 
 		//fiyatlar girilmiş mi?
 		if (count($arr) < 1) {
@@ -132,7 +149,7 @@ class Reservation extends MY_Controller {
 		}else{
 			$data['start_date'] = $start_date;
 			$data['end_date']	= $end_date;
-			$data['prices'] 	= $arr;
+			$data['data'] 		= $arr;
 
 			$this->load->view('reservation/prices',$data);
 		}

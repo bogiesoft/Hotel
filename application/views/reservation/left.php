@@ -60,10 +60,10 @@ if ($uri == 'prices' or $uri == 'set_prices') {
       <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Fiyat Ekle & Değiştir</a>
     </li>
     <li>
-      <a href="#"><i class="fa fa-caret-right"></i> Günlük Fiyatlar</a>
+      <a href="#"><i class="fa fa-caret-right"></i> Fiyat Planları</a>
     </li>
     <li>
-      <a href="#"><i class="fa fa-caret-right"></i> Paketler ve Promosyonlar</a>
+      <a href="#"><i class="fa fa-caret-right"></i> Fiyat Grupları</a>
     </li>
   </ul>
 </li>

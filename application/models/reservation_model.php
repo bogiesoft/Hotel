@@ -77,7 +77,7 @@ class Reservation_Model extends CI_Model
 			$whr .=" and room_id='$room'";
 		}
 
-		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' $whr and price_date >= '$start' and price_date <= '$end' order by price_date";
+		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' $whr and date(price_date) >= '$start' and date(price_date) <= '$end' order by price_date";
 		$query = $this->db->query($sql);
 
 		if ($query->num_rows() < 1) {
@@ -85,6 +85,12 @@ class Reservation_Model extends CI_Model
 		}else{
 			return $query->result();
 		}
+	}
+
+	function get_bar_by_room($date,$room_id){
+		$hotel_id 	= $this->session->userdata('hotel_id');
+		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' and room_id='$room_id' and date(price_date) = '$date' order by price_date";
+		return  $this->db->query($sql)->row();
 	}
 
 	function insert_prices($arr){

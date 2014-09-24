@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
 <div class="pageheader">
-  <h2><i class="fa fa-home"></i> Rate Plans</h2>
+  <h2><i class="fa fa-table"></i> Rate Plans</h2>
   <div class="breadcrumb-wrapper">
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
@@ -37,12 +37,14 @@
         <thead>
           <tr>
             <th></th>
+            <th></th>
+            <?php foreach ($data['dates'] as $key => $date): 
+            $day = date('D',strtotime($date)); ?>
 
-            <?php foreach (date_range($start_date,$end_date) as $key => $date): ?>
-            <th>
-            <?php echo date('D',strtotime($date)); ?><br />
-            <?php echo date('d',strtotime($date)); ?>/
-            <?php echo date('m',strtotime($date)); ?>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFCC33"' : ''; ?>>
+            <?php echo $day; ?><br />
+            <?php echo date('m',strtotime($date)); ?>/
+            <?php echo date('d',strtotime($date)); ?>
             </th>
             <?php endforeach; ?>
           </tr>
@@ -50,43 +52,37 @@
 
 
         <tbody>
-        <?php //print_r($prices); exit;?>
-
-            <?php foreach ($prices as $k => $room): ?>
-
+        <pre>
+        <?php //print_r($data); exit;?>
+          <pre>
+            <?php foreach ($data['rooms'] as $k => $room): ?>
               <tr>
-                <td colspan="4"><?php echo $room['name']; ?></td>
+                <td colspan="2" class="tdRoomName"><?php echo $room['name']; ?></td>
+                <?php foreach ($room['prices'] as $day => $price) {
+                  //print_r($price); exit;
+                  if ($price) {
+                    $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<td '.$stoped.'>'.@$price->reserved.'/'.@$price->available.'</td>';
+                  }else{
+                    echo '<td>N/A</td>';
+                  }
+                  
+
+                }?>
+              </tr>
+              <tr>
                 <td></td>
-              </tr>
-              <tr>
-              <?php //if ($k==0) {echo '<td>BAR</td>'; }else{echo '<td></td>';} ?>
-                <td width="100px">BAR</td>
-                <?php foreach ($room['prices'] as $p => $price) {
-                  $stoped = $price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                  echo '<td '.$stoped.'>'.$price->base_price.'</td>';
+                <td colspan="1">BAR</td>
+                <?php foreach ($room['prices'] as $day => $price) {
+                  if ($price) {
+                    $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<td '.$stoped.'>'.@$price->base_price.'</td>';
+                  }else{
+                    echo '<td>N/A</td>';
+                  }
+                  
                 }?>
               </tr>
-
-              <!-- price plans -->
-              <tr>
-              <?php //if ($k==0) {echo '<td>BAR</td>'; }else{echo '<td></td>';} ?>
-                <td width="100px">Plan 1</td>
-                <?php foreach ($room['prices'] as $p => $price) {
-                  $stoped = $price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                  echo '<td '.$stoped.'>'.$price->base_price.'</td>';
-                }?>
-              </tr>
-
-
-              <tr>
-              <?php //if ($k==0) {echo '<td>BAR</td>'; }else{echo '<td></td>';} ?>
-                <td width="100px">Plan 2</td>
-                <?php foreach ($room['prices'] as $p => $price) {
-                  $stoped = $price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                  echo '<td '.$stoped.'>'.$price->base_price.'</td>';
-                }?>
-              </tr>
-
           <?php endforeach; ?>
 
 
@@ -101,11 +97,13 @@ jQuery(document).ready(function(){
 });
 
 //disable left panel to view table wide
+/*
 $(function(){
   $('.leftpanelinner>ul>li').removeClass('nav-active');
   $('.leftpanelinner>ul>li>ul').removeAttr('style');
   $('body').addClass('leftpanel-collapsed');
 });
+*/
 </script>
 <?php $this->load->view('footer'); ?>
 
