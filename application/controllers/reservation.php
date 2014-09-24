@@ -129,7 +129,6 @@ class Reservation extends MY_Controller {
 			foreach ($rooms as $key => $r) {
 				$arr['rooms'][$r->id]['name'] 		= $r->name;
 				$arr['rooms'][$r->id]['prices'][$d] = $this->reservation_model->get_bar_by_room($d,$r->id);
-				//$arr['rooms'][$r->id] 	= $r->name;
 			}
 
 		}

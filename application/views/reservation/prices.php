@@ -50,11 +50,8 @@
           </tr>
         </thead>
 
-
         <tbody>
-        <pre>
         <?php //print_r($data); exit;?>
-          <pre>
             <?php foreach ($data['rooms'] as $k => $room): ?>
               <tr>
                 <td colspan="2" class="tdRoomName"><?php echo $room['name']; ?></td>
@@ -72,7 +69,7 @@
               </tr>
               <tr>
                 <td></td>
-                <td colspan="1">BAR</td>
+                <td colspan="1">Best Available Rate</td>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if ($price) {
                     $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
