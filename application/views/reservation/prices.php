@@ -33,7 +33,7 @@
     </div>
 
       <?php //print_r($prices); ?>
-      <table class="table mb30 table-condensed">
+      <table class="table mb30 table-condensed" id="selectable">
         <thead>
           <tr>
             <th></th>
@@ -54,26 +54,24 @@
         <?php //print_r($data); exit;?>
             <?php foreach ($data['rooms'] as $k => $room): ?>
               <tr>
-                <td colspan="2" class="tdRoomName"><?php echo $room['name']; ?></td>
+                <th colspan="2" class="tdRoomName" data-name="<?php echo $room['name']; ?>"><?php echo $room['name']; ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   //print_r($price); exit;
                   if ($price) {
                     $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.'>'.@$price->reserved.'/'.@$price->available.'</td>';
+                    echo '<th '.$stoped.'>'.@$price->reserved.'/'.@$price->available.'</th>';
                   }else{
-                    echo '<td>N/A</td>';
+                    echo '<th>N/A</th>';
                   }
-                  
 
                 }?>
               </tr>
               <tr>
-                <td></td>
-                <td colspan="1">Best Available Rate</td>
+                <th colspan="2">Best Available Rate</th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if ($price) {
                     $stoped = @$price->stoped == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.'>'.@$price->base_price.'</td>';
+                    echo '<td '.$stoped.' data-id="'.@$price->room_id.'" data-day="'.$day.'">'.@$price->base_price.'</td>';
                   }else{
                     echo '<td>N/A</td>';
                   }
@@ -86,6 +84,30 @@
         </tbody>
       </table>
 </div>
+
+<div id="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><div id="roomname"></div></h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+  #selectable .ui-selected { background: #F39814; color: white; }
+</style>
+<script src="<?php echo site_url('assets/jtable'); ?>/jquery-ui.min.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
   //datepicker
@@ -93,14 +115,45 @@ jQuery(document).ready(function(){
   jQuery('#end_date').datepicker({ dateFormat: 'yy-mm-dd' });
 });
 
+
+//selectable td
+$(function() {
+  var days = [];
+  $("#selectable").bind("mousedown", function(e) {
+      e.metaKey = true;
+  }).selectable({
+    filter:'td',
+    selected: function() {
+      
+         $( ".ui-selected", this ).each(function() {
+            var day     = $(this).data('day');
+            days.push(day);
+         });
+         var room_id   = $('.ui-selected').data('id');
+         var room_name = $('.ui-selected').closest('.tdRoomName').data('name');
+
+         var start_date = days['0'];
+         var end_date   = days[days.length-1];
+         console.log(room_name),
+         $('#modal').modal();
+     }
+  });
+
+
+  $('#modal').on('hidden.bs.modal', function() {
+    $('#selectable .ui-selectee').removeClass('ui-selected');
+  });
+
+
+});
+
+
 //disable left panel to view table wide
-/*
 $(function(){
   $('.leftpanelinner>ul>li').removeClass('nav-active');
   $('.leftpanelinner>ul>li>ul').removeAttr('style');
   $('body').addClass('leftpanel-collapsed');
 });
-*/
 </script>
 <?php $this->load->view('footer'); ?>
 
