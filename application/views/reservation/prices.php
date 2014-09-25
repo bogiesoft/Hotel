@@ -189,8 +189,8 @@
 <script type="text/javascript">
 jQuery(document).ready(function(){
   //datepicker
-  jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
-  jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  jQuery('#start_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  jQuery('#end_date').datepicker({ dateFormat: 'yy-mm-dd' });
 });
 
 
@@ -206,6 +206,9 @@ $(function() {
           var day     = $(this).data('day');
           days.push(day);
        });
+
+       jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
+       jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
 
        var room_id    = $('.ui-selected').data('room-id');
        var room_name  = $('.ui-selected').data('room-name');
@@ -228,7 +231,7 @@ $(function() {
        var  extra_price   = $('.ui-selected').data('extra-price');
        var  child_price   = $('.ui-selected').data('child-price');
        
-       console.log(days);
+       //console.log(days);
 
        if (child_capacity < 1) { $('.child_price').hide(); }else{ $('.child_price').show();};
        if (room_capacity < 3){ 
