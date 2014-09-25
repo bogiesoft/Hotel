@@ -308,8 +308,7 @@ jQuery(document).ready(function(){
     },
     success: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-error');
-
-     /* settings password update */
+      
       $("#form_by_date").submit(function(event) {
         /* stop form from submitting normally */
         event.preventDefault();

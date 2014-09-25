@@ -569,5 +569,43 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	function price_grid_update_by_room(){
+		$start_date		= $this->input->post('start_date');
+		$end_date		= $this->input->post('end_date');
+
+		if (strtotime($start_date) > strtotime($end_date)) {
+			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			exit;
+		}
+		
+		$arr = array(
+		'room_id' 		=> $this->input->post('room_id'),
+		'min_stay' 		=> $this->input->post('min_stay'),
+		'max_stay' 		=> $this->input->post('max_stay'),
+		'available' 	=> $this->input->post('available'),
+		'base_price'	=> $this->input->post('base_price'),
+		'single_price' 	=> $this->input->post('single_price'),
+		'double_price' 	=> $this->input->post('double_price'),
+		'triple_price' 	=> $this->input->post('triple_price'),
+		'extra_adult' 	=> $this->input->post('extra_adult'),
+		'child_price' 	=> $this->input->post('child_price'),
+		'stoped_arrival'	=> empty($this->input->post('stoped_arrival')) ? '0' : '1',
+		'stoped_departure'	=> empty($this->input->post('stoped_departure')) ? '0' : '1');
+
+		$this->load->model('reservation_model');
+		foreach (date_range($start_date,$end_date) as $key => $day) {
+			$arr['price_date'] 	= $day;
+			$update = $this->reservation_model->insert_prices($arr);
+		}
+
+		if ($update) {
+			echo json_encode(array('status' => 'success','message' => 'Fiyatlar Eklendi'));
+		}else{
+			echo json_encode(array('status' => 'danger','message' => 'Fiyatlar Eklenemedi! Lütfen Formu Kontrol Edit tekrar deneyin.'));
+		}
+		
+		//echo '<pre>';
+		//print_r($stoped_arrival.' - '.$stoped_depart);
+	}
 
 }

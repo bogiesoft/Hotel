@@ -84,13 +84,13 @@
 
 <div id="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <form id="save_by_room">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"><div id="roomname"></div></h4>
       </div>
       <div class="modal-body">
-        <form>
           <div class="form-group">
           <div class="row">
           <div class="col-sm-3">
@@ -191,12 +191,20 @@
             </div><!-- col-sm-6 -->
           </div>
           </div>
-        </form>
+          <div class="row">
+            <div id="loading" class="alert" style="display:none">
+              <img src="<?php echo site_url('assets/back/images/loaders'); ?>/loader6.gif" />
+            </div>
+            <div id="result" class="alert" style="display:none"></div>
+          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <input type="hidden" name="room_id" id="roomid">
+        <input type="hidden" name="changed" id="formchanged" value="0">
+        <button type="button" class="btn btn-default" id="closeModal">Close</button>
+        <button id="savebutton" type="submit" class="btn btn-primary">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -205,7 +213,11 @@
 <style type="text/css">
   #selectable .ui-selected { background: #F39814; color: white; }
 </style>
+<script type="text/javascript">
+  var current_url = <?php echo current_url(); ?> 
+</script>
 <script src="<?php echo site_url('assets/jtable'); ?>/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function(){
   //datepicker
@@ -278,17 +290,69 @@ $(function() {
        $('#price_triple').val(triple_price);
        $('#price_extra').val(extra_price);
        $('#price_child').val(child_price);
+       $('#roomid').val(room_id);
 
 
        $('#modal').modal();
      }
   });
 
+  //save form inside modal by room
+  $("#save_by_room").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    /*clear result div*/
+    $("#result").html('');
+    $('#loading').show();
+    $('#savebutton').addClass('disabled');
 
-  $('#modal').on('hidden.bs.modal', function() {
-    $('#selectable .ui-selectee').removeClass('ui-selected');
+    /* get some values from elements on the page: */
+    var val = $(this).serialize();
+    /* Send the data using post and put the results in a div */
+    $.ajax({
+        url: base_url + "reservation_actions/price_grid_update_by_room",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          $('#formchanged').val('1');
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 2500);
+
+        },
+        error:function(){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-danger');
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+        }   
+      }); 
+  }); /* ajax end */
+
+  //if form changed reload page else close modal
+  $('#closeModal').on('click',function(){
+    var changed = $('#formchanged').val();
+    if (changed=='0') {
+      $('#selectable .ui-selectee').removeClass('ui-selected');
+      $('#modal').modal('hide');
+    }else{
+      $("#modal").modal('hide');
+      setTimeout(function(){ 
+        location.reload(); }, 200);
+    };
   });
-
 
 });
 
