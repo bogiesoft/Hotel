@@ -105,6 +105,26 @@
               <input required type="text" name="end_date" class="form-control input-sm" id="to_date">
             </div>
           </div><!-- col-sm-6 -->
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">Stoped Arrival</label>
+              <div class="ckbox ckbox-danger">
+                <input type="checkbox" name="stoped_arrival" id="stoped_a" />
+                <label for="stoped_a"></label>
+              </div>
+              </div>
+          </div><!-- col-sm-6 -->
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">Stoped Departure</label>
+              <div class="ckbox ckbox-danger">
+                <input type="checkbox" name="stoped_departure" id="stoped_d" />
+                <label for="stoped_d"></label>
+              </div>
+              </div>
+          </div><!-- col-sm-6 -->
+
           </div>
           </div>
 
@@ -215,7 +235,8 @@ $(function() {
        var min_stay   = $('.ui-selected').data('min-stay');
        var max_stay   = $('.ui-selected').data('max-stay');
        var available  = $('.ui-selected').data('available');
-       var stoped     = $('.ui-selected').data('stoped');
+       var stoped_a     = $('.ui-selected').data('stoped-a');
+       var stoped_d     = $('.ui-selected').data('stoped-d');
 
        var start_date = days['0'];
        var end_date   = days[days.length-1];
@@ -240,6 +261,9 @@ $(function() {
           $('.extra_prices1').show(); $('.extra_prices2').show(); 
        };
 
+       if (stoped_a == '1') { $('#stoped_a').prop('checked',true)}else{$('#stoped_a').prop('checkd',false)};
+       if (stoped_d == '1') { $('#stoped_d').prop('checked',true)}else{$('#stoped_d').prop('checkd',false)};
+
        //fill the form
        $('#roomname').html(room_name);
        $('#from_date').val(start_date);
@@ -247,7 +271,6 @@ $(function() {
        $('#stay_min').val(min_stay);
        $('#stay_max').val(max_stay);
        $('#avail').val(available);
-       $('#stoped').val(stoped);
 
        $('#price_base').val(base_price);
        $('#price_single').val(single_price);
