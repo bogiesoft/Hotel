@@ -70,9 +70,9 @@
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['base_price']) {
                     $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d="'.$price['stoped_departure'].'" data-stoped-a="'.$price['stoped_arrival'].'" data-day="'.$day.'">'.@$price['base_price'].'</td>';
+                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">'.@$price['base_price'].'</td>';
                   }else{
-                    echo '<td data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d="'.$price['stoped_departure'].'" data-stoped-a="'.$price['stoped_arrival'].'" data-day="'.$day.'">N/A</td>';
+                    echo '<td  data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
@@ -235,8 +235,8 @@ $(function() {
        var min_stay   = $('.ui-selected').data('min-stay');
        var max_stay   = $('.ui-selected').data('max-stay');
        var available  = $('.ui-selected').data('available');
-       var stoped_a     = $('.ui-selected').data('stoped-a');
-       var stoped_d     = $('.ui-selected').data('stoped-d');
+       var stoped_a   = $('.ui-selected').data('stoped-a');
+       var stoped_d   = $('.ui-selected').data('stoped-d');
 
        var start_date = days['0'];
        var end_date   = days[days.length-1];
@@ -260,9 +260,9 @@ $(function() {
         }else{
           $('.extra_prices1').show(); $('.extra_prices2').show(); 
        };
-
-       if (stoped_a == '1') { $('#stoped_a').prop('checked',true)}else{$('#stoped_a').prop('checkd',false)};
-       if (stoped_d == '1') { $('#stoped_d').prop('checked',true)}else{$('#stoped_d').prop('checkd',false)};
+       alert(stoped_a);
+       if (stoped_a > 0) { $('#stoped_a').prop('checked',true)};
+       if (stoped_d > 0) { $('#stoped_d').prop('checked',true)};
 
        //fill the form
        $('#roomname').html(room_name);
