@@ -3862,27 +3862,49 @@ div.error label.error:before {
 }
 
 
-.tdGreen{
+th.tdGreen{
    background:#1caf9a;
    color:#fff;
 }
 
-.tdGreen:hover{
+th.tdGreen:hover{
    background:#1CD1B7;
    color:#fff;
 }
 
-.tdRed{
+th.tdRed{
    background:#F61E1E;
    color:#fff;
 }
 
-.tdRed:hover{
+th.tdRed:hover{
    background:#F34B4B;
    color:#fff;
 }
 
-.tdRoomName{
+td.tdGreen{
+   background:#1caf9a;
+   color:#fff;
+   cursor: pointer;
+}
+
+td.tdGreen:hover{
+   background:#1CD1B7;
+   color:#fff;
+}
+
+td.tdRed{
+   background:#F61E1E;
+   color:#fff;
+   cursor: pointer;
+}
+
+td.tdRed:hover{
+   background:#F34B4B;
+   color:#fff;
+}
+
+td.tdRoomName{
    background:#FFCC33;
    color:#fff;
 }
