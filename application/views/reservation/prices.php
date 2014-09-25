@@ -260,9 +260,9 @@ $(function() {
         }else{
           $('.extra_prices1').show(); $('.extra_prices2').show(); 
        };
-       alert(stoped_a);
-       if (stoped_a > 0) { $('#stoped_a').prop('checked',true)};
-       if (stoped_d > 0) { $('#stoped_d').prop('checked',true)};
+
+       if (parseInt(stoped_a) > 0) { $('#stoped_a').prop('checked',true)}else{$('#stoped_a').prop('checked',false)};
+       if (parseInt(stoped_d) > 0) { $('#stoped_d').prop('checked',true)}else{$('#stoped_d').prop('checked',false)};
 
        //fill the form
        $('#roomname').html(room_name);
