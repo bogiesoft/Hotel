@@ -45,7 +45,7 @@ if ($uri == 'hotels' or $uri == 'rooms' or $uri == 'extras' or $uri == 'extras' 
 </li>
 
 <?php //'prices' menu active
-if ($uri == 'prices' or $uri == 'set_prices') {
+if ($uri == 'prices' or $uri == 'set_prices' or $uri='price_plans') {
  $prices = 'nav-active';
  $prices_children = 'style="display:block;"';
 }
@@ -54,16 +54,13 @@ if ($uri == 'prices' or $uri == 'set_prices') {
  <li class="nav-parent <?php echo $prices; ?>"><a href="#"><i class="fa fa-edit"></i> <span>Fiyatlar</span></a>
   <ul class="children" <?php echo $prices_children; ?>>
     <li <?php echo $uri=='prices' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Fiyatlar</a>
+      <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Rate Availibility Plan</a>
     </li>
     <li <?php echo $uri=='set_prices' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Fiyat Ekle & Değiştir</a>
+      <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Bulk Price pdate</a>
     </li>
-    <li>
-      <a href="#"><i class="fa fa-caret-right"></i> Fiyat Planları</a>
-    </li>
-    <li>
-      <a href="#"><i class="fa fa-caret-right"></i> Fiyat Grupları</a>
+    <li <?php echo $uri=='price_plans' ? 'class="active"' : ''; ?>>
+      <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Price Plans</a>
     </li>
   </ul>
 </li>

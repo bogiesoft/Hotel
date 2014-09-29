@@ -147,22 +147,44 @@ class Reservation extends MY_Controller {
 
 		//print_r($arr); exit;
 
-		//fiyatlar girilmiş mi?
-		if (count($arr) < 1) {
-			$this->set_prices();
-		}else{
-			$data['start_date'] = $start_date;
-			$data['end_date']	= $end_date;
-			$data['data'] 		= $arr;
+	
+		$data['start_date'] = $start_date;
+		$data['end_date']	= $end_date;
+		$data['data'] 		= $arr;
 
-			$this->load->view('reservation/prices',$data);
-		}
+		$this->load->view('reservation/prices',$data);
+		
 	}
 
 	function set_prices(){
 		$data['seasons'] = $this->reservation_model->get_hotel_seasons();
 		$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
 		$this->load->view('reservation/prices_add',$data);
+	}
+
+	function price_plans(){
+
+		$uri = $this->uri->segment('3');
+
+		if ($uri=='add_new') {
+
+			$this->load->view('reservation/price_plans_add');
+
+		}elseif($uri=='edit'){
+
+			$id = $this->uri->segment('4');
+
+			//get hotel detail
+			$data['hotel'] 		 = $this->reservation_model->hotel_details($id);
+			$data['description'] = $this->reservation_model->hotel_description($id);
+			$data['countries'] 	 = $this->reservation_model->countries();
+
+			$this->load->view('reservation/hotels_edit',$data);
+
+		}else{
+
+			$this->load->view('reservation/price_plans');
+		}
 	}
 
 }

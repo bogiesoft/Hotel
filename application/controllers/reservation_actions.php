@@ -608,4 +608,9 @@ class Reservation_actions extends MY_Controller {
 		//print_r($stoped_arrival.' - '.$stoped_depart);
 	}
 
+	function list_price_plans(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		
+	}
+
 }

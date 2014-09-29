@@ -42,9 +42,9 @@
             $day = date('D',strtotime($date)); ?>
 
             <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6"' : ''; ?>>
-            <?php echo $day; ?><br />
-            <?php echo date('m',strtotime($date)); ?>/
-            <?php echo date('d',strtotime($date)); ?>
+            <?php echo date('M',strtotime($date)); ?><br />
+            <?php echo date('d',strtotime($date)); ?><br />
+            <?php echo $day; ?>
             </th>
             <?php endforeach; ?>
           </tr>
@@ -70,7 +70,34 @@
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['base_price']) {
                     $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">'.@$price['base_price'].'</td>';
+                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">'.substr(@$price['base_price'],'0', '-3').'</td>';
+                  }else{
+                    echo '<td  data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
+                  }
+                  
+                }?>
+              </tr>
+
+
+              <tr>
+                <th colspan="2">Price Plans</th>
+                <?php foreach ($room['prices'] as $day => $price) {
+                  if (@$price['base_price']) {
+                    $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<th '.$stoped.'>'.@$price['reserved'].'/'.$price['available'].'</th>';
+                  }else{
+                    echo '<th>N/A</th>';
+                  }
+                  
+                }?>
+              </tr>
+
+              <tr>
+                <th colspan="2"></th>
+                <?php foreach ($room['prices'] as $day => $price) {
+                  if (@$price['base_price']) {
+                    $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">'.substr(@$price['base_price'],'0', '-3').'</td>';
                   }else{
                     echo '<td  data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
@@ -79,6 +106,22 @@
               </tr>
           <?php endforeach; ?>
         </tbody>
+
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <?php foreach ($data['dates'] as $key => $date): 
+            $day = date('D',strtotime($date)); ?>
+
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6"' : ''; ?>>
+            <?php echo date('M',strtotime($date)); ?><br />
+            <?php echo date('d',strtotime($date)); ?><br />
+            <?php echo $day; ?>
+            </th>
+            <?php endforeach; ?>
+          </tr>
+        </thead>
       </table>
 </div>
 
@@ -214,7 +257,7 @@
   #selectable .ui-selected { background: #F39814; color: white; }
 </style>
 <script type="text/javascript">
-  var current_url = <?php echo current_url(); ?> 
+  var current_url = '<?php echo current_url(); ?>'; 
 </script>
 <script src="<?php echo site_url('assets/jtable'); ?>/jquery-ui.min.js"></script>
 
@@ -356,13 +399,14 @@ $(function() {
 
 });
 
-
+/*
 //disable left panel to view table wide
 $(function(){
   $('.leftpanelinner>ul>li').removeClass('nav-active');
   $('.leftpanelinner>ul>li>ul').removeAttr('style');
   $('body').addClass('leftpanel-collapsed');
 });
+*/
 </script>
 <?php $this->load->view('footer'); ?>
 
