@@ -45,7 +45,7 @@ if ($uri == 'hotels' or $uri == 'rooms' or $uri == 'extras' or $uri == 'extras' 
 </li>
 
 <?php //'prices' menu active
-if ($uri == 'prices' or $uri == 'set_prices' or $uri='price_plans') {
+if ($uri == 'prices' or $uri == 'set_prices' or $uri=='price_plans') {
  $prices = 'nav-active';
  $prices_children = 'style="display:block;"';
 }
@@ -57,7 +57,7 @@ if ($uri == 'prices' or $uri == 'set_prices' or $uri='price_plans') {
       <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Rate Availibility Plan</a>
     </li>
     <li <?php echo $uri=='set_prices' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Bulk Price pdate</a>
+      <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Bulk Price Update</a>
     </li>
     <li <?php echo $uri=='price_plans' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Price Plans</a>
