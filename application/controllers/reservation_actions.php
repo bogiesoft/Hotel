@@ -525,18 +525,6 @@ class Reservation_actions extends MY_Controller {
 			$day = strtotime($date);
 			$dayName = date('D',$day);
 
-			//if daily range is set, change the price's values by day name
-			if ($this->input->post('daily_range_val') == 'on') {
-				$daily_range = $this->input->post('daily_range');
-
-				$base_price		= $daily_range[$dayName]['base_price'];
-				$single_price	= $daily_range[$dayName]['single_price'];
-				$double_price	= $daily_range[$dayName]['double_price'];
-				$triple_price	= $daily_range[$dayName]['triple_price'];
-				$extra_adult	= $daily_range[$dayName]['extra_adult'];
-				$child_price	= $daily_range[$dayName]['child_price'];
-
-			}
 
 			$arr = array(
 				'room_id' 		=> $room_id,
@@ -554,9 +542,27 @@ class Reservation_actions extends MY_Controller {
 				'max_stay'		=> $max_stay,
 				'code'			=> $code);
 
-		
-			$insert = $this->reservation_model->insert_prices($arr);
 
+			//if daily range is set, change the price's values by day name
+			if ($this->input->post('daily_range_val') == 'on') {
+				$daily_range = $this->input->post('daily_range');
+
+				if (isset($daily_range[$dayName]) and $daily_range[$dayName] == 'on') {
+					$insert = $this->reservation_model->insert_prices($arr);
+				}
+				/*
+				print_r($daily_range);
+				exit;
+				$base_price		= $daily_range[$dayName]['base_price'];
+				$single_price	= $daily_range[$dayName]['single_price'];
+				$double_price	= $daily_range[$dayName]['double_price'];
+				$triple_price	= $daily_range[$dayName]['triple_price'];
+				$extra_adult	= $daily_range[$dayName]['extra_adult'];
+				$child_price	= $daily_range[$dayName]['child_price'];
+				*/
+			}else{
+				$insert = $this->reservation_model->insert_prices($arr);
+			}
 
 		}
 

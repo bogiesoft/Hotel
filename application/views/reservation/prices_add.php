@@ -25,11 +25,6 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="col-md-12 col-sm-3">
-        <div class="tab-content mb30">
-
-        <!-- By Date tab start -->
-        <div class="tab-pane active" id="by_date">
-    
         <form id="form_by_date" class="validate-form">
 
         <?php if ($by=='date' or empty($by)) : ?>
@@ -108,13 +103,13 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label">Min. Stay</label>
-                <input type="text" name="min_stay" class="form-control input-sm">
+                <input type="text" name="min_stay" value="1" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label">Max. Stay</label>
-                <input type="text" name="max_stay" class="form-control input-sm">
+                <input type="text" name="max_stay" value="99" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2">
@@ -131,10 +126,10 @@
           <div class="form-group" id="static_price">
             <label class="col-sm-3 control-label">Set Prices</label>
             <div class="row">
-            <div class="col-sm-1">
+            <div class="col-sm-1 baseprice" style="display:none">
               <div class="form-group">
                 <label class="control-label">Base</label>
-                <input required type="text" name="base_price" class="form-control input-sm">
+                <input type="text" name="base_price" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
             <div class="person_price">
@@ -197,69 +192,23 @@
           </div>
 
           <div id="daily_range_prices" style="display:none">
-
-          <?php foreach (days_checkbox() as $d => $day) : ?>
           <div class="form-group">
-            <label class="col-sm-3 control-label"><?php echo $day; ?></label>
-            <div class="row">
+            <label class="col-sm-3 control-label">Days</label>
+             <div class="row">
+            <?php foreach (days_checkbox() as $d => $day) : ?>
             <div class="col-sm-1">
               <div class="form-group">
-                <label class="control-label">Base</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][base_price]" class="form-control input-sm">
+                <label class="control-label"><?php echo $d; ?></label>
+                <div class="ckbox ckbox-success">
+                  <input type="checkbox" checked name="daily_range[<?php echo $d; ?>]" id="day_<?php echo $d; ?>" />
+                  <label for="day_<?php echo $d; ?>"></label>
+                </div>
               </div>
             </div><!-- col-sm-6 -->
-            <div class="person_price">
-            <div class="col-sm-1">
-              <div class="form-group">
-                <label class="control-label">SINGLE</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][single_price]" class="form-control input-sm">
-              </div>
-            </div><!-- col-sm-6 -->
-            <div class="col-sm-1">
-              <div class="form-group">
-                <label class="control-label">DOUBLE</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][double_price]" class="form-control input-sm">
-              </div>
-            </div><!-- col-sm-6 -->
-
-            <?php 
-            if ($capacity['0']['capacity'] > 2) {
-              $display = '';
-            }else{
-              $display = 'style="display:none"';
-            }
-            ?>
-            <div class="col-sm-1 extra_prices0" <?php echo $display; ?>>
-              <div class="form-group">
-                <label class="control-label">TRIPLE</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][triple_price]" value="" class="form-control input-sm">
-              </div>
-            </div><!-- col-sm-6 -->
-            <div class="col-sm-1 extra_prices1" <?php echo $display; ?>>
-              <div class="form-group">
-                <label class="control-label">EXTRA</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][extra_adult]" class="form-control input-sm">
-              </div>
-            </div><!-- col-sm-6 -->
+            <?php endforeach; ?>
+           </div>
+           </div>
           
-            </div><!-- person price end -->
-            <?php 
-            if ($capacity['0']['child'] > 0) {
-              $display = '';
-            }else{
-              $display = 'style="display:none"';
-            }
-            ?>
-            <div class="col-sm-1 child_price" <?php echo $display; ?>>
-              <div class="form-group">
-                <label class="control-label">CHILD</label>
-                <input type="text" name="daily_range[<?php echo $d; ?>][child_price]" class="form-control input-sm">
-              </div>
-            </div><!-- col-sm-6 -->
-
-            </div>
-            </div> 
-          <?php endforeach; ?>
           </div> <!-- daily range price end -->
 
         <div class="form-group">
@@ -280,17 +229,10 @@
           </div>
         </div>
 
-        </div>
-        
         </form>
       </div> <!-- tab pane by date -->
   </div>
 </div>
-</div>
-
-
-
-
 </div>
 
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.validate.min.js"></script>
@@ -309,54 +251,52 @@ jQuery(document).ready(function(){
     success: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-error');
       
-      $("#form_by_date").submit(function(event) {
-        /* stop form from submitting normally */
-        event.preventDefault();
-        /*clear result div*/
-        $("#result").html('');
-        $('#loading').show();
-        $('#savebutton').addClass('disabled');
+      /* stop form from submitting normally */
+      event.preventDefault();
+      /*clear result div*/
+      $("#result").html('');
+      $('#loading').show();
+      $('#savebutton').addClass('disabled');
 
-        /* get some values from elements on the page: */
-        var val = $(this).serialize();
-        /* Send the data using post and put the results in a div */
-        $.ajax({
-            url: base_url + "reservation_actions/add_prices",
-            type: "POST",
-            data: val,
-            dataType: 'json',
-            success: function(data){
-              $('#loading').hide();
-              $('#savebutton').removeClass('disabled');
-              $('#result').html(data.message);
-              $("#result").removeClass('alert-danger'); 
-              $("#result").removeClass('alert-success'); 
-              $("#result").addClass('alert-'+data.status);
-              $("#result").fadeIn(1000);
-              setTimeout(function(){ 
-                   $("#result").fadeOut(500); }, 3000); 
-                        
-            },
-            error:function(){
-              $('#result').html('Something went wrong!');
-              $("#result").removeClass('alert-error'); 
-              $("#result").removeClass('alert-success');      
-              $("#result").addClass('alert-error');
-              $("#result").fadeIn(1000);
-            }   
-          }); 
-      }); /* ajax end */
+      /* get some values from elements on the page: */
+      var val = $('#form_by_date').serialize();
+      /* Send the data using post and put the results in a div */
+      $.ajax({
+        url: base_url + "reservation_actions/add_prices",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+                    
+        },
+        error:function(){
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-danger');
+          $("#result").fadeIn(1000);
+        }   
+      });  // ajax end
     }
   });
 
   $('#daily_range_check').click(function () {
     var daily_range_check = $('#daily_range_check').is(':checked')?true:false;
     if (daily_range_check){
-      $("#daily_range_prices").show();  // checked
-      $("#static_price").toggle('slow');
+      $("#daily_range_prices").toggle('slow');  // checked
+      //$("#static_price").toggle('slow');
     }else{
-      $("#daily_range_prices").hide();  // unchecked
-      $("#static_price").toggle('slow');
+      $("#daily_range_prices").toggle('slow');  // unchecked
+      //$("#static_price").toggle('slow');
     };
   });
 
@@ -365,11 +305,13 @@ jQuery(document).ready(function(){
     //alert(val);
       if (val==1) 
       {
+        $('.baseprice').show();
         $('.person_price').hide();
         $('.child_price').hide();
         //$("div.extra_prices0_"+id+", div.extra_prices1_"+id+", div.extra_prices2_"+id+"").hide();
 
       }else {
+        $('.baseprice').hide();
         $('.person_price').show();
         $('.child_price').show();
         //$("div.extra_prices0_"+id+", div.extra_prices1_"+id+", div.extra_prices2_"+id+"").show();

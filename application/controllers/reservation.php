@@ -134,7 +134,6 @@ class Reservation extends MY_Controller {
 				$arr['rooms'][$r->id]['prices'][$d]['room_capacity'] = $r->capacity;
 				$arr['rooms'][$r->id]['prices'][$d]['room_child'] = $r->min_child;
 			}
-
 		}
 
 		/*
