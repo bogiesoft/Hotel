@@ -45,7 +45,7 @@ if ($uri == 'hotels' or $uri == 'rooms' or $uri == 'extras' or $uri == 'extras' 
 </li>
 
 <?php //'prices' menu active
-if ($uri == 'prices' or $uri == 'set_prices' or $uri=='price_plans') {
+if ($uri == 'set_prices' or $uri=='price_plans') {
  $prices = 'nav-active';
  $prices_children = 'style="display:block;"';
 }
@@ -59,25 +59,25 @@ if ($uri == 'prices' or $uri == 'set_prices' or $uri=='price_plans') {
     <li <?php echo $uri=='set_prices' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Bulk Price Update</a>
     </li>
-    <li <?php echo $uri=='price_plans' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Price Plans</a>
+    <li <?php echo $this->uri->segment('3') =='add_new' ? 'class="active"' : ''; ?>>
+      <a href="<?php echo site_url('reservation/price_plans/add_new'); ?>"><i class="fa fa-caret-right"></i> Add Promotion</a>
+    </li>
+
+    <li <?php echo ($uri=='price_plans' and $this->uri->segment('3') =='') ? 'class="active"' : ''; ?>>
+      <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Promotions</a>
     </li>
   </ul>
 </li>
 
 <?php  //'avalilable' menu active
-if ($uri == 'availablity') {
- $available = 'nav-active';
+if ($uri == 'prices') {
+ $available = 'active';
  $available_children = 'style="display:block;"';
 }
 ?>
 
-<li class="nav-parent <?php echo $available; ?>"><a href="#"><i class="fa fa-file-text"></i> <span>Müsaitlik</span></a>
-  <ul class="children" <?php echo $available_children; ?>>
-    <li><a href="#"><i class="fa fa-caret-right"></i> Calendar</a></li>
-    <li><a href="#"><i class="fa fa-caret-right"></i> Media Manager</a></li>
-    <li><a href="#"><i class="fa fa-caret-right"></i> Timeline</a></li>
-  </ul>
+<li class="<?php echo $available; ?>">
+  <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-file-text"></i> <span>Rates & Availablity</span></a>
 </li>
 
 </ul>

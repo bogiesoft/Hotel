@@ -76,6 +76,7 @@
                     }else{
                       $roomPrice = substr(@$price['double_price'],'0', '-3');
                     }
+                    
                     echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">
                     '.$roomPrice.'
                     </td>';

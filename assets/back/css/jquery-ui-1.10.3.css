@@ -920,6 +920,7 @@ body .ui-tooltip {
 	margin: 15px 0;
 }
 
+/*
 .ui-slider .ui-slider-handle {
 	background: #999;
 	border: 6px solid #fff;
@@ -940,7 +941,7 @@ body .ui-tooltip {
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.5);
 	box-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
-
+*/
 .ui-slider .ui-slider-range {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;

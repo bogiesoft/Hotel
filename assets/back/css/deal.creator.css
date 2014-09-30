@@ -1,0 +1,669 @@
+#deal_creator {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.form-actions {
+	background: none;
+	border: 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 48px;
+	text-align: center;
+	margin: 0 0 20px;
+}
+
+.subhead {
+	display: block;
+	text-align: center;
+	padding-top: 4px;
+	font-size: 0.4em;
+	color: #666;
+}
+
+.deals_navigation {
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: top !important;
+	max-width: 900px;
+}
+
+.deals_navigation .outer_span {
+	padding: 0 10px;
+	margin: 0;
+	text-align: center;
+	font-size: 17px;
+	display: inline-block;
+	cursor: pointer;
+	max-width: 145px;
+	min-height: 110px;
+	vertical-align: top;
+}
+
+.deals_navigation .arrow_up {
+	background: none;
+	height: 12px;
+	margin-top: 17px;
+	display: block;
+}
+
+.deals_navigation .selected .arrow_up,
+.deals_navigation .outer_span:hover .arrow_up {
+	background: url('../images/deal_creator_arrowup.png') 0 0 no-repeat;
+}
+
+.deals_navigation #simple_deal_label.selected .arrow_up,
+.deals_navigation #simple_deal_label:hover .arrow_up {
+	background-position: 50% 0;
+}
+
+.deals_navigation #minimum_stay_label.selected .arrow_up,
+.deals_navigation #minimum_stay_label:hover .arrow_up {
+	background-position: 50% -18px;
+
+}
+
+.deals_navigation #early_bird_label.selected .arrow_up,
+.deals_navigation #early_bird_label:hover .arrow_up {
+	background-position: 50% -53px;
+
+}
+
+.deals_navigation #last_minute_label.selected .arrow_up,
+.deals_navigation #last_minute_label:hover .arrow_up {
+	background-position: 50% -70px;
+
+}
+
+.deals_navigation #twentyfour_promotion_label.selected .arrow_up,
+.deals_navigation #twentyfour_promotion_label:hover .arrow_up {
+	background-position: 50% -88px;
+
+}
+
+.deals_navigation #secret_deal_label.selected .arrow_up,
+.deals_navigation #secret_deal_label:hover .arrow_up {
+	background-position: 50% -106px;
+
+}
+
+.deals_navigation #genius_addons_label.selected .arrow_up,
+.deals_navigation #genius_addons_label:hover .arrow_up {
+	background-position: 50% -106px;
+
+}
+
+.deals_navigation span .menu_icon,
+.deal_icon .menu_icon {
+	background: url('../images/deals_icon_sprite3.png') no-repeat;
+	background-position: 0 0;
+	width: 81px;
+	height: 81px;
+	margin: 0 auto 1em auto;
+	display: block;
+}
+
+.deals_navigation #secret_deal_label .menu_icon,
+#secret_deal .menu_icon {
+	background-position: 0 0;
+}
+
+.deals_navigation #secret_deal_label:hover .menu_icon,
+.deals_navigation #secret_deal.selected .menu_icon {
+	background-position: 0 -81px;
+}
+
+.deals_navigation #simple_deal_label .menu_icon,
+#simple_deal .menu_icon {
+	background-position: 0 -162px;
+}
+
+.deals_navigation #simple_deal_label:hover .menu_icon,
+.deals_navigation #simple_deal.selected .menu_icon {
+	background-position: 0 -243px;
+}
+
+.deals_navigation #minimum_stay_label .menu_icon,
+#minimum_stay .menu_icon {
+	background-position: 0 -324px;
+}
+
+.deals_navigation #minimum_stay_label:hover .menu_icon,
+.deals_navigation #minimum_stay_label.selected .menu_icon {
+	background-position: 0 -405px;
+}
+
+.deals_navigation #early_bird_label .menu_icon,
+#early_bird .menu_icon {
+	background-position: 0 -648px;
+}
+
+.deals_navigation #early_bird_label:hover .menu_icon,
+.deals_navigation #early_bird_label.selected .menu_icon {
+	background-position: 0 -729px;
+}
+
+.deals_navigation #last_minute_label .menu_icon,
+#last_minute .menu_icon {
+	background-position: 0 -810px;
+}
+
+.deals_navigation #last_minute_label:hover .menu_icon,
+.deals_navigation #last_minute_label.selected .menu_icon {
+	background-position: 0 -891px;
+}
+
+.deals_navigation #twentyfour_promotion_label .menu_icon,
+#twentyfour_promotion .menu_icon {
+	background-position: 0 -972px;
+}
+
+.deals_navigation #twentyfour_promotion_label:hover .menu_icon,
+.deals_navigation #twentyfour_promotion_label.selected .menu_icon {
+	background-position: 0 -1053px;
+}
+
+.deals_navigation #genius_addons_label .menu_icon,
+#genius_addons .menu_icon {
+	background-position: 0 -1134px;
+}
+
+.deals_navigation #genius_addons_label:hover .menu_icon,
+.deals_navigation #genius_addons_label.selected .menu_icon {
+	background-position: 0 -1215px;
+}
+
+.deals_navigation #simple_deal_label, #simple_deal {
+	color: #CF802E;
+}
+
+.deals_navigation #simple_deal_label:hover,
+.deals_navigation #simple_deal_label.selected {
+	color: #C16C20;
+	text-decoration: underline;
+}
+
+.deals_navigation #minimum_stay_label,
+#minimum_stay {
+	color: #40782F;
+}
+
+.deals_navigation #minimum_stay_label:hover,
+.deals_navigation #minimum_stay_label.selected {
+	color: #2C541F;
+	text-decoration: underline;
+}
+
+.deals_navigation #early_bird_label, #early_bird {
+	color: #CD4016;
+}
+
+.deals_navigation #early_bird_label:hover,
+.deals_navigation #early_bird_label.selected {
+	color: #BB2200;
+	text-decoration: underline;
+}
+
+.deals_navigation #last_minute_label,
+#last_minute {
+	color: #165FA7;
+}
+
+.deals_navigation #last_minute_label:hover,
+.deals_navigation #last_minute_label.selected {
+	color: #004992;
+	text-decoration: underline;
+}
+
+.deals_navigation #twentyfour_promotion_label, #twentyfour_promotion {
+	color: #4D2C6C;
+}
+
+.deals_navigation #twentyfour_promotion_label:hover,
+.deals_navigation #twentyfour_promotion_label.selected {
+	color: #3D1B66;
+	text-decoration: underline;
+}
+
+.deals_navigation #genius_addons_label, #genius_addons {
+	color: #7d8995;
+}
+
+.deals_navigation #genius_addons_label:hover,
+.deals_navigation #genius_addons_label.selected {
+	color: #7d8995;
+	text-decoration: underline;
+}
+
+.deals_navigation #secret_deal_label, #secret_deal {
+	color: #003580;
+}
+
+.deals_navigation #secret_deal_label:hover,
+.deals_navigation #secret_deal_label.selected {
+	color: #00295B;
+	text-decoration: underline;
+}
+
+.explanation_header {
+	display: none;
+	float: left;
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+.explanation_header h2 {
+	font-size: 16px;
+	line-height: 1.2;
+	margin: 0;
+	font-weight: 200;
+	color: #fff;
+	/*padding: 1em 1em 0.2em 1em; */
+}
+
+.explanation_header h2 strong {
+	font-weight: normal;
+}
+
+.explanation_header.simple_deal {
+	background: #c16c20;
+}
+
+.explanation_header.minimum_stay {
+	background: #2c541F;
+}
+
+.explanation_header.early_bird {
+	background: #bb2200;
+}
+
+.explanation_header.last_minute {
+	background: #004992;
+}
+
+.explanation_header.twentyfour_promotion {
+	background: #3d1b66;
+}
+
+.explanation_header.genius_addons {
+	background: #7d8995;
+}
+
+.explanation_header.secret_deal {
+	background: #00295B;
+}
+
+#clear_dates {
+	display: inline;
+	margin: 0 0 7px 10px;
+}
+
+#when_question_min_stay,
+#when_question_early_bird,
+#when_question_others {
+	display: none;
+}
+
+#deal_creator .ui-state-default {
+	background: none;
+}
+
+#deal_creator .ui-state-hover,
+#deal_creator .ui-state-active {
+	background: #003580;
+	color: white;
+}
+
+#deal_creator .highlight a {
+	background: #FEF1B5;
+}
+
+#deal_creator .highlight .ui-state-active {
+	color: #003580;
+}
+
+#week_days_selection {
+	float: right;
+	display: block;
+	width: 25%;
+}
+
+
+#week_days_selection h4 {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0.5em 0;
+}
+
+#datepicker-placeholder {
+	width: 70%;
+}
+
+#datepicker-placeholder .ui-datepicker-inline {
+	width: 100% !important;
+	padding-right: 1em;
+}
+
+.datepicker_input {
+	background: white url('../images/calendar_icon.png') no-repeat;
+	background-position: 0 0;
+	border: 1px solid #ccc;
+	padding: 3px 5px 3px 35px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.datepicker_input:hover {
+	background-position: 0px -24px;
+}
+
+.deal_example {
+	font-size: 1em;
+	color: #666;
+	font-style: italic;
+	margin: -0.3em 0 1.2em 0;
+	display: block;
+}
+
+#deal_creator h3 {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 2em 0 0.5em 0;
+}
+
+.custom_deal_example {
+	margin-bottom: 0.5em;
+}
+
+.when_options {
+	display: none;
+}
+
+#deal_creator textarea {
+   width: 97%;
+   height: 150px;
+   border: 3px solid #cccccc;
+   padding: 5px;
+   margin-top: 10px;
+}
+
+#genius_addons {
+	display: none;
+	float: left;
+	width: 100%;
+}
+
+#genius_addons ol {
+	list-style: none;
+	margin: 0;
+}
+
+#form_contents {
+	display: none;
+	float: left;
+	width: 100%;
+}
+
+#form_contents ol {
+	list-style: none;
+	margin: 0;
+}
+
+#deal_creator form {
+	width: 100%;
+}
+
+#deal_creator form ul {
+	margin-bottom: 24px;
+}
+
+#deal_creator form li {
+	padding: 20px 0 0 80px;
+	position: relative;
+	overflow: hidden;
+}
+
+#deal_creator form li i {
+	width: 48px;
+	height: 48px;
+	background: url('../images/dc_icons.png');
+	display: block;
+	position: absolute;
+	top: 14px;
+	left: 0px;
+}
+
+#deal_creator #step1 .dc-1 { background-position: 0 0; }
+#deal_creator #step1 .dc-2 { background-position: -48px 0; }
+#deal_creator #step1 .dc-3 { background-position: -96px 0; }
+#deal_creator #step1 .dc-4 { background-position: -144px 0; }
+#deal_creator #step1 .dc-5 { background-position: -192px 0; }
+#deal_creator #step1 .dc-6 { background-position: -240px 0; }
+
+#deal_creator form li h2 {
+	margin: 0 0 6px;
+	font-size: 20px;
+}
+
+.genius_form_item {
+	width: 32px;
+	height: 32px;
+	background: url('../images/ge-freebie-32.png');
+	display: block;
+	position: absolute;
+	top: 14px;
+	left: 20px;
+}
+
+#deal_creator .checkboxes {
+	overflow: hidden;
+	margin-bottom: 12px;
+	max-width: 620px;
+}
+
+#deal_creator .checkboxes label {
+	float: left;
+	margin-right: 5%;
+	width: 45%;
+}
+
+#deal_creator #stay_from, #deal_creator #stay_to {
+	background: white;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	cursor: default;
+	width: 110px;
+	font-size: 1.3em;
+}
+
+#deal_creator #overwrite_box {
+	margin-top: 0.5em;
+	display: block;
+	clear: both;
+}
+
+
+.buttons {
+	clear: left;
+	margin-left: 80px;
+}
+
+.buttons button, #deal_creator_confirm .buttons .loading {
+	background: #0896ff;
+	color: #fff;
+	border: 4px solid #fff;
+	border-radius: 8px;
+	padding: 12px;
+	display: block;
+	width: 100%;
+	font: bold 20px Helvetica, Arial, sans-serif;
+	cursor: pointer;
+	box-shadow: 2px 2px 3px #999;
+	background-clip: padding-box;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+}
+
+#deal_creator_confirm .buttons .loading {
+	text-align: center;
+	cursor: default;
+	display: none;
+}
+
+.feedback {
+    margin-top: 10px;
+}
+
+/* Page-specific styling */
+
+#content, #confirm, #creation_message {
+	margin: 0 auto;
+}
+
+#datepicker-placeholder {
+	margin-top: 12px;
+	font-size: 12px;
+	position: relative;
+	float: left;
+	display: block;
+}
+
+.ui-datepicker-month {
+	height: auto;
+	line-height: auto;
+}
+
+#release_time {
+	clear: left;
+}
+
+#confirm li {
+	font-size: 20px;
+}
+
+#release_time label {
+	display: block;
+}
+
+/* Utility classes */
+
+div.error, .invalid {
+	background: #FBE3E4;
+	color: #8A1F11;
+	padding: 0.8em;
+	margin-bottom: 1em;
+	border: 2px solid #FBC2C4;
+	border-radius: 4px;
+}
+
+label.error, .error b {
+	font-weight: normal !important;
+	color: #8A1F11 !important;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Slider widget */
+
+#slider-wrapper {
+	position: relative;
+}
+
+#slider-wrapper .slider-label {
+	position: absolute;
+	font-size: 20px;
+	color: #333;
+	top: 14px;
+	left: 12px;
+	z-index: 998;
+}
+
+#slider-wrapper .end {
+	right: 12px;
+	left: auto;
+}
+
+#slider-range {
+	height: 48px;
+	-webkit-transition: background-color 0.5s linear;
+	-moz-transition: background-color 0.5s linear;
+	-o-transition: background-color 0.5s linear;
+	transition: background-color 0.5s linear;
+}
+
+#input_percent {
+	border: 0;
+	width: 40px;
+	height: 18px;
+	font-size: 20px;
+}
+
+#slider-wrapper .ui-slider-horizontal .ui-slider-handle {
+	margin-left: -0.4em;
+	top: -0.3em;
+	z-index: 999 !important;
+}
+
+#slider-wrapper .ui-slider .ui-slider-handle {
+	cursor: pointer;
+	height: 54px;
+	position: absolute;
+	width: 40px;
+	z-index: 2;
+	background: #003580;
+}
+
+.ui-slider-range-min {
+	opacity: 0;
+}
+
+#discount_input {
+	position: absolute;
+	left: 105%;
+	top: 0;
+	width: 125px;
+	font-size: 36px;
+}
+
+#input_percent {
+	height: 1em;
+	font-size: 36px;
+	width: 60px;
+	text-align: right;
+	background: transparent;
+}
+
+small {
+	font-size: 11px;
+	display: block;
+	text-align: center;
+	margin-top: 6px;
+}
+
+.datepicker_twentyfour, .datepicker_custom {
+	z-index: 99;
+	background: white;
+}
+
+#deal_creator_confirm {
+	margin-top: 2em;
+}
+
+.deal_icon {
+	float: left;
+	display: block;
+	text-align: center;
+	padding: 0 2em;
+	margin: 0;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#feedback_dialog {
+	display: none;
+}
