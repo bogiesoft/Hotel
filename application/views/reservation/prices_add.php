@@ -250,7 +250,8 @@ jQuery(document).ready(function(){
     },
     success: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-error');
-      
+    },
+    submitHandler: function(element){
       /* stop form from submitting normally */
       event.preventDefault();
       /*clear result div*/

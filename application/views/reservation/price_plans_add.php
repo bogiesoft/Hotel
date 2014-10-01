@@ -73,14 +73,14 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
-              <form>
+              <form id="add_price_plan" class="validate-form">
                
               <div class="form-group">
                 <label class="col-sm-3 control-label">Set Name</label>
                   <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                       <input name="discount_name" type="text" class="form-control" />
+                       <input required name="promotion_name" type="text" class="form-control" />
                     </div>
                   </div>
 
@@ -99,7 +99,7 @@
                       <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" style="background: rgb(0, 204, 0);"><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a></div> 
                       <div id="slider-highest" class="slider-label end">100%</div>
                       <div id="discount_input">
-                        <input id="input_percent" name="discount" type="text" value="40" />%
+                        <input id="input_percent" name="promotion_discount" type="text" value="40" />%
                       </div>
                       <small>Click and drag the slider to select your percentage discount</small>
                     </div>
@@ -140,7 +140,7 @@
                   <div class="form-group">
                     <label class="control-label"><?php echo $d; ?></label>
                     <div class="ckbox ckbox-success">
-                      <input type="checkbox" checked name="daily_range[<?php echo $d; ?>]" id="day_<?php echo $d; ?>" />
+                      <input type="checkbox" checked name="daily_range[]" value="<?php echo $d; ?>" id="day_<?php echo $d; ?>" />
                       <label for="day_<?php echo $d; ?>"></label>
                     </div>
                   </div>
@@ -217,7 +217,7 @@
                 
                 <div class="row">
                 <div class="col-sm-3">
-                  <div class="form-group">s
+                  <div class="form-group">
                     <input required type="text" name="twentyfour_date" class="form-control input-sm from_date">
                   </div>
                 </div><!-- col-sm-6 -->
@@ -237,7 +237,7 @@
                   <div class="form-group">
                     <label class="control-label"><?php echo $room->name; ?></label>
                     <div class="ckbox ckbox-success">
-                      <input type="checkbox" checked name="rooms[<?php echo $room->id; ?>]" id="day_<?php echo $room->id; ?>" />
+                      <input type="checkbox" checked name="rooms[]" value="<?php echo $room->id; ?>" id="day_<?php echo $room->id; ?>" />
                       <label for="day_<?php echo $room->id; ?>"></label>
                     </div>
                   </div>
@@ -267,7 +267,7 @@
       </div><!-- row -->
 
     </div><!-- contentpanel -->
-
+<script src="<?php echo site_url('assets/back'); ?>/js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -470,6 +470,55 @@ $(document).ready(function(){
         }
       });
   }
+
+  //validate form and send
+  $.validator.messages.required = 'Bu Alan Gerekli';
+  jQuery(".validate-form").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+       /* stop form from submitting normally */
+    },
+    submitHandler: function(element){
+    event.preventDefault();
+      /*clear result div*/
+      $("#result").html('');
+      $('#loading').show();
+      $('#savebutton').addClass('disabled');
+
+      /* get some values from elements on the page: */
+      var val = $('#add_price_plan').serialize();
+      /* Send the data using post and put the results in a div */
+      $.ajax({
+        url: base_url + "reservation_actions/add_price_plan",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+                    
+        },
+        error:function(){
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-danger');
+          $("#result").fadeIn(1000);
+        }   
+      });  // ajax end
+
+    }
+  });
 
 });
 </script>

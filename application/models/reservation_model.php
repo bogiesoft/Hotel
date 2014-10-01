@@ -115,4 +115,9 @@ class Reservation_Model extends CI_Model
 
 	}
 
+
+	function insert_price_plan($arr){
+
+	}
+
 }

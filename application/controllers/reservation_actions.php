@@ -394,6 +394,11 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	/*
+	* DEPRECATED!
+	* THERE WILL BE NO SEASON PRICE
+	* ITS ADDED TO BULK PRICE UPDATE
+	*/
 	function season_price(){
 		$this->load->model('reservation_model');
 		$season_id 	= $this->input->get('season_id');
@@ -605,9 +610,9 @@ class Reservation_actions extends MY_Controller {
 		}
 
 		if ($update) {
-			echo json_encode(array('status' => 'success','message' => 'Fiyatlar Eklendi'));
+			echo json_encode(array('status' => 'success','message' => 'Success'));
 		}else{
-			echo json_encode(array('status' => 'danger','message' => 'Fiyatlar Eklenemedi! Lütfen Formu Kontrol Edit tekrar deneyin.'));
+			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
 		}
 		
 		//echo '<pre>';
@@ -617,6 +622,44 @@ class Reservation_actions extends MY_Controller {
 	function list_price_plans(){
 		$hotel_id = $this->session->userdata('hotel_id');
 		
+	}
+
+	/*
+	* Price Plans AKA Promotions
+	*/
+	function add_price_plan(){
+		//echo '<pre>';
+		//print_r($_POST);
+
+		$this->output->set_content_type('application/json');
+
+		$hotel_id 	= $this->session->userdata('hotel_id');
+		$code		= $this->session->userdata('code');
+		$arr = array(
+			'hotel_id' 			=> $hotel_id,
+			'promotion_name' 	=> $this->input->post('promotion_name'),
+			'start_date' 		=> $this->input->post('start_date'),
+			'end_date' 			=> $this->input->post('end_date'),
+			'daily_range' 		=> implode(',',$this->input->post('daily_range')),
+			'min_stay' 			=> $this->input->post('min_stay'),
+			'booking_start' 	=> $this->input->post('booking_start'),
+			'booking_end' 		=> $this->input->post('booking_end'),
+			'last_min_qty' 		=> $this->input->post('last_min_qty'),
+			'last_min_val' 		=> $this->input->post('last_min_val'),
+			'twentyfour_date' 	=> $this->input->post('twentyfour_date'),
+			'rooms' 			=> implode(',',$this->input->post('rooms')),
+			'promotion_type' 	=> $this->input->post('promotion_type'),
+			'code'				=> $code
+			);
+
+		$this->load->model('reservation_model');
+		$insert = $this->db->insert('price_plans',$arr);
+
+		if ($insert) {
+			echo json_encode(array('status' => 'success','message' => 'Success'));
+		}else{
+			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+		}
 	}
 
 }
