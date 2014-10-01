@@ -73,7 +73,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
-              
+              <form>
                
               <div class="form-group">
                 <label class="col-sm-3 control-label">Set Name</label>
@@ -151,7 +151,7 @@
                <hr>
 
                <div class="form-group min_stay_input" style="display:none">
-                <label class="col-sm-3 control-label">Minimum Stay</label>
+                <label class="col-sm-3 control-label">Minimum Stay (Nights)</label>
                 <div class="row">
                   <div class="col-sm-6">
                   <div class="form-group">
@@ -159,8 +159,9 @@
                   </div>
                   </div>
                 </div>
+                <hr>
               </div>
-              <hr>
+              
 
               <div class="form-group early_booker_input" style="display:none">
                 <label class="col-sm-3 control-label">Booking Days</label>
@@ -182,9 +183,84 @@
                 <div class="row">
                  <small>Date ranges that guests can make reservations</small>
                 </div>
+                <hr>
               </div>
-              <hr>
 
+              <div class="form-group last_minute_input" style="display:none">
+                <label class="col-sm-3 control-label">When can the deal be booked?</label>
+                
+                <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                  <input type="text" id="spinner2" name="last_min_qty">
+                  </div>                
+                </div><!-- col-sm-6 -->
+                <div class="col-sm-3">
+                  <div class="form-group">
+                  <select class="form-control" name="last_min_val">
+                    <option value="day">Days</option>
+                    <option value="hour" selected="selected">Hours</option>
+
+                  </select>
+                    
+                  </div>
+                </div><!-- col-sm-6 -->
+                </div>
+                <div class="row">
+                 <small>Date ranges that guests can make reservations</small>
+                </div>
+                <hr>
+              </div>
+
+              <div class="form-group twentyfour_promotion_input" style="display:none">
+                <label class="col-sm-3 control-label">When can customers book?</label>
+                
+                <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">s
+                    <input required type="text" name="twentyfour_date" class="form-control input-sm from_date">
+                  </div>
+                </div><!-- col-sm-6 -->
+                </div>
+                <div class="row">
+                 <small>Customers can only book the deal on the day that you select, from 00:01 until 23:59.</small>
+                </div>
+                <hr>
+              </div>
+              
+
+               <div class="form-group">
+                <label class="col-sm-3 control-label">Rooms</label>
+                 <div class="row">
+                <?php foreach ($rooms as $r => $room) : ?>
+                <div class="col-sm-1">
+                  <div class="form-group">
+                    <label class="control-label"><?php echo $room->name; ?></label>
+                    <div class="ckbox ckbox-success">
+                      <input type="checkbox" checked name="rooms[<?php echo $room->id; ?>]" id="day_<?php echo $room->id; ?>" />
+                      <label for="day_<?php echo $room->id; ?>"></label>
+                    </div>
+                  </div>
+                </div><!-- col-sm-6 -->
+                <?php endforeach; ?>
+               </div>
+               </div>
+               <hr>
+
+              <input id="promo_type" type="hidden" name="promotion_type"/>
+
+
+              <div class="row">
+              <div class="col-sm-2">
+              <input type="submit" class="btn btn-primary" value="Kaydet">
+              </div>
+                
+               <div class="col-sm-6">
+                <div id="result" class="alert" style="display:none"></div>
+                </div>
+              </div>
+
+              </form>
             </div>
           </div>
         </div>
@@ -242,6 +318,9 @@ $(document).ready(function(){
   var spinner = jQuery('#spinner').spinner();
   spinner.spinner('value', 2);
 
+  var spinner2 = jQuery('#spinner2').spinner();
+  spinner2.spinner('value', 12);
+
   //explanations on badge hover
   $('#simple_deal_label').mouseover(function(){
     $('.simple_deal').show();});
@@ -286,30 +365,82 @@ $(document).ready(function(){
 
   //show-hide inputs
   $('#simple_deal_label').on('click', function(){
-    $('#simple_deal_label').hasClass('selected') ? $('#simple_deal_label').removeClass('selected'): $('#simple_deal_label').addClass('selected');
-    $('.simple_deal').hasClass('shown') ? $('.simple_deal').removeClass('shown') : $('.simple_deal').addClass('shown').show();
-    
-    $('#promotion_form').show();
     remove_shown('simple_deal');
     remove_selected('simple_deal_label');
+    $('#promotion_form').fadeIn();
+   
+    //set promotion type
+    $('#promo_type').val('1');
 
-    $('.min_stay_input').hide();
-    $('.early_booker_input').hide();
+    $('.min_stay_input').fadeOut();
+    $('.early_booker_input').fadeOut();
+    $('.last_minute_input').fadeOut();
+    $('.twentyfour_promotion_input').fadeOut();
   });
 
   $('#minimum_stay_label').on('click', function(){
-    $('#minimum_stay_label').hasClass('selected') ? $('#minimum_stay_label').removeClass('selected'): $('#minimum_stay_label').addClass('selected');
-    $('.minimum_stay').hasClass('shown') ? $('.minimum_stay').removeClass('shown') : $('.minimum_stay').addClass('shown').show();
-    
-    $('#promotion_form').show();
+    $('#promotion_form').fadeIn();
     remove_shown('minimum_stay');
-    remove_selected('minimum_stay');
+    remove_selected('minimum_stay_label');
 
-    $('.min_stay_input').show();
-    $('.early_booker_input').hide();
+     //set promotion type
+    $('#promo_type').val('2');
+
+    $('.min_stay_input').fadeIn();
+    $('.early_booker_input').fadeOut();
+    $('.last_minute_input').fadeOut();
+    $('.twentyfour_promotion_input').fadeOut();
   });
 
+  $('#early_bird_label').on('click', function(){
+    $('#promotion_form').fadeIn();
+    remove_shown('early_bird');
+    remove_selected('early_bird_label');
+
+     //set promotion type
+    $('#promo_type').val('3');
+
+    $('.min_stay_input').fadeOut();
+    $('.early_booker_input').fadeIn();
+    $('.last_minute_input').fadeOut();
+    $('.twentyfour_promotion_input').fadeOut();
+  });
+
+  $('#last_minute_label').on('click', function(){
+    $('#promotion_form').fadeIn();
+    remove_shown('last_minute');
+    remove_selected('last_minute_label');
+
+     //set promotion type
+    $('#promo_type').val('4');
+
+    $('.min_stay_input').fadeOut();
+    $('.early_booker_input').fadeOut();
+    $('.last_minute_input').fadeIn();
+    $('.twentyfour_promotion_input').fadeOut();
+  });
+
+  $('#twentyfour_promotion_label').on('click', function(){
+    $('#promotion_form').fadeIn();
+    remove_shown('twentyfour_promotion');
+    remove_selected('twentyfour_promotion_label');
+
+     //set promotion type
+    $('#promo_type').val('5');
+
+    $('.min_stay_input').fadeOut();
+    $('.early_booker_input').fadeOut();
+    $('.last_minute_input').fadeOut();
+    $('.twentyfour_promotion_input').fadeIn();
+
+  });
+
+
+
   var remove_shown = function(my_class){
+
+    $('.'+my_class).hasClass('shown') ? $('.'+my_class).removeClass('shown') : $('.'+my_class).addClass('shown').show();
+    
     var classes = {
       '1' : 'simple_deal',
       '2' : 'minimum_stay',
@@ -325,6 +456,7 @@ $(document).ready(function(){
   }
 
   var remove_selected = function(my_id){
+    $('#'+my_id).hasClass('selected') ? $('#'+my_id).removeClass('selected'): $('#'+my_id).addClass('selected');
     var ids = {
       '1' : 'simple_deal_label',
       '2' : 'minimum_stay_label',

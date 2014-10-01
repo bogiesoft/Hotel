@@ -166,8 +166,8 @@ class Reservation extends MY_Controller {
 		$uri = $this->uri->segment('3');
 
 		if ($uri=='add_new') {
-
-			$this->load->view('reservation/price_plans_add');
+			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+			$this->load->view('reservation/price_plans_add',$data);
 
 		}elseif($uri=='edit'){
 
