@@ -621,6 +621,13 @@ class Reservation_actions extends MY_Controller {
 
 	function list_price_plans(){
 		$hotel_id = $this->session->userdata('hotel_id');
+
+		$plans = $this->db->query("SELECT * FROM price_plans WHERE hotel_id = '$hotel_id'");
+
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Records'] = $plans->result();
+		print json_encode($jTableResult);
 		
 	}
 
@@ -638,6 +645,7 @@ class Reservation_actions extends MY_Controller {
 		$arr = array(
 			'hotel_id' 			=> $hotel_id,
 			'promotion_name' 	=> $this->input->post('promotion_name'),
+			'promotion_discount'=> $this->input->post('promotion_discount'),
 			'start_date' 		=> $this->input->post('start_date'),
 			'end_date' 			=> $this->input->post('end_date'),
 			'daily_range' 		=> implode(',',$this->input->post('daily_range')),
@@ -656,7 +664,7 @@ class Reservation_actions extends MY_Controller {
 		$insert = $this->db->insert('price_plans',$arr);
 
 		if ($insert) {
-			echo json_encode(array('status' => 'success','message' => 'Success'));
+			echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));
 		}else{
 			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
 		}

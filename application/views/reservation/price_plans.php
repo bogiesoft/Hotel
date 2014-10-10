@@ -62,7 +62,7 @@
 
         $('#plans').jtable({
             messages: turkishMessages, //Lozalize
-            title: 'Hotels',
+            title: 'Promotions',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
@@ -75,11 +75,38 @@
                     key: true,
                     create: false,
                     edit: false,
-                    list: true
+                    list: true,
+                    width : '5%'
                 },
-                name: {
-                    title: 'Adı',
+                promotion_name: {
+                    title: 'Name',
                     width: '23%'
+                },
+
+                type : {
+                    title :'Type',
+                    display: function(data){
+                      //return data.record.promotion_type;
+                    
+                        if (data.record.promotion_type == '1') {
+                          return 'Basic Deal';
+                        }else if(data.record.promotion_type == '2'){
+                          return 'Minimum Stay';
+                        }else if(data.record.promotion_type == '3'){
+                          return 'Early Booker';
+                        }else if(data.record.promotion_type == 4){
+                          return 'Last Minute';
+                        }else if(data.record.promotion_type == 5){
+                          return '24 Hour Promotion';
+                        }
+                        
+                    }
+                },
+                start_date : {
+                    title : 'Start Date',
+                },
+                end_date : {
+                    title : 'End Date',
                 },
                 detail:{
                   title: '',

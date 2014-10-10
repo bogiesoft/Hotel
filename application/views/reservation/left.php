@@ -59,13 +59,15 @@ if ($uri == 'set_prices' or $uri=='price_plans') {
     <li <?php echo $uri=='set_prices' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/set_prices'); ?>"><i class="fa fa-caret-right"></i> Bulk Price Update</a>
     </li>
+    <li <?php echo ($uri=='price_plans' and $this->uri->segment('3') =='') ? 'class="active"' : ''; ?>>
+      <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Promotions</a>
+    </li>
+    
     <li <?php echo $this->uri->segment('3') =='add_new' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/price_plans/add_new'); ?>"><i class="fa fa-caret-right"></i> Add Promotion</a>
     </li>
 
-    <li <?php echo ($uri=='price_plans' and $this->uri->segment('3') =='') ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/price_plans'); ?>"><i class="fa fa-caret-right"></i> Promotions</a>
-    </li>
+    
   </ul>
 </li>
 
