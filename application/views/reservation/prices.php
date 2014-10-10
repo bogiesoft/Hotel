@@ -41,7 +41,7 @@
             <?php foreach ($data['dates'] as $key => $date): 
             $day = date('D',strtotime($date)); ?>
 
-            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6"' : ''; ?>>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px;"' : 'style="font-size: 12px;"'; ?>>
             <?php echo date('M',strtotime($date)); ?><br />
             <?php echo date('d',strtotime($date)); ?><br />
             <?php echo $day; ?>
@@ -87,7 +87,7 @@
                 }?>
               </tr>
 
-
+              <!--
               <tr>
                 <th colspan="2">Price Plans</th>
                 <?php foreach ($room['prices'] as $day => $price) {
@@ -113,6 +113,7 @@
                   
                 }?>
               </tr>
+              -->
           <?php endforeach; ?>
         </tbody>
 
@@ -123,7 +124,7 @@
             <?php foreach ($data['dates'] as $key => $date): 
             $day = date('D',strtotime($date)); ?>
 
-            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6"' : ''; ?>>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px;"' : 'style="font-size: 12px;"'; ?>>
             <?php echo date('M',strtotime($date)); ?><br />
             <?php echo date('d',strtotime($date)); ?><br />
             <?php echo $day; ?>
