@@ -77,11 +77,11 @@
                       $roomPrice = substr(@$price['double_price'],'0', '-3');
                     }
                     
-                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">
+                    echo '<td '.$stoped.' data-price-type="'.$price['price_type'].'" data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">
                     '.$roomPrice.'
                     </td>';
                   }else{
-                    echo '<td  data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
+                    echo '<td  data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
@@ -201,6 +201,17 @@
                 <input type="text" name="available" class="form-control input-sm" id="avail">
               </div>
             </div><!-- col-sm-6 -->
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="control-label">Price Type</label>
+                <select class="form-control" name="price_type" id="price_type_val">
+                  <option value="1">Unit</option>
+                  <option value="2">Person</option>
+                </select>
+              </div>
+            </div><!-- col-sm-6 -->
+
           </div>
 
           </div>
@@ -306,6 +317,7 @@ $(function() {
        var start_date = days['0'];
        var end_date   = days[days.length-1];
 
+       var price_type  = $('.ui-selected').data('price-type');
        var room_capacity  = $('.ui-selected').data('capacity');
        var child_capacity = $('.ui-selected').data('child');
 
@@ -344,6 +356,8 @@ $(function() {
        $('#price_extra').val(extra_price);
        $('#price_child').val(child_price);
        $('#roomid').val(room_id);
+       $('#price_type_val').val(parseInt(price_type));
+       //$('#price_type_val').filter('[value="'+price_type+'"]');
 
 
        $('#modal').modal();

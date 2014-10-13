@@ -136,6 +136,8 @@ class Reservation extends MY_Controller {
 			}
 		}
 
+		//echo '<pre>'; print_r($arr); exit;
+
 		/*
 		$arr = array();
 		foreach ($rooms as $key => $r) {
