@@ -591,6 +591,7 @@ class Reservation_actions extends MY_Controller {
 		
 		$arr = array(
 		'room_id' 		=> $this->input->post('room_id'),
+		'price_type' 	=> $this->input->post('price_type'),
 		'min_stay' 		=> $this->input->post('min_stay'),
 		'max_stay' 		=> $this->input->post('max_stay'),
 		'available' 	=> $this->input->post('available'),

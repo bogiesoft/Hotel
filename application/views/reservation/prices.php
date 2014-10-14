@@ -51,7 +51,7 @@
         </thead>
 
         <tbody>
-            <?php foreach ($data['rooms'] as $k => $room): ?>
+            <?php foreach ($data['rooms'] as $k => $room):?>
               <tr>
                 <th colspan="2" class="tdRoomName" data-name="<?php echo $room['name']; ?>"><?php echo $room['name']; ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
@@ -69,7 +69,7 @@
                 <th colspan="2">Best Available Rate</th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['price_type']) {
-                    $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
+                    $stoped = $price['stoped_arrival'] == '1' ? 'class="base_price tdRed"' : 'class="base_price tdGreen"';
 
                     if ($price['price_type'] == '1') {
                       $roomPrice = substr(@$price['base_price'],'0', '-3');
@@ -86,35 +86,39 @@
                   
                 }?>
               </tr>
+              <!-- promotions by room -->
+                <?php foreach ($data['promotions'][$k] as $p) :?>
+                <tr>
+                <th colspan="2"><?php echo $p['promotion_name']; ?></th>
+                  <?php foreach ($room['prices'] as $day => $price) {
+                  if (@$price['price_type']) {
+                    $stoped = $price['stoped_arrival'] == '1' ? 'class="promotion tdRed"' : 'class="promotion tdGreen"';
 
-              <!--
-              <tr>
-                <th colspan="2">Price Plans</th>
-                <?php foreach ($room['prices'] as $day => $price) {
-                  if (@$price['base_price']) {
-                    $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<th '.$stoped.'>'.@$price['reserved'].'/'.$price['available'].'</th>';
+
+                    if ($price['price_type'] == '1') {
+                      $roomPrice = $price['base_price'];
+                    }else{
+                      $roomPrice = $price['double_price'];
+                    }
+
+                    $roomPrice = $roomPrice - (($roomPrice / 100) * $p['promotion_discount']);
+                    
+                    
+                    echo '<td '.$stoped.' data-price-type="'.$price['price_type'].'" data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">
+                    '.$roomPrice.'
+                    </td>';
                   }else{
-                    echo '<th>N/A</th>';
+                    echo '<td  data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
-              </tr>
 
-              <tr>
-                <th colspan="2"></th>
-                <?php foreach ($room['prices'] as $day => $price) {
-                  if (@$price['base_price']) {
-                    $stoped = $price['stoped_arrival'] == '1' ? 'class="tdRed"' : 'class="tdGreen"';
-                    echo '<td '.$stoped.' data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">'.substr(@$price['base_price'],'0', '-3').'</td>';
-                  }else{
-                    echo '<td  data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
-                  }
-                  
-                }?>
-              </tr>
-              -->
-          <?php endforeach; ?>
+                </tr>
+                <?php endforeach; // promotion foreach end?>
+          
+          <?php endforeach; //rooms foreach end ?>
+
+
         </tbody>
 
         <thead>
@@ -305,6 +309,9 @@ $(function() {
 
        jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
        jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
+       
+       //base price ise
+       if ($('.ui-selected').hasClass('base_price')) {
 
        var room_id    = $('.ui-selected').data('room-id');
        var room_name  = $('.ui-selected').data('room-name');
@@ -361,6 +368,7 @@ $(function() {
 
 
        $('#modal').modal();
+      }
      }
   });
 

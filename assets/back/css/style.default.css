@@ -3862,7 +3862,7 @@ div.error label.error:before {
 }
 
 
-.table thead > tr > th {
+.table thead > tr > th > tp{
    text-align: center;
 }
 
@@ -3921,4 +3921,8 @@ td.tdRed:hover{
 td.tdRoomName{
    background:#FFCC33;
    color:#fff;
+}
+
+tr > tp{
+   display: table-cell;
 }

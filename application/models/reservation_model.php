@@ -115,6 +115,21 @@ class Reservation_Model extends CI_Model
 
 	}
 
+	function get_promotions(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$proms = $this->db->query("SELECT * FROM price_plans WHERE hotel_id = $hotel_id");
+
+		if ($proms->num_rows() >0) {
+			return $proms->result_array();
+		}else{
+			return false;
+		}
+		
+	}
+
+	function get_promotion_by_id($id){
+		return  $this->db->query("SELECT * FROM price_plans WHERE id=$id")->row_array();
+	}
 
 	function insert_price_plan($arr){
 
