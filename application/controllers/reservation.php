@@ -119,24 +119,7 @@ class Reservation extends MY_Controller {
 			$end_date	= $this->input->get('end_date');
 		}
 
-		//get promotions
-		$promotions = $this->reservation_model->get_promotions();
 		$rooms = $this->reservation_model->get_hotel_rooms();
-		//print_r($promotions); exit;
-
-		$promotion = array();
-		foreach ($promotions as $k => $p) {
-			$rooms = explode(',', $p['rooms']);
-			foreach ($rooms as $r => $room) {
-				$promotion[$room][$p['id']] = $this->reservation_model->get_promotion_by_id($p['id']);
-				
-			}
-
-		}
-
-
-		$rooms = $this->reservation_model->get_hotel_rooms();
-		//$this->reservation_model->check_bar($this->session->userdata('hotel_id'),$start_date,$end_date,$r->id);
 		$arr = array();
 		foreach (date_range($start_date,$end_date) as $k => $d) {
 
@@ -151,21 +134,21 @@ class Reservation extends MY_Controller {
 				$arr['rooms'][$r->id]['prices'][$d]['room_child'] = $r->min_child;
 			}
 		}
+		
+		//get promotions
+		$promotions = $this->reservation_model->get_promotions();
 
-		$arr['promotions'] = $promotion;
-
-		//echo '<pre>'; print_r($arr); exit;
-
-		/*
-		$arr = array();
-		foreach ($rooms as $key => $r) {
-			$arr[$r->id]['name'] = $r->name;
-			$arr[$r->id]['prices'] = $this->reservation_model->check_bar($this->session->userdata('hotel_id'),$start_date,$end_date,$r->id);
+		//set promotions by rooms id
+		$promotion = array();
+		foreach ($promotions as $k => $p) {
+			$rooms = explode(',', $p['rooms']);
+			foreach ($rooms as $r => $room) {
+				$promotion[$room][$p['id']] = $p;
+				
+			}
 		}
-		*/
 
-		//print_r($arr); exit;
-
+		$arr['promotions'] 	= $promotion;
 	
 		$data['start_date'] = $start_date;
 		$data['end_date']	= $end_date;

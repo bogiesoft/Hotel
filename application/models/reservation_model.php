@@ -127,10 +127,6 @@ class Reservation_Model extends CI_Model
 		
 	}
 
-	function get_promotion_by_id($id){
-		return  $this->db->query("SELECT * FROM price_plans WHERE id=$id")->row_array();
-	}
-
 	function insert_price_plan($arr){
 
 	}
