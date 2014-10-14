@@ -41,7 +41,7 @@
             <?php foreach ($data['dates'] as $key => $date): 
             $day = date('D',strtotime($date)); ?>
 
-            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px;"' : 'style="font-size: 12px;"'; ?>>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px; text-align: center;"' : 'style="font-size: 12px; text-align: center;"'; ?>>
             <?php echo date('M',strtotime($date)); ?><br />
             <?php echo date('d',strtotime($date)); ?><br />
             <?php echo $day; ?>
@@ -128,7 +128,7 @@
             <?php foreach ($data['dates'] as $key => $date): 
             $day = date('D',strtotime($date)); ?>
 
-            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px;"' : 'style="font-size: 12px;"'; ?>>
+            <th <?php echo ($day == 'Sat' or $day == 'Sun') ? 'style="background-color:#FFEDB6; font-size: 12px; text-align: center;"' : 'style="font-size: 12px; text-align: center;"'; ?>>
             <?php echo date('M',strtotime($date)); ?><br />
             <?php echo date('d',strtotime($date)); ?><br />
             <?php echo $day; ?>
@@ -310,7 +310,7 @@ $(function() {
        jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
        jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
        
-       //base price ise
+       //if cell is base price
        if ($('.ui-selected').hasClass('base_price')) {
 
        var room_id    = $('.ui-selected').data('room-id');
@@ -368,7 +368,9 @@ $(function() {
 
 
        $('#modal').modal();
-      }
+      }//if base price modify modal end
+
+
      }
   });
 
