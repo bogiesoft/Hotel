@@ -81,7 +81,7 @@
                     '.$roomPrice.'
                     </td>';
                   }else{
-                    echo '<td  data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
+                    echo '<td class="base_price" data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
