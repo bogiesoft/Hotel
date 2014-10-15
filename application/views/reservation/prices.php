@@ -87,6 +87,7 @@
                 }?>
               </tr>
               <!-- promotions by room -->
+              <?php  if (isset($data['promotions'])) : ?>
                 <?php foreach ($data['promotions'][$k] as $p) :?>
                 <tr>
                 <th colspan="2"><?php echo $p['promotion_name']; ?></th>
@@ -115,7 +116,7 @@
 
                 </tr>
                 <?php endforeach; // promotion foreach end?>
-          
+              <?php endif; ?>
           <?php endforeach; //rooms foreach end ?>
 
 
@@ -300,6 +301,7 @@ $(function() {
       e.metaKey = true;
   }).selectable({
     filter:'td',
+    tolerance :'touch',
     selected: function() {
        var days = [];
        $( ".ui-selected", this ).each(function() {

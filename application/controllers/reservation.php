@@ -139,6 +139,7 @@ class Reservation extends MY_Controller {
 		$promotions = $this->reservation_model->get_promotions();
 
 		//set promotions by rooms id
+		if ($promotions) {
 		$promotion = array();
 		foreach ($promotions as $k => $p) {
 			$rooms = explode(',', $p['rooms']);
@@ -149,7 +150,10 @@ class Reservation extends MY_Controller {
 		}
 
 		$arr['promotions'] 	= $promotion;
-	
+		}
+
+		//echo '<pre>'; print_r($arr); exit;
+
 		$data['start_date'] = $start_date;
 		$data['end_date']	= $end_date;
 		$data['data'] 		= $arr;
