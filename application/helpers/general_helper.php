@@ -74,3 +74,16 @@ function date_range($strDateFrom,$strDateTo) {
   }
   return $aryRange;
 }
+
+function promotion_available($date,$pid,$room_id){
+	$ci =& get_instance();
+
+	$query = $ci->db->query("SELECT * FROM price_plans_availability WHERE room_id = '$room_id' and price_plan_id = '$pid' and price_date='$date'")->row_array();
+
+	if ($query) {
+		return $query;
+	}else{
+		return false;
+	}
+
+}

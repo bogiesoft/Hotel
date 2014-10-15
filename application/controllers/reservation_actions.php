@@ -661,8 +661,41 @@ class Reservation_actions extends MY_Controller {
 			'code'				=> $code
 			);
 
+		
 		$this->load->model('reservation_model');
 		$insert = $this->db->insert('price_plans',$arr);
+
+		//create date range
+		$plan_id = $this->db->insert_id();
+		$available = $this->input->post('available');
+		$daily_range = $this->input->post('daily_range');
+
+		foreach ($daily_range as $key => $value) {
+			unset($daily_range[$key]);
+			$daily_range[$value] = $value;
+		}
+		
+		$rooms = explode(',', $arr['rooms']);
+
+		foreach (date_range($arr['start_date'],$arr['end_date']) as $key => $date) {
+
+		$day = strtotime($date);
+		$dayName = date('D',$day);	
+
+			//add availibility to all rooms
+			foreach ($rooms as $k => $room) {
+				$range = array(
+				'available' => $available,
+				'price_date' => $date,
+				'price_plan_id'	=> $plan_id,
+				'room_id'		=> $room);
+
+				if (isset($daily_range[$dayName])) {
+					$this->reservation_model->insert_price_plan_availability($range);
+				}
+			}
+			
+		}
 
 		if ($insert) {
 			echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));

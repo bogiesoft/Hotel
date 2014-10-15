@@ -227,6 +227,22 @@
                 </div>
                 <hr>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Available Rooms?</label>
+                
+                <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <input type="text" name="available" class="form-control input-sm" value="5">
+                  </div>
+                </div><!-- col-sm-6 -->
+                </div>
+                <div class="row">
+                 <small>How many rooms available?</small>
+                </div>
+                <hr>
+              </div>
               
 
                <div class="form-group">

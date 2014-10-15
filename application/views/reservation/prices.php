@@ -86,16 +86,19 @@
                   
                 }?>
               </tr>
+
               <!-- promotions by room -->
               <?php  if (isset($data['promotions'])) : ?>
                 <?php foreach ($data['promotions'][$k] as $p) :?>
                 <tr>
                 <th colspan="2"><?php echo $p['promotion_name']; ?></th>
                   <?php foreach ($room['prices'] as $day => $price) {
-                  if (@$price['price_type']) {
-                    $stoped = $price['stoped_arrival'] == '1' ? 'class="promotion tdRed"' : 'class="promotion tdGreen"';
 
+                  $available = promotion_available($day,$p['id'],$price['room_id']);                  
+                  if ($available) {
+                    $stoped = ($price['stoped_arrival'] == '1' or $available['stoped'] == '1') ? 'class="promotion tdRed"' : 'class="promotion tdGreen"';
 
+                    //set discount price
                     if ($price['price_type'] == '1') {
                       $roomPrice = $price['base_price'];
                     }else{
@@ -104,13 +107,13 @@
 
                     $roomPrice = $roomPrice - (($roomPrice / 100) * $p['promotion_discount']);
                     
-                    
-                    echo '<td '.$stoped.' data-price-type="'.$price['price_type'].'" data-available="'.$price['available'].'" data-max-stay="'.$price['max_stay'].'" data-min-stay="'.$price['min_stay'].'" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-base-price="'.$price['base_price'].'" data-single-price="'.$price['single_price'].'" data-double-price="'.$price['double_price'].'" data-triple-price="'.$price['triple_price'].'" data-extra-price="'.$price['extra_adult'].'" data-child-price="'.$price['child_price'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].' data-stoped-d='.$price['stoped_departure'].' data-stoped-a='.$price['stoped_arrival'].' data-day="'.$day.'">
+                    echo '<td '.$stoped.' data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-promo-id="'.$p['id'].'" data-promo-name="'.$p['promotion_name'].'" data-available="'.$available['available'].'" data-stoped='.$available['stoped'].' data-day="'.$day.'">
                     '.$roomPrice.'
                     </td>';
                   }else{
-                    echo '<td  data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
+                    echo '<td class="promotion" data-room-name="'.$room['name'].'" data-room-id="'.$price['room_id'].'" data-promo-id="'.$p['id'].'" data-promo-name="'.$p['promotion_name'].'"  data-day="'.$day.'">N/A</td>';
                   }
+                  
                   
                 }?>
 
@@ -146,7 +149,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel"><div id="roomname"></div></h4>
+        <h4 class="modal-title" id="myModalLabel"><span class="roomname"></span></h4>
       </div>
       <div class="modal-body">
           <div class="form-group">
@@ -154,13 +157,13 @@
           <div class="col-sm-3">
             <div class="form-group">
               <label class="control-label">From</label>
-              <input required type="text" name="start_date" class="form-control input-sm" id="from_date">
+              <input required type="text" name="start_date" class="form-control input-sm from_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
             <div class="form-group">
               <label class="control-label">To</label>
-              <input required type="text" name="end_date" class="form-control input-sm" id="to_date">
+              <input required type="text" name="end_date" class="form-control input-sm to_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
@@ -278,6 +281,70 @@
   </div>
 </div>
 
+<!-- promotion modal -->
+<div id="promo_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="save_by_promo">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="roomname"></span> > <span class="promotion_name"></span></h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+          <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">From</label>
+              <input required type="text" name="start_date" class="form-control input-sm from_date">
+            </div>
+          </div><!-- col-sm-6 -->
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">To</label>
+              <input required type="text" name="end_date" class="form-control input-sm to_date">
+            </div>
+          </div><!-- col-sm-6 -->
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">Available</label>
+                <input type="text" name="promo_available" class="form-control input-sm promo_available" />
+                <label for="promo_available"></label>
+              </div>
+          </div><!-- col-sm-6 -->
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label class="control-label">Stoped Arrival</label>
+              <div class="ckbox ckbox-danger">
+                <input type="checkbox" name="promo_stoped" id="promo_stoped" />
+                <label for="promo_stoped"></label>
+              </div>
+              </div>
+          </div><!-- col-sm-6 -->
+
+          </div>
+          </div>
+
+          <div class="row">
+            <div id="loading" class="alert" style="display:none">
+              <img src="<?php echo site_url('assets/back/images/loaders'); ?>/loader6.gif" />
+            </div>
+            <div id="result" class="alert" style="display:none"></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="promotion_id" class="promo_id">
+        <input type="hidden" name="promotion_room_id" class="promo_room_id">
+        <input type="hidden" name="promo_changed" id="promoFromChanged" value="0">
+        <button type="button" class="btn btn-default" id="closePromoModal">Close</button>
+        <button id="savebutton" type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <style type="text/css">
   #selectable .ui-selected { background: #F39814; color: white; }
@@ -312,20 +379,19 @@ $(function() {
        jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
        jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
        
-       //if cell is base price
-       if ($('.ui-selected').hasClass('base_price')) {
-
-       var room_id    = $('.ui-selected').data('room-id');
-       var room_name  = $('.ui-selected').data('room-name');
-       var min_stay   = $('.ui-selected').data('min-stay');
-       var max_stay   = $('.ui-selected').data('max-stay');
-       var available  = $('.ui-selected').data('available');
-       var stoped_a   = $('.ui-selected').data('stoped-a');
-       var stoped_d   = $('.ui-selected').data('stoped-d');
-
        var start_date = days['0'];
        var end_date   = days[days.length-1];
+       var available  = $('.ui-selected').data('available');
+       var room_name  = $('.ui-selected').data('room-name');
+       var room_id    = $('.ui-selected').data('room-id');
 
+       //if cell is base price
+       if ($('.ui-selected').hasClass('base_price')) {
+       var min_stay   = $('.ui-selected').data('min-stay');
+       var max_stay   = $('.ui-selected').data('max-stay');
+       var stoped_a   = $('.ui-selected').data('stoped-a');
+       var stoped_d   = $('.ui-selected').data('stoped-d');
+       
        var price_type  = $('.ui-selected').data('price-type');
        var room_capacity  = $('.ui-selected').data('capacity');
        var child_capacity = $('.ui-selected').data('child');
@@ -351,9 +417,9 @@ $(function() {
        if (parseInt(stoped_d) > 0) { $('#stoped_d').prop('checked',true)}else{$('#stoped_d').prop('checked',false)};
 
        //fill the form
-       $('#roomname').html(room_name);
-       $('#from_date').val(start_date);
-       $('#to_date').val(end_date);
+       $('.roomname').html(room_name);
+       $('.from_date').val(start_date);
+       $('.to_date').val(end_date);
        $('#stay_min').val(min_stay);
        $('#stay_max').val(max_stay);
        $('#avail').val(available);
@@ -371,6 +437,24 @@ $(function() {
 
        $('#modal').modal();
       }//if base price modify modal end
+      else{
+       var stoped           = $('.ui-selected').data('stoped');
+       var promotion_name   = $('.ui-selected').data('promo-name');
+       var promotion_id     = $('.ui-selected').data('promo-id');
+       //fill the form
+       $('.roomname').html(room_name);
+       $('.promotion_name').html(promotion_name);
+       $('.promo_available').val(available);
+       $('.promo_id').val(promotion_id);
+       $('.promo_room_id').val(room_id);
+       
+       if (parseInt(stoped) > 0) { $('#promo_stoped').prop('checked',true)}else{$('#promo_stoped').prop('checked',false)};
+
+       $('.from_date').val(start_date);
+       $('.to_date').val(end_date);
+
+       $('#promo_modal').modal();
+      }//if promotion price modify modal end
 
 
      }
@@ -428,6 +512,63 @@ $(function() {
       $('#modal').modal('hide');
     }else{
       $("#modal").modal('hide');
+      setTimeout(function(){ 
+        location.reload(); }, 200);
+    };
+  });
+
+ //save form inside modal by room
+  $("#save_by_promo").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    /*clear result div*/
+    $("#result").html('');
+    $('#loading').show();
+    $('#savebutton').addClass('disabled');
+
+    /* get some values from elements on the page: */
+    var val = $(this).serialize();
+    /* Send the data using post and put the results in a div */
+    $.ajax({
+        url: base_url + "reservation_actions/price_grid_update_by_room",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          $('#promoFromChanged').val('1');
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 2500);
+
+        },
+        error:function(){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-danger');
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+        }   
+      }); 
+  }); /* ajax end */
+
+  //if form changed reload page else close modal
+  $('#closePromoModal').on('click',function(){
+    var changed = $('#promoFromChanged').val();
+    if (changed=='0') {
+      $('#selectable .ui-selectee').removeClass('ui-selected');
+      $('#promo_modal').modal('hide');
+    }else{
+      $("#promo_modal").modal('hide');
       setTimeout(function(){ 
         location.reload(); }, 200);
     };
