@@ -150,4 +150,10 @@ class Reservation_Model extends CI_Model
 		return $insert;
 	}
 
+	function price_plan_detail($id){
+
+		return $this->db->query("SELECT * FROM price_plans WHERE id = '$id'")->row();
+
+	}
+
 }

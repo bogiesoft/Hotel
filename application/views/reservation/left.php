@@ -51,7 +51,7 @@ if ($uri == 'set_prices' or $uri=='price_plans') {
 }
 ?>
 
- <li class="nav-parent <?php echo $prices; ?>"><a href="#"><i class="fa fa-edit"></i> <span>Fiyatlar</span></a>
+ <li class="nav-parent <?php echo $prices; ?>"><a href="#"><i class="fa fa-edit"></i> <span>Prices & Promotions</span></a>
   <ul class="children" <?php echo $prices_children; ?>>
     <li <?php echo $uri=='prices' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Rate Availibility Plan</a>

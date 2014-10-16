@@ -88,7 +88,7 @@
               </tr>
 
               <!-- promotions by room -->
-              <?php  if (isset($data['promotions'])) : ?>
+              <?php  if (isset($data['promotions'][$k])) : ?>
                 <?php foreach ($data['promotions'][$k] as $p) :?>
                 <tr>
                 <th colspan="2"><?php echo $p['promotion_name']; ?></th>

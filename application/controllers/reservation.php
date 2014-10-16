@@ -181,11 +181,9 @@ class Reservation extends MY_Controller {
 			$id = $this->uri->segment('4');
 
 			//get hotel detail
-			$data['hotel'] 		 = $this->reservation_model->hotel_details($id);
-			$data['description'] = $this->reservation_model->hotel_description($id);
-			$data['countries'] 	 = $this->reservation_model->countries();
-
-			$this->load->view('reservation/hotels_edit',$data);
+			$data['p'] 		 = $this->reservation_model->price_plan_detail($id);
+			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+			$this->load->view('reservation/price_plans_edit',$data);
 
 		}else{
 
