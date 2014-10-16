@@ -68,7 +68,8 @@
             sorting: false, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '<?php echo site_url("reservation_actions/list_price_plans"); ?>'
+                listAction: '<?php echo site_url("reservation_actions/list_price_plans"); ?>',
+                deleteAction: '<?php echo site_url("reservation_actions/delete_price_plan"); ?>'
             },
             fields: {
                 id: {

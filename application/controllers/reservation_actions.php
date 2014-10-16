@@ -632,6 +632,16 @@ class Reservation_actions extends MY_Controller {
 		
 	}
 
+	function delete_price_plan(){
+		$this->db->delete('price_plans',array('id' =>$this->input->post('id')));
+		$this->db->delete('price_plans_availability',array('price_plan_id' =>$this->input->post('id')));
+		//Return result to jTable
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		print json_encode($jTableResult);
+
+	}
+
 	/*
 	* Price Plans AKA Promotions
 	*/
