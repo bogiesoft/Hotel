@@ -648,7 +648,7 @@ class Reservation_actions extends MY_Controller {
 	function add_price_plan(){
 		//echo '<pre>';
 		//print_r($_POST);
-
+		$update  	= $this->input->post('update');
 		$hotel_id 	= $this->session->userdata('hotel_id');
 		$code		= $this->session->userdata('code');
 		$arr = array(
@@ -671,10 +671,17 @@ class Reservation_actions extends MY_Controller {
 
 		
 		$this->load->model('reservation_model');
-		$insert = $this->db->insert('price_plans',$arr);
 
-		//create date range
-		$plan_id = $this->db->insert_id();
+		//check if update
+		if ($update == '1') {
+			$plan_id = $this->input->post('promotion_id'); 
+			$insert  = $this->db->update('price_plans',$arr,array('id'=>$plan_id));
+		}else{
+			$insert  = $this->db->insert('price_plans',$arr);
+			$plan_id = $this->db->insert_id();
+		}
+		
+		//create date range		
 		$available = $this->input->post('available');
 		$daily_range = $this->input->post('daily_range');
 
@@ -685,6 +692,10 @@ class Reservation_actions extends MY_Controller {
 		
 		$rooms = explode(',', $arr['rooms']);
 
+		//delete all availibility variables
+		$this->db->delete('price_plans_availability',array('price_plan_id' => $plan_id));
+
+		//add availability for each day
 		foreach (date_range($arr['start_date'],$arr['end_date']) as $key => $date) {
 
 		$day = strtotime($date);
@@ -692,34 +703,38 @@ class Reservation_actions extends MY_Controller {
 
 			//add availibility to all rooms
 			foreach ($rooms as $k => $room) {
-				$range = array(
-				'available' => $available,
-				'price_date' => $date,
+				$vars = array(
+				'available' 	=> $available,
+				'price_date' 	=> $date,
 				'price_plan_id'	=> $plan_id,
 				'room_id'		=> $room);
 
 				if (isset($daily_range[$dayName])) {
-					$this->reservation_model->insert_price_plan_availability($range);
+					$this->reservation_model->insert_price_plan_availability($vars);
 				}
 			}
 			
 		}
 
-		if ($insert) {
-			$this->session->set_flashdata('statusSuccess', 'Promotion Added');
-			redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+
+		//if not update redirect to plan edit page
+		if ($update == '0') {
+			if ($insert) {
+				$this->session->set_flashdata('statusSuccess', 'Promotion Added');
+				redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+			}else{
+				$this->session->set_flashdata('statusError', 'Error!');
+				redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+			}
 		}else{
-			$this->session->set_flashdata('statusError', 'Promotion Couldnt');
-			redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+			if ($insert) {
+				echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));
+			}else{
+				echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+			}
+
 		}
 
-		/*
-		if ($insert) {
-			echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));
-		}else{
-			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
-		}
-		*/
 	}
 
 }

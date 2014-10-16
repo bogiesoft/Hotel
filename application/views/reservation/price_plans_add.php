@@ -264,7 +264,7 @@
                <hr>
 
               <input id="promo_type" type="hidden" name="promotion_type"/>
-
+              <input type="hidden" name="update" value="0">
 
               <div class="row">
               <div class="col-sm-2">

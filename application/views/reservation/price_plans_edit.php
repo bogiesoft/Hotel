@@ -250,6 +250,7 @@
                <hr>
 
               <input id="promotion_id" type="hidden" name="promotion_id" value="<?php echo $p->id; ?>" />
+              <input type="hidden" name="update" value="1">
 
 
               <div class="row">
@@ -293,7 +294,7 @@ $(document).ready(function(){
           rgb = '#00cc00';
         }
 
-    $("#slider-range").css("background", rgb);
+  $("#slider-range").css("background", rgb);
     ui.handle.blur();
   };
 
@@ -322,6 +323,57 @@ $(document).ready(function(){
 
   var spinner2 = jQuery('#spinner2').spinner();
   spinner2.spinner();
+
+  //validate form and send
+  $.validator.messages.required = 'Bu Alan Gerekli';
+  jQuery(".validate-form").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+       /* stop form from submitting normally */
+    },
+
+    submitHandler: function(element){
+    event.preventDefault();
+    
+      $("#result").html('');
+      $('#loading').show();
+      $('#savebutton').addClass('disabled');
+
+  
+      var val = $('#add_price_plan').serialize();
+  
+      $.ajax({
+        url: base_url + "reservation_actions/add_price_plan",
+        type: "POST",
+        data: val,
+        dataType: 'json',
+        success: function(data){
+          $('#loading').hide();
+          $('#savebutton').removeClass('disabled');
+          $('#result').html(data.message);
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success'); 
+          $("#result").addClass('alert-'+data.status);
+          $("#result").fadeIn(1000);
+          setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+                    
+        },
+        error:function(){
+          $('#result').html('Something went wrong!');
+          $("#result").removeClass('alert-danger'); 
+          $("#result").removeClass('alert-success');      
+          $("#result").addClass('alert-danger');
+          $("#result").fadeIn(1000);
+        }   
+      });  // ajax end
+
+    }
+   
+  });
 
 });
 </script>
