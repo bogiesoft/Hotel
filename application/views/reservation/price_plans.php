@@ -86,6 +86,7 @@
 
                 type : {
                     title :'Type',
+                    width : '12%',
                     display: function(data){
                       //return data.record.promotion_type;
                     
@@ -108,13 +109,16 @@
                 },
                 start_date : {
                     title : 'Start Date',
+                    width : '8%',
                 },
                 end_date : {
                     title : 'End Date',
+                    width : '8%',
                 },
                 detail:{
                   title: '',
                   sorting: false,
+                  width : '2%',
                   display: function (data) {
                       return $('<a href="'+base_url+'reservation/price_plans/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }

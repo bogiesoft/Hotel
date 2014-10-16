@@ -249,7 +249,8 @@
                </div>
                <hr>
 
-              <input id="promotion_id" type="hidden" name="promotion_id" value="<?php echo $p->id; ?>" />
+              <input type="hidden" name="promotion_id" value="<?php echo $p->id; ?>" />
+              <input type="hidden" name="promotion_type" value="<?php echo $p->promotion_type; ?>" />
               <input type="hidden" name="update" value="1">
 
 
