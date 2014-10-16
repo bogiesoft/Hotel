@@ -73,7 +73,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
-              <form id="add_price_plan" class="validate-form">
+              <form id="add_price_plan" class="validate-form" method="POST" action="<?php echo site_url('reservation_actions/add_price_plan'); ?>">
                
               <div class="form-group">
                 <label class="col-sm-3 control-label">Set Name</label>
@@ -497,16 +497,18 @@ $(document).ready(function(){
       jQuery(element).closest('.form-group').removeClass('has-error');
        /* stop form from submitting normally */
     },
+
+    /*
     submitHandler: function(element){
     event.preventDefault();
-      /*clear result div*/
+    
       $("#result").html('');
       $('#loading').show();
       $('#savebutton').addClass('disabled');
 
-      /* get some values from elements on the page: */
+  
       var val = $('#add_price_plan').serialize();
-      /* Send the data using post and put the results in a div */
+  
       $.ajax({
         url: base_url + "reservation_actions/add_price_plan",
         type: "POST",
@@ -534,6 +536,7 @@ $(document).ready(function(){
       });  // ajax end
 
     }
+    */
   });
 
 });

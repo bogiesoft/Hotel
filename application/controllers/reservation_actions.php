@@ -649,8 +649,6 @@ class Reservation_actions extends MY_Controller {
 		//echo '<pre>';
 		//print_r($_POST);
 
-		$this->output->set_content_type('application/json');
-
 		$hotel_id 	= $this->session->userdata('hotel_id');
 		$code		= $this->session->userdata('code');
 		$arr = array(
@@ -708,10 +706,20 @@ class Reservation_actions extends MY_Controller {
 		}
 
 		if ($insert) {
+			$this->session->set_flashdata('statusSuccess', 'Promotion Added');
+			redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+		}else{
+			$this->session->set_flashdata('statusError', 'Promotion Couldnt');
+			redirect(site_url('reservation/price_plans/edit/'.$plan_id));
+		}
+
+		/*
+		if ($insert) {
 			echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));
 		}else{
 			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
 		}
+		*/
 	}
 
 }

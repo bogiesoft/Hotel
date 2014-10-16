@@ -13,9 +13,22 @@
     </div>
     
     <div class="contentpanel">
- 
-
       <div class="row" id="promotion_form">
+          
+    <?php if (NULL != $this->session->flashdata('statusSuccess')) : ?>
+      <div class="alert alert-success">
+       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <b><?php echo $this->session->flashdata('statusSuccess'); ?></b>
+      </div>
+    <?php endif; ?>
+
+    <?php if (NULL != $this->session->flashdata('statusError')) : ?>
+      <div class="alert alert-danger">
+       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <b><?php echo $this->session->flashdata('statusError'); ?></b>
+      </div>
+    <?php endif; ?>
+
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            

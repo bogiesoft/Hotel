@@ -103,6 +103,9 @@
                         
                     }
                 },
+                promotion_discount : {
+                    title : 'Discount (%)',
+                },
                 start_date : {
                     title : 'Start Date',
                 },
