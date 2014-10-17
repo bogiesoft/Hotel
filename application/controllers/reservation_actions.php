@@ -682,8 +682,9 @@ class Reservation_actions extends MY_Controller {
 		}
 		
 		//create date range		
-		$available = $this->input->post('available');
-		$daily_range = $this->input->post('daily_range');
+		$available 		= $this->input->post('available');
+		$daily_range 	= $this->input->post('daily_range');
+		$discount 		= $this->input->post('promotion_discount');
 
 		foreach ($daily_range as $key => $value) {
 			unset($daily_range[$key]);
@@ -707,7 +708,8 @@ class Reservation_actions extends MY_Controller {
 				'available' 	=> $available,
 				'price_date' 	=> $date,
 				'price_plan_id'	=> $plan_id,
-				'room_id'		=> $room);
+				'room_id'		=> $room,
+				'discount'		=> $discount);
 
 				if (isset($daily_range[$dayName])) {
 					$this->reservation_model->insert_price_plan_availability($vars);

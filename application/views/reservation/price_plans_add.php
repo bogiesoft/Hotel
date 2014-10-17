@@ -239,7 +239,7 @@
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>How many rooms available?</small>
+                 <small>How many rooms available? (For each rooms below)</small>
                 </div>
                 <hr>
               </div>
