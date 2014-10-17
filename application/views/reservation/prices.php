@@ -118,8 +118,8 @@
                 }?>
 
                 </tr>
-                <?php endforeach; // promotion foreach end?>
-              <?php endif; ?>
+                <?php endforeach; // promotion foreach end ?>
+              <?php endif; // promotions end ?>
           <?php endforeach; //rooms foreach end ?>
 
 
@@ -330,7 +330,7 @@
             <div id="loading" class="alert" style="display:none">
               <img src="<?php echo site_url('assets/back/images/loaders'); ?>/loader6.gif" />
             </div>
-            <div id="result" class="alert" style="display:none"></div>
+            <div id="promo_result" class="alert" style="display:none"></div>
           </div>
       </div>
       <div class="modal-footer">
@@ -453,6 +453,7 @@ $(function() {
        $('.from_date').val(start_date);
        $('.to_date').val(end_date);
 
+       //show promotion modal
        $('#promo_modal').modal();
       }//if promotion price modify modal end
 
@@ -522,7 +523,7 @@ $(function() {
     /* stop form from submitting normally */
     event.preventDefault();
     /*clear result div*/
-    $("#result").html('');
+    $("#promo_result").html('');
     $('#loading').show();
     $('#savebutton').addClass('disabled');
 
@@ -530,33 +531,33 @@ $(function() {
     var val = $(this).serialize();
     /* Send the data using post and put the results in a div */
     $.ajax({
-        url: base_url + "reservation_actions/price_grid_update_by_room",
+        url: base_url + "reservation_actions/price_grid_update_promo",
         type: "POST",
         data: val,
         dataType: 'json',
         success: function(data){
           $('#loading').hide();
           $('#savebutton').removeClass('disabled');
-          $('#result').html(data.message);
-          $("#result").removeClass('alert-danger'); 
-          $("#result").removeClass('alert-success'); 
-          $("#result").addClass('alert-'+data.status);
-          $("#result").fadeIn(1000);
+          $('#promo_result').html(data.message);
+          $("#promo_result").removeClass('alert-danger'); 
+          $("#promo_result").removeClass('alert-success'); 
+          $("#promo_result").addClass('alert-'+data.status);
+          $("#promo_result").fadeIn(1000);
           $('#promoFromChanged').val('1');
           setTimeout(function(){ 
-               $("#result").fadeOut(500); }, 2500);
+               $("#promo_result").fadeOut(500); }, 2500);
 
         },
         error:function(){
           $('#loading').hide();
           $('#savebutton').removeClass('disabled');
-          $('#result').html('Something went wrong!');
-          $("#result").removeClass('alert-danger'); 
-          $("#result").removeClass('alert-success');      
-          $("#result").addClass('alert-danger');
-          $("#result").fadeIn(1000);
+          $('#promo_result').html('Something went wrong!');
+          $("#promo_result").removeClass('alert-danger'); 
+          $("#promo_result").removeClass('alert-success');      
+          $("#promo_result").addClass('alert-danger');
+          $("#promo_result").fadeIn(1000);
           setTimeout(function(){ 
-               $("#result").fadeOut(500); }, 3000); 
+               $("#promo_result").fadeOut(500); }, 3000); 
         }   
       }); 
   }); /* ajax end */

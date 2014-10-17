@@ -737,4 +737,39 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	function price_grid_update_promo(){
+
+		$start_date 	= $this->input->post('start_date');
+		$end_date 		= $this->input->post('end_date');
+
+		if (strtotime($start_date) > strtotime($end_date)) {
+			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			exit;
+		}
+
+		$available 		= $this->input->post('promo_available');
+		$promotion_id 	= $this->input->post('promotion_id');
+		$room_id 		= $this->input->post('promotion_room_id');
+		$stoped 		= empty($this->input->post('promo_stoped')) ? '0' : '1';
+
+		$arr = array(
+			'available' => $available,
+			'stoped'	=> $stoped,
+			'room_id'	=> $room_id,
+			'price_plan_id'	=> $promotion_id);
+
+		$this->load->model('reservation_model');
+		foreach (date_range($start_date,$end_date) as $key => $day) {
+			$arr['price_date'] 	= $day;
+			$update = $this->reservation_model->update_price_plan($arr);
+		}
+
+		if ($update) {
+			echo json_encode(array('status' => 'success','message' => 'Success!'));
+		}else{
+			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+		}
+
+	}
+
 }

@@ -127,7 +127,27 @@ class Reservation_Model extends CI_Model
 		
 	}
 
-	function insert_price_plan($arr){
+	/*
+	* On rates page
+	*/
+	function update_price_plan($arr){
+		$plan_id  	= $arr['price_plan_id'];
+		$date 		= $arr['price_date'];
+		$room_id 	= $arr['room_id'];
+
+		$check = $this->db->query("
+			SELECT count(id) as total FROM price_plans_availability 
+			WHERE room_id = '$room_id' and date(price_date)='$date' and price_plan_id='$plan_id'
+		");
+
+		
+		if ($check->row()->total > 0) {
+			$insert = $this->db->update('price_plans_availability',$arr,array('price_plan_id' => $plan_id, 'price_date'=> $date, 'room_id' => $room_id));
+		}else{
+			$insert = $this->db->insert('price_plans_availability',$arr);
+		}
+
+		return $insert;
 
 	}
 
