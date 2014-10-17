@@ -2,7 +2,7 @@
 
 class Photos extends MY_Controller {
 
-        function hotel_photos(){
+    function hotel_photos(){
 		$hotel_id 	= $this->input->post('hotel_id');
 		$code		= $this->session->userdata('code');
 

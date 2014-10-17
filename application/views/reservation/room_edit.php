@@ -202,8 +202,7 @@
 
               </div> <!-- description end -->
             
-              <link rel="stylesheet" href="<?php echo site_url('assets/back'); ?>/css/dropzone.css" />
-              <script src="<?php echo site_url('assets/back'); ?>/js/dropzone.min.js"></script>
+              
               <div class="tab-pane" id="photos">
                 <div class="row">
                   
@@ -291,23 +290,25 @@
       <div class="modal-body">
 
           <div id="dropzone">
-          <form id="myDropzone" action="<?php echo site_url('photos/room_photos'); ?>" class="dropzone" id="demo-upload">
+          <form id="photoDrop" action="<?php echo site_url('photos/room_photos'); ?>" class="dropzone" id="demo-upload">
             <div class="dropzone-previews"></div> 
             <div class="fallback"> <!-- this is the fallback if JS isn't working -->
             <input name="file" type="file" multiple />
             </div>
 
-          <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
+            <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
           </form>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
+<link rel="stylesheet" href="<?php echo site_url('assets/back'); ?>/css/dropzone.css" />
+<script src="<?php echo site_url('assets/back'); ?>/js/dropzone.min.js"></script>
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.prettyPhoto.js"></script>
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>
 
@@ -435,28 +436,12 @@ function delete_photos(){
     dataType: 'json',
     success: function(data){
       $('#loading').hide();
-      
-      /*
-      data.message.forEach(function(item){
-        $('#photo_'+item).remove();
-      });
-      */
+
       var photo = $.parseJSON(data.message);
 
       $.each(photo,function(i,val){
         $('#photo_'+val).fadeOut(1000, function() { $(this).remove(); });
       });
-
-      /*
-      $('#savebutton').removeClass('disabled');
-      $('#result').html(data.message);
-      $("#result").removeClass('alert-danger'); 
-      $("#result").removeClass('alert-success'); 
-      $("#result").addClass('alert-'+data.status);
-      $("#result").fadeIn(1000);
-      setTimeout(function(){ 
-           $("#result").fadeOut(500); }, 3000);
-      */ 
                 
     },
     error:function(){
@@ -468,8 +453,21 @@ function delete_photos(){
     }   
   });  // ajax end
 
- 
 }
+
+  //if form changed reload page else close modal
+  $('#closeModal').on('click',function(){
+    $("#modal").modal('hide');
+    console.log(location);
+    setTimeout(function(){ 
+      location.reload(); }, 200);  
+  });
+
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+  } 
+
 
 </script>
 <?php $this->load->view('footer'); ?>
