@@ -217,22 +217,22 @@
                       </div>
                     </li>
                     <li>
-                      <a href="#" class="itemopt disabled"><i class="fa fa-trash-o"></i> Delete</a>
+                      <a onClick="delete_photos();" class="itemopt disabled"><i class="fa fa-trash-o"></i> Delete</a>
                     </li>
                     <li class="filter-type">
                     <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#myModal">Upload Photos</button>
                     </li>
                     
                   </ul>
-
+                  <div id="result" class="alert" style="display:none"></div>
 
                   <div class="row filemanager">
                   <link href="<?php echo site_url('assets/back'); ?>/css/prettyPhoto.css" rel="stylesheet">
                   <?php foreach ($photos as $r => $photo): ?>
-                  <div class="col-xs-6 col-sm-4 col-md-3 image">
+                  <div class="col-xs-6 col-sm-4 col-md-3 image" id="photo_<?php echo $photo->id; ?>">
                     <div class="thmb">
                       <div class="ckbox ckbox-default" style="display: none;">
-                        <input type="checkbox" id="check<?php echo $photo->id; ?>" value="1">
+                        <input type="checkbox" name="photo_ids[]" id="check<?php echo $photo->id; ?>" value="<?php echo $photo->id; ?>">
                         <label for="check<?php echo $photo->id; ?>"></label>
                       </div>
                       <div class="btn-group fm-group" style="display: none;">
@@ -267,7 +267,6 @@
               </div>
                 
              <div class="col-sm-6">
-              <div id="result" class="alert" style="display:none"></div>
               </div>
             </div>
 
@@ -417,7 +416,60 @@ jQuery(document).ready(function(){
 
   //pretty photo
   jQuery("a[rel^='prettyPhoto']").prettyPhoto();
+
+
 });
+
+//delete checked photos
+function delete_photos(){
+  var selected = [];
+  $('.filemanager input:checked').each(function() {
+      selected.push($(this).val());
+  });
+
+  event.preventDefault();
+  $.ajax({
+    url: base_url + "reservation_actions/delete_room_photos",
+    type: "POST",
+    data: {photos:selected},
+    dataType: 'json',
+    success: function(data){
+      $('#loading').hide();
+      
+      /*
+      data.message.forEach(function(item){
+        $('#photo_'+item).remove();
+      });
+      */
+      var photo = $.parseJSON(data.message);
+
+      $.each(photo,function(i,val){
+        $('#photo_'+val).fadeOut(1000, function() { $(this).remove(); });
+      });
+
+      /*
+      $('#savebutton').removeClass('disabled');
+      $('#result').html(data.message);
+      $("#result").removeClass('alert-danger'); 
+      $("#result").removeClass('alert-success'); 
+      $("#result").addClass('alert-'+data.status);
+      $("#result").fadeIn(1000);
+      setTimeout(function(){ 
+           $("#result").fadeOut(500); }, 3000);
+      */ 
+                
+    },
+    error:function(){
+      $('#result').html('Something went wrong!');
+      $("#result").removeClass('alert-danger'); 
+      $("#result").removeClass('alert-success');      
+      $("#result").addClass('alert-danger');
+      $("#result").fadeIn(1000);
+    }   
+  });  // ajax end
+
+ 
+}
 
 </script>
 <?php $this->load->view('footer'); ?>
