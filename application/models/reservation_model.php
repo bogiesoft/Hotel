@@ -25,6 +25,10 @@ class Reservation_Model extends CI_Model
 		return $this->db->query("SELECT * FROM room_contents WHERE room_id='$id' ORDER BY lang")->result();
 	}
 
+	function room_photos($id){
+		return $this->db->query("SELECT * FROM room_photos WHERE room_id='$id' ORDER BY id DESC")->result();	
+	}	
+
 	function extra_details($id){
 		return $this->db->query("SELECT * FROM extras WHERE id = '$id'")->row();
 	}

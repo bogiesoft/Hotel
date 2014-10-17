@@ -64,6 +64,7 @@ class Reservation extends MY_Controller {
 			//get hotel detail
 			$data['room'] 		 = $this->reservation_model->room_details($id);
 			$data['description'] = $this->reservation_model->room_description($id);
+			$data['photos']		 = $this->reservation_model->room_photos($id);
 			$this->load->view('reservation/room_edit',$data);
 
 		}else{
