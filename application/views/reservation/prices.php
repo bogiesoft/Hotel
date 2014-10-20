@@ -65,13 +65,14 @@
 
                 }?>
               </tr>
+              <?php //print_r($room['prices']); exit; ?>
               <tr>
                 <th colspan="2">Best Available Rate</th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['price_type']) {
                     $stoped = $price['stoped_arrival'] == '1' ? 'class="base_price tdRed"' : 'class="base_price tdGreen"';
 
-                    if ($price['price_type'] == '1') {
+                    if (@$price['price_type'] == '1') {
                       $roomPrice = substr(@$price['base_price'],'0', '-3');
                     }else{
                       $roomPrice = substr(@$price['double_price'],'0', '-3');
@@ -81,7 +82,7 @@
                     '.$roomPrice.'
                     </td>';
                   }else{
-                    echo '<td class="base_price" data-price-type="'.$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
+                    echo '<td class="base_price" data-price-type="'.@$price['price_type'].'" data-room-id="'.$price['room_id'].'" data-room-name="'.$room['name'].'" data-child='.$price['room_child'].' data-capacity='.$price['room_capacity'].'  data-day="'.$day.'">N/A</td>';
                   }
                   
                 }?>
@@ -96,13 +97,13 @@
 
                   $available = promotion_available($day,$p['id'],$price['room_id']);                  
                   if ($available) {
-                    $stoped = ($price['stoped_arrival'] == '1' or $available['stoped'] == '1') ? 'class="promotion tdRed"' : 'class="promotion tdGreen"';
+                    $stoped = (@$price['stoped_arrival'] == '1' or $available['stoped'] == '1') ? 'class="promotion tdRed"' : 'class="promotion tdGreen"';
 
                     //set discount price
-                    if ($price['price_type'] == '1') {
+                    if (@$price['price_type'] == '1') {
                       $roomPrice = $price['base_price'];
                     }else{
-                      $roomPrice = $price['double_price'];
+                      $roomPrice = @$price['double_price'];
                     }
 
                     $roomPrice = $roomPrice - (($roomPrice / 100) * $p['promotion_discount']);

@@ -204,9 +204,6 @@
             
               
               <div class="tab-pane" id="photos">
-                <div class="row">
-                  
-                </div>
 
                 <ul class="filemanager-options">
                     <li>
@@ -216,7 +213,7 @@
                       </div>
                     </li>
                     <li>
-                      <a onClick="delete_photos();" class="itemopt disabled"><i class="fa fa-trash-o"></i> Delete</a>
+                      <a onClick="delete_photos();" class="itemopt disabled" style="cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
                     </li>
                     <li class="filter-type">
                     <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#myModal">Upload Photos</button>
@@ -289,19 +286,19 @@
       </div>
       <div class="modal-body">
 
-          <div id="dropzone">
-          <form id="photoDrop" action="<?php echo site_url('photos/room_photos'); ?>" class="dropzone" id="demo-upload">
+         <div id="dropzone">
+          <form id="myDropzone" action="<?php echo site_url('photos/room_photos'); ?>" class="dropzone" id="demo-upload">
             <div class="dropzone-previews"></div> 
             <div class="fallback"> <!-- this is the fallback if JS isn't working -->
             <input name="file" type="file" multiple />
             </div>
 
-            <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
+          <input type="hidden" name="room_id" value="<?php echo $this->uri->segment('4'); ?>" />
           </form>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Save Photos</button>
       </div>
     </div>
   </div>
@@ -450,6 +447,8 @@ function delete_photos(){
       $("#result").removeClass('alert-success');      
       $("#result").addClass('alert-danger');
       $("#result").fadeIn(1000);
+      setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
     }   
   });  // ajax end
 

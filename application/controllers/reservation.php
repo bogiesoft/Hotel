@@ -39,6 +39,7 @@ class Reservation extends MY_Controller {
 			$data['hotel'] 		 = $this->reservation_model->hotel_details($id);
 			$data['description'] = $this->reservation_model->hotel_description($id);
 			$data['countries'] 	 = $this->reservation_model->countries();
+			$data['photos']		 = $this->reservation_model->hotel_photos($id);
 
 			$this->load->view('reservation/hotels_edit',$data);
 

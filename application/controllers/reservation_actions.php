@@ -801,4 +801,30 @@ class Reservation_actions extends MY_Controller {
 		}
 	}
 
+	function delete_hotel_photos(){
+		$photos = $this->input->post('photos');
+
+		$output = array();
+		foreach ($photos as $p => $id) {
+			//delete file
+			$row = $this->db->query("SELECT * FROM hotel_photos WHERE id ='$id'")->row();
+			$path = parse_url($row->photo_url);
+			if (file_exists(FCPATH.$path['path'])) {
+				unlink(FCPATH.$path['path']);
+			}
+			
+			//delete row from dbs
+			$del = $this->db->delete('hotel_photos',array('id'=>$id));
+			$output[] = $id;
+			
+		}
+
+		//return deleted items ids
+		if ($del) {
+			echo json_encode(array('status' => 'success','message' => json_encode($output)));
+		}else{
+			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+		}
+	}
+
 }

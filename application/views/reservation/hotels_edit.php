@@ -413,25 +413,52 @@
             <script src="<?php echo site_url('assets/back'); ?>/js/dropzone.min.js"></script>
             <div class="tab-pane" id="photos">
 
-            <h4 class="panel-title">Otel fotoğrafları yükle</h4>
-            <p>Dosyaları aşağıdaki alana sürükleyerek kolayca yükleyebilirsiniz</p>
+              <ul class="filemanager-options">
+                <li>
+                  <div class="ckbox ckbox-default">
+                    <input type="checkbox" id="selectall" value="1">
+                    <label for="selectall">Select All</label>
+                  </div>
+                </li>
+                <li>
+                  <a onClick="delete_photos();" class="itemopt disabled" style="cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
+                </li>
+                <li class="filter-type">
+                <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#myModal">Upload Photos</button>
+                </li>
+                
+              </ul>
+              <div id="result" class="alert" style="display:none"></div>
 
-             
-            <div id="dropzone">
-            <form class="dropzone" id="demo-upload"></form>
-            </div>
-
-            <div id="dropzone">
-            <form id="myDropzone" action="<?php echo site_url('photos/hotel_photos'); ?>" class="dropzone" id="demo-upload">
-              <div class="dropzone-previews"></div> 
-              <div class="fallback"> <!-- this is the fallback if JS isn't working -->
-              <input name="file" type="file" multiple />
+              <div class="row filemanager">
+              <link href="<?php echo site_url('assets/back'); ?>/css/prettyPhoto.css" rel="stylesheet">
+              <?php foreach ($photos as $r => $photo): ?>
+              <div class="col-xs-6 col-sm-4 col-md-3 image" id="photo_<?php echo $photo->id; ?>">
+                <div class="thmb">
+                  <div class="ckbox ckbox-default" style="display: none;">
+                    <input type="checkbox" name="photo_ids[]" id="check<?php echo $photo->id; ?>" value="<?php echo $photo->id; ?>">
+                    <label for="check<?php echo $photo->id; ?>"></label>
+                  </div>
+                  <div class="btn-group fm-group" style="display: none;">
+                      <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu fm-menu" role="menu">
+                        <li><a href="#"><i class="fa fa-share"></i> Make Default</a></li>
+                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                      </ul>
+                  </div><!-- btn-group -->
+                  <div class="thmb-prev">
+                    <a href="<?php echo $photo->photo_url; ?>" data-rel="prettyPhoto" rel="prettyPhoto">
+                      <img src="<?php echo $photo->photo_url; ?>" class="img-responsive" alt="" style="height:125px">
+                    </a>
+                  </div>
+                  <center class="text-muted">Added: <?php echo date('d-m-Y',time($photo->add_date)); ?></center>
+                </div><!-- thmb -->
+              </div><!-- col-xs-6 -->
+              <?php endforeach; ?>
+              
               </div>
-
-            <input type="hidden" name="hotel_id" value="<?php echo $this->uri->segment('4'); ?>" />
-            </form>
-            </div>
-
 
             </div> <!-- photos end -->
 
@@ -459,6 +486,38 @@
 <?php endif; ?>
 </div><!-- contentpanel -->
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Hotel Photos</h4>
+      </div>
+      <div class="modal-body">
+
+          <div id="dropzone">
+          <form id="photoDrop" action="<?php echo site_url('photos/hotel_photos'); ?>" class="dropzone" id="demo-upload">
+            <div class="dropzone-previews"></div> 
+            <div class="fallback"> <!-- this is the fallback if JS isn't working -->
+            <input name="file" type="file" multiple />
+            </div>
+
+            <input type="hidden" name="hotel_id" value="<?php echo $this->uri->segment('4'); ?>" />
+          </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Save Photos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="<?php echo site_url('assets/back'); ?>/css/dropzone.css" />
+<script src="<?php echo site_url('assets/back'); ?>/js/dropzone.min.js"></script>
+<script src="<?php echo site_url('assets/back'); ?>/js/jquery.prettyPhoto.js"></script>
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>
 
 <script type="text/javascript">
@@ -492,10 +551,140 @@ jQuery(document).ready(function(){
   
   $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
       e.preventDefault(); $(this).closest('#item').remove(); x--;
-  })
+  });
 
+
+ jQuery('.thmb').hover(function(){
+      var t = jQuery(this);
+      t.find('.ckbox').show();
+      t.find('.fm-group').show();
+    }, function() {
+      var t = jQuery(this);
+      if(!t.closest('.thmb').hasClass('checked')) {
+        t.find('.ckbox').hide();
+        t.find('.fm-group').hide();
+      }
+    });
+
+  jQuery('.ckbox').each(function(){
+    var t = jQuery(this);
+    var parent = t.parent();
+    if(t.find('input').is(':checked')) {
+      t.show();
+      parent.find('.fm-group').show();
+      parent.addClass('checked');
+    }
+  });
+  
+  
+  jQuery('.ckbox').click(function(){
+    var t = jQuery(this);
+    if(!t.find('input').is(':checked')) {
+      t.closest('.thmb').removeClass('checked');
+      enable_itemopt(false);
+    } else {
+      t.closest('.thmb').addClass('checked');
+      enable_itemopt(true);
+    }
+  });
+
+  jQuery('#selectall').click(function(){
+    if(jQuery(this).is(':checked')) {
+      jQuery('.thmb').each(function(){
+        jQuery(this).find('input').attr('checked',true);
+        jQuery(this).addClass('checked');
+        jQuery(this).find('.ckbox, .fm-group').show();
+      });
+      enable_itemopt(true);
+    } else {
+      jQuery('.thmb').each(function(){
+        jQuery(this).find('input').attr('checked',false);
+        jQuery(this).removeClass('checked');
+        jQuery(this).find('.ckbox, .fm-group').hide();
+      });
+      enable_itemopt(false);
+    }
+  });
+  
+  function enable_itemopt(enable) {
+    if(enable) {
+      jQuery('.itemopt').removeClass('disabled');
+    } else {
+      
+      // check all thumbs if no remaining checks
+      // before we can disabled the options
+      var ch = false;
+      jQuery('.thmb').each(function(){
+        if(jQuery(this).hasClass('checked'))
+          ch = true;
+      });
+      
+      if(!ch)
+        jQuery('.itemopt').addClass('disabled');
+    }
+  }
+  
+  //Replaces data-rel attribute to rel.
+  //We use data-rel because of w3c validation issue
+  jQuery('a[data-rel]').each(function() {
+    jQuery(this).attr('rel', jQuery(this).data('rel'));
+  });
+
+
+  //pretty photo
+  jQuery("a[rel^='prettyPhoto']").prettyPhoto();
 
 });
+
+
+//delete checked photos
+function delete_photos(){
+  var selected = [];
+  $('.filemanager input:checked').each(function() {
+      selected.push($(this).val());
+  });
+
+  event.preventDefault();
+  $.ajax({
+    url: base_url + "reservation_actions/delete_hotel_photos",
+    type: "POST",
+    data: {photos:selected},
+    dataType: 'json',
+    success: function(data){
+      $('#loading').hide();
+
+      var photo = $.parseJSON(data.message);
+
+      $.each(photo,function(i,val){
+        $('#photo_'+val).fadeOut(1000, function() { $(this).remove(); });
+      });
+                
+    },
+    error:function(){
+      $('#result').html('Something went wrong!');
+      $("#result").removeClass('alert-danger'); 
+      $("#result").removeClass('alert-success');      
+      $("#result").addClass('alert-danger');
+      $("#result").fadeIn(1000);
+      setTimeout(function(){ 
+               $("#result").fadeOut(500); }, 3000); 
+    }   
+  });  // ajax end
+
+}
+
+  //if form changed reload page else close modal
+  $('#closeModal').on('click',function(){
+    $("#modal").modal('hide');
+    console.log(location);
+    setTimeout(function(){ 
+      location.reload(); }, 200);  
+  });
+
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+  } 
 
 </script>
 <?php $this->load->view('footer'); ?>
