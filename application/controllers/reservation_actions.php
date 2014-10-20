@@ -827,4 +827,10 @@ class Reservation_actions extends MY_Controller {
 		}
 	}
 
+	function list_policies(){
+		$hotel_id = $this->session->userdata('hotel_id');
+
+		return $this->db->query("SELECT * FROM policies WHERE hotel_id = '$hotel_id'");
+	}
+
 }

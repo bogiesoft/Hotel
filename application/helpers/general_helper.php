@@ -87,3 +87,23 @@ function promotion_available($date,$pid,$room_id){
 	}
 
 }
+
+function twentyfour_hour_selectbox($name){
+	$output = '<select name="'.$name.'">';
+	for ($i=1; $i <=24; $i++) { 
+		$output .= '<option value="'.$i.'">'.$i.':00</option>';
+	}
+	$output .= '</select>';
+
+	return $output;
+}
+
+function age_selectbox($name){
+	$output = '<select name="'.$name.'">';
+	for ($i=1; $i <=18; $i++) { 
+		$output .= '<option value="'.$i.'">'.$i.'</option>';
+	}
+	$output .= '</select>';
+
+	return $output;
+}

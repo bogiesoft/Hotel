@@ -193,4 +193,21 @@ class Reservation extends MY_Controller {
 		}
 	}
 
+	function policies(){
+
+		$uri = $this->uri->segment('3');
+		if ($uri=='add_new') {
+
+			$this->load->view('reservation/policies_add');
+
+		}elseif($uri=='edit'){
+			$id = $this->uri->segment('4');
+			$data['policy'] = $this->reservation_model->policy_detail($id);
+			$this->load->view('reservation/policies_edit');
+
+		}else{
+			$this->load->view('reservation/policies');
+		}
+	}
+
 }

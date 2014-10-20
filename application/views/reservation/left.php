@@ -35,12 +35,14 @@ if ($uri == 'hotels' or $uri == 'rooms' or $uri == 'extras' or $uri == 'extras' 
     <li <?php echo $uri=='seasons' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/seasons'); ?>"><i class="fa fa-caret-right"></i> Sezonlar</a>
     </li>
+    <li <?php echo $uri=='policies' ? 'class="active"' : ''; ?>>
+      <a href="<?php echo site_url('reservation/policies'); ?>"><i class="fa fa-caret-right"></i> Policies</a>
+    </li>
     <!-- 
     <li><a href="#"><i class="fa fa-caret-right"></i> İndirimler</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Ekstra Ücret</a></li>
     <li><a href="#"><i class="fa fa-caret-right"></i> Vergiler</a></li>
     -->
-    <li><a href="#"><i class="fa fa-caret-right"></i> Poliçeler</a></li>
   </ul>
 </li>
 
