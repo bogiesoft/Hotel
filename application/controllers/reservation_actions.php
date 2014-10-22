@@ -859,8 +859,15 @@ class Reservation_actions extends MY_Controller {
 			'policy_details'=> json_encode($policy),
 			'hotel_id'		=> $hotel_id);
 
-		$insert = $this->db->insert('policies',$arr);
-		$id 	= $this->db->insert_id();
+		//check if update
+		if ($this->input->post('update') == '1') {
+			$id = $this->input->post('policy_id');
+			$insert = $this->db->update('policies',$arr);
+		}else{
+			$insert = $this->db->insert('policies',$arr);
+			$id 	= $this->db->insert_id();
+		}
+		
 
 		if ($insert) {
 			$this->session->set_flashdata('status_succes', 'Success');
