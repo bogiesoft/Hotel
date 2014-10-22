@@ -830,7 +830,55 @@ class Reservation_actions extends MY_Controller {
 	function list_policies(){
 		$hotel_id = $this->session->userdata('hotel_id');
 
-		return $this->db->query("SELECT * FROM policies WHERE hotel_id = '$hotel_id'");
+		$policies = $this->db->query("SELECT id,policy_name FROM policies WHERE hotel_id = '$hotel_id'");
+		
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['Records'] = $policies->result();
+		print json_encode($jTableResult);
+	}
+
+	function add_policy(){
+		$name 	= $this->input->post('name');
+		$extra 	= $this->input->post('extra_policies');
+		$policy	= $this->input->post('policy');
+
+		foreach ($policy['description'] as $k => $desc) {
+			$description[$desc['lang']] = $desc['desc'];
+		}
+
+		$policy['name'] 		= $name;
+		$policy['extra']		= $extra;
+		$policy['description'] 	= $description;
+
+		$hotel_id = $this->session->userdata('hotel_id');
+
+		$arr = array(
+			'policy_name' 	=> $name,
+			'policy_extra'	=> $extra,
+			'policy_details'=> json_encode($policy),
+			'hotel_id'		=> $hotel_id);
+
+		$insert = $this->db->insert('policies',$arr);
+		$id 	= $this->db->insert_id();
+
+		if ($insert) {
+			$this->session->set_flashdata('status_succes', 'Success');
+			redirect(site_url('reservation/policies/edit/'.$id));
+		}else{
+			$this->session->set_flashdata('status_error', 'Error, Try again');
+			redirect(site_url('reservation/policies/add_new'));
+		}
+		
+    	
+	}
+
+	function delete_policy(){
+		$this->db->delete('policies',array('id' =>$this->input->post('id')));
+		//Return result to jTable
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		print json_encode($jTableResult);
 	}
 
 }

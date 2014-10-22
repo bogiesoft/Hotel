@@ -196,6 +196,8 @@ class Reservation extends MY_Controller {
 	function policies(){
 
 		$uri = $this->uri->segment('3');
+		$this->load->helper('policy');
+		
 		if ($uri=='add_new') {
 
 			$this->load->view('reservation/policies_add');
@@ -203,7 +205,7 @@ class Reservation extends MY_Controller {
 		}elseif($uri=='edit'){
 			$id = $this->uri->segment('4');
 			$data['policy'] = $this->reservation_model->policy_detail($id);
-			$this->load->view('reservation/policies_edit');
+			$this->load->view('reservation/policies_edit',$data);
 
 		}else{
 			$this->load->view('reservation/policies');

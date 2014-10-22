@@ -10,18 +10,21 @@
       </div>
     </div>
     <div class="contentpanel">
+
       <div class="row">
 
-      <?php if ($this->session->flashdata('status_error')): ?>
+      <?php if ($this->session->flashdata('status_succes')): ?>
         <div class="alert alert-danger">
-        <?php echo $this->session->flashdata('status_error'); ?>
+        <?php echo $this->session->flashdata('status_succes'); ?>
         </div>
       <?php endif; ?>
 
-      <form method="POST" action="<?php echo site_url('reservation_actions/add_policy'); ?>">
-      <?php $this->load->view('templates/policy_form_add'); ?>
-      </form>
+      <form method="POST" action="<?php echo site_url('reservation_actions/update_policy'); ?>">
       
+      <?php $data['p'] = json_decode($policy->policy_details);?>
+      <?php $this->load->view('templates/policy_form_edit',$data); ?>
+      </form>
+
       </div><!-- row -->
 
     </div><!-- contentpanel -->

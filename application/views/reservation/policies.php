@@ -68,7 +68,8 @@
             sorting: false, //Enable sorting
             defaultSorting: 'Name ASC', //Set default sorting
             actions: {
-                listAction: '<?php echo site_url("reservation_actions/list_policies"); ?>'
+                listAction: '<?php echo site_url("reservation_actions/list_policies"); ?>',
+                deleteAction : '<?php echo site_url("reservation_actions/delete_policy"); ?>'
             },
             fields: {
                 id: {
@@ -77,7 +78,7 @@
                     edit: false,
                     list: true
                 },
-                name: {
+                policy_name: {
                     title: 'Adı',
                     width: '23%'
                 },
@@ -85,7 +86,7 @@
                   title: '',
                   sorting: false,
                   display: function (data) {
-                      return $('<a href="'+base_url+'reservation/hotels/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
+                      return $('<a href="'+base_url+'reservation/policies/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }
                 }
 
