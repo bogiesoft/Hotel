@@ -1,18 +1,18 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Hotels </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('hotels'); ?> </h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Hotels</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('hotels'); ?></li>
         </ol>
       </div>
     </div>
     
     <div class="contentpanel">
       <div class="row">
-        <a href="<?php echo site_url('reservation/hotels/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle </a>
+        <a href="<?php echo site_url('reservation/hotels/add_new'); ?>" class="btn btn-info pull-right"> <?php echo lang('add_new_button'); ?> </a>
       </div>
     
       <div class="row">
@@ -78,7 +78,7 @@
                     list: true
                 },
                 name: {
-                    title: 'Adı',
+                    title: '<?php echo lang('hotel_name'); ?>',
                     width: '23%'
                 },
                 detail:{
