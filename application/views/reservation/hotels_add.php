@@ -27,10 +27,10 @@
 
 
       <ul class="nav nav-tabs">
-          <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
-          <li class=""><a href="#info" data-toggle="tab"><strong>Tesis Özellikleri</strong></a></li>
-          <li class=""><a href="#description" data-toggle="tab"><strong>Açıklamalar</strong></a></li>
-          <li class=""><a href="#accounts" data-toggle="tab"><strong>Hesap Numaraları</strong></a></li>
+          <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('information'); ?></strong></a></li>
+          <li class=""><a href="#info" data-toggle="tab"><strong><?php echo lang('hotel_specs'); ?></strong></a></li>
+          <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translations'); ?></strong></a></li>
+          <li class=""><a href="#accounts" data-toggle="tab"><strong><?php echo lang('bank_accounts'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -43,64 +43,64 @@
             
             <div class="tab-pane active" id="general">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel adı</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_name'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="name" placeholder="Otel adı" class="form-control input-sm">
+                  <input type="text" name="name" placeholder="<?php echo lang('hotel_name'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Kategori</label>
+                <label class="col-sm-3 control-label"><?php echo lang('category'); ?></label>
                 <div class="col-sm-6">
                   <select name="category" class="form-control input-sm mb15">
-                    <option value="0">Belirtilmemiş</option>
-                    <option value="1">1 Yıldız</option>
-                    <option value="2">2 Yıldız</option>
-                    <option value="3">3 Yıldız</option>
-                    <option value="4">4 Yıldız</option>
-                    <option value="5">5 Yıldız</option>
+                    <option value="0"><?php echo lang('cat_0_star'); ?></option>
+                    <option value="1"><?php echo lang('cat_1_star'); ?></option>
+                    <option value="2"><?php echo lang('cat_2_star'); ?></option>
+                    <option value="3"><?php echo lang('cat_3_star'); ?></option>
+                    <option value="4"><?php echo lang('cat_4_star'); ?></option>
+                    <option value="5"><?php echo lang('cat_5_star'); ?></option>
                   </select>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Adres</label>
+                <label class="col-sm-3 control-label"><?php echo lang('adress'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="adress" placeholder="Adres" class="form-control input-sm">
+                  <input type="text" name="adress" placeholder="<?php echo lang('adress'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Telefon</label>
+                <label class="col-sm-3 control-label"><?php echo lang('phone'); ?></label>
                 <div class="col-sm-6">
-                <input type="text" name="phone" id="phone" placeholder="Telefon" class="form-control input-sm">
+                <input type="text" name="phone" id="phone" placeholder="<?php echo lang('phone'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Telefon 2</label>
+                <label class="col-sm-3 control-label"><?php echo lang('phone2'); ?></label>
                 <div class="col-sm-6">
-                <input type="text" name="phone2" id="phone2" placeholder="Telefon 2" class="form-control input-sm">
+                <input type="text" name="phone2" id="phone2" placeholder="<?php echo lang('phone2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Fax</label>
+                <label class="col-sm-3 control-label"><?php echo lang('fax'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="fax" placeholder="Fax" class="form-control input-sm">
+                  <input type="text" name="fax" placeholder="<?php echo lang('fax'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">E-Mail</label>
+                <label class="col-sm-3 control-label"><?php echo lang('email'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="email" placeholder="E-Mail" class="form-control input-sm">
+                  <input type="text" name="email" placeholder="<?php echo lang('email'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Website</label>
+                <label class="col-sm-3 control-label"><?php echo lang('website'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="website" placeholder="http://www.site.com" class="form-control input-sm">
                 </div>
@@ -108,7 +108,7 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Country</label>
+                <label class="col-sm-3 control-label"><?php echo lang('country'); ?></label>
                 <div class="col-sm-6">
                   <select name="country" id="country" class="form-control choosen-select input-sm mb15">
                   <?php foreach ($countries as $key => $c) {
@@ -119,22 +119,22 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Şehir</label>
+                <label class="col-sm-3 control-label"><?php echo lang('city'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="city" placeholder="Şehir" class="form-control input-sm">
+                  <input type="text" name="city" placeholder="<?php echo lang('city'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">ZIP Posta Kodu</label>
+                <label class="col-sm-3 control-label"><?php echo lang('zipcode'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="postcode" placeholder="ZIP Posta Kodu" class="form-control input-sm">
+                  <input type="text" name="postcode" placeholder="<?php echo lang('zipcode'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Para Birimi</label>
+                <label class="col-sm-3 control-label"><?php echo lang('currency'); ?></label>
                 <div class="col-sm-6">
                     <select name="currency" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -145,23 +145,23 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Yönetici</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_manager'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="administrator" placeholder="Yönetici Adı" class="form-control input-sm">
+                  <input type="text" name="administrator" placeholder="<?php echo lang('hotel_manager'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Ön Büro Telefon</label>
+                <label class="col-sm-3 control-label"><?php echo lang('reception_phone'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="reception_phone" placeholder="Ön Büro Telefon" class="form-control input-sm">
+                  <input type="text" name="reception_phone" placeholder="<?php echo lang('reception_phone'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Ön Büro Email</label>
+                <label class="col-sm-3 control-label"><?php echo lang('reception_email'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="reception_email" placeholder="Ön Büro Email" class="form-control input-sm">
+                  <input type="text" name="reception_email" placeholder="<?php echo lang('reception_email'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -171,8 +171,8 @@
             <div class="tab-pane" id="info">
               <div class="form-group">
                 <label class="col-sm-3 control-label">
-                Varsayılan Açıklama 
-                <div  data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="Çoklu dil aktif değilse varsayılan açıklama. Diğer Diller için açıklamalar sayfasına bakınız.">
+                <?php echo lang('default_description'); ?> 
+                <div  data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="<?php echo lang('default_description_info'); ?> ">
                 <i class="fa fa-info"></i>
                 </div>
 
@@ -183,7 +183,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel özellikleri</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_specs'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -200,7 +200,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Restourant</label>
+                <label class="col-sm-3 control-label"><?php echo lang('restourant'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -218,7 +218,7 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Spor ve Eğlence</label>
+                <label class="col-sm-3 control-label"><?php echo lang('sports_entertainment'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -239,11 +239,11 @@
 
             <div class="tab-pane" id="description">
              
-              <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
+              <a href="#" class="btn btn-success add_field_button pull-right"><?php echo lang('add_field'); ?></a>
               <div class="input_fields_wrap">
               <div id="item">
                <div class="form-group">
-                  <label class="col-sm-3 control-label">Dil</label>
+                  <label class="col-sm-3 control-label"><?php echo lang('language'); ?></label>
                   <div class="col-sm-2">
                     <select name="description[1][lang]" size="1" class="form-control input-sm">
                       <?php foreach (languages() as $key => $value) {
@@ -252,12 +252,12 @@
                       </select>
                   </div>
                   <div class="col-sm-4">
-                    <a class="btn btn-xs btn-danger remove_field" href="#">Remove</a>
+                    <a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Açıklama</label>
+                  <label class="col-sm-3 control-label"><?php echo lang('description'); ?></label>
                   <div class="col-sm-6">
                     <textarea name="description[1][desc]"  class="form-control"></textarea>
                   </div>
@@ -273,29 +273,29 @@
 
             <div class="tab-pane" id="accounts">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Adı 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_name'),'1'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_name1" placeholder="Banka Adı" class="form-control input-sm">
+                  <input type="text" name="bank_name1" placeholder="<?php echo sprintf(lang('bank_name'),'1'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Şube 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_office'),'1'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_office1" placeholder="Banka Şube" class="form-control input-sm">
+                  <input type="text" name="bank_office1" placeholder="<?php echo sprintf(lang('bank_office'),'1'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Swift Kodu 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_swift'),'1'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_swift1" placeholder="Swift Kodu" class="form-control input-sm">
+                  <input type="text" name="bank_swift1" placeholder="<?php echo sprintf(lang('bank_swift'),'1'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Bank Hesap No 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_account'),'1'); ?></label>
                 <div class="col-sm-2">
                     <select name="bank_currency1" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -304,51 +304,51 @@
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" name="bank_account1" placeholder="Banka Hesap No" class="form-control input-sm">
+                    <input type="text" name="bank_account1" placeholder="<?php echo sprintf(lang('bank_account'),'1'); ?>" class="form-control input-sm">
                 </div>
                
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Lehdar 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_beneficiary'),'1'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_beneficiary1" placeholder="Lehdar" class="form-control input-sm">
+                  <input type="text" name="bank_beneficiary1" placeholder="<?php echo sprintf(lang('bank_beneficiary'),'1'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Iban 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_iban'),'1'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_iban1" placeholder="Iban 1" class="form-control input-sm">
+                  <input type="text" name="bank_iban1" placeholder="<?php echo sprintf(lang('bank_iban'),'1'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <hr> <!-- 1 - 2 arası -->
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Adı 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_name'),'2'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_name2" placeholder="Banka Adı" class="form-control input-sm">
+                  <input type="text" name="bank_name2" placeholder="<?php echo sprintf(lang('bank_name'),'2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Şube 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_office'),'2'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_office2" placeholder="Banka Şube" class="form-control input-sm">
+                  <input type="text" name="bank_office2" placeholder="<?php echo sprintf(lang('bank_office'),'2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Swift Kodu 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_swift'),'2'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_swift2" placeholder="Swift Kodu" class="form-control input-sm">
+                  <input type="text" name="bank_swift2" placeholder="<?php echo sprintf(lang('bank_swift'),'2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Bank Hesap No 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_account'),'2'); ?></label>
                 <div class="col-sm-2">
                     <select name="bank_currency2" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -357,22 +357,22 @@
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <input type="text" name="bank_account2" placeholder="Banka Hesap No" class="form-control input-sm">
+                    <input type="text" name="bank_account2" placeholder="<?php echo sprintf(lang('bank_accunt'),'2'); ?>" class="form-control input-sm">
                 </div>
                
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Lehdar 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_beneficiary'),'2'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_beneficiary2" placeholder="Lehdar" class="form-control input-sm">
+                  <input type="text" name="bank_beneficiary2" placeholder="<?php echo sprintf(lang('bank_beneficiary'),'2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Iban 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_iban'),'2'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="bank_iban2" placeholder="Iban" class="form-control input-sm">
+                  <input type="text" name="bank_iban2" placeholder="<?php echo sprintf(lang('bank_iban'),'2'); ?>" class="form-control input-sm">
                 </div>
               </div>
 
@@ -385,7 +385,7 @@
 
             <div class="row">
               <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="Kaydet">
+              <input type="submit" class="btn btn-primary" value="<?php echo lang('save_button'); ?>">
               </div>
                 
              <div class="col-sm-6">
@@ -427,7 +427,7 @@ jQuery(document).ready(function(){
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">Dil</label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#">Remove</a></div></div><div class="form-group"><label class="col-sm-3 control-label">Açıklama</label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('language'); ?></label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('description'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
           $(wrapper).append(html); //add input box
       }
   });

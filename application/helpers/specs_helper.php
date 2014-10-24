@@ -2,29 +2,29 @@
 
 function hotel_specs($id=0){
 	$specs = array(
-		'1'	=> 'Asansör',
-		'2' => 'Engelliler için özellikler',
-		'3' => 'Korumalı Park',
-		'4' => 'Ücretsiz park',
-		'5' => 'Garaj',
-		'6' => 'Konferans Toplantı tesisleri',
-		'7' => 'Wi-Fi',
-		'8' => 'Fittness Centre',
-		'9' => 'Sağlık Merkezi',
-		'10'=> 'Türk Hamamı / Buhar Banyosu',
-		'11'=> 'Masaj',
-		'12'=> 'Açık Havuz',
-		'13'=> 'Kapalı Havuz',
-		'14'=> 'Çamaşır servisi',
-		'15'=> 'Oto kiralama',
-		'16'=> 'Özel plaj',
-		'17'=> 'Halk Plajı',
-		'18'=> 'Bebek bakım servisi',
-		'19'=> 'Kuaför',
-		'20'=> 'Uluslararası gazeteler',
-		'21'=> 'Döviz Bürosu',
-		'22'=> 'Transfer Servisi',
-		'23'=> 'Ev hayvanlarına izin verilir');
+		'1'	=> lang('elevator'),
+		'2' => lang('disabled_persons'),
+		'3' => lang('guarded_parking'),
+		'4' => lang('free_parking'),
+		'5' => lang('garage'),
+		'6' => lang('conferance_saloon'),
+		'7' => lang('wifi'),
+		'8' => lang('fitness_center'),
+		'9' => lang('wellness_center'),
+		'10'=> lang('turkish_bath'),
+		'11'=> lang('massage'),
+		'12'=> lang('outdoor_swimming_pool'),
+		'13'=> lang('indoor_swimming_pool'),
+		'14'=> lang('laundry_service'),
+		'15'=> lang('car_central'),
+		'16'=> lang('private_beach'),
+		'17'=> lang('public_beach'),
+		'18'=> lang('baby_sitting_service'),
+		'19'=> lang('hair_dresser'),
+		'20'=> lang('internation_newspapers'),
+		'21'=> lang('exchange_office'),
+		'22'=> lang('transfer_service'),
+		'23'=> lang('pets_allowed'));
 
 	if ($id > 0) {
 		return $specs[$id];
@@ -35,12 +35,12 @@ function hotel_specs($id=0){
 
 function restourant_specs($id=0){
 	$specs = array(
-		'1'	=> 'Ana Restaurant',
-		'2' => 'A la carte restaurant',
-		'3' => 'Local Cousine',
-		'4' => 'Snack-Bar',
-		'5' => 'Plaj Restaurant',
-		'6' => 'Piano-Bar');
+		'1'	=> lang('main_restourant'),
+		'2' => lang('alacarte_restourant'),
+		'3' => lang('tavern_restourant'),
+		'4' => lang('snack_restourant'),
+		'5' => lang('beach_restourant'),
+		'6' => lang('piano_restourant'));
 
 	if ($id > 0) {
 		return $specs[$id];
@@ -52,17 +52,17 @@ function restourant_specs($id=0){
 
 function sport_specs($id=0){
 	$specs = array(
-		'1'	=> 'Casino',
-		'2' => 'Disko',
-		'3' => 'Gece Klübü',
-		'4' => 'Plaj Bar',
-		'5' => 'Bowling',
-		'6' => 'Mini Golf',
-		'7' => 'Tenis Kortu',
-		'8' => 'Yürüme Yolu',
-		'9' => 'Su Sporları',
-		'10'=> 'Animasyon',
-		'11'=> 'Yerel Uçuşlar');
+		'1'	=> lang('casino'),
+		'2' => lang('disco'),
+		'3' => lang('night_club'),
+		'4' => lang('beach_bar'),
+		'5' => lang('bowling'),
+		'6' => lang('mini_golf'),
+		'7' => lang('tennis'),
+		'8' => lang('walking_paths'),
+		'9' => lang('water_sports'),
+		'10'=> lang('animation'),
+		'11'=> lang('local_excursions'));
 
 	if ($id > 0) {
 		return $specs[$id];
@@ -115,16 +115,16 @@ function currencies($id=0){
 
 }
 
-function hotel_category($id){
+function hotel_category($id=NULL){
 	$cats = array(
-		'0' => 'Belirtilmemiş',
-		'1' => '1 Yıldız',
-		'2' => '2 Yıldız',
-		'3' => '3 Yıldız',
-		'4' => '4 Yıldız',
-		'5' => '5 Yıldız');
+		'0' => lang('cat_0_star'),
+		'1' => lang('cat_1_star'),
+		'2' => lang('cat_2_star'),
+		'3' => lang('cat_3_star'),
+		'4' => lang('cat_4_star'),
+		'5' => lang('cat_5_star'));
 
-	if ($id > 0) {
+	if (NULL != $id) {
 		return $cats[$id];
 	}else{
 		return $cats;
