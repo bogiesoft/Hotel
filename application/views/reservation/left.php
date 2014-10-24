@@ -11,7 +11,7 @@
 <h5 class="sidebartitle">Navigation</h5>
 <ul class="nav nav-pills nav-stacked nav-bracket">
 <li <?php echo $this->uri->segment('1') == 'dashboard' ? 'class="active"' : ''; ?>><a href="<?php echo site_url('dashboard'); ?>">
-  <i class="fa fa-home"></i> <span>Anasayfa</span></a>
+  <i class="fa fa-home"></i> <span><?php echo lang('dashboard'); ?></span></a>
 </li>
 
 <?php //'setup' menu active
@@ -21,22 +21,22 @@ if ($uri == 'hotels' or $uri == 'rooms' or $uri == 'extras' or $uri == 'extras' 
 }
 ?>
 
-<li class="nav-parent <?php echo $setup; ?>"><a href="#"><i class="fa fa-building-o"></i> <span>Setup</span></a>
+<li class="nav-parent <?php echo $setup; ?>"><a href="#"><i class="fa fa-building-o"></i> <span><?php echo lang('setup'); ?></span></a>
   <ul class="children" <?php echo $setup_children; ?>>
     <li <?php echo $uri=='hotels' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/hotels'); ?>"><i class="fa fa-caret-right"></i> Tesisler</a>
+      <a href="<?php echo site_url('reservation/hotels'); ?>"><i class="fa fa-caret-right"></i> <?php echo lang('hotels'); ?></a>
     </li>
     <li <?php echo $uri=='rooms' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/rooms'); ?>"><i class="fa fa-caret-right"></i> Oda Tipleri</a>
+      <a href="<?php echo site_url('reservation/rooms'); ?>"><i class="fa fa-caret-right"></i> <?php echo lang('rooms'); ?></a>
     </li>
     <li <?php echo $uri=='extras' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/extras'); ?>"><i class="fa fa-caret-right"></i> Extralar</a>
+      <a href="<?php echo site_url('reservation/extras'); ?>"><i class="fa fa-caret-right"></i> <?php echo lang('extras'); ?></a>
     </li>
     <li <?php echo $uri=='seasons' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/seasons'); ?>"><i class="fa fa-caret-right"></i> Sezonlar</a>
+      <a href="<?php echo site_url('reservation/seasons'); ?>"><i class="fa fa-caret-right"></i> <?php echo lang('seasons'); ?></a>
     </li>
     <li <?php echo $uri=='policies' ? 'class="active"' : ''; ?>>
-      <a href="<?php echo site_url('reservation/policies'); ?>"><i class="fa fa-caret-right"></i> Policies</a>
+      <a href="<?php echo site_url('reservation/policies'); ?>"><i class="fa fa-caret-right"></i> <?php echo lang('policies'); ?></a>
     </li>
     <!-- 
     <li><a href="#"><i class="fa fa-caret-right"></i> İndirimler</a></li>
@@ -53,7 +53,7 @@ if ($uri == 'set_prices' or $uri=='price_plans') {
 }
 ?>
 
- <li class="nav-parent <?php echo $prices; ?>"><a href="#"><i class="fa fa-edit"></i> <span>Prices & Promotions</span></a>
+ <li class="nav-parent <?php echo $prices; ?>"><a href="#"><i class="fa fa-edit"></i> <span><?php echo lang('prices'); ?></span></a>
   <ul class="children" <?php echo $prices_children; ?>>
     <li <?php echo $uri=='prices' ? 'class="active"' : ''; ?>>
       <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-caret-right"></i> Rate Availibility Plan</a>

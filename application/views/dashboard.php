@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-home"></i> Blank <span>Subtitle goes here...</span></h2>
+      <h2><i class="fa fa-home"></i> <?php echo lang('dashboard'); ?></h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="index.html">Bracket</a></li>
-          <li class="active">Blank</li>
+          <li><a href="index.html"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('homepage'); ?></li>
         </ol>
       </div>
     </div>
