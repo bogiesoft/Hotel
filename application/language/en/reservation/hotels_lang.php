@@ -105,3 +105,10 @@ $lang['bank_account']	= 'Bank Account %s';
 $lang['bank_beneficiary']= 'Bank Beneficiary %s';
 $lang['bank_iban']		= 'Bank Iban %s';
 $lang['bank_account']	= 'Bank Account %s';
+
+$lang['error_wrong_hotel'] = "Oops!. Seems that you are trying to edit an hotel does not belong to you.";
+$lang['select_all']		= 'Select All';
+$lang['delete_photo']	= 'Delete';
+$lang['upload_photos']	= 'Upload Photos';
+$lang['save_photos']	= 'Save Photos';
+$lang['added']			= 'Added:';

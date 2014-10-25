@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Hotels > <?php echo $hotel->name; ?></h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_hotel'); ?> > <?php echo $hotel->name; ?></h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Edit hotel</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('edit_hotel'); ?></li>
         </ol>
       </div>
     </div>
@@ -28,16 +28,16 @@
     <?php if ($hotel->code != $this->session->userdata('code')) : ?>
       <div id="result" class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      Başkalarının odalarını değiştirmeye mi çalışıyorsun?
+      <?php echo lang('error_wrong_hotel'); ?>
       </div>
     <?php else: ?>
 
       <ul class="nav nav-tabs">
-          <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
-          <li class=""><a href="#info" data-toggle="tab"><strong>Tesis Özellikleri</strong></a></li>
-          <li class=""><a href="#description" data-toggle="tab"><strong>Açıklamalar</strong></a></li>
-          <li class=""><a href="#accounts" data-toggle="tab"><strong>Hesap Numaraları</strong></a></li>
-          <li class=""><a href="#photos" data-toggle="tab"><strong>Fotoğraflar</strong></a></li>
+          <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('information'); ?></strong></a></li>
+          <li class=""><a href="#info" data-toggle="tab"><strong><?php echo lang('hotel_specs'); ?></strong></a></li>
+          <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translations'); ?></strong></a></li>
+          <li class=""><a href="#accounts" data-toggle="tab"><strong><?php echo lang('bank_accounts'); ?></strong></a></li>
+          <li class=""><a href="#photos" data-toggle="tab"><strong><?php echo lang('hotel_photos'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -50,14 +50,14 @@
             
             <div class="tab-pane active" id="general">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel adı</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_name'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="name" value="<?php echo $hotel->name; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Kategori</label>
+                <label class="col-sm-3 control-label"><?php echo lang('category'); ?></label>
                 <div class="col-sm-6">
                   <select name="category" class="form-control input-sm mb15">
                   <?php foreach (hotel_category() as $key => $value) {
@@ -69,7 +69,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Adres</label>
+                <label class="col-sm-3 control-label"><?php echo lang('adress'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="adress" value="<?php echo $hotel->adress; ?>" class="form-control input-sm">
                 </div>
@@ -77,35 +77,35 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Telefon</label>
+                <label class="col-sm-3 control-label"><?php echo lang('phone'); ?></label>
                 <div class="col-sm-6">
                 <input type="text" name="phone" id="phone" value="<?php echo $hotel->phone; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Telefon 2</label>
+                <label class="col-sm-3 control-label"><?php echo lang('phone2'); ?></label>
                 <div class="col-sm-6">
                 <input type="text" name="phone2" id="phone2" value="<?php echo $hotel->phone2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Fax</label>
+                <label class="col-sm-3 control-label"><?php echo lang('fax'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="fax" value="<?php echo $hotel->fax; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">E-Mail</label>
+                <label class="col-sm-3 control-label"><?php echo lang('email'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="email" value="<?php echo $hotel->email; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Website</label>
+                <label class="col-sm-3 control-label"><?php echo lang('website'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="website" value="<?php echo $hotel->website; ?>" class="form-control input-sm">
                 </div>
@@ -113,7 +113,7 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Country</label>
+                <label class="col-sm-3 control-label"><?php echo lang('country'); ?></label>
                 <div class="col-sm-6">
                   <select name="country" id="country" class="form-control choosen-select input-sm mb15">
                   <?php foreach ($countries as $key => $c) {
@@ -125,7 +125,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Şehir</label>
+                <label class="col-sm-3 control-label"><?php echo lang('city'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="city" value="<?php echo $hotel->city; ?>" class="form-control input-sm">
                 </div>
@@ -133,14 +133,14 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">ZIP Posta Kodu</label>
+                <label class="col-sm-3 control-label"><?php echo lang('zipcode'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="postcode" value="<?php echo $hotel->postcode; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Para Birimi</label>
+                <label class="col-sm-3 control-label"><?php echo lang('currency'); ?></label>
                 <div class="col-sm-6">
                     <select name="currency" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -152,21 +152,21 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Yönetici</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_manager'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="administrator" value="<?php echo $hotel->administrator; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Ön Büro Telefon</label>
+                <label class="col-sm-3 control-label"><?php echo lang('reception_phone'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="reception_phone" value="<?php echo $hotel->reception_phone; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Ön Büro Email</label>
+                <label class="col-sm-3 control-label"><?php echo lang('reception_email'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="reception_email" value="<?php echo $hotel->reception_email; ?>" class="form-control input-sm">
                 </div>
@@ -178,8 +178,8 @@
             <div class="tab-pane" id="info">
               <div class="form-group">
                 <label class="col-sm-3 control-label">
-                Varsayılan Açıklama 
-                <div  data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="Çoklu dil aktif değilse varsayılan açıklama. Diğer Diller için açıklamalar sayfasına bakınız.">
+                <?php echo lang('default_description'); ?>
+                <div  data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="<?php echo lang('default_description_info'); ?>">
                 <i class="fa fa-info"></i>
                 </div>
 
@@ -190,7 +190,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel özellikleri</label>
+                <label class="col-sm-3 control-label"><?php echo lang('hotel_specs'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -212,7 +212,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Restourant</label>
+                <label class="col-sm-3 control-label"><?php echo lang('restourant'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -235,7 +235,7 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Spor ve Eğlence</label>
+                <label class="col-sm-3 control-label"><?php echo lang('sports_entertainment'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -261,14 +261,14 @@
 
             <div class="tab-pane" id="description">
              
-              <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
+              <a href="#" class="btn btn-success add_field_button pull-right"><?php echo lang('add_field'); ?></a>
               <div class="input_fields_wrap">
 
               <?php foreach ($description as $k => $desc) : ?>
             
               <div id="item">
                <div class="form-group">
-                  <label class="col-sm-3 control-label">Dil</label>
+                  <label class="col-sm-3 control-label"><?php echo lang('language'); ?></label>
                   <div class="col-sm-2">
                     <select name="description[<?php echo $k; ?>][lang]" size="1" class="form-control input-sm">
                       <?php foreach (languages() as $key => $value) {
@@ -278,12 +278,12 @@
                       </select>
                   </div>
                   <div class="col-sm-4">
-                    <a class="btn btn-xs btn-danger remove_field" href="#">Remove</a>
+                    <a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Açıklama</label>
+                  <label class="col-sm-3 control-label"><?php echo lang('description'); ?></label>
                   <div class="col-sm-6">
                     <textarea name="description[<?php echo $k; ?>][desc]"  class="form-control"><?php echo $desc->content; ?></textarea>
                   </div>
@@ -301,14 +301,14 @@
 
             <div class="tab-pane" id="accounts">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Adı 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_name'),'1'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_name1" value="<?php echo $hotel->bank_name1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Şube 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_office'),'1'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_office1" value="<?php echo $hotel->bank_office1; ?>" class="form-control input-sm">
                 </div>
@@ -316,14 +316,14 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Swift Kodu 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_swift'),'1'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_swift1" value="<?php echo $hotel->bank_swift1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Bank Hesap No 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_account'),'1'); ?></label>
                 <div class="col-sm-2">
                     <select name="bank_currency1" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -339,14 +339,14 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Lehdar 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_beneficiary'),'1'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_beneficiary1" value="<?php echo $hotel->bank_beneficiary1; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Iban 1</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_iban'),'1'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_iban1" value="<?php echo $hotel->bank_iban1; ?>" class="form-control input-sm">
                 </div>
@@ -355,14 +355,14 @@
               <hr> <!-- 1 - 2 arası -->
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Adı 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_name'),'2'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_name2" value="<?php echo $hotel->bank_name2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Şube 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_office'),'2'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_office2" value="<?php echo $hotel->bank_office2; ?>" class="form-control input-sm">
                 </div>
@@ -370,14 +370,14 @@
 
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Swift Kodu 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_swift'),'2'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_swift2" value="<?php echo $hotel->bank_swift2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Bank Hesap No 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_account'),'2'); ?></label>
                 <div class="col-sm-2">
                     <select name="bank_currency2" size="1" class="form-control input-sm">
                     <?php foreach (currencies() as $key => $value) {
@@ -393,14 +393,14 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Lehdar 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_beneficiary'),'2'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_beneficiary2" value="<?php echo $hotel->bank_beneficiary2; ?>" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Banka Iban 2</label>
+                <label class="col-sm-3 control-label"><?php echo sprintf(lang('bank_iban'),'2'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="bank_iban2" value="<?php echo $hotel->bank_iban2; ?>" class="form-control input-sm">
                 </div>
@@ -417,14 +417,14 @@
                 <li>
                   <div class="ckbox ckbox-default">
                     <input type="checkbox" id="selectall" value="1">
-                    <label for="selectall">Select All</label>
+                    <label for="selectall"><?php echo lang('select_all'); ?></label>
                   </div>
                 </li>
                 <li>
-                  <a onClick="delete_photos();" class="itemopt disabled" style="cursor: pointer;"><i class="fa fa-trash-o"></i> Delete</a>
+                  <a onClick="delete_photos();" class="itemopt disabled" style="cursor: pointer;"><i class="fa fa-trash-o"></i> <?php echo lang('delete_photo'); ?></a>
                 </li>
                 <li class="filter-type">
-                <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#myModal">Upload Photos</button>
+                <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="modal" data-target="#myModal"><?php echo lang('upload_photos'); ?></button>
                 </li>
                 
               </ul>
@@ -444,8 +444,8 @@
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu fm-menu" role="menu">
-                        <li><a href="#"><i class="fa fa-share"></i> Make Default</a></li>
-                        <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                        <li><a href="#"><i class="fa fa-share"></i> <?php echo lang('make_default'); ?></a></li>
+                        <li><a href="#"><i class="fa fa-trash-o"></i> <?php echo lang('delete_photo'); ?></a></li>
                       </ul>
                   </div><!-- btn-group -->
                   <div class="thmb-prev">
@@ -453,7 +453,7 @@
                       <img src="<?php echo $photo->photo_url; ?>" class="img-responsive" alt="" style="height:125px">
                     </a>
                   </div>
-                  <center class="text-muted">Added: <?php echo date('d-m-Y',time($photo->add_date)); ?></center>
+                  <center class="text-muted"><?php echo lang('added'); ?> <?php echo date('d-m-Y',time($photo->add_date)); ?></center>
                 </div><!-- thmb -->
               </div><!-- col-xs-6 -->
               <?php endforeach; ?>
@@ -491,8 +491,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Upload Hotel Photos</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo lang('jtable_close'); ?></span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo lang('upload_photos'); ?></h4>
       </div>
       <div class="modal-body">
 
@@ -508,7 +508,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Save Photos</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal"><?php echo lang('save_photos'); ?></button>
       </div>
     </div>
   </div>
@@ -544,7 +544,7 @@ jQuery(document).ready(function(){
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">Dil</label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#">Remove</a></div></div><div class="form-group"><label class="col-sm-3 control-label">Açıklama</label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('language'); ?></label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('description'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
           $(wrapper).append(html); //add input box
       }
   });
