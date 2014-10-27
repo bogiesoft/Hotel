@@ -54,6 +54,9 @@ class Reservation extends MY_Controller {
 	
 
 	function rooms(){
+		//load language
+		$this->lang->load('reservation/rooms',$this->language);
+
 		$uri = $this->uri->segment('3');
 
 		$this->load->helper('room');

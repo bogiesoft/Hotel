@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Add New Room > <?php echo $this->session->userdata('hotel_name'); ?></h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('add_new_room'); ?> > <?php echo $this->session->userdata('hotel_name'); ?></h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Add new room to <?php echo $this->session->userdata('hotel_name'); ?> </li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('add_new_room'); ?> > <?php echo $this->session->userdata('hotel_name'); ?> </li>
         </ol>
       </div>
     </div>
@@ -27,8 +27,8 @@
 
 
       <ul class="nav nav-tabs">
-          <li class="active"><a href="#general" data-toggle="tab"><strong>Genel Bilgi</strong></a></li>
-          <li class=""><a href="#description" data-toggle="tab"><strong>Açıklamalar</strong></a></li>
+          <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('general'); ?></strong></a></li>
+          <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translation'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -41,31 +41,31 @@
             
             <div class="tab-pane active" id="general">
               <div class="form-group">
-                <label class="col-sm-3 control-label">Oda Adı</label>
+                <label class="col-sm-3 control-label"><?php echo lang('room_name'); ?></label>
                 <div class="col-sm-6">
-                  <input type="text" name="name" placeholder="Oda adı" class="form-control input-sm">
+                  <input type="text" name="name" placeholder="<?php echo lang('room_name'); ?>" class="form-control input-sm">
                 </div>
               </div>
               
               <div class="form-group">
-                <label class="col-sm-3 control-label">Standart Kapasite</label>
+                <label class="col-sm-3 control-label"><?php echo lang('standart_capacity'); ?></label>
                 <div class="col-sm-6">
                   <input type="text" name="capacity" value="2" class="form-control input-sm">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Kapasite</label>
+                <label class="col-sm-3 control-label"><?php echo lang('capacity'); ?></label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Min. Kapasite</label>
+                    <label class="control-label"><?php echo lang('min_capacity'); ?></label>
                     <input type="text" name="min_capacity" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Max. Kapasite</label>
+                    <label class="control-label"><?php echo lang('max_capacity'); ?></label>
                     <input type="text" name="max_capacity" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
@@ -73,17 +73,17 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Yetişkin Sayısı</label>
+                <label class="col-sm-3 control-label"><?php echo lang('adults'); ?></label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Min. Yetişkin</label>
+                    <label class="control-label"><?php echo lang('min_adult'); ?></label>
                     <input type="text" name="min_adult" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">Max. Yetişkin</label>
+                    <label class="control-label"><?php echo lang('max_adult'); ?></label>
                     <input type="text" name="max_adult" class="form-control input-sm">
                   </div>
                 </div><!-- col-sm-6 -->
@@ -91,23 +91,23 @@
               </div>
 
                <div class="form-group">
-                <label class="col-sm-3 control-label">Çocuk Sayısı</label>
+                <label class="col-sm-3 control-label"><?php echo lang('kids'); ?></label>
                  <div class="row">
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <label class="control-label">Min. Çocuk</label>
+                      <label class="control-label"><?php echo lang('min_kid'); ?></label>
                       <input type="text" name="min_child" value="0" class="form-control input-sm">
                     </div>
                   </div><!-- col-sm-6 -->
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <label class="control-label">Max. Çocuk</label>
+                      <label class="control-label"><?php echo lang('max_kid'); ?></label>
                       <input type="text" name="max_child" value="0" class="form-control input-sm">
                     </div>
                   </div><!-- col-sm-6 -->
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <label class="control-label">Max. Çocuk Yaş</label>
+                      <label class="control-label"><?php echo lang('kid_age'); ?></label>
                       <select name="child_age" class="form-control input-sm">
                       <?php for ($i=0; $i <=18 ; $i++) { 
                         echo '<option value="'.$i.'">'.$i.'</option>';
@@ -120,7 +120,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Otel özellikleri</label>
+                <label class="col-sm-3 control-label"><?php echo lang('room_specs'); ?></label>
                 <div class="col-sm-6">
                 <table>
                   <tbody>
@@ -140,11 +140,11 @@
 
               <div class="tab-pane" id="description">
                
-                <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
+                <a href="#" class="btn btn-success add_field_button pull-right"><?php echo lang('add_field'); ?></a>
                 <div class="input_fields_wrap">
                 <div id="item">
                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Dil</label>
+                    <label class="col-sm-3 control-label"><?php echo lang('language'); ?></label>
                     <div class="col-sm-2">
                       <select name="description[1][lang]" size="1" class="form-control input-sm">
                         <?php foreach (languages() as $key => $value) {
@@ -153,18 +153,18 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                      <a class="btn btn-xs btn-danger remove_field" href="#">Remove</a>
+                      <a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Adı</label>
+                    <label class="col-sm-3 control-label"><?php echo lang('name'); ?></label>
                     <div class="col-sm-6">
                       <input type="text" name="description[1][title]" placeholder="Name" class="form-control input-sm"/>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Açıklama</label>
+                    <label class="col-sm-3 control-label"><?php echo lang('description'); ?></label>
                     <div class="col-sm-6">
                       <textarea name="description[1][desc]"  class="form-control"></textarea>
                     </div>
@@ -184,7 +184,7 @@
 
             <div class="row">
               <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="Kaydet">
+              <input type="submit" class="btn btn-primary" value="<?php echo lang('save'); ?>">
               </div>
                 
              <div class="col-sm-6">
@@ -219,7 +219,7 @@ jQuery(document).ready(function(){
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">Dil</label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#">Remove</a></div></div><div class="form-group"><label class="col-sm-3 control-label">Adı</label><div class="col-sm-6"><input type="text" name="description['+x+'][title]" placeholder="Name" class="form-control input-sm"/></div></div><div class="form-group"><label class="col-sm-3 control-label">Açıklama</label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('language'); ?></label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('name'); ?></label><div class="col-sm-6"><input type="text" name="description['+x+'][title]" placeholder="Name" class="form-control input-sm"/></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('description'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
           $(wrapper).append(html); //add input box
       }
   });

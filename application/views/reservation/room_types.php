@@ -1,18 +1,18 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Rooms </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('rooms'); ?></h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Rooms</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('rooms'); ?></li>
         </ol>
       </div>
     </div>
     
     <div class="contentpanel">
       <div class="row">
-        <a href="<?php echo site_url('reservation/rooms/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle </a>
+        <a href="<?php echo site_url('reservation/rooms/add_new'); ?>" class="btn btn-info pull-right"> <?php echo lang('add_room'); ?></a>
       </div>
     
       <div class="row">
@@ -37,21 +37,21 @@
     $(document).ready(function () {
     //Localization texts
 
-          var turkishMessages = {
-              serverCommunicationError: 'Sunucu ile iletişim kurulurken bir hata oluştu.',
-              loadingMessage: 'Kayıtlar yükleniyor...',
-              noDataAvailable: 'Hiç kayıt bulunmamaktadır!',
-              addNewRecord: '+ Yeni kayıt ekle',
-              editRecord: 'Kayıt düzenle',
-              areYouSure: 'Emin misiniz?',
-              deleteConfirmation: 'Bu odaya ait tüm veriler silinecektir. Emin misiniz?',
-              save: 'Kaydet',
-              saving: 'Kaydediyor',
-              cancel: 'İptal',
-              deleteText: 'Sil',
-              deleting: 'Siliyor',
-              error: 'Hata',
-              close: 'Kapat',
+          var messages = {
+              serverCommunicationError: '<?php echo lang('server_communication_error'); ?>',
+              loadingMessage: '<?php echo lang('loading_message'); ?>',
+              noDataAvailable: '<?php echo lang('no_data'); ?>',
+              addNewRecord: '<?php echo lang('add_room'); ?>',
+              editRecord: '<?php echo lang('edit_room'); ?>',
+              areYouSure: '<?php echo lang('are_you_sure'); ?>',
+              deleteConfirmation: '<?php echo lang('delete_confirm'); ?>',
+              save: '<?php echo lang('jtable_save'); ?>',
+              saving: '<?php echo lang('jtable_saving'); ?>',
+              cancel: '<?php echo lang('jtable_cancel'); ?>',
+              deleteText: '<?php echo lang('jtable_delete'); ?>',
+              deleting: '<?php echo lang('jtable_deleting'); ?>',
+              error: '<?php echo lang('jtable_error'); ?>',
+              close: '<?php echo lang('jtable_close'); ?>',
               gotoPageLabel: 'Sayfaya Git',
               pageSizeChangeLabel: 'Satır Sayısı',
               cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
@@ -61,7 +61,7 @@
           };
 
         $('#rooms').jtable({
-            messages: turkishMessages, //Lozalize
+            messages: messages, //Lozalize
             
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
@@ -80,19 +80,19 @@
                     width: '4%'
                 },
                 name: {
-                    title: 'Oda Adı',
+                    title: '<?php echo lang('room_name'); ?>',
                     width: '23%'
                 },
                 capacity:{
-                    title: 'Kapasite',
+                    title: '<?php echo lang('capacity'); ?>',
                     width: '10%'
                 },
                 min_capacity:{
-                    title: 'Min. Kapasite',
+                    title: '<?php echo lang('min_capacity'); ?>',
                     width: '12%'
                 },
                 max_capacity:{
-                    title: 'Max. Kapasite',
+                    title: '<?php echo lang('max_capacity'); ?>',
                     width: '12%'
                 },
                 detail:{
