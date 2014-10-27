@@ -413,7 +413,7 @@ jQuery(document).ready(function(){
 
 
   //pretty photo
-  jQuery("a[rel^='prettyPhoto']").prettyPhoto();
+  jQuery("a[rel^='prettyPhoto']").prettyPhoto({social_tools:false});
 
 
 });
