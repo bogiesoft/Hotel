@@ -30,6 +30,13 @@ $lang['language']		= 'Language';
 $lang['name']			= 'Name';
 $lang['description']	= 'Description';
 
+$lang['select_all']		= 'Select All';
+$lang['delete']			= 'Delete';
+$lang['upload_photos']	= 'Upload Photos';
+$lang['make_default']	= 'Make Default';
+$lang['save_photos']	= 'Save Photos';
+$lang['close']			= 'Close';
+
 //specs
 $lang['room_service']	= 'Room Service';
 $lang['air_condition']	= 'Air Condition';
@@ -76,6 +83,8 @@ $lang['pet_friendly']	= 'Pets friendly';
 $lang['hifi']			= 'Hi-Fi';
 $lang['balcony']		= 'Balcony';
 
+$lang['warning_room_id']= 'WARNING! This room is not blong to hotel that you are editing. Changes will be saved under <b>%s</b> property.';
+$lang['warning_wrong_room'] = 'Oops. You are trying to edit a room does not belong to you.';
 
 $lang['added_success']	= 'Room Added Successfully';
 $lang['added_error']	= 'Room could not be added. Please Try Again!';
