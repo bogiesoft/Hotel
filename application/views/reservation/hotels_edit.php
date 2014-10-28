@@ -470,7 +470,7 @@
 
             <div class="row">
               <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="Kaydet">
+              <input type="submit" class="btn btn-primary" value="<?php echo lang('save_button'); ?>">
               </div>
                 
              <div class="col-sm-6">

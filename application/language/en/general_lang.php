@@ -7,8 +7,8 @@ $lang['navigation'] 	= 'Navigation';
 //menu
 $lang['dashboard'] 				= 'Dashboard';	
 $lang['setup_menu'] 			= 'Setup';	
-$lang['hotels_menu'] 			= 'Hotels';	
-$lang['rooms_menu'] 			= 'Rooms';	
+$lang['hotels_menu'] 			= 'Properties';	
+$lang['rooms_menu'] 			= 'Room Types';	
 $lang['extras_menu'] 			= 'Extras';	
 $lang['seasons_menu'] 			= 'Seasons';	
 $lang['policies_menu'] 			= 'Policies';	

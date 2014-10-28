@@ -62,7 +62,7 @@
 
         $('#rooms').jtable({
             messages: messages, //Lozalize
-            
+            title  :'<?php echo lang('rooms'); ?>',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
