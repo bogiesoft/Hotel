@@ -112,3 +112,4 @@ $lang['delete_photo']	= 'Delete';
 $lang['upload_photos']	= 'Upload Photos';
 $lang['save_photos']	= 'Save Photos';
 $lang['added']			= 'Added:';
+$lang['make_default']	= 'Make Default';

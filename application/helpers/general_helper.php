@@ -37,13 +37,13 @@ function arr_val_to_key($arr){
 
 function days_checkbox($id=''){
 	$days = array(
-		'Sun'	=> 'Sunday',
-		'Mon' 	=> 'Monday',
-		'Tue' 	=> 'Tuesday',
-		'Wed' 	=> 'Wednesday',
-		'Thu' 	=> 'Thursday',
-		'Fri' 	=> 'Friday',
-		'Sat'	=> 'Saturday');
+		'Sun'	=> lang('sunday'),
+		'Mon' 	=> lang('monday'),
+		'Tue' 	=> lang('tuesday'),
+		'Wed' 	=> lang('wednesday'),
+		'Thu' 	=> lang('thursday'),
+		'Fri' 	=> lang('friday'),
+		'Sat'	=> lang('saturday'));
 
 	if ($id != '') {
 		return $days[$id];

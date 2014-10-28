@@ -42,3 +42,12 @@ $lang['jtable_error']		= 'Can not load options for field %s';
 $lang['jtable_gopage']		= 'Go to page';
 $lang['jtable_rowcount']	= 'Row Size';
 $lang['jtable_page_info']	= 'Row Size';
+
+//days
+$lang['sunday']		= 'Sunday';
+$lang['monday']		= 'Monday';
+$lang['tuesday']	= 'Tuesday';
+$lang['wednesday']	= 'Wednesday';
+$lang['thursday']	= 'Thursday';
+$lang['friday']		= 'Friday';
+$lang['saturday']	= 'Saturday';

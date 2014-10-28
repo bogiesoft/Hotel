@@ -83,10 +83,10 @@ $lang['pet_friendly']	= 'Pets friendly';
 $lang['hifi']			= 'Hi-Fi';
 $lang['balcony']		= 'Balcony';
 
-$lang['warning_room_id']= 'WARNING! This room is not blong to hotel that you are editing. Changes will be saved under <b>%s</b> property.';
+$lang['warning_room_id']= 'WARNING! This room is not belong to hotel that you are editing. Changes will be saved under <b>%s</b> property.';
 $lang['warning_wrong_room'] = 'Oops. You are trying to edit a room does not belong to you.';
 
-$lang['added_success']	= 'Room Added Successfully';
+$lang['added_success']	= 'Room has been added successfully';
 $lang['added_error']	= 'Room could not be added. Please Try Again!';
 $lang['update_success']	= 'Updated successfully';
 $lagn['update_error']	= 'Error. Room could not be updated. Please Try Again';

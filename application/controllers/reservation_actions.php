@@ -224,6 +224,9 @@ class Reservation_actions extends MY_Controller {
 
 
 	function save_extra(){
+		//load language
+		$this->lang->load('reservation/extras',$this->language);
+		
 		$code 		= $this->session->userdata('code');
 		$hotel_id 	= $this->session->userdata('hotel_id');
 
@@ -259,10 +262,10 @@ class Reservation_actions extends MY_Controller {
 			}
 
 			if ($update) {
-				$this->session->set_flashdata('success','Extra başarıyla düzenlendi.');
+				$this->session->set_flashdata('success',lang('update_success'));
 				redirect('reservation/extras/edit/'.$extra_id);
 			}else{
-				$this->session->set_flashdata('error','Extra Düzenlenemedi, Lütfen Tekrar Deneyin.');
+				$this->session->set_flashdata('error',lang('update_error'));
 				redirect('reservation/extras/edit/'.$extra_id);
 
 				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
@@ -288,10 +291,10 @@ class Reservation_actions extends MY_Controller {
 			}
 
 			if ($insert) {
-				$this->session->set_flashdata('success','Oda başarıyla eklendi.');
+				$this->session->set_flashdata('success',lang('added_success'));
 				redirect('reservation/extras/edit/'.$extra_id);
 			}else{
-				$this->session->set_flashdata('error','Oda Eklenemedi, Lütfen Tekrar Deneyin.');
+				$this->session->set_flashdata('error',lang('added_error'));
 				redirect('reservation/extras/add_new');
 
 				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
