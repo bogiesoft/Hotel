@@ -52,12 +52,12 @@
               deleting: '<?php echo lang('jtable_deleting'); ?>',
               error: '<?php echo lang('jtable_error'); ?>',
               close: '<?php echo lang('jtable_close'); ?>',
-              gotoPageLabel: 'Sayfaya Git',
-              pageSizeChangeLabel: 'Satır Sayısı',
-              cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
-              pagingInfo: 'Toplam {2}, {0} ile {1} arası gösteriliyor',
-              canNotDeletedRecords: '{1} kayıttan {0} adedi silinemedi!',
-              deleteProggress: '{1} kayıttan {0} adedi silindi, devam ediliyor...'
+              gotoPageLabel: '<?php echo lang('jtable_gopage'); ?>',
+              pageSizeChangeLabel: '<?php echo lang('jtable_rowcount'); ?>',
+              cannotLoadOptionsFor: '<?php echo lang('jtable_page_cannot_load'); ?>',
+              pagingInfo: '<?php echo lang('jtable_page_info'); ?>',
+              canNotDeletedRecords: '<?php echo lang('jtable_cannot_delete'); ?>',
+              deleteProggress: '<?php echo lang('jtable_cannot_deleting'); ?>'
           };
 
         $('#rooms').jtable({

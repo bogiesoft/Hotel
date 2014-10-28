@@ -35,27 +35,27 @@
     $(document).ready(function () {
     //Localization texts
 
-          var turkishMessages = {
-              serverCommunicationError: 'Sunucu ile iletişim kurulurken bir hata oluştu.',
-              loadingMessage: 'Kayıtlar yükleniyor...',
-              noDataAvailable: 'Hiç kayıt bulunmamaktadır!',
-              addNewRecord: 'Sezon Ekle',
-              editRecord: 'Sezon düzenle',
-              areYouSure: 'Emin misiniz?',
-              deleteConfirmation: 'Bu sezona ait tüm veriler silinecektir. Emin misiniz?',
-              save: 'Kaydet',
-              saving: 'Kaydediyor',
-              cancel: 'İptal',
-              deleteText: 'Sil',
-              deleting: 'Siliyor',
-              error: 'Hata',
-              close: 'Kapat',
-              gotoPageLabel: 'Sayfaya Git',
-              pageSizeChangeLabel: 'Satır Sayısı',
-              cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
-              pagingInfo: 'Toplam {2}, {0} ile {1} arası gösteriliyor',
-              canNotDeletedRecords: '{1} kayıttan {0} adedi silinemedi!',
-              deleteProggress: '{1} kayıttan {0} adedi silindi, devam ediliyor...'
+          var messages = {
+              serverCommunicationError: '<?php echo lang('server_communication_error'); ?>',
+              loadingMessage: '<?php echo lang('loading_message'); ?>',
+              noDataAvailable: '<?php echo lang('no_data'); ?>',
+              addNewRecord: '<?php echo lang('add_new'); ?>',
+              editRecord: '<?php echo lang('edit_season'); ?>',
+              areYouSure: '<?php echo lang('are_you_sure'); ?>',
+              deleteConfirmation: '<?php echo lang('delete_confirm'); ?>',
+              save: '<?php echo lang('jtable_save'); ?>',
+              saving: '<?php echo lang('jtable_saving'); ?>',
+              cancel: '<?php echo lang('jtable_cancel'); ?>',
+              deleteText: '<?php echo lang('jtable_delete'); ?>',
+              deleting: '<?php echo lang('jtable_deleting'); ?>',
+              error: '<?php echo lang('jtable_error'); ?>',
+              close: '<?php echo lang('jtable_close'); ?>',
+              gotoPageLabel: '<?php echo lang('jtable_gopage'); ?>',
+              pageSizeChangeLabel: '<?php echo lang('jtable_rowcount'); ?>',
+              cannotLoadOptionsFor: '<?php echo lang('jtable_page_cannot_load'); ?>',
+              pagingInfo: '<?php echo lang('jtable_page_info'); ?>',
+              canNotDeletedRecords: '<?php echo lang('jtable_cannot_delete'); ?>',
+              deleteProggress: '<?php echo lang('jtable_cannot_deleting'); ?>'
           };
 
           var roomMessages = {
@@ -77,8 +77,8 @@
 
 
         $('#seasons').jtable({
-            messages: turkishMessages, //Lozalize
-            title  :'Seasons',
+            messages: messages, //Lozalize
+            title  :'<?php echo lang('seasons'); ?>',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
@@ -172,33 +172,33 @@
                     }
                 },*/
                 name:{
-                    title : 'Name',
+                    title : '<?php echo lang('name'); ?>',
                     width: '23%'
                 },
                 start_date: {
-                    title: 'Start Date',
+                    title: '<?php echo lang('start_date'); ?>',
                     width: '10%',
                     type : 'date'
                 },
                 end_date:{
-                    title: 'End Date',
+                    title: '<?php echo lang('end_date'); ?>',
                     width: '10%',
                     type : 'date'
                 },
                 early_reservation_days :{
-                  title: 'Early Reservation Days',
+                  title: '<?php echo lang('early_reservation'); ?>',
                     width: '18%'
                 },
                 cancel_days :{
-                  title: 'Cancel days',
+                  title: '<?php echo lang('cancel_days'); ?>',
                     width: '10%'
                 },
                 min_stay :{
-                  title: 'Min. Stay',
+                  title: '<?php echo lang('min_stay'); ?>',
                     width: '10%'
                 },
                 max_stay :{
-                  title: 'Max. Stay',
+                  title: '<?php echo lang('max_stay'); ?>',
                     width: '10%'
                 }
 

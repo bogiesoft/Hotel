@@ -41,7 +41,10 @@ $lang['jtable_close']		= 'Close';
 $lang['jtable_error']		= 'Can not load options for field %s';
 $lang['jtable_gopage']		= 'Go to page';
 $lang['jtable_rowcount']	= 'Row Size';
-$lang['jtable_page_info']	= 'Row Size';
+$lang['jtable_page_cannot_load']	= 'Options can not be loaded for option {0}';
+$lang['jtable_page_info']	= 'Total {2}, Showing between {0} and {1}';
+$lang['jtable_cannot_delete']	= '{0} records of {1} can not be deleted!';
+$lang['jtable_cannot_deleting']	= 'Total {0} records of {1} has been deleted. Continue...';
 
 //days
 $lang['sunday']		= 'Sunday';

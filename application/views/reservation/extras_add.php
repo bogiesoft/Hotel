@@ -56,7 +56,7 @@
                     <select name="per" class="form-control input-sm">
                       <option value="1"><?php echo lang('per_person'); ?></option>
                       <option value="2"><?php echo lang('per_unit'); ?></option>
-                      <option value="3"><?php echo lang('per_unit'); ?></option>
+                      <option value="3"><?php echo lang('per_day'); ?></option>
                       <option value="4"><?php echo lang('per_child'); ?></option>
                     </select>
                   </div>

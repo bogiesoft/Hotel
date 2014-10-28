@@ -110,6 +110,8 @@ class Reservation extends MY_Controller {
 
 
 	function seasons(){
+		//load language
+		$this->lang->load('reservation/seasons',$this->language);
 		$this->load->view('reservation/seasons');
 	}
 

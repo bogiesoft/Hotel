@@ -37,7 +37,7 @@
     $(document).ready(function () {
     //Localization texts
 
-          var turkishMessages = {
+          var messages = {
               serverCommunicationError: 'Sunucu ile iletişim kurulurken bir hata oluştu.',
               loadingMessage: 'Kayıtlar yükleniyor...',
               noDataAvailable: 'Hiç kayıt bulunmamaktadır!',
@@ -52,17 +52,17 @@
               deleting: 'Siliyor',
               error: 'Hata',
               close: 'Kapat',
-              gotoPageLabel: 'Sayfaya Git',
-              pageSizeChangeLabel: 'Satır Sayısı',
-              cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
-              pagingInfo: 'Toplam {2}, {0} ile {1} arası gösteriliyor',
-              canNotDeletedRecords: '{1} kayıttan {0} adedi silinemedi!',
-              deleteProggress: '{1} kayıttan {0} adedi silindi, devam ediliyor...'
+              gotoPageLabel: '<?php echo lang('jtable_gopage'); ?>',
+              pageSizeChangeLabel: '<?php echo lang('jtable_rowcount'); ?>',
+              cannotLoadOptionsFor: '<?php echo lang('jtable_page_cannot_load'); ?>',
+              pagingInfo: '<?php echo lang('jtable_page_info'); ?>',
+              canNotDeletedRecords: '<?php echo lang('jtable_cannot_delete'); ?>',
+              deleteProggress: '<?php echo lang('jtable_cannot_deleting'); ?>'
           };
 
         $('#hotels').jtable({
-            messages: turkishMessages, //Lozalize
-            title: 'Hotels',
+            messages: messages, //Lozalize
+            title: '<?php echo lang('hotels'); ?>',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
