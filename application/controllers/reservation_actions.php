@@ -156,7 +156,7 @@ class Reservation_actions extends MY_Controller {
 		if ($this->input->post('update') == 1) {
 			$room_id = $this->input->post('room_id');
 
-			$update = $this->db->update('rooms',$arr,array('id' => $hotel_id));
+			$update = $this->db->update('rooms',$arr,array('id' => $room_id));
 			//diğer dillerdeki açıklamalar
 			$this->db->delete('room_contents',array('room_id'=>$room_id));
 			$description	= $this->input->post('description');
