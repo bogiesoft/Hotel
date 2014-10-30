@@ -2,17 +2,17 @@
   <div class="panel-body">
     <div class="col-md-12 col-sm-3">            
     <fieldset class="table-legend">
-      <legend class="table-legend">Policy Details</legend>
+      <legend class="table-legend"><?php echo lang('policy_details'); ?></legend>
 
      <div class="form-group">
-        <label class="col-sm-3 control-label">Policy Name</label>
+        <label class="col-sm-3 control-label"><?php echo lang('policy_name'); ?></label>
         <div class="col-sm-6">
           <input type="text" name="name" class="form-control input-sm">
         </div>
       </div>
 
       <div class="form-group">
-        <label class="col-sm-3 control-label">Extra Policies</label>
+        <label class="col-sm-3 control-label"><?php echo lang('extra_policies'); ?></label>
         <div class="col-sm-6">
         <textarea name="extra_policies" class="form-control"></textarea>
         </div>
@@ -21,7 +21,7 @@
     </fieldset>
 
     <fieldset class="table-legend">
-      <legend class="table-legend">Sales Policy</legend>
+      <legend class="table-legend"><?php echo lang('sales_policy'); ?></legend>
       <table class="table mb30">
         <tbody>
           <tr>
@@ -31,7 +31,7 @@
               <label for="policy_note"></label>
             </div>
             </td>
-            <td>Rezervasyon yaptığınız için teşekkür ederiz.Lütfen satış politikasını not ediniz</td>
+            <td><?php echo lang('policy_note'); ?></td>
           </tr>
           <tr>
             <td>
@@ -40,7 +40,7 @@
               <label for="credit_card"></label>
             </div>
             </td>
-            <td>Rezervasyon garantisi için geçerli kredi kartı gereklidir.</td>
+            <td><?php echo lang('credit_card'); ?></td>
           </tr>
           <tr>
             <td>
@@ -50,13 +50,12 @@
             </div>
             </td>
             <td>
-            Eğer kredi kartınızda yeterli miktarda garanti miktarı
-            <input type="text" name="policy[sales][valid_card][no_card_depozit_value]" style="width: 36px;height: 20px;">
-            <?php valid_card_select(); ?>
-            yoksa,
-            Kredi kartı olmayan misafirler için, garanti ödemesini acounta transfer yöntemi ile 
-            <input type="text" name="policy[sales][valid_card][no_card_depozit_days]" style="width: 36px;height: 20px;">
-            gün önce gönderilmesi gerekir.
+            <?php 
+            $value = '<input type="text" name="policy[sales][valid_card][no_card_depozit_value]" style="width: 36px;height: 20px;">';
+            $days = ' <input type="text" name="policy[sales][valid_card][no_card_depozit_days]" style="width: 36px;height: 20px;">';
+            ?>
+            <?php echo sprintf(lang('valid_card'),$value,valid_card_select(),$days); ?>
+
             </td>
           </tr>
 
@@ -68,9 +67,8 @@
             </div>
             </td>
             <td>
-             For clients without credit cards - guarantee down payment by wire transfer to our account has to be done at least 
-              <input type="text" name="policy[sales][depozit_after_resv][days]" style="width: 36px;height: 20px;">
-              day(s) after making reservation.
+            <?php $days = '<input type="text" name="policy[sales][depozit_after_resv][days]" style="width: 36px;height: 20px;">'; ?>
+            <?php echo sprintf(lang('depozit_after_resv'), $days); ?>
             </td>
           </tr>
 
@@ -81,7 +79,7 @@
               <label for="taxes"></label>
             </div>
             </td>
-            <td>Konaklama ücretleri vergiler ve hizmet bedellerini içerir.</td>
+            <td><?php echo lang('taxes'); ?></td>
           </tr>
           
 
@@ -92,8 +90,9 @@
               <label for="checkin"></label>
             </div>
             </td>
-            <td>Check-in otele varış günü <?php twentyfour_hour_selectbox('policy[sales][checkin][value]'); ?>
-            dan sonra yapılır.</td>
+            <td>
+            <?php echo sprintf(lang('checkin'), twentyfour_hour_selectbox('policy[sales][checkin][value]')); ?>
+            </td>
           </tr>
 
           <tr>
@@ -103,8 +102,10 @@
               <label for="checkout"></label>
             </div>
             </td>
-            <td>Check out <?php twentyfour_hour_selectbox('policy[sales][checkout][value]'); ?>
-            dan önce otelden çıkış günü</td>
+            <td>
+            <?php echo sprintf(lang('checkout'), twentyfour_hour_selectbox('policy[sales][checkout][value]')); ?>
+            </td>
+            
           </tr>
 
           <tr>
@@ -114,7 +115,9 @@
               <label for="child_age"></label>
             </div>
             </td>
-            <td><?php age_selectbox('policy[sales][child_age][value]'); ?>yaş ve üzeri konaklamalarda yetişkin fiyat listesi uygulanır. Lütfen Yetişkin olarak değerlendiriniz.</td>
+            <td>
+            <?php echo sprintf(lang('child_age'),age_selectbox('policy[sales][child_age][value]')); ?>
+            </td>
           </tr>
 
           <tr>
@@ -124,7 +127,7 @@
               <label for="payment"></label>
             </div>
             </td>
-            <td>Hesap kesimi check out zamanında ön büroda gerçekleşecektir.</td>
+            <td><?php echo lang('payment'); ?></td>
           </tr>
 
           <tr>
@@ -134,7 +137,7 @@
               <label for="info_rate"></label>
             </div>
             </td>
-            <td>Bu fiyat listesinde bulunan fiyatlar gerçeğe yakın fiyatlardır</td>
+            <td><?php echo lang('info_rate'); ?></td>
           </tr>
 
           <tr>
@@ -144,7 +147,7 @@
               <label for="resv_cancel"></label>
             </div>
             </td>
-            <td>Rezervasyonunuzu iptal etmek veya değiştirmek istiyorsanız, Lütfen rezervasyon departmanımız ile görüşünüz.</td>
+            <td><?php echo lang('resv_cancel'); ?></td>
           </tr>
 
           <tr>
@@ -154,8 +157,7 @@
               <label for="resv_contact"></label>
             </div>
             </td>
-            <td>Lütfen rezervasyon ofisi ile iletişim kurunuz.
-              Otel, rezervasyonları iptal etme veya değiştirme hakkını olası sahte rezervasyonlar ve bu tarz nedenler dolayısı ile saklı tutar.</td>
+            <td><?php echo lang('resv_contact'); ?></td>
           </tr>
          
             
@@ -165,7 +167,7 @@
 
 
       <fieldset class="table-legend">
-      <legend class="table-legend">Cancelation Policy</legend>
+      <legend class="table-legend"><?php echo lang('cancellation_policy'); ?></legend>
       <table class="table mb30">
         <tbody>
           <tr>
@@ -175,7 +177,8 @@
               <label for="cancellation_time"></label>
             </div>
             </td>
-            <td>Bu rezervasyon otele varış günü <?php echo twentyfour_hour_selectbox('policy[cancel][cancellation_time][value]'); ?> saatine kadar tutulacaktır</td>
+            <td><?php echo sprintf(lang('cancellation_time'),twentyfour_hour_selectbox('policy[cancel][cancellation_time][value]')); ?>
+            </td>
           </tr>
 
           <tr>
@@ -186,9 +189,10 @@
             </div>
             </td>
             <td>
-            No Show durumlarında, iptal ücreti uygulanır 
-            <input type="text" name="policy[cancel][no_show_value][value]" style="width: 36px;height: 20px;">
-            <?php no_show_select(); ?>
+            <?php
+            $value = '<input type="text" name="policy[cancel][no_show_value][value]" style="width: 36px;height: 20px;">';
+            echo sprintf(lang('no_show_value'),$value,no_show_select()); ?>
+
             </td>
           </tr>
 
@@ -198,7 +202,7 @@
 
 
       <fieldset class="table-legend">
-      <legend class="table-legend">Online Cancellation</legend>
+      <legend class="table-legend"><?php echo lang('online_cancellation'); ?></legend>
       <table class="table mb30">
         <tbody>
           <tr>
@@ -208,7 +212,7 @@
               <label for="client_can_cancel"></label>
             </div>
             </td>
-            <td>Online rezervasyon iptali mümkündür</td>
+            <td><?php echo lang('client_can_cancel'); ?></td>
           </tr> 
 
           <tr>
@@ -218,7 +222,7 @@
               <label for="client_confirmation"></label>
             </div>
             </td>
-            <td>Müşteri satış poliçesini okuyup anladığını confirme etmek zorundadır.</td>
+            <td><?php echo lang('client_confirmation'); ?></td>
           </tr>             
             
          </tbody>
@@ -226,12 +230,12 @@
       </fieldset>
 
       <fieldset class="table-legend">
-      <legend class="table-legend">Extra Policies by Language</legend>
-      <a href="#" class="btn btn-success add_field_button pull-right">Add Field</a>
+      <legend class="table-legend"><?php echo lang('extra_policies_by_lang'); ?></legend>
+      <a href="#" class="btn btn-success add_field_button pull-right"><?php echo lang('add_field'); ?></a>
         <div class="input_fields_wrap">
         <div id="item">
          <div class="form-group">
-            <label class="col-sm-3 control-label">Dil</label>
+            <label class="col-sm-3 control-label"><?php echo lang('language'); ?></label>
             <div class="col-sm-2">
               <select name="policy[description][1][lang]" size="1" class="form-control input-sm">
                 <?php foreach (languages() as $key => $value) {
@@ -240,11 +244,11 @@
                 </select>
             </div>
             <div class="col-sm-4">
-              <a class="btn btn-xs btn-danger remove_field" href="#">Remove</a>
+              <a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label">Açıklama</label>
+            <label class="col-sm-3 control-label"><?php echo lang('description'); ?></label>
             <div class="col-sm-6">
               <textarea name="policy[description][1][desc]"  class="form-control"></textarea>
             </div>
@@ -262,7 +266,7 @@
 
       <div class="form-group">
         <div class="col-sm-6">
-        <button type="submit" class="btn btn-success">Kaydet</button>
+        <button type="submit" class="btn btn-success"><?php echo lang('save'); ?></button>
         </div>
       </div>
 

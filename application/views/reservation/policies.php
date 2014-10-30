@@ -1,18 +1,18 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Policies </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('policies'); ?> </h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Policies</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('policies'); ?></li>
         </ol>
       </div>
     </div>
     
     <div class="contentpanel">
       <div class="row">
-        <a href="<?php echo site_url('reservation/policies/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle </a>
+        <a href="<?php echo site_url('reservation/policies/add_new'); ?>" class="btn btn-info pull-right"> <?php echo lang('add_new'); ?> </a>
       </div>
     
       <div class="row">
@@ -37,31 +37,31 @@
     $(document).ready(function () {
     //Localization texts
 
-          var turkishMessages = {
-              serverCommunicationError: 'Sunucu ile iletişim kurulurken bir hata oluştu.',
-              loadingMessage: 'Kayıtlar yükleniyor...',
-              noDataAvailable: 'Hiç kayıt bulunmamaktadır!',
-              addNewRecord: '+ Yeni kayıt ekle',
-              editRecord: 'Kayıt düzenle',
-              areYouSure: 'Emin misiniz?',
-              deleteConfirmation: 'Bu kayıt silinecektir. Emin misiniz?',
-              save: 'Kaydet',
-              saving: 'Kaydediyor',
-              cancel: 'İptal',
-              deleteText: 'Sil',
-              deleting: 'Siliyor',
-              error: 'Hata',
-              close: 'Kapat',
-              gotoPageLabel: 'Sayfaya Git',
-              pageSizeChangeLabel: 'Satır Sayısı',
-              cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
-              pagingInfo: 'Toplam {2}, {0} ile {1} arası gösteriliyor',
-              canNotDeletedRecords: '{1} kayıttan {0} adedi silinemedi!',
-              deleteProggress: '{1} kayıttan {0} adedi silindi, devam ediliyor...'
+          var messages = {
+              serverCommunicationError: '<?php echo lang('server_communication_error'); ?>',
+              loadingMessage: '<?php echo lang('loading_message'); ?>',
+              noDataAvailable: '<?php echo lang('no_data'); ?>',
+              addNewRecord: '<?php echo lang('add_new_policy'); ?>',
+              editRecord: '<?php echo lang('edit_policy'); ?>',
+              areYouSure: '<?php echo lang('are_you_sure'); ?>',
+              deleteConfirmation: '<?php echo lang('delete_confirm'); ?>',
+              save: '<?php echo lang('jtable_save'); ?>',
+              saving: '<?php echo lang('jtable_saving'); ?>',
+              cancel: '<?php echo lang('jtable_cancel'); ?>',
+              deleteText: '<?php echo lang('jtable_delete'); ?>',
+              deleting: '<?php echo lang('jtable_deleting'); ?>',
+              error: '<?php echo lang('jtable_error'); ?>',
+              close: '<?php echo lang('jtable_close'); ?>',
+              gotoPageLabel: '<?php echo lang('jtable_gopage'); ?>',
+              pageSizeChangeLabel: '<?php echo lang('jtable_rowcount'); ?>',
+              cannotLoadOptionsFor: '<?php echo lang('jtable_page_cannot_load'); ?>',
+              pagingInfo: '<?php echo lang('jtable_page_info'); ?>',
+              canNotDeletedRecords: '<?php echo lang('jtable_cannot_delete'); ?>',
+              deleteProggress: '<?php echo lang('jtable_cannot_deleting'); ?>'
           };
 
         $('#policies').jtable({
-            messages: turkishMessages, //Lozalize
+            messages: messages, //Lozalize
             title: 'Policies',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
@@ -80,7 +80,7 @@
                     width: '5%'
                 },
                 policy_name: {
-                    title: 'Adı',
+                    title: '<?php echo lang('name'); ?>',
                     width: '23%'
                 },
                 detail:{

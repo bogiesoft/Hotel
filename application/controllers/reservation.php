@@ -204,6 +204,8 @@ class Reservation extends MY_Controller {
 	}
 
 	function policies(){
+		//load language
+		$this->lang->load('reservation/policies',$this->language);
 
 		$uri = $this->uri->segment('3');
 		$this->load->helper('policy');

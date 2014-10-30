@@ -8,7 +8,7 @@ function twentyfour_hour_selectbox($name,$value=NULL){
 	}
 	$output .= '</select>';
 
-	echo $output;
+	return $output;
 }
 
 function age_selectbox($name,$value=NULL){
@@ -19,7 +19,7 @@ function age_selectbox($name,$value=NULL){
 	}
 	$output .= '</select>';
 
-	echo $output;
+	return $output;
 }
 
 function no_show_select($value=NULL){
@@ -28,11 +28,11 @@ function no_show_select($value=NULL){
 	$no_show_perc = $value=="no_show_perc" ? 'selected="selected"' : '';
 	$no_show_perc_guarantee = $value=="no_show_perc_guarantee" ? 'selected="selected"' : '';
 
-	echo '
+	return '
 	<select name="policy[cancel][no_show_value][no_card_depozit_method]" style="width:240px; height: 20px">
-      <option value="no_show_days" '.$no_show_days.'>Seçili konaklamada kişi başına geceleme</option>
-      <option value="no_show_perc" '.$no_show_perc.'>Rezervasyon değerininin yüzdesi</option>
-      <option value="no_show_perc_guarantee" '.$no_show_perc_guarantee.'>Garanti değerinin yüzdesi</option>
+      <option value="no_show_days" '.$no_show_days.'>'.lang('no_show_method_days').'</option>
+      <option value="no_show_perc" '.$no_show_perc.'>'.lang('no_show_method_perc').'</option>
+      <option value="no_show_perc_guarantee" '.$no_show_perc_guarantee.'>'.lang('no_show_method_fix').'</option>
     </select>';
 }
 
@@ -42,11 +42,11 @@ function valid_card_select($value=NULL){
 	$days = $value=='days' ? 'selected="selected"' :'';
 	$fix  = $value=='fix' ? 'selected="selected"' :'';
 	
-	echo '
+	return '
 	<select name="policy[sales][valid_card][no_card_depozit_method]" style="width:240px; height: 20px">
-      <option value="perc" '.$perc.'>Rezervasyon değerininin yüzdesi</option>
-      <option value="days" '.$days.'>Seçili konaklamada kişi başına geceleme</option>
-      <option value="fix" '.$fix.'>(EUR) Sabit değer</option>
+      <option value="perc" '.$perc.'>'.lang('depozit_method_perc').'</option>
+      <option value="days" '.$days.'>'.lang('depozit_method_days').'</option>
+      <option value="fix" '.$fix.'>'.lang('depozit_method_fix').'</option>
     </select>';
 }
 
