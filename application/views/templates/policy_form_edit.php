@@ -31,7 +31,7 @@
               <label for="policy_note"></label>
             </div>
             </td>
-            <td><?php echo lang('plicy_note'); ?></td>
+            <td><?php echo lang('policy_note'); ?></td>
           </tr>
           <tr>
             <td>
