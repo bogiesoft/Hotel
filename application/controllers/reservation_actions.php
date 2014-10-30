@@ -869,12 +869,12 @@ class Reservation_actions extends MY_Controller {
 			'policy_extra'	=> $extra,
 			'policy_details'=> json_encode($policy),
 			'hotel_id'		=> $hotel_id,
-			'code');
+			'code' 			=> $code);
 
 		//check if update
 		if ($this->input->post('update') == '1') {
 			$id = $this->input->post('policy_id');
-			$insert = $this->db->update('policies',$arr);
+			$insert = $this->db->update('policies',$arr,array('id'=>$id));
 		}else{
 			$insert = $this->db->insert('policies',$arr);
 			$id 	= $this->db->insert_id();
