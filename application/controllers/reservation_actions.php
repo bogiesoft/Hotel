@@ -846,6 +846,9 @@ class Reservation_actions extends MY_Controller {
 	}
 
 	function add_policy(){
+		//load language
+		$this->lang->load('reservation/policies',$this->language);
+
 		$name 	= $this->input->post('name');
 		$extra 	= $this->input->post('extra_policies');
 		$policy	= $this->input->post('policy');
@@ -858,13 +861,15 @@ class Reservation_actions extends MY_Controller {
 		$policy['extra']		= $extra;
 		$policy['description'] 	= $description;
 
-		$hotel_id = $this->session->userdata('hotel_id');
+		$hotel_id 	= $this->session->userdata('hotel_id');
+		$code 		= $this->session->userdata('code');
 
 		$arr = array(
 			'policy_name' 	=> $name,
 			'policy_extra'	=> $extra,
 			'policy_details'=> json_encode($policy),
-			'hotel_id'		=> $hotel_id);
+			'hotel_id'		=> $hotel_id,
+			'code');
 
 		//check if update
 		if ($this->input->post('update') == '1') {
@@ -877,10 +882,10 @@ class Reservation_actions extends MY_Controller {
 		
 
 		if ($insert) {
-			$this->session->set_flashdata('status_succes', 'Success');
+			$this->session->set_flashdata('status_succes', lang('success'));
 			redirect(site_url('reservation/policies/edit/'.$id));
 		}else{
-			$this->session->set_flashdata('status_error', 'Error, Try again');
+			$this->session->set_flashdata('status_error', lang('error'));
 			redirect(site_url('reservation/policies/add_new'));
 		}
 		

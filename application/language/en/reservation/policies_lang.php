@@ -46,7 +46,10 @@ $lang['depozit_method_fix'] 	= '(EUR) fix value';
 $lang['no_show_method_days']	= 'overnight(s) per person in selected accommodation';
 $lang['no_show_method_perc']	= '% off the reservation value.';
 $lang['no_show_method_fix']		= '% from guarantee value.';
-	
 
+$lang['warning_policy_id']		= 'WARNING! This policy is not belong to hotel that you are editing. Changes will be saved under <b>%s</b> property.';
+$lang['warning_wrong_policy'] 	= 'Oops. You are trying to edit a policy does not belong to you.';
+$lang['success']				= 'Success';
+$lang['error']					= 'An error occured, Please Try Again.';
 $lang['name']					= 'Name';
 $lang['save']					= 'Save';

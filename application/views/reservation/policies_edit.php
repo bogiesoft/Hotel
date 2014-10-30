@@ -1,23 +1,37 @@
 <?php $this->load->view('header'); ?>
-    <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_policy'); ?></h2>
-      <div class="breadcrumb-wrapper">
-        <span class="label"><?php echo lang('you_are_here'); ?></span>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
-          <li class="active"><?php echo lang('edit_policy'); ?></li>
-        </ol>
-      </div>
+  <div class="pageheader">
+    <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_policy'); ?></h2>
+    <div class="breadcrumb-wrapper">
+      <span class="label"><?php echo lang('you_are_here'); ?></span>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+        <li class="active"><?php echo lang('edit_policy'); ?></li>
+      </ol>
     </div>
-    <div class="contentpanel">
+  </div>
+  <div class="contentpanel">
 
-      <div class="row">
+    <div class="row">
 
-      <?php if ($this->session->flashdata('status_succes')): ?>
-        <div class="alert alert-success">
-        <?php echo $this->session->flashdata('status_succes'); ?>
+    <?php if ($this->session->flashdata('status_succes')): ?>
+      <div class="alert alert-success">
+      <?php echo $this->session->flashdata('status_succes'); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($policy->code != $this->session->userdata('code')) : ?>
+    <div id="result" class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <?php echo lang('warning_wrong_policy'); ?>
+    </div>
+    <?php else: ?>
+
+      <?php if ($policy->hotel_id != $this->session->userdata('hotel_id')) :?>
+        <div id="result" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <?php echo sprintf(lang('warning_policy_id'),$this->session->userdata('hotel_name')); ?>      
         </div>
-      <?php endif; ?>
+      <?php endif; ?>      
 
       <form method="POST" action="<?php echo site_url('reservation_actions/add_policy'); ?>">
       
@@ -25,9 +39,11 @@
       <?php $this->load->view('templates/policy_form_edit',$data); ?>
       </form>
 
-      </div><!-- row -->
+    <?php endif; // policy code check ?>
 
-    </div><!-- contentpanel -->
+    </div><!-- row -->
+
+  </div><!-- contentpanel -->
 <script type="text/javascript">
 jQuery(document).ready(function(){
   var max_fields      = 30; //maximum input boxes allowed
