@@ -484,6 +484,10 @@ class Reservation_actions extends MY_Controller {
 
 
 	function add_prices(){
+		//load language
+		$this->lang->load('reservation/set_prices',$this->language);
+
+
 		if (!$this->input->is_ajax_request()) {
 		   exit('No direct script access allowed');
 		}
@@ -520,7 +524,7 @@ class Reservation_actions extends MY_Controller {
 
 		//salaklar start date'i end date'den sonrası bir tarihe girer falan
 		if (strtotime($start_date) > strtotime($end_date)) {
-			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			echo json_encode(array('status' => 'danger','message' => lang('error_date_range')));
 			exit;
 		}
 
@@ -580,9 +584,9 @@ class Reservation_actions extends MY_Controller {
 
 
 		if ($insert) {
-			echo json_encode(array('status' => 'success','message' => 'Fiyatlar Eklendi'));
+			echo json_encode(array('status' => 'success','message' => lang('success_message')));
 		}else{
-			echo json_encode(array('status' => 'danger','message' => 'Fiyatlar Eklenemedi! Lütfen Formu Kontrol Edit tekrar deneyin.'));
+			echo json_encode(array('status' => 'danger','message' => lang('error_message')));
 		}
 
 	}
@@ -853,6 +857,7 @@ class Reservation_actions extends MY_Controller {
 		$extra 	= $this->input->post('extra_policies');
 		$policy	= $this->input->post('policy');
 
+		//create an array for translations
 		foreach ($policy['description'] as $k => $desc) {
 			$description[$desc['lang']] = $desc['desc'];
 		}

@@ -116,6 +116,8 @@ class Reservation extends MY_Controller {
 	}
 
 	function prices(){
+		//load language
+		$this->lang->load('reservation/set_prices',$this->language);
 
 		//set start date
 		if (empty($this->input->get('start_date'))) {
@@ -175,6 +177,9 @@ class Reservation extends MY_Controller {
 	}
 
 	function set_prices(){
+		//load language
+		$this->lang->load('reservation/set_prices',$this->language);
+		
 		$data['seasons'] = $this->reservation_model->get_hotel_seasons();
 		$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
 		$this->load->view('reservation/prices_add',$data);
