@@ -657,6 +657,9 @@ class Reservation_actions extends MY_Controller {
 	* Price Plans AKA Promotions
 	*/
 	function add_price_plan(){
+		//load language
+		$this->lang->load('reservation/price_plans',$this->language);
+
 		//echo '<pre>';
 		//print_r($_POST);
 		$update  	= $this->input->post('update');
@@ -733,17 +736,17 @@ class Reservation_actions extends MY_Controller {
 		//if not update redirect to plan edit page
 		if ($update == '0') {
 			if ($insert) {
-				$this->session->set_flashdata('statusSuccess', 'Promotion Added');
+				$this->session->set_flashdata('statusSuccess', lang('added_success'));
 				redirect(site_url('reservation/price_plans/edit/'.$plan_id));
 			}else{
-				$this->session->set_flashdata('statusError', 'Error!');
+				$this->session->set_flashdata('statusError', lang('added_error'));
 				redirect(site_url('reservation/price_plans/edit/'.$plan_id));
 			}
 		}else{
 			if ($insert) {
-				echo json_encode(array('status' => 'success','message' => 'Successfully Added!'));
+				echo json_encode(array('status' => 'success','message' => lang('update_success')));
 			}else{
-				echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+				echo json_encode(array('status' => 'danger','message' => lang('update_error')));
 			}
 
 		}

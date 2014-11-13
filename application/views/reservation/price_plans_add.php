@@ -2,12 +2,12 @@
   <link href="<?php echo site_url('assets/back'); ?>/css/deal.creator.css" rel="stylesheet">
 
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Price Plans </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('add_new_promotion'); ?> </h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Price Plans</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('add_new_promotion'); ?></li>
         </ol>
       </div>
     </div>
@@ -22,46 +22,46 @@
                 <input id="deal_type" type="hidden" value="" name="deal_type" />
                 <span id="simple_deal_label" class="outer_span">
                   <span class="menu_icon"></span>
-                  Basic deal
+                  <?php echo lang('basic_deal'); ?>
                   <span class="arrow_up"></span>
                 </span>
                 <span id="minimum_stay_label" class="outer_span">
                   <span class="menu_icon"></span>
-                  Minimum stay
+                  <?php echo lang('minimum_stay'); ?>
                   <span class="arrow_up"></span>
                 </span>
                 <span id="early_bird_label" class="outer_span">
                   <span class="menu_icon"></span>
-                  Early booker
+                  <?php echo lang('early_booker'); ?>
                   <span class="arrow_up"></span>
                 </span>
                 <span id="last_minute_label" class="outer_span">
                   <span class="menu_icon"></span>
-                  Last minute
+                  <?php echo lang('last_minute'); ?>
                   <span class="arrow_up"></span>
                 </span>
                 <span id="twentyfour_promotion_label" class="outer_span">
                   <span class="menu_icon"></span>
-                  24h promotion
+                  <?php echo lang('twentyfourhour'); ?>
                   <span class="arrow_up"></span>
                 </span>   
               </div>
 
               <div class="alert simple_deal explanation_header">
-                <h2>Our <strong>Basic deals</strong> are the easiest to create, just decide on the discount and the dates for the rooms you want to create a promotion for and that's it!</h2>
+                <h2><?php echo lang('basic_deal_desc'); ?></h2>
               </div>
 
               <div class="alert minimum_stay explanation_header">
-                <h2><strong>Minimum Stay</strong> deals require that the booking is for 2 or 3 nights.</h2>
+                <h2><?php echo lang('minimum_stay_desc'); ?>.</h2>
               </div>
               <div class="alert early_bird explanation_header">
-                <h2><strong>Early booker</strong> deals are for people booking very early. You can tell us how long in advance they must book - days, weeks, or months!</h2>
+                <h2><?php echo lang('early_booker_desc'); ?></h2>
               </div>
               <div class="alert last_minute explanation_header">
-                <h2><strong>Last minute</strong> deals are only available to people booking very late. Restrict it to the last few days or hours before arrival!</h2>
+                <h2><?php echo lang('last_minute_desc'); ?></h2>
               </div>
               <div class="alert twentyfour_promotion explanation_header">
-                <h2><strong>24 hour promotions</strong> are limited time offers that can only be booked on one particular day.</h2>
+                <h2><?php echo lang('twentyfourhour_desc'); ?></h2>
               </div>
 
             </div>
@@ -76,7 +76,7 @@
               <form id="add_price_plan" class="validate-form" method="POST" action="<?php echo site_url('reservation_actions/add_price_plan'); ?>">
                
               <div class="form-group">
-                <label class="col-sm-3 control-label">Set Name</label>
+                <label class="col-sm-3 control-label"><?php echo lang('set_name'); ?></label>
                   <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -89,7 +89,7 @@
 
 
                <div class="form-group">
-                <label class="col-sm-3 control-label">Deal discount</label>
+                <label class="col-sm-3 control-label"><?php echo lang('deal_discount'); ?></label>
                   <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -101,7 +101,7 @@
                       <div id="discount_input">
                         <input id="input_percent" name="promotion_discount" type="text" value="40" />%
                       </div>
-                      <small>Click and drag the slider to select your percentage discount</small>
+                      <small><?php echo lang('deal_discount_info'); ?></small>
                     </div>
                     </div>
                   </div>
@@ -111,29 +111,29 @@
 
               <hr>
               <div class="form-group">
-                <label class="col-sm-3 control-label">Active Date Range</label>
+                <label class="col-sm-3 control-label"><?php echo lang('date_range'); ?></label>
                 <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">From</label>
+                    <label class="control-label"><?php echo lang('from'); ?></label>
                     <input required type="text" name="start_date" class="form-control input-sm from_date">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">To</label>
+                    <label class="control-label"><?php echo lang('to'); ?></label>
                     <input required type="text" name="end_date" class="form-control input-sm to_date">
                   </div>
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>Date ranges that this plan is available</small>
+                 <small><?php echo lang('date_range_info'); ?></small>
                 </div>
               </div>
               <hr>
 
                <div class="form-group">
-                <label class="col-sm-3 control-label">Available Days</label>
+                <label class="col-sm-3 control-label"><?php echo lang('available_days'); ?></label>
                  <div class="row">
                 <?php foreach (days_checkbox() as $d => $day) : ?>
                 <div class="col-sm-1">
@@ -151,7 +151,7 @@
                <hr>
 
                <div class="form-group min_stay_input" style="display:none">
-                <label class="col-sm-3 control-label">Minimum Stay (Nights)</label>
+                <label class="col-sm-3 control-label"><?php echo lang('min_stay'); ?></label>
                 <div class="row">
                   <div class="col-sm-6">
                   <div class="form-group">
@@ -164,30 +164,30 @@
               
 
               <div class="form-group early_booker_input" style="display:none">
-                <label class="col-sm-3 control-label">Booking Days</label>
+                <label class="col-sm-3 control-label"><?php echo lang('booking_days'); ?></label>
                 
                 <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">From</label>
+                    <label class="control-label"><?php echo lang('from'); ?></label>
                     <input required type="text" name="booking_start" class="form-control input-sm from_date">
                   </div>
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">To</label>
+                    <label class="control-label"><?php echo lang('to'); ?></label>
                     <input required type="text" name="booking_end" class="form-control input-sm to_date">
                   </div>
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>Date ranges that guests can make reservations</small>
+                 <small><?php echo lang('booking_days_info'); ?></small>
                 </div>
                 <hr>
               </div>
 
               <div class="form-group last_minute_input" style="display:none">
-                <label class="col-sm-3 control-label">When can the deal be booked?</label>
+                <label class="col-sm-3 control-label"><?php echo lang('last_min_days'); ?></label>
                 
                 <div class="row">
                 <div class="col-sm-3">
@@ -198,8 +198,8 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                   <select class="form-control" name="last_min_val">
-                    <option value="day">Days</option>
-                    <option value="hour" selected="selected">Hours</option>
+                    <option value="day"><?php echo lang('days'); ?></option>
+                    <option value="hour" selected="selected"><?php echo lang('hours'); ?></option>
 
                   </select>
                     
@@ -207,13 +207,13 @@
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>Date ranges that guests can make reservations</small>
+                 <small><?php echo lang('last_min_info'); ?></small>
                 </div>
                 <hr>
               </div>
 
               <div class="form-group twentyfour_promotion_input" style="display:none">
-                <label class="col-sm-3 control-label">When can customers book?</label>
+                <label class="col-sm-3 control-label"><?php echo lang('twentyfour_date'); ?></label>
                 
                 <div class="row">
                 <div class="col-sm-3">
@@ -223,13 +223,13 @@
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>Customers can only book the deal on the day that you select, from 00:01 until 23:59.</small>
+                 <small><?php echo lang('twentyfour_info'); ?></small>
                 </div>
                 <hr>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Available Rooms?</label>
+                <label class="col-sm-3 control-label"><?php echo lang('available_rooms'); ?></label>
                 
                 <div class="row">
                 <div class="col-sm-3">
@@ -239,14 +239,14 @@
                 </div><!-- col-sm-6 -->
                 </div>
                 <div class="row">
-                 <small>How many rooms available? (For each rooms below)</small>
+                 <small><?php echo lang('available_rooms_info'); ?></small>
                 </div>
                 <hr>
               </div>
               
 
                <div class="form-group">
-                <label class="col-sm-3 control-label">Rooms</label>
+                <label class="col-sm-3 control-label"><?php echo lang('rooms'); ?></label>
                  <div class="row">
                 <?php foreach ($rooms as $r => $room) : ?>
                 <div class="col-sm-1">
@@ -268,7 +268,7 @@
 
               <div class="row">
               <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="Kaydet">
+              <input type="submit" class="btn btn-primary" value="<?php echo lang('save'); ?>">
               </div>
                 
                <div class="col-sm-6">

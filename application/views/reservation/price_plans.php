@@ -1,18 +1,18 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> Price Plans </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('price_plans'); ?> </h2>
       <div class="breadcrumb-wrapper">
-        <span class="label">You are here:</span>
+        <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
-          <li><a href="<?php echo site_url('dashboard'); ?>">Yönetim</a></li>
-          <li class="active">Price Plans</li>
+          <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
+          <li class="active"><?php echo lang('price_plans'); ?></li>
         </ol>
       </div>
     </div>
     
     <div class="contentpanel">
       <div class="row">
-        <a href="<?php echo site_url('reservation/price_plans/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle </a>
+        <a href="<?php echo site_url('reservation/price_plans/add_new'); ?>" class="btn btn-info pull-right"> <?php echo lang('add_new'); ?> </a>
       </div>
     
       <div class="row">
@@ -37,32 +37,32 @@
     $(document).ready(function () {
     //Localization texts
 
-          var turkishMessages = {
-              serverCommunicationError: 'Sunucu ile iletişim kurulurken bir hata oluştu.',
-              loadingMessage: 'Kayıtlar yükleniyor...',
-              noDataAvailable: 'Hiç kayıt bulunmamaktadır!',
-              addNewRecord: '+ Yeni kayıt ekle',
-              editRecord: 'Kayıt düzenle',
-              areYouSure: 'Emin misiniz?',
-              deleteConfirmation: 'Bu kayıt silinecektir. Emin misiniz?',
-              save: 'Kaydet',
-              saving: 'Kaydediyor',
-              cancel: 'İptal',
-              deleteText: 'Sil',
-              deleting: 'Siliyor',
-              error: 'Hata',
-              close: 'Kapat',
-              gotoPageLabel: 'Sayfaya Git',
-              pageSizeChangeLabel: 'Satır Sayısı',
-              cannotLoadOptionsFor: '{0} alanı için seçenekler yüklenemedi!',
-              pagingInfo: 'Toplam {2}, {0} ile {1} arası gösteriliyor',
-              canNotDeletedRecords: '{1} kayıttan {0} adedi silinemedi!',
-              deleteProggress: '{1} kayıttan {0} adedi silindi, devam ediliyor...'
+          var messages = {
+              serverCommunicationError: '<?php echo lang('server_communication_error'); ?>',
+              loadingMessage: '<?php echo lang('loading_message'); ?>',
+              noDataAvailable: '<?php echo lang('no_data'); ?>',
+              addNewRecord: '<?php echo lang('add_room'); ?>',
+              editRecord: '<?php echo lang('edit_promotion'); ?>',
+              areYouSure: '<?php echo lang('are_you_sure'); ?>',
+              deleteConfirmation: '<?php echo lang('delete_confirm'); ?>',
+              save: '<?php echo lang('jtable_save'); ?>',
+              saving: '<?php echo lang('jtable_saving'); ?>',
+              cancel: '<?php echo lang('jtable_cancel'); ?>',
+              deleteText: '<?php echo lang('jtable_delete'); ?>',
+              deleting: '<?php echo lang('jtable_deleting'); ?>',
+              error: '<?php echo lang('jtable_error'); ?>',
+              close: '<?php echo lang('jtable_close'); ?>',
+              gotoPageLabel: '<?php echo lang('jtable_gopage'); ?>',
+              pageSizeChangeLabel: '<?php echo lang('jtable_rowcount'); ?>',
+              cannotLoadOptionsFor: '<?php echo lang('jtable_page_cannot_load'); ?>',
+              pagingInfo: '<?php echo lang('jtable_page_info'); ?>',
+              canNotDeletedRecords: '<?php echo lang('jtable_cannot_delete'); ?>',
+              deleteProggress: '<?php echo lang('jtable_cannot_deleting'); ?>'
           };
 
         $('#plans').jtable({
-            messages: turkishMessages, //Lozalize
-            title: 'Promotions',
+            messages: messages, //Lozalize
+            title: '<?php echo lang('promotions'); ?>',
             paging: false, //Enable paging
             pageSize: 10, //Set page size (default: 10)
             sorting: false, //Enable sorting
@@ -80,39 +80,39 @@
                     width : '5%'
                 },
                 promotion_name: {
-                    title: 'Name',
+                    title: '<?php echo lang('name'); ?>',
                     width: '23%'
                 },
 
                 type : {
-                    title :'Type',
+                    title :'<?php echo lang('type'); ?>',
                     width : '12%',
                     display: function(data){
                       //return data.record.promotion_type;
                     
                         if (data.record.promotion_type == '1') {
-                          return 'Basic Deal';
+                          return '<?php echo lang('basic_deal'); ?>';
                         }else if(data.record.promotion_type == '2'){
-                          return 'Minimum Stay';
+                          return '<?php echo lang('minimum_stay'); ?>';
                         }else if(data.record.promotion_type == '3'){
-                          return 'Early Booker';
+                          return '<?php echo lang('early_booker'); ?>';
                         }else if(data.record.promotion_type == 4){
-                          return 'Last Minute';
+                          return '<?php echo lang('last_minute'); ?>';
                         }else if(data.record.promotion_type == 5){
-                          return '24 Hour Promotion';
+                          return '<?php echo lang('twentyfourhour'); ?>';
                         }
                         
                     }
                 },
                 promotion_discount : {
-                    title : 'Discount (%)',
+                    title : '<?php echo lang('discount'); ?>',
                 },
                 start_date : {
-                    title : 'Start Date',
+                    title : '<?php echo lang('start_date'); ?>',
                     width : '8%',
                 },
                 end_date : {
-                    title : 'End Date',
+                    title : '<?php echo lang('end_date'); ?>',
                     width : '8%',
                 },
                 detail:{

@@ -186,6 +186,8 @@ class Reservation extends MY_Controller {
 	}
 
 	function price_plans(){
+		//load language
+		$this->lang->load('reservation/price_plans',$this->language);
 
 		$uri = $this->uri->segment('3');
 
