@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
 <div class="pageheader">
-  <h2><i class="fa fa-table"></i> Rate Plans</h2>
+  <h2><i class="fa fa-table"></i> <?php echo lang('rate_plans'); ?></h2>
   <div class="breadcrumb-wrapper">
-    <span class="label">You are here:</span>
+    <span class="label"><?php echo lang('you_are_here'); ?></span>
     <ol class="breadcrumb">
-      <li><a href="index.html">Yönetim</a></li>
-      <li class="active">Rate Plans</li>
+      <li><a href="index.html"><?php echo lang('manage'); ?></a></li>
+      <li class="active"><?php echo lang('rate_plans'); ?></li>
     </ol>
   </div>
 </div>
@@ -17,20 +17,31 @@
       <div class="row">
         <form class="form-inline" method="GET">
             <div class="form-group">
-              <label class="sr-only" for="start_date">Start Date</label>
+              <label class="sr-only" for="start_date"><?php echo lang('start_date'); ?></label>
               <input type="text" name="start_date" class="form-control" id="start_date" value="<?php echo $start_date; ?>">
             </div>
             <div class="form-group">
-              <label class="sr-only" for="end_date">End Date</label>
+              <label class="sr-only" for="end_date"><?php echo lang('end_date'); ?></label>
               <input type="text" name="end_date" class="form-control" id="end_date" value="<?php echo $end_date; ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="submit" class="btn btn-primary"><?php echo lang('send'); ?></button>
           </form>
       </div>
-
       </div>
     </div>
     </div>
+
+
+      <?php if($error) : ?>
+        <div class="col-md-12 col-sm-3">
+        <div class="row">
+          <div class="alert alert-danger">
+          <?php echo $error; ?>
+          </div>
+        </div>
+        </div>
+      <?php else: ?>
+
 
       <?php //print_r($prices); ?>
       <table class="table mb30 table-condensed" id="selectable">
@@ -67,7 +78,7 @@
               </tr>
               <?php //print_r($room['prices']); exit; ?>
               <tr>
-                <th colspan="2">Best Available Rate</th>
+                <th colspan="2"><?php echo lang('best_abailable_rate'); ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['price_type']) {
                     $stoped = $price['stoped_arrival'] == '1' ? 'class="base_price tdRed"' : 'class="base_price tdGreen"';
@@ -142,6 +153,8 @@
           </tr>
         </thead>
       </table>
+
+    <?php endif; //date error ?>
 </div>
 
 <div id="modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -157,19 +170,19 @@
           <div class="row">
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">From</label>
+              <label class="control-label"><?php echo lang('from'); ?></label>
               <input required type="text" name="start_date" class="form-control input-sm from_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">To</label>
+              <label class="control-label"><?php echo lang('to'); ?></label>
               <input required type="text" name="end_date" class="form-control input-sm to_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">Stoped Arrival</label>
+              <label class="control-label"><?php echo lang('stoped_a'); ?></label>
               <div class="ckbox ckbox-danger">
                 <input type="checkbox" name="stoped_arrival" id="stoped_a" />
                 <label for="stoped_a"></label>
@@ -179,7 +192,7 @@
 
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">Stoped Departure</label>
+              <label class="control-label"><?php echo lang('stoped_d'); ?></label>
               <div class="ckbox ckbox-danger">
                 <input type="checkbox" name="stoped_departure" id="stoped_d" />
                 <label for="stoped_d"></label>
@@ -194,29 +207,29 @@
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group">
-                <label class="control-label">Min. Stay</label>
+                <label class="control-label"><?php echo lang('min_stay'); ?></label>
                 <input type="text" name="min_stay" class="form-control input-sm" id="stay_min">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-3">
               <div class="form-group">
-                <label class="control-label">Max. Stay</label>
+                <label class="control-label"><?php echo lang('max_stay'); ?></label>
                 <input type="text" name="max_stay" class="form-control input-sm" id="stay_max">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-3">
               <div class="form-group">
-                <label class="control-label">Available</label>
+                <label class="control-label"><?php echo lang('available'); ?></label>
                 <input type="text" name="available" class="form-control input-sm" id="avail">
               </div>
             </div><!-- col-sm-6 -->
 
             <div class="col-sm-3">
               <div class="form-group">
-                <label class="control-label">Price Type</label>
+                <label class="control-label"><?php echo lang('price_type'); ?></label>
                 <select class="form-control" name="price_type" id="price_type_val">
-                  <option value="1">Unit</option>
-                  <option value="2">Person</option>
+                  <option value="1"><?php echo lang('unit'); ?></option>
+                  <option value="2"><?php echo lang('person'); ?></option>
                 </select>
               </div>
             </div><!-- col-sm-6 -->
@@ -228,37 +241,37 @@
           <div class="row">
             <div class="col-sm-2">
               <div class="form-group">
-                <label class="control-label">Base</label>
+                <label class="control-label"><?php echo lang('base'); ?></label>
                 <input type="text" name="base_price" class="form-control input-sm" id="price_base">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2">
               <div class="form-group">
-                <label class="control-label">SINGLE</label>
+                <label class="control-label"><?php echo lang('single'); ?></label>
                 <input type="text" name="single_price" class="form-control input-sm" id="price_single">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2">
               <div class="form-group">
-                <label class="control-label">DOUBLE</label>
+                <label class="control-label"><?php echo lang('double'); ?></label>
                 <input type="text" name="double_price" class="form-control input-sm" id="price_double">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2 extra_prices1">
               <div class="form-group">
-                <label class="control-label">TRIPLE</label>
+                <label class="control-label"><?php echo lang('triple'); ?></label>
                 <input type="text" name="triple_price" class="form-control input-sm" id="price_triple">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2 extra_prices2">
               <div class="form-group">
-                <label class="control-label">EXTRA</label>
+                <label class="control-label"><?php echo lang('extra'); ?></label>
                 <input type="text" name="extra_price" class="form-control input-sm" id="price_extra">
               </div>
             </div><!-- col-sm-6 -->
             <div class="col-sm-2 child_price">
               <div class="form-group">
-                <label class="control-label">CHILD</label>
+                <label class="control-label"><?php echo lang('child'); ?></label>
                 <input type="text" name="child_price" class="form-control input-sm" id="price_child">
               </div>
             </div><!-- col-sm-6 -->
@@ -274,8 +287,8 @@
       <div class="modal-footer">
         <input type="hidden" name="room_id" id="roomid">
         <input type="hidden" name="changed" id="formchanged" value="0">
-        <button type="button" class="btn btn-default" id="closeModal">Close</button>
-        <button id="savebutton" type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" id="closeModal"><?php echo lang('close'); ?></button>
+        <button id="savebutton" type="submit" class="btn btn-primary"><?php echo lang('save'); ?></button>
       </div>
       </form>
     </div>
@@ -288,7 +301,7 @@
     <form id="save_by_promo">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo lang('close'); ?></span></button>
         <h4 class="modal-title" id="myModalLabel"><span class="roomname"></span> > <span class="promotion_name"></span></h4>
       </div>
       <div class="modal-body">
@@ -296,19 +309,19 @@
           <div class="row">
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">From</label>
+              <label class="control-label"><?php echo lang('from'); ?></label>
               <input required type="text" name="start_date" class="form-control input-sm from_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">To</label>
+              <label class="control-label"><?php echo lang('to'); ?></label>
               <input required type="text" name="end_date" class="form-control input-sm to_date">
             </div>
           </div><!-- col-sm-6 -->
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">Available</label>
+              <label class="control-label"><?php echo lang('available'); ?></label>
                 <input type="text" name="promo_available" class="form-control input-sm promo_available" />
                 <label for="promo_available"></label>
               </div>
@@ -316,7 +329,7 @@
 
           <div class="col-sm-3">
             <div class="form-group">
-              <label class="control-label">Stoped Arrival</label>
+              <label class="control-label"><?php echo lang('stoped_a'); ?></label>
               <div class="ckbox ckbox-danger">
                 <input type="checkbox" name="promo_stoped" id="promo_stoped" />
                 <label for="promo_stoped"></label>
@@ -338,8 +351,8 @@
         <input type="hidden" name="promotion_id" class="promo_id">
         <input type="hidden" name="promotion_room_id" class="promo_room_id">
         <input type="hidden" name="promo_changed" id="promoFromChanged" value="0">
-        <button type="button" class="btn btn-default" id="closePromoModal">Close</button>
-        <button id="savebutton" type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" id="closePromoModal"><?php echo lang('close'); ?></button>
+        <button id="savebutton" type="submit" class="btn btn-primary"><?php echo lang('save'); ?></button>
       </div>
       </form>
     </div>

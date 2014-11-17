@@ -133,6 +133,12 @@ class Reservation extends MY_Controller {
 			$end_date	= $this->input->get('end_date');
 		}
 
+		$data['error'] = false;
+		if (strtotime($start_date) > strtotime($end_date)) {
+			$data['error'] = lang('date_error');
+		}
+
+
 		$rooms = $this->reservation_model->get_hotel_rooms();
 		$arr = array();
 		foreach (date_range($start_date,$end_date) as $k => $d) {

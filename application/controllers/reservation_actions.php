@@ -592,11 +592,14 @@ class Reservation_actions extends MY_Controller {
 	}
 
 	function price_grid_update_by_room(){
+		//load language
+		$this->lang->load('reservation/set_prices',$this->language);
+
 		$start_date		= $this->input->post('start_date');
 		$end_date		= $this->input->post('end_date');
 
 		if (strtotime($start_date) > strtotime($end_date)) {
-			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			echo json_encode(array('status' => 'danger','message' => lang('date_error')));
 			exit;
 		}
 		
@@ -622,9 +625,9 @@ class Reservation_actions extends MY_Controller {
 		}
 
 		if ($update) {
-			echo json_encode(array('status' => 'success','message' => 'Success'));
+			echo json_encode(array('status' => 'success','message' => lang('success_message')));
 		}else{
-			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+			echo json_encode(array('status' => 'danger','message' => lang('error_message')));
 		}
 		
 		//echo '<pre>';
@@ -754,12 +757,15 @@ class Reservation_actions extends MY_Controller {
 	}
 
 	function price_grid_update_promo(){
+		//load language
+		$this->lang->load('reservation/set_prices',$this->language);
+
 
 		$start_date 	= $this->input->post('start_date');
 		$end_date 		= $this->input->post('end_date');
 
 		if (strtotime($start_date) > strtotime($end_date)) {
-			echo json_encode(array('status' => 'danger','message' => 'Başlangıç tarihi, bitiş tarihinden önce olmak zorunda. Muck.'));
+			echo json_encode(array('status' => 'danger','message' => lang('date_error')));
 			exit;
 		}
 
@@ -781,9 +787,9 @@ class Reservation_actions extends MY_Controller {
 		}
 
 		if ($update) {
-			echo json_encode(array('status' => 'success','message' => 'Success!'));
+			echo json_encode(array('status' => 'success','message' => lang('success_message')));
 		}else{
-			echo json_encode(array('status' => 'danger','message' => 'Error! Please Try Again.'));
+			echo json_encode(array('status' => 'danger','message' => lang('error_message')));
 		}
 
 	}
