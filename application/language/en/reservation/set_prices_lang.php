@@ -40,7 +40,7 @@ $lang['success_message'] 	= 'Prices updated!';
 $lang['error_message'] 		= 'Error! Somethings happened. Please try again.';
 
 
-$lang['date_error']	= 'Start date can not be set lower than end date.';
+$lang['date_error']	= '<b>Start date</b> can not be set lower than <b>end date.</b>';
 
 $lang['close']		= 'Close';
 $lang['save']		= 'Save';

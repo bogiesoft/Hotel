@@ -78,7 +78,7 @@
               </tr>
               <?php //print_r($room['prices']); exit; ?>
               <tr>
-                <th colspan="2"><?php echo lang('best_abailable_rate'); ?></th>
+                <th colspan="2"><?php echo lang('best_available_rate'); ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   if (@$price['price_type']) {
                     $stoped = $price['stoped_arrival'] == '1' ? 'class="base_price tdRed"' : 'class="base_price tdGreen"';
