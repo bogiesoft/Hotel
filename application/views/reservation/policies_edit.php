@@ -34,7 +34,7 @@
       <?php endif; ?>      
 
       <form method="POST" action="<?php echo site_url('reservation_actions/add_policy'); ?>">
-      
+
       <?php $data['p'] = json_decode($policy->policy_details);?>
       <?php $this->load->view('templates/policy_form_edit',$data); ?>
       </form>
