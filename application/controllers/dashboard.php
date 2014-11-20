@@ -12,7 +12,7 @@ class Dashboard extends MY_Controller {
 	}
 
 	public function index(){
-		//echo $this->session->userdata('user_id');
+		echo $this->session->userdata('user_id');
 
 		$this->load->view('dashboard');
 	}
