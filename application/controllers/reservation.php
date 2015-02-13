@@ -178,6 +178,7 @@ class Reservation extends MY_Controller {
 		$data['end_date']	= $end_date;
 		$data['data'] 		= $arr;
 
+		
 		$this->load->view('reservation/prices',$data);
 		
 	}
