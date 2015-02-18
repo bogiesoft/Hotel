@@ -22,40 +22,56 @@ class Hotel extends CI_Controller {
 			exit('Hotel not found.');
 		}
 
+		//options
 		$default_lang = $this->session->userdata('default_lang') ? $this->session->userdata('default_lang') : 'en';
-
 		$start_date = $this->input->get('checkin') ? $this->input->get('checkin') : date('Y-m-d');
 		$end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('Y-m-d');
 		$adults		= $this->input->get('adults') ? $this->input->get('adults') : '1';
 		$children	= $this->input->get('child') ? $this->input->get('child') : '0';
 		$nights 	= 1;
 		
+		//salaklar start date'i end date'den sonrası bir tarihe girerse falan
+		if (strtotime($start_date) > strtotime($end_date)) {
+			exit('Checkout Date Error');
+		}
+
+		//salaklar geçmişe dönük rezervasyon yapmak isterse
+		if (strtotime($start_date) < strtotime(date('Y-m-d'))) {
+			exit('Checkin Date Error');
+		}
 
 		//get rooms
 		$search = array('child' => $children,
 			'adults' => $adults,
 			'language' => $default_lang);
 
-
+		$arr = array();
 		$rooms = $this->front_model->get_hotel_rooms($hotel_id,$search);
 
-		$arr = array();
-		foreach (date_range($start_date,$end_date) as $k => $d) {
+		if (FALSE === $rooms) {
+			$arr['rooms'] = '';
+		}else{
+			
+			foreach (date_range($start_date,$end_date) as $k => $d) {
 
-			$arr['dates'][$d] = $d;
-			$nights = count($arr['dates']);
-			foreach ($rooms as $key => $r) {
-				$arr['rooms'][$r->id]['name'] 		= $r->name;
-				$arr['rooms'][$r->id]['title'] 		= $r->title;
-				$arr['rooms'][$r->id]['content'] 	= $r->content;
-				$arr['rooms'][$r->id]['photos'] 	= $this->front_model->get_room_photos($r->id);
-				$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
-				$arr['rooms'][$r->id]['prices'][$d]['room_name'] = $r->name;
-				$arr['rooms'][$r->id]['prices'][$d]['room_id'] = $r->id;
-				$arr['rooms'][$r->id]['prices'][$d]['room_capacity'] = $r->capacity;
-				$arr['rooms'][$r->id]['prices'][$d]['room_child'] = $r->min_child;
+				$arr['dates'][$d] = $d;
+				//set nights
+				$nights = count($arr['dates']);
+				foreach ($rooms as $key => $r) {
+
+					$arr['rooms'][$r->id]['name'] 		= $r->name;
+					$arr['rooms'][$r->id]['title'] 		= $r->title;
+					$arr['rooms'][$r->id]['content'] 	= $r->content;
+					$arr['rooms'][$r->id]['photos'] 	= $this->front_model->get_room_photos($r->id);
+					$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
+					$arr['rooms'][$r->id]['prices'][$d]['room_name'] = $r->name;
+					$arr['rooms'][$r->id]['prices'][$d]['room_id'] = $r->id;
+					$arr['rooms'][$r->id]['prices'][$d]['room_capacity'] = $r->capacity;
+					$arr['rooms'][$r->id]['prices'][$d]['room_child'] = $r->min_child;
+				}
 			}
 		}
+		
 
 
 		//get promotions
@@ -75,15 +91,19 @@ class Hotel extends CI_Controller {
 			$arr['promotions'] 	= $promotion;
 		}
 
-
+		$data['options'] 		= array(
+			'nights' => $nights,
+			'adults'=>$adults,
+			'children'=>$children,
+			'checkin'=>$start_date,
+			'checkout'=>$end_date);
 
 		$data['hotel_info'] 	= $hotel;
 		$data['rooms'] 			= $arr['rooms'];
 		$data['promotion'] 		= $arr['promotions'];
 
-		echo $nights;
 		echo '<pre>';
-		print_r($arr);
+		print_r($data);
 
 	}
 

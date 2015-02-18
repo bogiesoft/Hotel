@@ -119,6 +119,12 @@ class Reservation extends MY_Controller {
 		//load language
 		$this->lang->load('reservation/set_prices',$this->language);
 
+		//load user agent
+		$this->load->library('user_agent');
+
+		//set max row for table
+		$rowlimit = $this->agent->is_mobile() ? '5' : '14';
+
 		//set start date
 		if (empty($this->input->get('start_date'))) {
 			$start_date = date('Y-m-d', strtotime('-1 day', time()));
@@ -128,7 +134,7 @@ class Reservation extends MY_Controller {
 
 		//set end date
 		if (empty($this->input->get('end_date'))) {
-			$end_date = date('Y-m-d', strtotime('+14 day', time()));
+			$end_date = date('Y-m-d', strtotime('+'.$rowlimit.' day', time()));
 		}else{
 			$end_date	= $this->input->get('end_date');
 		}
@@ -176,6 +182,7 @@ class Reservation extends MY_Controller {
 
 		$data['start_date'] = $start_date;
 		$data['end_date']	= $end_date;
+		$data['rowlimit']	= $rowlimit;
 		$data['data'] 		= $arr;
 
 		

@@ -76,6 +76,16 @@
       </div>
       -->
 
+      <div class="header">
+        <ul class="headermenu">
+          <li>
+            <div class="btn-group">
+            <a class="btn btn-white dropdown-toggle">Settings</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
       <div class="header-right">
         <ul class="headermenu">
 

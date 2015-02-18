@@ -64,7 +64,7 @@
         <tbody>
             <?php foreach ($data['rooms'] as $k => $room):?>
               <tr>
-                <th colspan="2" class="tdRoomName" data-name="<?php echo $room['name']; ?>"><?php echo $room['name']; ?></th>
+                <th colspan="2" class="tdRoomName fixed-" data-name="<?php echo $room['name']; ?>"><?php echo $room['name']; ?></th>
                 <?php foreach ($room['prices'] as $day => $price) {
                   //print_r($price); exit;
                   if (@$price['base_price']) {
@@ -137,7 +137,7 @@
 
         </tbody>
 
-        <thead>
+        <tfoot>
           <tr>
             <th></th>
             <th></th>
@@ -151,7 +151,7 @@
             </th>
             <?php endforeach; ?>
           </tr>
-        </thead>
+        </tfoot>
       </table>
 
     <?php endif; //date error ?>
@@ -367,8 +367,19 @@
   var current_url = '<?php echo current_url(); ?>'; 
 </script>
 <script src="<?php echo site_url('assets/jtable'); ?>/jquery-ui.min.js"></script>
+<script src="<?php echo site_url('assets/back/js'); ?>/table-scroll.min.js"></script>
 
 <script type="text/javascript">
+
+/*
+$('.table').table_scroll({
+    fixedColumnsLeft: 2,
+    columnsInScrollableArea: <?php echo $rowlimit; ?>,
+    rowsInScrollableArea :100
+});
+*/
+
+
 jQuery(document).ready(function(){
   //datepicker
   jQuery('#start_date').datepicker({ dateFormat: 'yy-mm-dd' });
@@ -378,10 +389,10 @@ jQuery(document).ready(function(){
 
 //selectable td
 $(function() {
-  $("#selectable").bind("mousedown", function(e) {
+  $("tbody>tr").bind("mousedown", function(e) {
       e.metaKey = true;
   }).selectable({
-    filter:'td',
+    filter:'td:not(.sg-v-scroll-cell)',
     tolerance :'touch',
     selected: function() {
        var days = [];
@@ -390,8 +401,8 @@ $(function() {
           days.push(day);
        });
 
-       jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
-       jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
+       jQuery('.from_date').datepicker({ dateFormat: 'yy-mm-dd' });
+       jQuery('.to_date').datepicker({ dateFormat: 'yy-mm-dd' });
        
        var start_date = days['0'];
        var end_date   = days[days.length-1];
@@ -451,7 +462,7 @@ $(function() {
 
        $('#modal').modal();
       }//if base price modify modal end
-      else{
+      else if ($('.ui-selected').hasClass('promotion')){
        var stoped           = $('.ui-selected').data('stoped');
        var promotion_name   = $('.ui-selected').data('promo-name');
        var promotion_id     = $('.ui-selected').data('promo-id');
@@ -470,7 +481,9 @@ $(function() {
        //show promotion modal
        $('#promo_modal').modal();
       }//if promotion price modify modal end
-
+      else{
+        $('td').removeClass('ui-selectee ui-selected');
+      }
 
      }
   });
@@ -590,6 +603,7 @@ $(function() {
   });
 
 });
+
 
 /*
 //disable left panel to view table wide

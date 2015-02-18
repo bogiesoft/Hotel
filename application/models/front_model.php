@@ -43,9 +43,14 @@ class Front_Model extends CI_Model{
 		GROUP BY
 		    r.id
 		    ORDER BY
-		    r.id")->result();
+		    r.id");
 
-		return $rooms;
+		if ($rooms->num_rows() > 0) {
+			return $rooms->result();
+		}else{
+			return false;
+		}
+		
 	}
 
 
