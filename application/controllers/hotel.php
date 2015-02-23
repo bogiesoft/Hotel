@@ -73,6 +73,7 @@ class Hotel extends CI_Controller {
 					$arr['rooms'][$r->id]['title'] 		= $r->title;
 					$arr['rooms'][$r->id]['content'] 	= $r->content;
 					$arr['rooms'][$r->id]['units'] 		= $r->room_units;
+					$arr['rooms'][$r->id]['max_capacity']= $r->max_capacity;
 					$arr['rooms'][$r->id]['photos'] 	= $this->front_model->get_room_photos($r->id);
 					$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
 					$arr['rooms'][$r->id]['prices'][$d]['room_name'] = $r->name;

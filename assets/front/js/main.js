@@ -198,4 +198,33 @@ $(function() {
     $("#reserve").click(function(){
         $("#ddd").click();
     });
+
+    $('#persons').change(function(e){
+        e.preventDefault();
+        var max_person = $(this).val();
+        if (max_person ==0) {
+            $('.max-person').slideDown();
+        }else{
+            //burası daha mantıklı
+            $('.max-person').slideDown();
+            $('.max-person:not(.max-'+max_person+')').slideUp();
+            /* çok saçma oldu bu
+            $('.max-person').each(function(){
+                //console.log(this);
+                if (true == $(this).hasClass('max-'+max_person)) {
+                    $('.max-'+max_person).slideDown();
+                    $('.max-person:not(.max-'+max_person+')').slideUp();
+                    //console.log('.max-'+max_person+'-shown');
+                }else{
+                    $('.max-'+max_person).slideUp();
+                    $('.max-person:not(.max-'+max_person+')').slideDown();
+                    //console.log('.max-'+max_person+'-hidden');
+                };
+            });
+            */
+            
+        }
+        
+    });
+
 });
