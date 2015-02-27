@@ -138,6 +138,7 @@ class Reservation_actions extends MY_Controller {
 		$code 		= $this->session->userdata('code');
 		$hotel_id 	= $this->session->userdata('hotel_id');
 
+		
 		$arr = array(
 			'name' 			=> $this->input->post('name'),
 			'capacity' 		=> $this->input->post('capacity'),
@@ -145,9 +146,7 @@ class Reservation_actions extends MY_Controller {
 			'max_capacity' 	=> $this->input->post('max_capacity'),
 			'min_adult' 	=> $this->input->post('min_adult'),
 			'max_adult' 	=> $this->input->post('max_adult'),
-			'min_child' 	=> $this->input->post('min_child'),
 			'max_child' 	=> $this->input->post('max_child'),
-			'child_age' 	=> $this->input->post('child_age'),
 			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
 			'hotel_id'		=> $hotel_id,
 			'code'			=> $code);
@@ -157,6 +156,8 @@ class Reservation_actions extends MY_Controller {
 			$room_id = $this->input->post('room_id');
 
 			$update = $this->db->update('rooms',$arr,array('id' => $room_id));
+			
+
 			//diğer dillerdeki açıklamalar
 			$this->db->delete('room_contents',array('room_id'=>$room_id));
 			$description	= $this->input->post('description');
@@ -169,6 +170,22 @@ class Reservation_actions extends MY_Controller {
 					'room_id'	=> $room_id,
 					'hotel_id'	=> $hotel_id));
 			}
+
+			//children yaşlarını ekle
+			if ($arr['max_child'] != '0') {
+				$this->db->delete('room_children',array('room_id'=> $room_id));
+				$children = $this->input->post('child_age');
+
+				foreach ($children as $key => $child) {
+					$this->db->insert('room_children',array(
+						'room_id' => $room_id,
+						'child_id' => $key,
+						'child_min' => $child['min'],
+						'child_max'	=> $child['max']));
+				}
+
+			}
+			
 
 			if ($update) {
 				$this->session->set_flashdata('success',lang('update_success'));
@@ -197,6 +214,22 @@ class Reservation_actions extends MY_Controller {
 					'room_id'	=> $room_id,
 					'hotel_id'	=> $hotel_id));
 			}
+
+			//children yaşlarını ekle
+			if ($arr['max_child'] != '0') {
+				$this->db->delete('room_children',array('room_id'=> $room_id));
+				$children = $this->input->post('child_age');
+
+				foreach ($children as $key => $child) {
+					$this->db->insert('room_children',array(
+						'room_id' => $room_id,
+						'child_id' => $key,
+						'child_min' => $child['min'],
+						'child_max'	=> $child['max']));
+				}
+
+			}
+
 
 			if ($insert) {
 				$this->session->set_flashdata('success',lang('added_success'));
@@ -553,7 +586,7 @@ class Reservation_actions extends MY_Controller {
 				'double_price'	=> $double_price,
 				'triple_price'	=> $triple_price,
 				'extra_adult'	=> $extra_adult,
-				'child_price'	=> $child_price,
+				'child_price'	=> json_encode($child_price),
 				'min_stay'		=> $min_stay,
 				'max_stay'		=> $max_stay,
 				'code'			=> $code);
@@ -914,4 +947,11 @@ class Reservation_actions extends MY_Controller {
 		print json_encode($jTableResult);
 	}
 
+	function room_children(){
+		$room_id = $this->input->get('id');
+		$this->load->model('reservation_model');
+		$child = $this->reservation_model->room_children($room_id);
+
+		echo json_encode($child);
+	}
 }

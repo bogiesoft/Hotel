@@ -105,27 +105,14 @@
               </div>
               </div>
 
-               <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo lang('kids'); ?></label>
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('max_kid'); ?></label>
                  <div class="row">
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <label class="control-label"><?php echo lang('min_kid'); ?></label>
-                      <input type="text" name="min_child" value="<?php echo $room->min_child;?>" value="0" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label"><?php echo lang('max_kid'); ?></label>
-                      <input type="text" name="max_child" value="<?php echo $room->max_child;?>" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label"><?php echo lang('kid_age'); ?></label>
-                      <select name="child_age" class="form-control input-sm">
-                      <?php for ($i=0; $i <=18 ; $i++) {
-                        $selected = $room->child_age == $i ? 'selected="selected"' :'';
+                      <select name="max_child" class="form-control input-sm" onclick="children_options(this.value)">
+                      <?php for ($i=0; $i <=4 ; $i++) {
+                        $selected = $room->max_child == $i ? 'selected="selected"' :'';
                         echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
                       }
                       ?>
@@ -133,7 +120,44 @@
                     </div>
                   </div><!-- col-sm-6 -->
                   </div>
+
+
+                  <div id="child-ages" <?php echo $room->max_child == 0 ? 'style="display:none"' : ''; ?>>
+                  <label class="col-sm-3 control-label"><?php echo lang('children_ages'); ?></label>
+                  <div id="child-ages-content"></div>
+                  <?php if($room->max_child != '0') : ?>
+                    <div class="row" id="child-content">
+                    <?php //echo '<pre>'; print_r($children); exit; 
+                    foreach ($children as $key => $child) : ?>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <div class="row">
+                          <div class="col-sm-4 col-md-3">
+                          <select name="child_age[<?php echo $key; ?>][min]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="" data-original-title="Child <?php echo $key; ?> Min. Age">
+                          <?php for ($i=0; $i <= 18; $i++) { $selected = $child->child_min == $i ? 'selected="selected"' :''; ?>
+                            <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          </div>
+
+                          <div class="col-sm-4 col-md-3">
+                          <select name="child_age[<?php echo $key; ?>][max]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="" data-original-title="Child <?php echo $key; ?> Max. Age">
+                          <?php for ($i=0; $i <= 18; $i++) { $selected = $child->child_max == $i ? 'selected="selected"' :''; ?>
+                            <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          </div>
+                          </div>
+                        </div>
+                      </div><!-- col-sm-6 -->
+                    <?php endforeach; ?>
+                    </div>
+                  <?php endif; ?>
+
+                  </div>
+
               </div>
+
 
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('room_specs'); ?></label>
@@ -316,6 +340,7 @@ jQuery(document).ready(function(){
 
   // Tooltip
   jQuery('.tooltips').tooltip({ container: 'body'});
+  $("[data-toggle='tooltip']").tooltip();
 
   var max_fields      = 30; //maximum input boxes allowed
   var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -467,6 +492,51 @@ function delete_photos(){
       $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
   } 
 
+
+function children_options(cnt){
+  //clear content
+  $('#child-content').remove();
+    if (cnt != 0) {
+
+      $('#child-ages').slideDown();
+
+      var ages = '';
+      for (i = 0; i <= 18; i++) {
+        ages +=("<option value="+i+"> " + i + "</option>");
+      }
+ 
+
+      html = '<div class="row" id="child-content">';
+
+      for (i = 1; i <= cnt; i++) {
+        html +='<div class="col-sm-2">'+
+          '<div class="form-group">'+
+          '<div class="row">'+
+          '<div class="col-sm-4 col-md-3">'+
+          '<select name="child_age['+i+'][min]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Child '+i+' Min. Age">'+
+          ages
+          +'</select>'+
+          '</div>'+
+          '<div class="col-sm-4 col-md-3">'+
+          '<select name="child_age['+i+'][max]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Child '+i+' Max. Age">'+
+          ages
+          +'</select>'+
+          '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div><!-- col-sm-6 -->';
+      };
+
+      html += '<div>';
+
+    $('#child-ages-content').after(html);
+    $("[data-toggle='tooltip']").tooltip();
+
+    }else{
+       $('#child-ages').slideUp();
+    };
+
+}
 
 </script>
 <?php $this->load->view('footer'); ?>

@@ -22,6 +22,7 @@ $lang['kids']			= 'Children';
 $lang['min_kid']		= 'Min. Children';
 $lang['max_kid']		= 'Max. Children';
 $lang['kid_age']		= 'Max. Child Age';
+$lang['children_ages']	= 'Children Ages';
 $lang['room_specs']		= 'Room Ameinities';
 
 $lang['add_field']		= 'Add Field';

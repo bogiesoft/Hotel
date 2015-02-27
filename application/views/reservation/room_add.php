@@ -91,25 +91,12 @@
               </div>
 
                <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo lang('kids'); ?></label>
+                <label class="col-sm-3 control-label"><?php echo lang('max_kid'); ?></label>
                  <div class="row">
                   <div class="col-sm-2">
                     <div class="form-group">
-                      <label class="control-label"><?php echo lang('min_kid'); ?></label>
-                      <input type="text" name="min_child" value="0" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label"><?php echo lang('max_kid'); ?></label>
-                      <input type="text" name="max_child" value="0" class="form-control input-sm">
-                    </div>
-                  </div><!-- col-sm-6 -->
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label class="control-label"><?php echo lang('kid_age'); ?></label>
-                      <select name="child_age" class="form-control input-sm">
-                      <?php for ($i=0; $i <=18 ; $i++) { 
+                      <select name="max_child" class="form-control input-sm" onclick="children_options(this.value)">
+                      <?php for ($i=0; $i <=4 ; $i++) { 
                         echo '<option value="'.$i.'">'.$i.'</option>';
                       }
                       ?>
@@ -117,6 +104,12 @@
                     </div>
                   </div><!-- col-sm-6 -->
                   </div>
+                  <div id="child-ages" style="display:none">
+                  <label class="col-sm-3 control-label"><?php echo lang('children_ages'); ?></label>
+                  <div id="child-ages-content"></div>
+
+                  </div>
+
               </div>
 
               <div class="form-group">
@@ -219,7 +212,17 @@ jQuery(document).ready(function(){
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('language'); ?></label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('name'); ?></label><div class="col-sm-6"><input type="text" name="description['+x+'][title]" placeholder="Name" class="form-control input-sm"/></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('description'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">'+
+          '<?php echo lang('language'); ?></label><div class="col-sm-2">'+
+          '<select name="description['+x+'][lang]" size="1" class="form-control input-sm">'+
+          '<?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>">'+
+          '<?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4">'+
+          '<a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div>'+
+          '<div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('name'); ?></label>'+
+          '<div class="col-sm-6"><input type="text" name="description['+x+'][title]" placeholder="Name" class="form-control input-sm"/></div>'+
+          '</div><div class="form-group"><label class="col-sm-3 control-label">'+
+          '<?php echo lang('description'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div>'+
+          '</div><hr></div>';
           $(wrapper).append(html); //add input box
       }
   });
@@ -228,7 +231,55 @@ jQuery(document).ready(function(){
       e.preventDefault(); $(this).closest('#item').remove(); x--;
   })
 
+  
+
 });
+
+
+function children_options(cnt){
+  //clear content
+  $('#child-content').remove();
+    if (cnt != 0) {
+
+      $('#child-ages').slideDown();
+
+      var ages = '';
+      for (i = 0; i <= 18; i++) {
+        ages +=("<option value="+i+"> " + i + "</option>");
+      }
+ 
+
+      html = '<div class="row" id="child-content">';
+
+      for (i = 1; i <= cnt; i++) {
+        html +='<div class="col-sm-2">'+
+          '<div class="form-group">'+
+          '<div class="row">'+
+          '<div class="col-sm-4 col-md-3">'+
+          '<select name="child_age['+i+'][min]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Child '+i+' Min. Age">'+
+          ages
+          +'</select>'+
+          '</div>'+
+          '<div class="col-sm-4 col-md-3">'+
+          '<select name="child_age['+i+'][max]" class="form-control input-sm" style="width:60px" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Child '+i+' Max. Age">'+
+          ages
+          +'</select>'+
+          '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div><!-- col-sm-6 -->';
+      };
+
+      html += '<div>';
+
+    $('#child-ages-content').after(html);
+    $("[data-toggle='tooltip']").tooltip();
+
+    }else{
+       $('#child-ages').slideUp();
+    };
+
+}
 
 </script>
 <?php $this->load->view('footer'); ?>

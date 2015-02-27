@@ -74,12 +74,13 @@
                 <select class="form-control" name="room_id" onclick="room_type(this.value)">
                 <?php $capacity = ''; ?>
                 <?php foreach ($rooms as $key => $room) : ?>
-                  <option id="room<?php echo $room->id; ?>" value="<?php echo $room->id; ?>" data-capacity="<?php echo $room->capacity; ?>" data-child="<?php echo $room->min_child; ?>">
+                  <option id="room<?php echo $room->id; ?>" value="<?php echo $room->id; ?>" data-capacity="<?php echo $room->capacity; ?>" data-child="<?php echo $room->max_child; ?>">
                     <?php echo $room->name; ?>
                   </option>
                 <?php 
                 $capacity[$key]['capacity'] = $room->capacity;
-                $capacity[$key]['child'] = $room->min_child;
+                $capacity[$key]['child'] = $room->max_child;
+                $capacity[$key]['room'] = $room->id;
                 ?>
                 <?php endforeach; ?>
                 </select>
@@ -159,6 +160,15 @@
                 <input type="text" name="triple_price" value="" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
+
+            <?php 
+            if ($capacity['0']['capacity'] > 3) {
+              $display = '';
+            }else{
+              $display = 'style="display:none"';
+            }
+            ?>
+
             <div class="col-sm-1 extra_prices1" <?php echo $display; ?>>
               <div class="form-group">
                 <label class="control-label"><?php echo lang('extra'); ?></label>
@@ -167,20 +177,21 @@
             </div><!-- col-sm-6 -->
           
             </div><!-- person price end -->
+            <div id="child-prices"></div>
+
             <?php 
-            if ($capacity['0']['child'] > 0) {
-              $display = '';
-            }else{
-              $display = 'style="display:none"';
-            }
-            ?>
-            <div class="col-sm-1 child_price" <?php echo $display; ?>>
+            if ($capacity['0']['child'] > 0) : ?>
+            <?php foreach (room_children($capacity['0']['room']) as $key => $child) : ?>
+            <div class="col-sm-1 child_price">
               <div class="form-group">
-                <label class="control-label"><?php echo lang('child'); ?></label>
-                <input type="text" name="child_price" class="form-control input-sm">
+                <label class="control-label"><?php echo $child->child_min.'-'.$child->child_max; ?></label>
+                <input type="hidden" name="child_price[<?php echo $key; ?>][min]" value="<?php echo $child->child_min; ?>">
+                <input type="hidden" name="child_price[<?php echo $key; ?>][max]" value="<?php echo $child->child_max; ?>">
+                <input type="text" name="child_price[<?php echo $key; ?>][price]" class="form-control input-sm">
               </div>
             </div><!-- col-sm-6 -->
-
+            <?php endforeach; ?>
+            <?php endif; ?>
             </div>
           </div> <!-- static price end -->
 
@@ -325,14 +336,36 @@ function room_type(id){
   var capacity  = $('#room'+id).data('capacity');
   var child     = $('#room'+id).data('child');
 
-  if (capacity<3){
-    $("div.extra_prices0, div.extra_prices1, div.extra_prices2").hide();
+  if (capacity<=2){
+    $("div.extra_prices0, div.extra_prices1").hide();
+  }else if(capacity==3){
+    $("div.extra_prices0").show();
   }else{
-    $("div.extra_prices0, div.extra_prices1, div.extra_prices2").show();
+    $("div.extra_prices0, div.extra_prices1").show();
   };
 
   if (child>0){
-    $('.child_price').show();
+    $('.child_price').remove();
+    var html = '';
+    $.getJSON( base_url + "reservation_actions/room_children?id="+id).done(function(data){
+      //genereate html for children prices
+      $.each(data,function(i,item){
+        html += '<div class="col-sm-1 child_price">'+
+              '<div class="form-group">'+
+                '<label class="control-label">'+item.child_min+'-'+item.child_max+'</label>'+
+                '<input type="hidden" name="child_price['+i+'][min]" value="'+item.child_min+'">'+
+                '<input type="hidden" name="child_price['+i+'][max]" value="'+item.child_max+'">'+
+                '<input type="text" name="child_price['+i+'][price]" class="form-control input-sm">'+
+              '</div>'+
+            '</div><!-- col-sm-6 -->';
+      });
+      
+      $('#child-prices').after(html);
+
+    });
+    
+
+    //$('.child_price').show();
   }else{
     $('.child_price').hide();
   };

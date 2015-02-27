@@ -31,6 +31,22 @@ class Reservation_Model extends CI_Model
 
 	function room_photos($id){
 		return $this->db->query("SELECT * FROM room_photos WHERE room_id='$id' ORDER BY id DESC")->result();	
+	}
+
+	function room_children($id){
+		$db = $this->db->query("SELECT * FROM room_children WHERE room_id='$id' ORDER BY child_id");
+
+		if ($db->num_rows() > 0) {
+			$child = array();
+			foreach ($db->result() as $key => $value) {
+				$child[$value->child_id] = $value;
+			}
+			return $child;
+
+		}
+		else{
+			return false;
+		}
 	}	
 
 	function extra_details($id){
@@ -43,8 +59,7 @@ class Reservation_Model extends CI_Model
 
 	function get_hotel_rooms(){
 		$hotel_id = $this->session->userdata('hotel_id');
-		$rooms = $this->db->query("SELECT * FROM rooms WHERE hotel_id=$hotel_id order by id")->result();
-
+		$rooms = $this->db->query("SELECT id,name,capacity,min_child,max_child FROM rooms WHERE hotel_id=$hotel_id order by id")->result();
 		return $rooms;
 	}
 

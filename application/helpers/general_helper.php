@@ -87,3 +87,9 @@ function promotion_available($date,$pid,$room_id){
 	}
 
 }
+
+function room_children($room_id){
+	$ci =& get_instance();
+	$ci->load->model('reservation_model');
+	return $ci->reservation_model->room_children($room_id);
+}

@@ -71,6 +71,7 @@ class Reservation extends MY_Controller {
 			$data['room'] 		 = $this->reservation_model->room_details($id);
 			$data['description'] = $this->reservation_model->room_description($id);
 			$data['photos']		 = $this->reservation_model->room_photos($id);
+			$data['children']	 = $this->reservation_model->room_children($id);
 			$this->load->view('reservation/room_edit',$data);
 
 		}else{
@@ -193,7 +194,7 @@ class Reservation extends MY_Controller {
 	function set_prices(){
 		//load language
 		$this->lang->load('reservation/set_prices',$this->language);
-		
+		$this->load->helper('general_helper');
 		$data['seasons'] = $this->reservation_model->get_hotel_seasons();
 		$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
 		$this->load->view('reservation/prices_add',$data);
