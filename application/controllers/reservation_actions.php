@@ -647,7 +647,7 @@ class Reservation_actions extends MY_Controller {
 		'double_price' 	=> $this->input->post('double_price'),
 		'triple_price' 	=> $this->input->post('triple_price'),
 		'extra_adult' 	=> $this->input->post('extra_adult'),
-		'child_price' 	=> $this->input->post('child_price'),
+		'child_price' 	=> json_encode($this->input->post('child_price')),
 		'stoped_arrival'	=> empty($this->input->post('stoped_arrival')) ? '0' : '1',
 		'stoped_departure'	=> empty($this->input->post('stoped_departure')) ? '0' : '1');
 
