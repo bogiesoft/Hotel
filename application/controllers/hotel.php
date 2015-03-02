@@ -122,13 +122,9 @@ class Hotel extends CI_Controller {
 			'checkin'=>$start_date,
 			'checkout'=>$end_date);
 
-
-	
-
 		$data['hotel_info'] 	= $hotel;
 		$data['rooms'] 			= $arr['rooms'];
 		$data['promotion'] 		= $arr['promotions'];
-		;
 		$data['room_price'] 	= $this->calculate_room_prices($data['rooms']);
 		echo '<!--';
 		echo '<pre>';
@@ -143,7 +139,7 @@ class Hotel extends CI_Controller {
 
 	private function calculate_room_prices($arr){
 
-		$this->total_room_price = new StdClass;
+		$total_room_price = new StdClass;
 
 		if ($this->adults == 1) {
 			$type = 'single_price';

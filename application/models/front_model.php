@@ -67,9 +67,10 @@ class Front_Model extends CI_Model{
 	}
 
 	function get_bar_by_room($date,$room_id){
-		$hotel_id 	= $this->session->userdata('hotel_id');
-		$sql = "SELECT * FROM prices WHERE hotel_id='$hotel_id' and room_id='$room_id' and date(price_date) = '$date' order by price_date";
-		return  $this->db->query($sql)->row_array();
+		//$hotel_id 	= $this->session->userdata('hotel_id');
+		return  $this->db->query( "SELECT * FROM prices 
+			WHERE room_id='$room_id' and date(price_date) = '$date' 
+			order by price_date")->row_array();
 	}
 
 
