@@ -2,7 +2,7 @@
 $this->load->view('front/header');
 ?>
     <div class="tab-content">
-        <div class="tab-pane active po-re" id="tab_b"><!-- first tap ------------------------------------------------------------- -->
+        <div class="tab-pane active po-re" id="tab_b"><!-- first tap -->
             <div class="row" id="fixed-row">
                 <div class="col-md-10">
                     <div class="row">
@@ -12,7 +12,7 @@ $this->load->view('front/header');
                             </div>
                         </div>
                         <div class="col-md-9">
-                        <div class="row"><!------------------------------------------- results header -->
+                        <div class="row"><!-- results header -->
                                 <div class="col-md-3 hidden-xs cent nopadding">
                                     <div class="c-fff bg-000 cent ptb-5">
                                         <select id="persons"  name="" class="bg-000 sl-person">
@@ -55,6 +55,7 @@ $this->load->view('front/header');
 
                 <!-- room details -->
                 <?php foreach ($rooms as $rid => $room) : ?>
+                <?php if($room_price->$rid != '0.00') : ?>
                 <div class="row one-room max-person max-<?php echo $room['max_capacity']; ?>">
                         <div class="col-md-3 nopadding" id="slider-content">
                             <!--
@@ -127,20 +128,56 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="142">&euro; 142.00 </abbr>
+                                    <abbr class="price" title="<?php echo $room_price->$rid; ?>">&euro; <?php echo number_format($room_price->$rid, 2, '.', ''); ?> </abbr>
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
-                                    <del class="c-f00 price"><abbr title="284">&euro; 284.00</abbr></del><br />
-                                    You save &euro; 142.00
+                                    
                                 </div>
                                 <div class="col-md-3">
+                                <?php
+                                //check stoped arrival or stoped departure
+                                $stoped_a = false;
+                                $check_a = @$room['prices'][$options['checkin']]['stoped_arrival'];
+                                if (!is_null($check_a) and $check_a == 1) {
+                                    $stoped_a = true;
+                                }
+
+                                $stoped_d = false;
+                                $check_d = @$room['prices'][$options['checkout']]['stoped_departure'];
+                                if (!is_null($check_d) and $check_d== 1) {
+                                    $stoped_d = true;
+                                }
+
+                                $available_error = false;
+                                //güne göre available kontrolü
+                                foreach ($room['prices'] as $d => $a) {
+
+                                    if (!is_null($a['available']) and $a['available'] < 1) {
+                                        $available_error .= $d.',';
+                                    }
+                                }
+
+                                //print_r($available_error);
+
+                                if ($stoped_a) {
+                                   echo 'Bu tarihte checkin olmaz';
+                                }elseif($stoped_d){
+                                    echo 'Bu tarihte checkout olmaz';
+                                }elseif($available_error){
+                                    echo $available_error.' dates are not available';
+                                }else{
+                                    $available = $room['prices'][$options['checkin']]['available'];
+                                ?>
                                     <select class="sl-menu">
-                                        <option data-room="0" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="0-0">Select</option>
-                                        <option data-room="1" data-promotion="0" data-qty="1" data-price="100" data-type="add">1 - 100 &euro;</option>
-                                        <option data-room="1" data-promotion="0" data-qty="2" data-price="200" data-type="add">2 - 200 &euro;</option>
-                                        <option data-room="1" data-promotion="0" data-qty="3" data-price="300" data-type="add">3 - 300 &euro;</option>
+                                    <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
+
+                                    <?php for ($i=1; $i <= $available ; $i++) { ?>
+                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo $room_price->$rid *$i; ?>" data-type="add"><?php echo $i; ?> - <?php echo number_format($room_price->$rid*$i, 2, '.', ','); ?> &euro;</option>
+                                    <?php } ?>
                                     </select><br />
-                                    We Have 3 rooms left!
+                                     We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
+                                <?php } ?>
+                                   
                                 </div>
                             </div>
                             <!-- promotions of room start -->
@@ -206,6 +243,7 @@ $this->load->view('front/header');
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    <?php endif; ?>
                     <?php endforeach; ?>
 
 

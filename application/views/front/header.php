@@ -13,6 +13,9 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo site_url('assets/front'); ?>/js/jquery.fancybox.js"></script>
     <script src="<?php echo site_url('assets/front'); ?>/js/main.js"></script>
+    <script type="text/javascript">
+    var base_url = '<?php echo site_url(); ?>';
+    </script>
 </head>
 <body>
 <div id="main">
@@ -82,6 +85,7 @@
     </div>
 </div>
 </div>
+<?php //print_r($this->input->get('children_ages')); ?>
 <div id="content">
 <div class="container">
     <div class="row top1"><!-- tabs controls -->
@@ -110,38 +114,85 @@
             </div>
             <div class="col-md-1">
                 Nights<br />
-                <input id="nights" name="nights" type="text" class="small-input" placeholder="10" readonly="" />
+                <input id="nights" name="nights" type="text" class="small-input" value="<?php echo $options['nights'];?>" placeholder="10" readonly="" />
             </div>
-            <div class="col-md-1">
+            <div class="col-md-1" style="padding:0">
                 Adults:<br />
                 <select class="small-input" name="adults">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                <?php for ($i=0; $i < 6; $i++) { 
+                    $selected = $options['adults'] == $i ? 'selected="selected"' : ''; ?>
+                    <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?></option>
+                <?php } ?>
                 </select>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-1" style="padding:0">
                 Children<br />
-                <select class="small-input" name="children">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                <select class="small-input" name="children" id="children">
+                <?php for ($i=0; $i <=3; $i++) { 
+                    $selected = $options['children'] == $i ? 'selected="selected"' : ''; ?>
+                    <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?></option>
+                <?php } ?>
                 </select>
             </div>
+
+            <?php if ($this->input->get('children_ages')) : ?>
+                <?php $a =0 ;foreach ($this->input->get('children_ages') as $key => $age) : $a++; ?>
+                     <div class="col-md-1 child-ages">
+                        Child <?php echo $a; ?> Age<br />
+                        <select class="small-input" name="children_ages[]">
+                        <?php for ($i=0; $i < 18; $i++) { 
+                            $selected = $age== $i ? 'selected="selected"' : ''; ?>
+                            <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?></option>
+                        <?php } ?>
+                        </select>
+                    </div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            <div id="children-ages"></div>
             <div class="col-md-2">
                 <br />
                 <input type="submit" class="srch-btn" value="Search" />
             </div>
+            <!--
             <div class="col-md-2 cent">
                 <br />
                 <span>Best Price Guarantee</span> 
                 <img src="<?php echo site_url('assets/front');?>/img/guarantee.png" />
-            </div>
+            </div>-->
         </form>
     </div>
+<style type="text/css">
+    .child-ages{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#children').on('change',function(){
+        var val = this.value;
+        html ='';
+        if (val>0) {
+            $('.child-ages').remove();
+            for (i = 1; i <= val; i++) {
+                html += '<div class="col-md-1 child-ages">'+
+                'Child '+i+' Age<br />'+
+                '<select class="small-input" name="children_ages[]" id="children">'+
+                '<?php for ($i=0; $i < 18; $i++) {  ?><option value="<?php echo $i; ?>"><?php echo $i; ?></option>'+
+                '<?php } ?>'+
+                '</select>'+
+            '</div>';
+            }
+        $('#children-ages').before(html).slideDown();
+        }else{
+            $('.child-ages').remove().slideUp();
+        }
+
+    });
+
+});
+
+</script>

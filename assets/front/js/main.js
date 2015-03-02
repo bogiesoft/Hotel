@@ -144,6 +144,7 @@ $(function() {
         $("#dtls-sh3").show();
     });
 // ---------------------------------- select menus
+/*
     $(".sl-menu").change(function(){
         var ro = 0, pr = 0;
         $(".sl-menu").each(function () {
@@ -154,19 +155,23 @@ $(function() {
             $("#tot").val(pr);
         });
     });
+    */
    	$('.sl-menu').change(function(){
 		var room_id 	= $(this).find(':selected').data('room');
 		var promotion	= $(this).find(':selected').data('promotion');
 		var qty 	 	= $(this).find(':selected').data('qty');
 		var price 		= $(this).find(':selected').data('price');
 		var type 		= $(this).find(':selected').data('type');
-		var data = {"room":room_id, "promotion":promotion, "qty":qty, "price":price};
+        
+		var data = {"room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type};
 		$.ajax({
-	        url: "test.php",
+	        url: base_url + "hotel/user_cart",
 	        type: "POST",
 	        data: data,
 	        dataType: 'text json',
 	        success: function(data){
+                $("#rom").val(data.total_qty);
+                $("#tot").val(data.total_price);
 	        	console.log(data);
 	        },
 	        error:function(){
