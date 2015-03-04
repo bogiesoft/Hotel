@@ -4,8 +4,13 @@ class Hotel extends CI_Controller {
 
 	var $total_room_price;
 	var $user_cart;
-	var $adults = 1;
+	var $adults = 2;
 	var $children = 0;
+	var $nights = 1;
+	var $start_date;
+	var $end_date;
+	var $currency;
+
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('general_helper');
@@ -31,27 +36,24 @@ class Hotel extends CI_Controller {
 		}
 
 		//options
-		$default_lang = $this->session->userdata('default_lang') ? $this->session->userdata('default_lang') : 'en';
-		$start_date = $this->input->get('checkin') ? $this->input->get('checkin') : date('d-m-Y');
-		$end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('d-m-Y');
-		$adults		= $this->input->get('adults') ? $this->input->get('adults') : '1';
-		$children	= $this->input->get('children') ? $this->input->get('children') : '0';
-		$nights 	= 1;
-
-		$this->adults = $adults;
-		$this->children = $children;
+		$default_lang 		= $this->session->userdata('default_lang') ? $this->session->userdata('default_lang') : 'en';
+		$this->start_date 	= $this->input->get('checkin') ? $this->input->get('checkin') : date('d-m-Y');
+		$this->end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('d-m-Y');
+		$this->adults		= $this->input->get('adults') ? $this->input->get('adults') : '2';
+		$this->children		= $this->input->get('children') ? $this->input->get('children') : '0';
+		$this->currency		= $hotel->currency;
 
 		//make dates to yy-mm-dd format
-		$start_date = date('Y-m-d', strtotime($start_date));
-		$end_date = date('Y-m-d', strtotime($end_date));
+		$this->start_date = date('Y-m-d', strtotime($this->start_date));
+		$this->end_date = date('Y-m-d', strtotime($this->end_date));
 
 		//salaklar start date'i end date'den sonrası bir tarihe girerse falan
-		if (strtotime($start_date) > strtotime($end_date)) {
+		if (strtotime($this->start_date) > strtotime($this->end_date)) {
 			exit('Checkout Date Error');
 		}
 
 		//salaklar geçmişe dönük rezervasyon yapmak isterse
-		if (strtotime($start_date) < strtotime(date('Y-m-d'))) {
+		if (strtotime($this->start_date) < strtotime(date('Y-m-d'))) {
 			exit('Checkin Date Error');
 		}
 
@@ -60,22 +62,22 @@ class Hotel extends CI_Controller {
 
 
 		//get rooms
-		$search = array('child' => $children,
-			'adults' => $adults,
+		$search = array('child' => $this->children,
+			'adults' => $this->adults,
 			'language' => $default_lang);
 
 		$arr = array();
 		$rooms = $this->front_model->get_hotel_rooms($hotel_id,$search);
 
 		if (FALSE === $rooms) {
-			$arr['rooms'] = '';
+			$arr['rooms'] = false;
 		}else{
 			
-			foreach (date_range($start_date,$end_date) as $k => $d) {
+			foreach (date_range($this->start_date,$this->end_date) as $k => $d) {
 
 				$arr['dates'][$d] = $d;
 				//set nights
-				$nights = count($arr['dates']);
+				$this->nights = count($arr['dates']);
 				foreach ($rooms as $key => $r) {
 
 					$arr['rooms'][$r->id]['name'] 		= $r->name;
@@ -108,6 +110,7 @@ class Hotel extends CI_Controller {
 				$rooms = explode(',', $p['rooms']);
 				foreach ($rooms as $r => $room) {
 					$promotion[$room][$p['id']] = $p;
+					$promotion[$room][$p['id']]['rule'] = 1;
 					
 				}
 			}
@@ -116,19 +119,29 @@ class Hotel extends CI_Controller {
 		}
 
 		$data['options'] 		= array(
-			'nights' => $nights,
+			'nights' => $this->nights,
 			'adults'=>$this->adults,
 			'children'=>$this->children,
-			'checkin'=>$start_date,
-			'checkout'=>$end_date);
+			'checkin'=>$this->start_date,
+			'checkout'=>$this->end_date,
+			'currency'=>$this->currency);
 
 		$data['hotel_info'] 	= $hotel;
 		$data['rooms'] 			= $arr['rooms'];
-		$data['promotion'] 		= $arr['promotions'];
-		$data['room_price'] 	= $this->calculate_room_prices($data['rooms']);
+
+		//create prices and set session 
+		//by rooms and promotions
+		$this->calculate_room_prices($data['rooms']);
+		$this->calculate_promo_prices($arr['promotions']);
+
+		//set promotion rules
+		$data['promotion']		= $this->set_promotion_rules($arr['promotions']);
+		
+		$data['prices'] 		= $this->session->userdata('room_prices');
 		echo '<!--';
 		echo '<pre>';
 		print_r($data);
+		print_r($this->session->userdata('user_cart'));
 		echo '-->';
 		
 
@@ -136,7 +149,9 @@ class Hotel extends CI_Controller {
 
 	}
 
-
+	/*
+	* Calculate room prices
+	*/
 	private function calculate_room_prices($arr){
 
 		$total_room_price = new StdClass;
@@ -162,9 +177,9 @@ class Hotel extends CI_Controller {
 
 				//if price is unit price
 				if (isset($p['price_type']) and $p['price_type'] == 1) {
-					@$total_room_price->$room_id = $p['base_price'];
+					@$total_room_price->$room_id->price = $p['base_price'];
 				}else{
-					@$total_room_price->$room_id += $p[$type];
+					@$total_room_price->$room_id->price += $p[$type];
 				}
 
 				//calculate children prices
@@ -181,17 +196,16 @@ class Hotel extends CI_Controller {
 						
 			}
 
-			$total_room_price->$room_id += $total_child_price;
-			//$this->total_room_price->$room_id = number_format($this->total_room_price->$room_id, 2, '.', '');
+			$total_room_price->$room_id->price += $total_child_price;
 		}
 
 		$this->session->set_userdata('room_prices',$total_room_price);
-		//print_r($this->session->userdata('room_prices'));
-		return $total_room_price;
-		//echo $total_child_price;
-		//print_r($this->total_room_price);
-	}
 
+	}
+	/*
+	* Calculate children prices
+	* Used in calculate_room_prices()
+	*/
 	private function get_child_price_by_age($age,$arr){
 		$price = 0;
 		if (is_array($arr)) {
@@ -207,7 +221,94 @@ class Hotel extends CI_Controller {
 
 	}
 
+	/*
+	* Calculate promotion prices by promotion_discount
+	*/
+	private function calculate_promo_prices($promotions){
+
+		$room_prices = $this->session->userdata('room_prices');
+
+		foreach ($room_prices as $rid => $room) {
+			
+			if (isset($promotions[$rid])) {
+				
+				foreach ($promotions[$rid] as $pid => $promo) {
+					$price = $room->price - ($room->price * $promo['promotion_discount'] / 100);
+					@$room->promotions->$pid->price = $price;
+
+				}
+
+			}		
+		}
+
+		return $this->session->set_userdata('room_prices',$room_prices);
+	
+	}
+
+	/*
+	* Set Promotion Rules
+	* 1=basic_deal, 2=minimum_stay, 3=early_booker,4=last_minute,5=24Hour
+	*/
+	private function set_promotion_rules($promotions){
+
+		$new_arr = $promotions;
+
+		foreach ($promotions as $rid => $promo) {
+			
+			foreach ($promo as $pid => $p) {
+				//standart rules
+				//check promotion dates
+				if (strtotime(date('Y-m-d')) < strtotime($p['start_date']) or strtotime(date('Y-m-d')) > strtotime($p['end_date']) ) {
+					$new_arr[$rid][$pid]['rule'] = 0;
+				}
+
+				//check room availibity or stoped values for reservation dates
+				foreach (date_range($this->start_date,$this->end_date) as $d => $date) {
+
+					$available = promotion_available($date,$pid,$rid);
+
+					if (!$available or $available['available'] < 1 or $available['stoped'] == 1) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				//minimum stay rules
+				if ($p['promotion_type'] == 2) {
+					//check total nights for minimum stay
+					if ($this->nights < $p['min_stay']) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				//early booker rules
+				if ($p['promotion_type'] == 3) {
+					//booking days for reservation
+					if (strtotime($this->start_date) < strtotime($p['booking_start']) or strtotime($this->end_date) > strtotime($p['booking_end']) ) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				//24h rules
+				if ($p['promotion_type'] == 5) {
+					//$new_arr[$rid][$pid]['rule'] = strtotime($p['twentyfour_date'].' 23:59:59');
+
+					//$p['twentyfour_date'];
+					//booking days for reservation
+					if (strtotime(date('Y-m-d H:i:s')) >= strtotime($p['twentyfour_date'].' 23:59:59')) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+			}
+
+		}
+		return $new_arr;
+
+	}
+
+
 	//add to cart başlasın
+	//burayı düzgünce yapmak lazım
 	function user_cart(){
 		
 		$user_cart = $this->session->userdata('user_cart');
@@ -221,7 +322,7 @@ class Hotel extends CI_Controller {
 		if ($this->input->post('type') == 'delete' and $user_cart[$room_id]) {
 			unset($user_cart[$room_id]);
 		}else{
-			$arr =  array('qty' => $qty,'promotion'=>$promotion,'price'=>$room_prices->$room_id );
+			$arr =  array('qty' => $qty,'promotion'=>$promotion,'price'=>$room_prices->$room_id->price );
 			$user_cart[$room_id] = $arr;
 		}
 
@@ -231,9 +332,7 @@ class Hotel extends CI_Controller {
 		$response['total_price'] = 0;
 		$response['total_qty'] = 0;
 
-		
-
-
+		//print_r($this->session->userdata('user_cart')); exit;
 		foreach ($this->session->userdata('user_cart') as $r => $v) {
 			$response['total_price']  	+= $v['price']*$v['qty'];
 			$response['total_qty'] 		+= $v['qty'];

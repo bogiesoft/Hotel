@@ -55,7 +55,7 @@ $this->load->view('front/header');
 
                 <!-- room details -->
                 <?php foreach ($rooms as $rid => $room) : ?>
-                <?php if($room_price->$rid != '0.00') : ?>
+                <?php if($prices->$rid->price != '0.00') : ?>
                 <div class="row one-room max-person max-<?php echo $room['max_capacity']; ?>">
                         <div class="col-md-3 nopadding" id="slider-content">
                             <!--
@@ -128,7 +128,7 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="<?php echo $room_price->$rid; ?>">&euro; <?php echo number_format($room_price->$rid, 2, '.', ''); ?> </abbr>
+                                    <abbr class="price" title="<?php echo $prices->$rid->price; ?>"><?php echo number_format($prices->$rid->price, 2, '.', ''); ?> <?php echo $options['currency']; ?></abbr>
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
                                     
@@ -172,7 +172,7 @@ $this->load->view('front/header');
                                     <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
 
                                     <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo $room_price->$rid *$i; ?>" data-type="add"><?php echo $i; ?> - <?php echo number_format($room_price->$rid*$i, 2, '.', ','); ?> &euro;</option>
+                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo $prices->$rid->price *$i; ?>" data-type="add"><?php echo $i; ?> - <?php echo number_format($prices->$rid->price*$i, 2, '.', ','); ?> &euro;</option>
                                     <?php } ?>
                                     </select><br />
                                      We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
@@ -181,14 +181,31 @@ $this->load->view('front/header');
                                 </div>
                             </div>
                             <!-- promotions of room start -->
+                            <?php if(isset($promotion[$rid])) : ?>
+                            <?php foreach ($promotion[$rid] as $pid => $promo) : ?>
+                                <?php if($promo['rule'] == 1) : ?>
                             <div class="row data-row">
                                 <div class="col-md-3 cent">
                                     <img src="<?php echo site_url('assets/front');?>/img/2persons.png" />
                                 </div>
                                 <div class="col-md-3">
-                                    <abbr id="free-cancellation" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="You can cancel this booking right up to Feb 2, 2015 for free. You may be charged if you cancel or change your booking after that. And we can’t refund you if you check out early or don’t turn up at the hotel.">Free cancellation</abbr>
+                                    <abbr id="free-cancellation" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="You can cancel this booking right up to Feb 2, 2015 for free. You may be charged if you cancel or change your booking after that. And we can’t refund you if you check out early or don’t turn up at the hotel."><?php echo $promo['promotion_name']; ?></abbr>
                                     <br />
-                                    Until Feb 2, 2015
+                                    <?php if($promo['promotion_type'] == 5){ ?>
+                                    <div class="countdown<?php echo $rid.'-'.$pid; ?>"></div>
+                                    <script type="text/javascript">
+                                    $(".countdown<?php echo $rid.'-'.$pid; ?>").countdown('<?php echo date("Y/m/d",strtotime($promo['twentyfour_date'])); ?> 23:59:59', function(event) {
+                                       var $this = $(this).html(event.strftime(''
+                                         + '<span>%H</span> hr '
+                                         + '<span>%M</span> min '
+                                         + '<span>%S</span> sec'));
+                                    });
+
+
+                                    </script>
+                                    <?php }else{ ?>
+                                    Until <?php echo date('j F Y',strtotime($promo['end_date'])); ?>
+                                    <?php } ?>
                                     <br />
                                     <div class="ftr">
                                         <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
@@ -201,11 +218,14 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="142">&euro; 142.00 </abbr>
+                                    <abbr class="price" title="142"><?php echo number_format($prices->$rid->promotions->$pid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?></abbr>
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights'];?> nights<br />
-                                    <del class="c-f00 price"><abbr title="284">&euro; 284.00</abbr></del><br />
-                                    You save &euro; 142.00
+                                    <del class="c-f00 price">
+                                    <abbr title="284"><?php echo number_format($prices->$rid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?></abbr>
+                                    </del>
+                                    <br />
+                                    You save <?php echo number_format($prices->$rid->price-$prices->$rid->promotions->$pid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?>
                                 </div>
                                 <div class="col-md-3">
                                     <select class="sl-menu">
@@ -217,6 +237,9 @@ $this->load->view('front/header');
                                     We Have 3 rooms left!
                                 </div>
                             </div>
+                        <?php endif; // if promotion rule end ?>
+                        <?php endforeach; ?>
+                        <?php endif; //if promotion available end ?>
                             <!-- promotions of room end -->
                         </div>
                     </div>
@@ -719,6 +742,7 @@ $this->load->view('front/header');
     </div><!-- /tab-content ---------------------------------------------------------------------- -->
 </div>
 </div>
+
 <?php
 $this->load->view('front/footer');
 ?>
