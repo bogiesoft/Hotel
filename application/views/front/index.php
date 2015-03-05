@@ -1,6 +1,23 @@
 <?php
 $this->load->view('front/header');
 ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    $.ajax({
+        url: base_url + "hotel/currency_rates?c=<?php echo $options['currency']; ?>",
+        // the name of the callback parameter
+        jsonp: "callback",
+        // tell jQuery we're expecting JSONP
+        dataType: "jsonp",
+        // work with the response
+        success: function (response) {
+           console.log(response); // server response
+        }
+    });
+
+});
+</script>
     <div class="tab-content">
         <div class="tab-pane active po-re" id="tab_b"><!-- first tap -->
             <div class="row" id="fixed-row">
@@ -128,8 +145,11 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="<?php echo $prices->$rid->price; ?>"><?php echo number_format($prices->$rid->price, 2, '.', ''); ?> <?php echo $options['currency']; ?></abbr>
-                                    <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
+                                    <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> " data-currency="<?php echo $options['currency']; ?>">
+                                    <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
+                                    <?php echo $options['user_currency']; ?></abbr>
+                                    <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title">
+                                    <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
                                     
                                 </div>
@@ -172,7 +192,7 @@ $this->load->view('front/header');
                                     <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
 
                                     <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo $prices->$rid->price *$i; ?>" data-type="add"><?php echo $i; ?> - <?php echo number_format($prices->$rid->price*$i, 2, '.', ','); ?> &euro;</option>
+                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                     <?php } ?>
                                     </select><br />
                                      We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
@@ -218,14 +238,21 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="142"><?php echo number_format($prices->$rid->promotions->$pid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?></abbr>
+                                    <abbr class="price" title="142" data-price="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> ">
+                                    <?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> 
+                                    <?php echo $options['user_currency']; ?>
+                                    </abbr>
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights'];?> nights<br />
                                     <del class="c-f00 price">
-                                    <abbr title="284"><?php echo number_format($prices->$rid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?></abbr>
+                                    <abbr title="284">
+                                    <?php echo show_price($prices->$rid->price,$options['currency_rate']);?> 
+                                    <?php echo $options['user_currency']; ?></abbr>
                                     </del>
                                     <br />
-                                    You save <?php echo number_format($prices->$rid->price-$prices->$rid->promotions->$pid->price, 2, '.', ','); ?> <?php echo $options['currency']; ?>
+                                    You save <?php 
+                                    $price = $prices->$rid->price-$prices->$rid->promotions->$pid->price;
+                                    echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?>
                                 </div>
                                 <div class="col-md-3">
                                     <select class="sl-menu">

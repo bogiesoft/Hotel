@@ -10,6 +10,8 @@ class Hotel extends CI_Controller {
 	var $start_date;
 	var $end_date;
 	var $currency;
+	var $user_currency;
+	var $currency_rate = 1;
 
 	function __construct(){
 		parent::__construct();
@@ -42,6 +44,11 @@ class Hotel extends CI_Controller {
 		$this->adults		= $this->input->get('adults') ? $this->input->get('adults') : '2';
 		$this->children		= $this->input->get('children') ? $this->input->get('children') : '0';
 		$this->currency		= $hotel->currency;
+		//$this->user_currency = isset($this->session->userdata('currency')) ? $this->session->userdata('currency') : $this->currency;
+		$this->user_currency= 'USD';
+		if ($this->user_currency != $this->currency) {
+			$this->currency_rate = currency_rates($this->currency,$this->user_currency);
+		}
 
 		//make dates to yy-mm-dd format
 		$this->start_date = date('Y-m-d', strtotime($this->start_date));
@@ -124,7 +131,9 @@ class Hotel extends CI_Controller {
 			'children'=>$this->children,
 			'checkin'=>$this->start_date,
 			'checkout'=>$this->end_date,
-			'currency'=>$this->currency);
+			'currency'=>$this->currency,
+			'user_currency' => $this->user_currency,
+			'currency_rate'=>$this->currency_rate);
 
 		$data['hotel_info'] 	= $hotel;
 		$data['rooms'] 			= $arr['rooms'];
@@ -342,4 +351,34 @@ class Hotel extends CI_Controller {
 		//print_r($user_cart); exit;
 		//print_r($this->session->userdata);
 	}
+
+
+	/*
+	* Print Currency Rates JSON
+	*/
+	public function currency_rates(){
+		// get current exchange rates
+		$cur = $this->input->get('c');
+		$this->load->driver('cache', array('apdapter'=>'apc','backup'=>'file'));
+		$file = 'currency-rates-'.$cur;
+
+		if (!$cache = $this->cache->get($file)) {
+			$exurl = 'http://api.fixer.io/latest?base='.$cur;
+			$ch = curl_init($exurl);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$json_response_content = curl_exec($ch);
+			curl_close($ch);
+			$cache = $json_response_content;
+	 		$this->cache->file->save('currency-rates-'.$cur, $json_response_content, 5000);
+	 		
+	 	}
+
+	 	print $cache;
+	 	//$rate = $cache['rates'][$cur2];
+	 	// $rate;
+		
+	}
+
+
+
 }

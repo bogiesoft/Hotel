@@ -97,3 +97,62 @@ function room_children($room_id){
 	$ci->load->model('reservation_model');
 	return $ci->reservation_model->room_children($room_id);
 }
+
+
+function convert($from, $to, $retry = 0)
+{
+    $ch = curl_init("http://download.finance.yahoo.com/d/quotes.csv?s=$from$to=X&f=l1&e=.csv");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_NOBODY, false);
+    $rate = curl_exec($ch);
+    curl_close($ch);
+    if ($rate) {
+        return (float)$rate;
+    } elseif ($retry > 0) {
+        return convert($from, $to, --$retry);
+    }
+    return false;
+}
+
+
+/*
+* Get curency rates
+*/
+function currency_rates($cur,$cur2){
+	// get current exchange rates
+	$ci =& get_instance();
+	$ci->load->driver('cache',array('apdapter'=>'file','backup'=>'file'));
+	$file = 'currency-rates-'.$cur;
+	if (!$cache = $ci->cache->get($file)) {
+			$exurl = 'http://api.fixer.io/latest?base='.$cur;
+			$ch = curl_init($exurl);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			$json_response_content = curl_exec($ch);
+			curl_close($ch);
+			$cache = $json_response_content;
+	 		$ci->cache->file->save('currency-rates-'.$cur, $json_response_content, 5000);
+	 		
+	 	}
+
+	$data = json_decode($cache,true);
+ 	return $data['rates'][$cur2];
+	
+}
+
+function show_price($price,$rate=1){
+
+	return number_format($price*$rate, 2, '.', '');
+
+}
+
+/* DEPRECATED */
+function show_price2($price,$cur,$cur2){
+
+	if ($cur != $cur2) {
+		$rate = currency_rates($cur,$cur2);
+		return number_format($price*$rate, 2, '.', '');
+	}
+	return number_format($price, 2, '.', '');
+
+}
