@@ -71,6 +71,8 @@ $this->load->view('front/header');
                 <div class="col-md-10 main-row">
 
                 <!-- room details -->
+                <?php if(is_array($rooms)) : ?>
+
                 <?php foreach ($rooms as $rid => $room) : ?>
                 <?php if($prices->$rid->price != '0.00') : ?>
                 <div class="row one-room max-person max-<?php echo $room['max_capacity']; ?>">
@@ -132,7 +134,7 @@ $this->load->view('front/header');
                                     <img src="<?php echo site_url('assets/front');?>/img/3persons.png" />
                                 </div>
                                 <div class="col-md-3">
-                                    <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Non-refundable</abbr>
+                                    <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Best Available Rate</abbr>
                                     <br /><br />
                                     <div class="ftr">
                                         <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
@@ -220,8 +222,16 @@ $this->load->view('front/header');
                                          + '<span>%M</span> min '
                                          + '<span>%S</span> sec'));
                                     });
-
-
+                                    </script>
+                                    <?php }elseif($promo['promotion_type'] == 4){ ?>
+                                    <div class="countdown<?php echo $rid.'-'.$pid; ?>"></div>
+                                    <script type="text/javascript">
+                                    $(".countdown<?php echo $rid.'-'.$pid; ?>").countdown('<?php echo date("Y/m/d",strtotime($options['checkin'])); ?> 23:59:59', function(event) {
+                                       var $this = $(this).html(event.strftime(''
+                                         + '<span>%H</span> hr '
+                                         + '<span>%M</span> min '
+                                         + '<span>%S</span> sec'));
+                                    });
                                     </script>
                                     <?php }else{ ?>
                                     Until <?php echo date('j F Y',strtotime($promo['end_date'])); ?>
@@ -296,6 +306,9 @@ $this->load->view('front/header');
                     <?php endif; ?>
                     <?php endforeach; ?>
 
+                <?php else : ?>
+                    No Room available your search criteria
+                <?php endif; //rooms array end?>
 
                 </div>
                 <div class="col-md-2 nopadding po-re">
