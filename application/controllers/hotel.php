@@ -141,11 +141,16 @@ class Hotel extends CI_Controller {
 		//create prices and set session 
 		//by rooms and promotions
 		$this->calculate_room_prices($data['rooms']);
-		@$this->calculate_promo_prices($arr['promotions']);
+		if (is_array($arr['promotions'])) {
+			$this->calculate_promo_prices($arr['promotions']);
+			//set promotion rules
+			$data['promotion']		= $this->set_promotion_rules($arr['promotions']);
+		}else{
+			$data['promotion']		= false;
+		}
 		
 
-		//set promotion rules
-		$data['promotion']		= @$this->set_promotion_rules($arr['promotions']);
+		
 		
 		$data['prices'] 		= $this->session->userdata('room_prices');
 		echo '<!--';
@@ -330,7 +335,7 @@ class Hotel extends CI_Controller {
 					$promo_starts = date('Y-m-d H:i:s',strtotime("-".$p['last_min_qty'].' '.$p['last_min_val'], strtotime($this->start_date.' 00:00:00')));
 
 					//if today is lower than promo start, disable promo
-					if (strtotime(date('Y-m-d H:i:s')) <= strtotime($promo_start)) {
+					if (strtotime(date('Y-m-d H:i:s')) <= strtotime($promo_starts)) {
 						$new_arr[$rid][$pid]['rule'] = 0;
 					}
 
