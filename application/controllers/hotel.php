@@ -40,7 +40,7 @@ class Hotel extends CI_Controller {
 		//options
 		$default_lang 		= $this->session->userdata('default_lang') ? $this->session->userdata('default_lang') : 'en';
 		$this->start_date 	= $this->input->get('checkin') ? $this->input->get('checkin') : date('d-m-Y');
-		$this->end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('d-m-Y');
+		$this->end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('d-m-Y',strtotime('+1 day',strtotime($this->start_date)));
 		$this->adults		= $this->input->get('adults') ? $this->input->get('adults') : '2';
 		$this->children		= $this->input->get('children') ? $this->input->get('children') : '0';
 		$this->currency		= $hotel->currency;
@@ -55,7 +55,7 @@ class Hotel extends CI_Controller {
 		$this->end_date = date('Y-m-d', strtotime($this->end_date));
 
 		//salaklar start date'i end date'den sonrası bir tarihe girerse falan
-		if (strtotime($this->start_date) > strtotime($this->end_date)) {
+		if (strtotime($this->start_date) >= strtotime($this->end_date)) {
 			exit('Checkout Date Error');
 		}
 
@@ -183,7 +183,6 @@ class Hotel extends CI_Controller {
 		* ekstra girilen fiyata çözüm bulunacak
 		*/
 		
-		$total_room_price = new StdClass();
 
 		//if rooms available
 		if (!is_array($arr)) {
@@ -191,7 +190,7 @@ class Hotel extends CI_Controller {
 		}else{
 
 			foreach ($arr as $room_id => $r) {
-				
+
 				$total_child_price = 0;
 				//unset first date (yoksa hem giriş gününe hemde çıkış gününe fiyat eklemiş oluyoruz mk)
 				unset($r['prices'][$this->start_date]);
