@@ -353,7 +353,7 @@ $this->load->view('front/header');
                             <div>Hotel Sultania</div>
                             <div>Istanbul , Tukey</div>
                             <div><?php echo date('j F Y',strtotime($options['checkin'])); ?>- <?php echo date('j F Y',strtotime($options['checkout'])); ?></div>
-                            <div> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
+                            <div><b id="total_room"></b> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
                         </div>
                         <div id="lc-b">
                             <img src="<?php echo site_url('assets/front');?>/img/ecal-white.png" width="" alt="" />

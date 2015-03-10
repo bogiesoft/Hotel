@@ -176,6 +176,7 @@ $(function() {
 	        dataType: 'text json',
 	        success: function(data){
                 $("#rom").val(data.total_qty);
+                $("#total_room").html(data.total_qty);
                 $("#tot").val(data.user_price);
                 if (promotion != 0 && qty!=0) {
                     $('#best_price').hide().html('<p class="c-f00">You got the best price</p>').fadeIn('slow');
@@ -204,7 +205,7 @@ $(function() {
                 //if user currency is different
                 if(data.currency != data.default_currency){
                     $('.avrgdefault').html(data.total_price+' '+data.default_currency);
-                    html ='<div>'+data.currency+' prices are for information. The hotel accepts payment in '+default_currency+'</div>';
+                    html ='<div>*'+data.currency+' rates are for information. The hotel accepts payment in '+default_currency+'</div>';
                     $('.price_information').html(html);
                 }
 	        	console.log(data);
