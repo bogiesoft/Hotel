@@ -157,13 +157,18 @@ $(function() {
     });
     */
    	$('.sl-menu').change(function(){
+        var default_currency    = $(this).data('currency');
 		var room_id 	= $(this).find(':selected').data('room');
 		var promotion	= $(this).find(':selected').data('promotion');
 		var qty 	 	= $(this).find(':selected').data('qty');
 		var price 		= $(this).find(':selected').data('price');
-		var type 		= $(this).find(':selected').data('type');
+        var type        = $(this).find(':selected').data('type');
+        var name        = $(this).find(':selected').data('room-name');
+        var desc        = $(this).find(':selected').data('desc');
+        var rate        = $(this).find(':selected').data('rate');
+		var currency 	= $(this).find(':selected').data('currency');
         
-		var data = {"room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type};
+		var data = {"default_currency":default_currency, "room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type, "name":name, "desc": desc,"rate":rate,"currency":currency};
 		$.ajax({
 	        url: base_url + "hotel/user_cart",
 	        type: "POST",
@@ -171,7 +176,37 @@ $(function() {
 	        dataType: 'text json',
 	        success: function(data){
                 $("#rom").val(data.total_qty);
-                $("#tot").val(data.total_price);
+                $("#tot").val(data.user_price);
+                if (promotion != 0 && qty!=0) {
+                    $('#best_price').hide().html('<p class="c-f00">You got the best price</p>').fadeIn('slow');
+                }else{
+                     $('#best_price').fadeOut();
+                };
+                $('.room').remove();
+                $('.avrg').show();
+                //insert roo details
+                $.each(data.details, function(i,val){
+
+                html = '<div class="room">'+
+                    '<div class="park-view">'+val.name+' x '+val.qty+'</div>'+
+                    '<div class="avrg">'+
+                        '<div>'+val.desc+'/night</div>'+
+                        '<div>'+val.user_price+' '+currency+'</div>'+
+                    '</div>'+
+                '</div>';
+
+                $('.items_in_cart').after(html);
+
+                });
+
+                $('.avrgtotal').html(data.user_price+' '+currency);
+
+                //if user currency is different
+                if(data.currency != data.default_currency){
+                    $('.avrgdefault').html(data.total_price+' '+data.default_currency);
+                    html ='<div>'+data.currency+' prices are for information. The hotel accepts payment in '+default_currency+'</div>';
+                    $('.price_information').html(html);
+                }
 	        	console.log(data);
 	        },
 	        error:function(){

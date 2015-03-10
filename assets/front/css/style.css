@@ -28,7 +28,7 @@ a:hover {text-decoration: none;color: #fff;}
 .ptb-5 {padding: 5px 0;}
 .bb-no {border: none;background: none;}
 .hh1 {width: 20px;border: none;text-align: center;}
-.hh2 {width: 60px;border: none;text-align: center;}
+.hh2 {width: 100px;border: none;text-align: center;}
 /* ------------------------------------------------------------------- end controls */
 /* ------------------------------------------------------------------- header */
 .head-part {display: inline-block;vertical-align: middle;margin-top: 5px;}
@@ -118,7 +118,7 @@ a:hover {text-decoration: none;color: #fff;}
 #lc-a {background: #fdb300;color: #fff;padding: 5px 10px;font-size: 12px;font-weight: bold;}
 #lc-a img, #lc-a span, #lc-b img, #lc-b span {display: inline-block;cursor: pointer;}
 #lc-b {background: #333;color: #fff;padding: 5px 10px;font-size: 12px;font-weight: bold;}
-#lc-a-in,#lc-b-in {background: #ededec;font-size: 12px;padding: 10px;display: none;}
+#lc-a-in,#lc-b-in {background: #ededec;font-size: 12px;padding: 10px}
 .cancellation {background: #ededec;font-size: 12px;padding: 10px;border-bottom: 3px solid #b3b3b3;}
 .park-view {background: #ededec;border-top: 3px solid #b3b3b3;border-bottom: 3px solid #b3b3b3;padding-left: 15px;}
 .avrg {background: #d6d6d5;padding: 10px;text-align: right;border-bottom: 3px solid #b3b3b3;}

@@ -190,11 +190,11 @@ $this->load->view('front/header');
                                 }else{
                                     $available = $room['prices'][$options['checkin']]['available'];
                                 ?>
-                                    <select class="sl-menu">
-                                    <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
+                                    <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
+                                    <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
 
                                     <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                     <?php } ?>
                                     </select><br />
                                      We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
@@ -265,11 +265,11 @@ $this->load->view('front/header');
                                     echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="sl-menu">
-                                        <option data-room="0" data-promotion="0" data-qty="0" data-price="0" value="0-0">Select</option>
-                                        <option data-room="1" data-promotion="1" data-qty="1" data-price="100">1 - 100  &euro;</option>
-                                        <option data-room="1" data-promotion="1" data-qty="2" data-price="200">2 - 200  &euro;</option>
-                                        <option data-room="1" data-promotion="1" data-qty="3" data-price="300">3 - 300  &euro;</option>
+                                    <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
+                                        <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="<?php echo $pid; ?>" data-qty="0" data-price="0" value="0-0" data-type="delete">Select</option>
+                                        <?php for ($i=1; $i <=5; $i++) { ?>
+                                        <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="<?php echo $promo['promotion_name']; ?>" data-promotion="<?php echo $pid; ?>" data-qty="<?php echo $i; ?>" data-type="add" data-price="<?php echo $prices->$rid->promotions->$pid->price * $i; ?>"><?php echo $i;?> - <?php echo show_price($prices->$rid->promotions->$pid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <?php }?>
                                     </select><br />
                                     We Have 3 rooms left!
                                 </div>
@@ -325,8 +325,8 @@ $this->load->view('front/header');
                              <input class="price hh1" id="nits" type="text" name="val[1][nights]" value="1" readonly="" /> 
                               night
                             </p>
-                            &euro;<input class="price hh2" id="tot" type="text" name="val[1][price]" value="0" readonly="" />
-                            <p class="c-f00">You got the best price</p>
+                           <input class="price hh2" id="tot" type="text" name="val[1][price]" value="0" readonly="" /> <?php echo $options['user_currency']; ?>
+                            <div id="best_price"></div>
                         </div>
                     </form>
                     <div class="all-green cent f-b">
@@ -339,10 +339,10 @@ $this->load->view('front/header');
                 </div>
                 </div>
             </div><!-- main row of results -->
-        </div><!-- end of first tap ------------------------------------------------------------- -->
-        <div class="tab-pane" id="tab_c"><!-- second tap ------------------------------------------------------------- -->
+        </div><!-- end of first tap -->
+        <div class="tab-pane" id="tab_c"><!-- second tap -->
             <div class="row">
-                <div class="col-md-3 nopadding"><!-- left column ------------------------------------------------------ -->
+                <div class="col-md-3 nopadding"><!-- left column  -->
                     <div id="fixed-part"><!-- second tap fixed part -->
                         <div id="lc-a">
                             <img src="<?php echo site_url('assets/front');?>/img/cal-white.png" width="" alt="" />
@@ -352,8 +352,8 @@ $this->load->view('front/header');
                         <div id="lc-a-in">
                             <div>Hotel Sultania</div>
                             <div>Istanbul , Tukey</div>
-                            <div>Jan 30 , 2015- Jan 31 , 2015</div>
-                            <div>1 room for 1 adult and  0  Child</div>
+                            <div><?php echo date('j F Y',strtotime($options['checkin'])); ?>- <?php echo date('j F Y',strtotime($options['checkout'])); ?></div>
+                            <div> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
                         </div>
                         <div id="lc-b">
                             <img src="<?php echo site_url('assets/front');?>/img/ecal-white.png" width="" alt="" />
@@ -367,27 +367,12 @@ $this->load->view('front/header');
                             </div>
                         </div>
                         <div class="items_in_cart"></div>
-                        <!-- list items in cart -->
-                        <div class="room">
-	                        <div class="park-view">Park View Room</div>
-	                        <div class="avrg">
-	                            <div>Average rate per room/night</div>
-	                            <div>EUR 340.00</div>
-	                        </div>
-                        </div>
-                        <div class="room">
-	                        <div class="park-view">Park View Room</div>
-	                        <div class="avrg">
-	                            <div>Average rate per room/night</div>
-	                            <div>EUR 340.00</div>
-	                        </div>
-                        </div>
-                        <!-- end items in cart-->
 
-                        <div class="avrg">
+                        <div class="avrg" style="display:none">
                             <div>TOTAL</div>
-                            <div class="c-090">340.00</div>
-                            <div>Excluding Tax</div>
+                            <div class="c-090 avrgtotal"></div>
+                            <div class="c-090 avrgdefault"></div>
+                            <div class="price_information"></div>
                         </div>
                         <div class="cancellation">
                             <div>Cancellation policy:</div>
@@ -403,8 +388,8 @@ $this->load->view('front/header');
                             <a href=""><img src="<?php echo site_url('assets/front');?>/img/scured-black.png" width="" alt="" /></a>
                         </div>
                     </div><!-- end of second tap fixed part -->
-                </div><!-- end of left column ------------------------------------------------------ -->
-                <div class="col-md-9"><!-- right column ------------------------------------------------------ -->
+                </div><!-- end of left column  -->
+                <div class="col-md-9"><!-- right column  -->
                     <div class="row">
                         <div class="col-md-12">
                         Guest Details

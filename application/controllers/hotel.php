@@ -4,14 +4,14 @@ class Hotel extends CI_Controller {
 
 	var $total_room_price;
 	var $user_cart;
-	var $adults = 2;
-	var $children = 0;
-	var $nights = 1;
-	var $start_date;
-	var $end_date;
-	var $currency;
-	var $user_currency;
-	var $currency_rate = 1;
+	public $adults = 2;
+	public $children = 0;
+	public $nights = 1;
+	public $start_date;
+	public $end_date;
+	private $currency = 'EUR';
+	public $user_currency;
+	public $currency_rate = 1;
 
 	function __construct(){
 		parent::__construct();
@@ -43,9 +43,12 @@ class Hotel extends CI_Controller {
 		$this->end_date 	= $this->input->get('checkout') ? $this->input->get('checkout') : date('d-m-Y',strtotime('+1 day',strtotime($this->start_date)));
 		$this->adults		= $this->input->get('adults') ? $this->input->get('adults') : '2';
 		$this->children		= $this->input->get('children') ? $this->input->get('children') : '0';
-		$this->currency		= $hotel->currency;
+		
+		$this->currency 	= $hotel->currency;
+		//$this->setCurrency($hotel->currency);
+		
 		//$this->user_currency = isset($this->session->userdata('currency')) ? $this->session->userdata('currency') : $this->currency;
-		$this->user_currency= 'TRY';
+		$this->user_currency= 'CAD';
 		if ($this->user_currency != $this->currency) {
 			$this->currency_rate = currency_rates($this->currency,$this->user_currency);
 		}
@@ -136,6 +139,7 @@ class Hotel extends CI_Controller {
 			'currency_rate'=>$this->currency_rate);
 
 		$data['hotel_info'] 	= $hotel;
+		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
 
 		//create prices and set session 
@@ -148,10 +152,7 @@ class Hotel extends CI_Controller {
 		}else{
 			$data['promotion']		= false;
 		}
-		
-
-		
-		
+				
 		$data['prices'] 		= $this->session->userdata('room_prices');
 		echo '<!--';
 		echo '<pre>';
@@ -362,34 +363,66 @@ class Hotel extends CI_Controller {
 
 	//add to cart başlasın
 	//burayı düzgünce yapmak lazım
-	function user_cart(){
+	public function user_cart(){
 		
 		$user_cart = $this->session->userdata('user_cart');
-
 		$room_id 	= $this->input->post('room');
 		$qty 		= $this->input->post('qty');
 		$promotion 	= $this->input->post('promotion');
+		$rate 		= $this->input->post('rate');
+		$currency 	= $this->input->post('currency');
+		$default_currency = $this->input->post('default_currency');
+		/*
+		$item = array('room_id' => $room_id,
+			'qty' => $qty,
+			'promotion' => $promotion);
+		*/
 
 		$room_prices = $this->session->userdata('room_prices');
 
-		if ($this->input->post('type') == 'delete' and $user_cart[$room_id]) {
-			unset($user_cart[$room_id]);
+		if ($this->input->post('type') == 'delete') {
+			foreach ($user_cart as $key => $c) {
+				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
+					unset($user_cart[$key]);
+				}
+			} 
+			
 		}else{
-			$arr =  array('qty' => $qty,'promotion'=>$promotion,'price'=>$room_prices->$room_id->price );
-			$user_cart[$room_id] = $arr;
-		}
 
+			if ($promotion != 0) {
+				$price = $room_prices->$room_id->promotions->$promotion->price;
+			}else{
+				$price = $room_prices->$room_id->price;
+			}
+
+			$arr =  array('room_id'=>$room_id, 
+				'qty'=>$qty,
+				'promotion'=>$promotion,
+				'price'=>$price,
+				'user_price'=>show_price($price,$rate),
+				'name' => $this->input->post('name'),
+				'desc' => $this->input->post('desc'));
+			$user_cart[] = $arr;
+		}
+		//$user_cart = '';
 		$this->session->set_userdata('user_cart',$user_cart);
 		
 		//get total items in cart
 		$response['total_price'] = 0;
+		$response['user_price'] = 0;
 		$response['total_qty'] = 0;
+		$response['currency'] = $currency;
+		$response['currency_rate'] = $rate;
+		$response['default_currency'] = $default_currency;
 
 		//print_r($this->session->userdata('user_cart')); exit;
-		foreach ($this->session->userdata('user_cart') as $r => $v) {
+		foreach ($user_cart as $r => $v) {
+			$response['user_price']  	+= show_price($v['price']*$v['qty'],$rate);
 			$response['total_price']  	+= $v['price']*$v['qty'];
 			$response['total_qty'] 		+= $v['qty'];
 		}
+
+		$response['details'] = $user_cart;
 
 		echo json_encode($response);
 		//print_r($user_cart); exit;
@@ -423,6 +456,14 @@ class Hotel extends CI_Controller {
 		
 	}
 
+	
+	function setCurrency($currency){
+		$this->currency = $currency;
+	}
+
+	function getCurrency(){
+		return $this->currency;
+	}
 
 
 }
