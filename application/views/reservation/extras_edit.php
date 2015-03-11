@@ -68,7 +68,7 @@
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label">per</label>
+                    <label class="control-label"><?php echo lang('price_per'); ?></label>
                     <select name="per" class="form-control input-sm" onclick="price_type(this.value)">
                       <option value="1" <?php echo $extra->per == '1' ? 'selected' :''; ?>><?php echo lang('per_person'); ?></option>
                       <option value="2" <?php echo $extra->per == '2' ? 'selected' :''; ?>><?php echo lang('per_unit'); ?></option>
@@ -82,7 +82,7 @@
 
                 <div class="col-sm-3" id="max-person" <?php echo $extra->per != 1 ? 'style="display:none"' : ''; ?>>
                   <div class="form-group">
-                    <label class="control-label">Max. Person</label>
+                    <label class="control-label"><?php echo lang('max_person'); ?></label>
                     <select name="max_person"  class="form-control input-sm" onclick="price_options(this.value)">
                       <?php for ($i=0; $i <= 5 ; $i++) {
                         $selected = $extra->max_person == $i ? 'selected="selected"' : '';
@@ -112,7 +112,7 @@
                         <div class="form-group">
                         <div class="row">
                         <div class="col-sm-12 col-md-12">
-                        <input type="text" name="price[<?php echo $i; ?>]" value="<?php echo $price->$i; ?>" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Person <?php echo $i; ?> Price">
+                        <input type="text" name="price[<?php echo $i; ?>]" value="<?php echo $price->$i; ?>" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="<?php echo sprintf(lang('person_price'),$i); ?>">
                         </div>
                         </div>
                       </div>
@@ -179,7 +179,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Extra Image</label>
+                <label class="col-sm-3 control-label"><?php echo lang('extra_image'); ?></label>
                 <div class="col-sm-6">
                 <div id="extra_image"><?php if($extra->image) {echo '<img src="'.$extra->image.'" />'; } ?></div>
                 <input type="file" name="userfile" id="uploadedfile">
@@ -280,7 +280,9 @@
 jQuery(document).ready(function(){
   // Chosen Select
   jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
-  
+
+  $("[data-toggle='tooltip']").tooltip();
+
   //datepicker
   jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
   jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
@@ -306,6 +308,9 @@ jQuery(document).ready(function(){
   })
 
 });
+
+var person_price = '<?php echo lang('person_price'); ?>';
+
 function price_options(cnt){
   //clear content
   $('#price-content').remove();
@@ -315,6 +320,7 @@ function price_options(cnt){
       $('#unit-price').slideUp();
       html = '<div class="row" id="price-content">';
       for (i = 1; i <= cnt; i++) {
+        var price = person_price.replace(/%s/g,i);
         html +='<div class="col-sm-2">'+
           '<div class="form-group">'+
           '<div class="row">'+

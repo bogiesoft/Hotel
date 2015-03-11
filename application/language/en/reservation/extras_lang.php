@@ -14,6 +14,9 @@ $lang['per_person']		= 'Person';
 $lang['per_unit']		= 'Unit';
 $lang['per_day']		= 'Day';
 $lang['per_child']		= 'Child';
+$lang['extra_image']	= 'Extra Image';
+$lang['max_person']		= 'Max. Person';
+$lang['person_price']	= 'Person %s Price';
 
 $lang['limit_period']	= 'Limit to Period';
 $lang['limit_period_info']	= 'If you set \'0\' there will be no limitation.';

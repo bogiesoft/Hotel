@@ -52,7 +52,7 @@
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label class="control-label"><?php echo lang('per'); ?></label>
+                    <label class="control-label"><?php echo lang('price_per'); ?></label>
                     <select name="per" class="form-control input-sm" onclick="price_type(this.value)">
                       <option value="2"><?php echo lang('per_unit'); ?></option>
                       <option value="1"><?php echo lang('per_person'); ?></option>
@@ -65,7 +65,7 @@
                 </div><!-- col-sm-6 -->
                 <div class="col-sm-3" id="max-person" style="display:none">
                   <div class="form-group">
-                    <label class="control-label">Max. Person</label>
+                    <label class="control-label"><?php echo lang('max_person'); ?></label>
                     <select name="max_person"  class="form-control input-sm" onclick="price_options(this.value)">
                       <?php for ($i=0; $i <= 5 ; $i++) { 
                         echo '<option value="'.$i.'">'.$i.'</option>';
@@ -129,7 +129,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Extra Image</label>
+                <label class="col-sm-3 control-label"><?php echo lang('extra_image'); ?></label>
                 <div class="col-sm-6">
                 <div id="extra_image"></div>
                 <input type="file" name="userfile" id="uploadedfile">
@@ -265,6 +265,7 @@ jQuery(document).ready(function(){
 
 });
 
+var person_price = '<?php echo lang('person_price'); ?>';
 function price_options(cnt){
   //clear content
   $('#price-content').remove();
