@@ -48,28 +48,45 @@
               </div>
               
               <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo lang('pricing'); ?></label>
+                <label class="col-sm-3 control-label"></label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label"><?php echo lang('per'); ?></label>
-                    <select name="per" class="form-control input-sm">
-                      <option value="1"><?php echo lang('per_person'); ?></option>
+                    <select name="per" class="form-control input-sm" onclick="price_type(this.value)">
                       <option value="2"><?php echo lang('per_unit'); ?></option>
+                      <option value="1"><?php echo lang('per_person'); ?></option>
+                      <!--
                       <option value="3"><?php echo lang('per_day'); ?></option>
                       <option value="4"><?php echo lang('per_child'); ?></option>
+                      -->
                     </select>
                   </div>
                 </div><!-- col-sm-6 -->
-                <div class="col-sm-3">
+                <div class="col-sm-3" id="max-person" style="display:none">
                   <div class="form-group">
-                    <label class="control-label"><?php echo lang('price'); ?></label>
-                    <input type="text" name="price" placeholder="99.00" class="form-control input-sm">
+                    <label class="control-label">Max. Person</label>
+                    <select name="max_person"  class="form-control input-sm" onclick="price_options(this.value)">
+                      <?php for ($i=0; $i <= 5 ; $i++) { 
+                        echo '<option value="'.$i.'">'.$i.'</option>';
+                      }?>
+                    </select>
+                   
                   </div>
                 </div><!-- col-sm-6 -->
               </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('pricing'); ?></label>
+                <div class="col-sm-6">
+                   <input type="text" id="unit-price" name="price[unit]" placeholder="99.00" class="form-control input-sm">
+                <div id="person-price-content"></div>
+                </div>
+                
+              </div>
+
+              <!--
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('limit_period'); ?>
                   <div data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="<?php echo lang('limit_period_info'); ?>">
@@ -82,15 +99,17 @@
                     <label class="control-label"><?php echo lang('from'); ?></label>
                     <input type="text" name="start_date" class="form-control input-sm" placeholder="yyyy-mm-dd" id="from_date">
                   </div>
-                </div><!-- col-sm-6 -->
+                </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label"><?php echo lang('to'); ?></label>
                     <input type="text" name="end_date" class="form-control input-sm" placeholder="yyyy-mm-dd" id="to_date">
                   </div>
-                </div><!-- col-sm-6 -->
+                </div>
+
               </div>
               </div>
+              -->
 
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('available'); ?></label>
@@ -98,8 +117,8 @@
                 <table>
                   <tbody>
                     <tr>
-                      <?php $i=0; foreach (days_checkbox() as $k => $v) { $i++;
-                      echo '<td width="5%"><input type="checkbox" name="room_units[]" value="'.$k.'" checked/></td>';
+                      <?php $i=; foreach (days_checkbox() as $k => $v) { $i++;
+                      echo '<td width="5%"><input type="checkbox" name="available_days[]" value="'.$k.'" checked/></td>';
                       echo '<td width="40%">'.$v.'</td>';
                       if($i%2==0) echo '</tr><tr>';
                     } ?>
@@ -108,6 +127,17 @@
                 </table>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Extra Image</label>
+                <div class="col-sm-6">
+                <div id="extra_image"></div>
+                <input type="file" name="userfile" id="uploadedfile">
+                <input type="hidden" name="extra_image" id="extra_image_value">
+                </div>
+              </div>
+
+
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('basic_description'); ?></label>
                 <div class="col-sm-6">
@@ -195,7 +225,9 @@
 jQuery(document).ready(function(){
   // Chosen Select
   jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
-  
+
+  $("[data-toggle='tooltip']").tooltip();
+
   //datepicker
   jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
   jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
@@ -211,7 +243,18 @@ jQuery(document).ready(function(){
       e.preventDefault();
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('language'); ?></label><div class="col-sm-2"><select name="description['+x+'][lang]" size="1" class="form-control input-sm"><?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>"><?php echo $value["name"]; ?></option><?php } ?></select></div><div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#"><?php echo lang('remove'); ?></a></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('name'); ?></label><div class="col-sm-6"><input type="text" name="description['+x+'][title]" placeholder="<?php echo lang('name'); ?>" class="form-control input-sm"/></div></div><div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('descripton'); ?></label><div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
+          var html = '<div id="item"><div class="form-group"><label class="col-sm-3 control-label">'+
+          '<?php echo lang('language'); ?></label><div class="col-sm-2">'+
+          '<select name="description['+x+'][lang]" size="1" class="form-control input-sm">'+
+          '<?php foreach (languages() as $key => $value) { ?><option value="<?php echo $value["code"]; ?>">'+
+          '<?php echo $value["name"]; ?></option><?php } ?></select></div>'+
+          '<div class="col-sm-4"><a class="btn btn-xs btn-danger remove_field" href="#">'+
+          '<?php echo lang('remove'); ?></a></div></div>'+
+          '<div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('name'); ?></label>'+
+          '<div class="col-sm-6">'+
+          '<input type="text" name="description['+x+'][title]" placeholder="<?php echo lang('name'); ?>" class="form-control input-sm"/></div></div>'+
+          '<div class="form-group"><label class="col-sm-3 control-label"><?php echo lang('descripton'); ?></label>'+
+          '<div class="col-sm-6"><textarea name="description['+x+'][desc]"  class="form-control"></textarea></div></div><hr></div>';
           $(wrapper).append(html); //add input box
       }
   });
@@ -222,5 +265,88 @@ jQuery(document).ready(function(){
 
 });
 
+function price_options(cnt){
+  //clear content
+  $('#price-content').remove();
+  //$('#unit-price').slideDown();
+    if (cnt != 0) {
+      $('#price-content').slideDown();
+      $('#unit-price').slideUp();
+      html = '<div class="row" id="price-content">';
+      for (i = 1; i <= cnt; i++) {
+        html +='<div class="col-sm-2">'+
+          '<div class="form-group">'+
+          '<div class="row">'+
+          '<div class="col-sm-12 col-md-12">'+
+          '<input type="text" name="price['+i+']" rel="txtTooltip" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Person '+i+' Price">'+
+          '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div><!-- col-sm-6 -->';
+      };
+
+      html += '<div>';
+
+    $('#person-price-content').after(html);
+    $("[data-toggle='tooltip']").tooltip();
+    }else{
+       $('#unit-price').slideDown();
+    };
+
+}
+
+function price_type(type){
+  if (type==1) {
+    //$('#price-content').remove();
+    $('#max-person').slideDown();
+    $('#unit-price').slideUp();
+    $('#price-content').slideDown();
+  }else{
+    $('#max-person').slideUp();
+    $('#unit-price').slideDown();
+    $('#price-content').slideUp();
+  }
+}
+
 </script>
+<script src="<?php echo site_url('assets/back'); ?>/js/jupload.js"></script>
+<script type="text/javascript">
+  $(function() {
+      $('#uploadedfile').change(function() {
+          $(this).upload(base_url + 'reservation_actions/upload_extra_image', function(res) {
+            var obj = jQuery.parseJSON( res );
+            html = '<img src="'+obj.image+'" />';
+            $('#extra_image').html(html);
+            $('#extra_image_value').val(obj.image);
+          }, 'html');
+      });
+  });
+
+</script>
+
+<script type="text/javascript">
+//upload file
+  
+  //uploader event
+  /*
+  $('#uploadedfile').change(function(){
+  var formData = new FormData($('#uploadedfile')[0]);
+  $.ajax({
+         url: base_url + 'reservation_actions/upload_extra_image',
+         data: formData,
+         async: false,
+         contentType: false,
+         processData: false,
+         cache: false,
+         type: 'POST',
+         success: function(data)
+         {
+          console.log(data);
+         },
+       })    
+  return false;  
+  });
+*/
+
+  </script>
 <?php $this->load->view('footer'); ?>

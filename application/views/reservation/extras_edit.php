@@ -64,28 +64,74 @@
               </div>
               
               <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo lang('pricing'); ?></label>
+                <label class="col-sm-3 control-label"></label>
                  <div class="row">
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label">per</label>
-                    <select name="per" class="form-control input-sm">
+                    <select name="per" class="form-control input-sm" onclick="price_type(this.value)">
                       <option value="1" <?php echo $extra->per == '1' ? 'selected' :''; ?>><?php echo lang('per_person'); ?></option>
                       <option value="2" <?php echo $extra->per == '2' ? 'selected' :''; ?>><?php echo lang('per_unit'); ?></option>
+                      <!--
                       <option value="3" <?php echo $extra->per == '3' ? 'selected' :''; ?>><?php echo lang('per_day'); ?></option>
                       <option value="4" <?php echo $extra->per == '4' ? 'selected' :''; ?>><?php echo lang('per_child'); ?></option>
+                      -->
                     </select>
                   </div>
                 </div><!-- col-sm-6 -->
-                <div class="col-sm-3">
+
+                <div class="col-sm-3" id="max-person" <?php echo $extra->per != 1 ? 'style="display:none"' : ''; ?>>
                   <div class="form-group">
-                    <label class="control-label"><?php echo lang('price'); ?></label>
-                    <input type="text" name="price" value="<?php echo $extra->price; ?>" class="form-control input-sm">
+                    <label class="control-label">Max. Person</label>
+                    <select name="max_person"  class="form-control input-sm" onclick="price_options(this.value)">
+                      <?php for ($i=0; $i <= 5 ; $i++) {
+                        $selected = $extra->max_person == $i ? 'selected="selected"' : '';
+                        echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+                      }?>
+                    </select>
+                   
                   </div>
                 </div><!-- col-sm-6 -->
+               
               </div>
               </div>
 
+              <div class="form-group">
+               <?php $price = json_decode($extra->price); //print_r($price); ?>
+               <label class="col-sm-3 control-label"><?php echo lang('pricing'); ?></label>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label"><?php echo lang('price'); ?></label>
+                    <?php if($extra->per == 1) : ?>
+
+                    <input type="text" id="unit-price" style="display:none" name="price[unit]" value="<?php echo $price->unit; ?>" class="form-control input-sm">
+                    <div id="person-price-content"></div>
+                    <div class="row" id="price-content">
+                     <?php for ($i=1; $i <= $extra->max_person ; $i++) { ?>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                        <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                        <input type="text" name="price[<?php echo $i; ?>]" value="<?php echo $price->$i; ?>" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Person <?php echo $i; ?> Price">
+                        </div>
+                        </div>
+                      </div>
+                    </div><!-- col-sm-6 -->
+                    <?php } ?>
+                    </div>
+
+                    <?php else: ?>
+
+                    <input type="text" id="unit-price"  name="price[unit]" value="<?php echo $price->unit; ?>" class="form-control input-sm">
+                    <div id="person-price-content"></div>
+
+                  <?php endif; ?>
+                  </div>
+                </div><!-- col-sm-6 -->
+
+                
+              </div>
+              <!--
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('limit_period'); ?>
                   <div data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="If you set '0' there will be no limitation.">
@@ -98,15 +144,16 @@
                     <label class="control-label"><?php echo lang('from'); ?></label>
                     <input type="text" name="start_date" class="form-control input-sm" value="<?php echo $extra->start_date; ?>" id="from_date">
                   </div>
-                </div><!-- col-sm-6 -->
+                </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label class="control-label"><?php echo lang('to'); ?></label>
                     <input type="text" name="end_date" class="form-control input-sm" value="<?php echo $extra->end_date; ?>" id="to_date">
                   </div>
-                </div><!-- col-sm-6 -->
+                </div>
               </div>
               </div>
+              -->
 
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('available'); ?></label>
@@ -130,10 +177,22 @@
                 </table>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Extra Image</label>
+                <div class="col-sm-6">
+                <div id="extra_image"><?php if($extra->image) {echo '<img src="'.$extra->image.'" />'; } ?></div>
+                <input type="file" name="userfile" id="uploadedfile">
+                <input type="hidden" name="extra_image" id="extra_image_value" value="<?php echo $extra->image; ?>">
+                </div>
+              </div>
+
+
+
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('basic_description'); ?></label>
                 <div class="col-sm-6">
-                <textarea class="form-control" name="description"></textarea>
+                <textarea class="form-control" name="basic_desc"><?php echo $extra->description; ?></textarea>
                    
                 </div>
               </div>
@@ -247,6 +306,63 @@ jQuery(document).ready(function(){
   })
 
 });
+function price_options(cnt){
+  //clear content
+  $('#price-content').remove();
+  //$('#unit-price').slideDown();
+    if (cnt != 0) {
+      $('#price-content').slideDown();
+      $('#unit-price').slideUp();
+      html = '<div class="row" id="price-content">';
+      for (i = 1; i <= cnt; i++) {
+        html +='<div class="col-sm-2">'+
+          '<div class="form-group">'+
+          '<div class="row">'+
+          '<div class="col-sm-12 col-md-12">'+
+          '<input type="text" name="price['+i+']" rel="txtTooltip" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Person '+i+' Price">'+
+          '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div><!-- col-sm-6 -->';
+      };
+
+      html += '<div>';
+
+    $('#person-price-content').after(html);
+    $("[data-toggle='tooltip']").tooltip();
+    }else{
+       $('#unit-price').slideDown();
+    };
+
+}
+
+function price_type(type){
+  if (type==1) {
+    //$('#price-content').remove();
+    $('#max-person').slideDown();
+    $('#unit-price').slideUp();
+    $('#price-content').slideDown();
+  }else{
+    $('#max-person').slideUp();
+    $('#unit-price').slideDown();
+    $('#price-content').slideUp();
+  }
+}
+
+</script>
+
+<script src="<?php echo site_url('assets/back'); ?>/js/jupload.js"></script>
+<script type="text/javascript">
+  $(function() {
+      $('#uploadedfile').change(function() {
+          $(this).upload(base_url + 'reservation_actions/upload_extra_image', function(res) {
+            var obj = jQuery.parseJSON( res );
+            html = '<img src="'+obj.image+'" />';
+            $('#extra_image').html(html);
+            $('#extra_image_value').val(obj.image);
+          }, 'html');
+      });
+  });
 
 </script>
 <?php $this->load->view('footer'); ?>

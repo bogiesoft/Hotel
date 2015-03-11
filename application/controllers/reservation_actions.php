@@ -267,9 +267,9 @@ class Reservation_actions extends MY_Controller {
 			'name' 			=> $this->input->post('name'),
 			'description' 	=> $this->input->post('basic_desc'),
 			'per' 			=> $this->input->post('per'),
-			'price' 		=> $this->input->post('price'),
-			'start_date' 	=> $this->input->post('start_date'),
-			'end_date' 		=> $this->input->post('end_date'),
+			'price' 		=> json_encode($this->input->post('price')),
+			'image' 		=> $this->input->post('extra_image'),
+			'max_person' 	=> $this->input->post('max_person'),
 			'available_days'=> null!==$this->input->post('available_days') ? implode(',',$this->input->post('available_days')) : '0',
 			'status'		=> $this->input->post('status'),
 			'hotel_id'		=> $hotel_id,
@@ -954,4 +954,70 @@ class Reservation_actions extends MY_Controller {
 
 		echo json_encode($child);
 	}
+
+
+	function upload_extra_image(){
+		$config['upload_path']   =   "uploads/extras/";
+
+		if (!is_dir($config['upload_path'])) {
+		    mkdir($config['upload_path'], 0777, TRUE);
+		}
+
+		$config['allowed_types'] =   "gif|jpg|jpeg|png"; 
+		$config['max_size']      =   "5000";
+		$config['max_width']     =   "2400";
+		$config['max_height']    =   "2400";
+
+		$config['maintain_ratio']   = FALSE;      
+        $config['width'] = "600";      
+        $config['height'] = "280";
+
+		$this->load->library('upload',$config);
+
+		$file_name = $this->session->userdata('hotel_id').'-'.time();
+
+		if(!$this->upload->do_upload('userfile',$file_name)){
+		   echo $this->upload->display_errors();
+		}else{
+
+			$finfo=$this->upload->data();
+
+			//$image_data = $this->upload->data();
+			$config2['image_library'] = 'gd2';
+			$config2['source_image'] = $finfo['full_path'];
+			$config2['maintain_ratio'] = FALSE;
+			$config2['width'] = 600;
+			$config2['height'] = 280;
+			$config2['overwrite'] = TRUE;
+			$this->load->library('image_lib',$config2); 
+
+			if ( !$this->image_lib->resize()){
+				echo json_encode(array('status'=>'error'));  
+			}else{
+				$file_name =$finfo['raw_name'].$finfo['file_ext'];
+				$response = site_url('uploads/extras/'.$file_name);
+
+				echo json_encode(array('status'=>'success','image'=>$response));
+			}
+
+
+		}
+
+	}
+
+	function _createThumbnail($filename){
+        $config['image_library']    = "gd2";      
+        $config['source_image']     = "uploads/extras/thumbs" .$filename;      
+        $config['create_thumb']     = TRUE;      
+        $config['maintain_ratio']   = FALSE;      
+        $config['width'] = "600";      
+        $config['height'] = "280";
+        $this->load->library('image_lib',$config);
+        if(!$this->image_lib->resize())
+        {
+            echo $this->image_lib->display_errors();
+        }      
+ 
+    }
+
 }
