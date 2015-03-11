@@ -325,7 +325,7 @@ function price_options(cnt){
           '<div class="form-group">'+
           '<div class="row">'+
           '<div class="col-sm-12 col-md-12">'+
-          '<input type="text" name="price['+i+']" rel="txtTooltip" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="Person '+i+' Price">'+
+          '<input type="text" name="price['+i+']" rel="txtTooltip" class="form-control input-sm" data-toggle="tooltip" data-trigger="focus" data-placement="top" title="'+person_price.replace(/%s/g,i)+'">'+
           '</div>'+
           '</div>'+
         '</div>'+
