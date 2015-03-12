@@ -562,8 +562,8 @@ $this->load->view('front/header');
                             <li>
                                 <img src="<?php echo $extra['image']; ?>" alt="" />
                                 <div class="content">
-                                    <strong><?php echo $extra['name'];?></strong>
-                                    <p class="splash-text"><?php echo $extra['description']; ?></p>
+                                    <strong><?php echo  $extra['title'] !=NULL ? $extra['title'] : $extra['name'] ;?></strong>
+                                    <p class="splash-text"><?php echo $extra['content'] !=NULL  ? $extra['content'] : $extra['description']; ?></p>
                                 </div>
                                 <?php 
                                 $prices = json_decode($extra['price']);

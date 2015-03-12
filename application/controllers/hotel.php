@@ -142,7 +142,7 @@ class Hotel extends CI_Controller {
 		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
 
-		$data['extras']			= $this->front_model->get_extras($hotel_id);
+		$data['extras']			= $this->front_model->get_extras($hotel_id,$default_lang);
 		//create prices and set session 
 		//by rooms and promotions
 		$this->calculate_room_prices($data['rooms']);
