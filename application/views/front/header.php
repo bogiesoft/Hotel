@@ -12,6 +12,7 @@
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo site_url('assets/front'); ?>/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="<?php echo site_url('assets/front'); ?>/js/jquery.zaccordion.min.js"></script>
     <script src="<?php echo site_url('assets/front'); ?>/js/countdown.js"></script>
     <script src="<?php echo site_url('assets/front'); ?>/js/main.js"></script>
     <script type="text/javascript">

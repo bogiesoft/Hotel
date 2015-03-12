@@ -175,3 +175,24 @@ function array_orderby()
     call_user_func_array('array_multisort', $args);
     return array_pop($args);
 }
+
+/*
+*	Eğer adult 3 ise ve price 2 kişilik ayarlanmışsa 3.kişi için son ayarlanan fiyat geçerli
+*/
+function calculate_extra_price($obj,$person){
+	$price = '';
+	//print_r($obj);
+	end($obj);
+	// get the key
+	$key = key($obj);
+	for ($i=1; $i <=$person ; $i++) {
+		if (isset($obj->$i)) {
+			$price += $obj->$i;
+		}else{
+			$price += $obj->$key;
+		}
+
+	}
+
+	return $price;
+}

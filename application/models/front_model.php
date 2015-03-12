@@ -78,4 +78,8 @@ class Front_Model extends CI_Model{
 		return $this->db->query("SELECT * FROM room_photos WHERE room_id = $id")->result_array();
 	}
 
+	function get_extras($hotel_id){
+		return $this->db->query("SELECT * FROM extras WHERE hotel_id = $hotel_id")->result_array();
+	}
+
 }

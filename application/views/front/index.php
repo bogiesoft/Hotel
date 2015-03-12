@@ -555,7 +555,96 @@ $this->load->view('front/header');
                         <div class="col-md-6 text-right">
                             <span class="dtls" id="dtls-h1">Details Hide <img src="<?php echo site_url('assets/front');?>/img/zt-d-arrow.png" /></span>
                             <span class="dtls" id="dtls-sh1">Details View <img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /></span>
+                        </div> 
+                        <div id="dtl-dtl1">
+                        <ul id="splash">
+                            <?php foreach ($extras as $key => $extra) : ?>
+                            <li>
+                                <img src="<?php echo $extra['image']; ?>" alt="" />
+                                <div class="content">
+                                    <strong><?php echo $extra['name'];?></strong>
+                                    <p class="splash-text"><?php echo $extra['description']; ?></p>
+                                </div>
+                                <?php 
+                                $prices = json_decode($extra['price']);
+                                
+                                //set price per unit or person
+                                if($extra['per'] ==2){
+                                    $price = $prices->unit;
+                                }else{
+                                    $price = calculate_extra_price($prices,$options['adults']);
+                                }
+
+                                //price descripton
+                                if($extra['per'] ==2){
+                                    $price_desc = 'for Unit';
+                                }else{
+                                    $price_desc = 'for '.$options['adults'].' adult';
+                                }
+                                ?>
+                                <div class="price">
+                                    <strong><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?> <?php echo $price_desc; ?></strong>
+                                </div>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <!--
+                        <ul id="splash">
+                            <li>
+                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/diner.jpg" alt="" />
+                                <div class="content">
+                                    <strong>Old School Diner</strong>
+                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor lacus sollicitudin ligula sagittis a ultricies nulla ultricies. Ut odio nisi, posuere sed blandit at, bibendum non dolor.</p>
+                                </div>
+                                <div class="price">
+                                    <strong>55 EUR</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/pool.jpg" alt="" />
+                                <div class="content">
+                                    <strong>A Day at the Pool</strong>
+                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in condimentum sem. Aenean faucibus dignissim auctor. In ut libero vitae augue laoreet iaculis at a tellus.</p>
+                                </div>
+                                <div class="price">
+                                    <strong>55 EUR</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/gas.jpg" alt="" />
+                                <div class="content">
+                                    <strong>Fill it Up!</strong>
+                                    <p class="splash-text">Duis viverra velit orci. Sed vestibulum mi nec est imperdiet sed ullamcorper augue molestie. Donec ultrices facilisis erat at porttitor.</p>
+                                </div>
+                                <div class="price">
+                                    <strong>55 EUR</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/car.jpg" alt="" />
+                                <div class="content">
+                                    <strong>Going for a Drive</strong>
+                                    <p class="splash-text">Phasellus sed lectus nisl, eget cursus eros. Suspendisse posuere orci eu lorem luctus et porta nunc posuere. Cras sed lectus vitae leo accumsan adipiscing.</p>
+                                </div>
+                                <div class="price">
+                                    <strong>55 EUR</strong>
+                                </div>
+                            </li>
+                             <li>
+                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/pool.jpg" alt="" />
+                                <div class="content">
+                                    <strong>A Day at the Pool</strong>
+                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in condimentum sem. Aenean faucibus dignissim auctor. In ut libero vitae augue laoreet iaculis at a tellus.</p>
+                                </div>
+                                <div class="price">
+                                    <strong>55 EUR</strong>
+                                </div>
+                            </li>
+
+                        </ul>
+                        -->
                         </div>
+                        <!--
                         <div class="col-md-12" id="dtl-dtl1">
                             <div class="row">
                                 <div class="col-md-12">
@@ -696,6 +785,8 @@ $this->load->view('front/header');
                         show more
                         </div>
                         </div>
+
+                        -->
                     </div>
                     <div class="row details">
                         <div class="col-md-6">
