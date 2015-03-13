@@ -208,31 +208,7 @@
                       $(function(){
                         fb = new Formbuilder({
                           selector: '.fb-main',
-                          bootstrapData: [
-                            {
-                              "label": "Please enter your flight number",
-                              "field_type": "text",
-                              "required": true,
-                              "field_options": {},
-                              "cid": "c6"
-                            },
-                            {
-                              "label": "Security personnel #82?",
-                              "field_type": "radio",
-                              "required": true,
-                              "field_options": {
-                                  "options": [{
-                                      "label": "Yes",
-                                      "checked": false
-                                  }, {
-                                      "label": "No",
-                                      "checked": false
-                                  }],
-                                  "include_other_option": true
-                              },
-                              "cid": "c10"
-                            }
-                          ]
+                          bootstrapData: []
                         });
 
                         fb.on('save', function(payload){

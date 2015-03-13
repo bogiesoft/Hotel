@@ -81,7 +81,7 @@ class Front_Model extends CI_Model{
 	function get_extras($hotel_id,$lang){
 		return $this->db->query("SELECT * FROM extras as e 
 			LEFT JOIN extras_contents as ec ON ec.extra_id = e.id
-			WHERE e.hotel_id = $hotel_id and ec.lang='$lang'")->result_array();
+			WHERE e.hotel_id = $hotel_id and ec.lang='$lang' and status=1")->result_array();
 	}
 
 }
