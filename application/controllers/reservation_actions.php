@@ -244,6 +244,31 @@ class Reservation_actions extends MY_Controller {
 
 	}
 
+	/*
+	* Delete room by id
+	* Used in jtable
+	*/
+	function delete_room(){
+		$id = $this->input->post('id');
+
+		$room 		= $this->db->delete('rooms',array('id' => $id));
+		$photos 	= $this->db->delete('room_photos',array('room_id'=>$id));
+		$children 	= $this->db->delete('room_children',array('room_id'=>$id));
+		$content 	= $this->db->delete('room_contents',array('room_id'=>$id));
+		$prices 	= $this->db->delete('prices',array('room_id'=>$id));
+
+		//Return result to jTable
+		$jTableResult = array();
+		if ($room and $photos and $children and $content and $prices) {
+			$jTableResult['Result'] = "OK";
+		}else{
+			$jTableResult['Result'] = "Error";
+		}
+
+		print json_encode($jTableResult);
+
+	}
+
 	function list_extras(){
 		$hotel_id = $this->session->userdata('hotel_id');
 		$query = $this->db->query("SELECT * FROM extras WHERE hotel_id='$hotel_id'");
