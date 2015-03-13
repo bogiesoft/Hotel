@@ -196,3 +196,19 @@ function calculate_extra_price($obj,$person){
 
 	return $price;
 }
+
+/*
+* Teting the formbuilder library
+*/
+
+function formbuild($form){
+	if ($form != NULL) {
+		$ci =& get_instance();
+		$ci->load->library('Formbuilder');
+		$ci->formbuilder->setFormbuilderSchema(json_decode($form));
+	    print_r( $ci->formbuilder->toJsonFormFromSchema());
+	}else{
+		echo 'Form Yok';
+	}
+
+}

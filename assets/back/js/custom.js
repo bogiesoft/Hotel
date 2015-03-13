@@ -140,7 +140,7 @@ jQuery(document).ready(function() {
    
    
    // Sticky Header
-   if(jQuery.cookie('sticky-header'))
+   if($.cookie('sticky-header'))
       jQuery('body').addClass('stickyheader');
       
    // Sticky Left Panel

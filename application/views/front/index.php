@@ -548,6 +548,7 @@ $this->load->view('front/header');
                         </p>
                         </div>
                     </div>
+                    <?php if(is_array($extras)) : ?>
                     <div class="row details">
                         <div class="col-md-6">
                         Enhance Your Stay
@@ -559,6 +560,15 @@ $this->load->view('front/header');
                         <div id="dtl-dtl1">
                         <ul id="splash">
                             <?php foreach ($extras as $key => $extra) : ?>
+                                <?php
+                                /*
+                                echo '<!--';
+                                echo '<pre>';
+                                print_r(json_decode($extra['forms']));
+                                echo '-->';
+                                */
+                                ?>
+
                             <li>
                                 <img src="<?php echo $extra['image']; ?>" alt="" />
                                 <div class="content">
@@ -588,61 +598,6 @@ $this->load->view('front/header');
                             </li>
                             <?php endforeach; ?>
                         </ul>
-                        <!--
-                        <ul id="splash">
-                            <li>
-                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/diner.jpg" alt="" />
-                                <div class="content">
-                                    <strong>Old School Diner</strong>
-                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor lacus sollicitudin ligula sagittis a ultricies nulla ultricies. Ut odio nisi, posuere sed blandit at, bibendum non dolor.</p>
-                                </div>
-                                <div class="price">
-                                    <strong>55 EUR</strong>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/pool.jpg" alt="" />
-                                <div class="content">
-                                    <strong>A Day at the Pool</strong>
-                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in condimentum sem. Aenean faucibus dignissim auctor. In ut libero vitae augue laoreet iaculis at a tellus.</p>
-                                </div>
-                                <div class="price">
-                                    <strong>55 EUR</strong>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/gas.jpg" alt="" />
-                                <div class="content">
-                                    <strong>Fill it Up!</strong>
-                                    <p class="splash-text">Duis viverra velit orci. Sed vestibulum mi nec est imperdiet sed ullamcorper augue molestie. Donec ultrices facilisis erat at porttitor.</p>
-                                </div>
-                                <div class="price">
-                                    <strong>55 EUR</strong>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/car.jpg" alt="" />
-                                <div class="content">
-                                    <strong>Going for a Drive</strong>
-                                    <p class="splash-text">Phasellus sed lectus nisl, eget cursus eros. Suspendisse posuere orci eu lorem luctus et porta nunc posuere. Cras sed lectus vitae leo accumsan adipiscing.</p>
-                                </div>
-                                <div class="price">
-                                    <strong>55 EUR</strong>
-                                </div>
-                            </li>
-                             <li>
-                                <img src="http://www.armagost.com/wp-content/themes/assassinnew/images/pool.jpg" alt="" />
-                                <div class="content">
-                                    <strong>A Day at the Pool</strong>
-                                    <p class="splash-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in condimentum sem. Aenean faucibus dignissim auctor. In ut libero vitae augue laoreet iaculis at a tellus.</p>
-                                </div>
-                                <div class="price">
-                                    <strong>55 EUR</strong>
-                                </div>
-                            </li>
-
-                        </ul>
-                        -->
                         </div>
                         <!--
                         <div class="col-md-12" id="dtl-dtl1">
@@ -788,6 +743,7 @@ $this->load->view('front/header');
 
                         -->
                     </div>
+                    <?php endif; ?>
                     <div class="row details">
                         <div class="col-md-6">
                         Room Preferences

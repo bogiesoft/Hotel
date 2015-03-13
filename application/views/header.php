@@ -20,15 +20,23 @@
   <![endif]-->
 
   <script src="<?php echo site_url('assets/back'); ?>/js/jquery-1.10.2.min.js"></script>
+  
+  <script src="<?php echo site_url('assets/back'); ?>/js/vendor.js"></script>
+  <script src="<?php echo site_url('assets/back'); ?>/js/formbuilder.js"></script>
   <script src="<?php echo site_url('assets'); ?>/jtable/jquery-ui.min.js"></script>
 
+  
   <script src="<?php echo site_url('assets/back'); ?>/js/jquery-migrate-1.2.1.min.js"></script>
   <script src="<?php echo site_url('assets/back'); ?>/js/bootstrap.min.js"></script>
   <script src="<?php echo site_url('assets/back'); ?>/js/modernizr.min.js"></script>
 
   <script src="<?php echo site_url('assets/back'); ?>/js/jquery.cookies.js"></script>
   <script src="<?php echo site_url('assets/back'); ?>/js/chosen.jquery.min.js"></script>
+
+
   <script src="<?php echo site_url('assets/back'); ?>/js/custom.js"></script>
+
+
 
   <script type="text/javascript">
     var base_url = '<?php echo base_url(); ?>';

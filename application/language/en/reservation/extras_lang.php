@@ -5,6 +5,7 @@ $lang['add_new_extra']	= 'Add New Extra';
 $lang['edit_extra']		= 'Edit Extra';
 $lang['general']		= 'General';
 $lang['translation']	= 'Translation';
+$lang['forms']			= 'Forms';
 
 $lang['name'] 			= 'Name';
 $lang['pricing']		= 'Pricing';

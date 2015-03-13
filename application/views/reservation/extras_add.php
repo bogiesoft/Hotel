@@ -29,6 +29,8 @@
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('general'); ?></strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translation'); ?></strong></a></li>
+          <li class=""><a href="#forms" data-toggle="tab"><strong><?php echo lang('forms'); ?></strong></a></li>
+      
       </ul>
     
       <div class="row">
@@ -196,6 +198,52 @@
                 </div>
 
               </div> <!-- description end -->
+
+
+               <div class="tab-pane" id="forms">
+                  <div class='fb-main'></div>
+                  <link href="<?php echo site_url('assets/back'); ?>/css/vendor.css" rel="stylesheet">
+                  <link href="<?php echo site_url('assets/back'); ?>/css/formbuilder.css" rel="stylesheet">
+                  <script type="text/javascript">
+                      $(function(){
+                        fb = new Formbuilder({
+                          selector: '.fb-main',
+                          bootstrapData: [
+                            {
+                              "label": "Please enter your flight number",
+                              "field_type": "text",
+                              "required": true,
+                              "field_options": {},
+                              "cid": "c6"
+                            },
+                            {
+                              "label": "Security personnel #82?",
+                              "field_type": "radio",
+                              "required": true,
+                              "field_options": {
+                                  "options": [{
+                                      "label": "Yes",
+                                      "checked": false
+                                  }, {
+                                      "label": "No",
+                                      "checked": false
+                                  }],
+                                  "include_other_option": true
+                              },
+                              "cid": "c10"
+                            }
+                          ]
+                        });
+
+                        fb.on('save', function(payload){
+                          $('#form_input').val(JSON.stringify(payload));
+                          console.log(JSON.stringify(payload));
+                        })
+                      });
+                    </script>
+                    <input type="hidden" name="forms" id="form_input" />
+              </div> <!-- forms end -->
+
             
             </div> <!-- tab content end -->
 
@@ -222,17 +270,13 @@
 <script src="<?php echo site_url('assets/back'); ?>/js/jquery.maskedinput.min.js"></script>
 
 <script type="text/javascript">
-jQuery(document).ready(function(){
-  // Chosen Select
-  jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
+$(document).ready(function(){
 
   $("[data-toggle='tooltip']").tooltip();
 
-  //datepicker
-  jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
-  jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
+
   // Tooltip
-  jQuery('.tooltips').tooltip({ container: 'body'});
+  $('.tooltips').tooltip({ container: 'body'});
 
   var max_fields      = 30; //maximum input boxes allowed
   var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -262,7 +306,6 @@ jQuery(document).ready(function(){
   $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
       e.preventDefault(); $(this).closest('#item').remove(); x--;
   })
-
 });
 
 var person_price = '<?php echo lang('person_price'); ?>';

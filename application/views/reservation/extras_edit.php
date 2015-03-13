@@ -45,6 +45,7 @@
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('general'); ?></strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translation'); ?></strong></a></li>
+          <li class=""><a href="#forms" data-toggle="tab"><strong><?php echo lang('forms'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -251,6 +252,37 @@
 
               </div> <!-- description end -->
             
+            <div class="tab-pane" id="forms">
+                  <div class='fb-main'></div>
+                  <link href="<?php echo site_url('assets/back'); ?>/css/vendor.css" rel="stylesheet">
+                  <link href="<?php echo site_url('assets/back'); ?>/css/formbuilder.css" rel="stylesheet">
+                  <script type="text/javascript">
+                 
+                      $(function(){
+                      var form_inputs = '<?php echo $extra->forms; ?>';
+
+                      var obj = '';
+                      if (form_inputs != null) {
+                        var obj = '<?php echo $extra->forms; ?>';
+                      }
+                      //console.log(form_inputs);
+                        fb = new Formbuilder({
+                          selector: '.fb-main',
+                          bootstrapData:  JSON.parse(obj)
+                        });
+
+                        fb.on('save', function(payload){
+                          var value = JSON.stringify(fb.mainView.collection.toJSON());
+                          $('#form_input').val(value);
+                          console.log(value);
+
+                         // console.log(JSON.stringify(payload));
+                        })
+                      });
+                    </script>
+                    <input type="hidden" name="forms" id="form_input"/>
+              </div> <!-- forms end -->
+
             </div> <!-- tab content end -->
 
             <input type="hidden" name="update" value="1" />
@@ -258,7 +290,7 @@
            
             <div class="row">
               <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="<?php echo lang('save'); ?>">
+              <input type="submit" class="btn btn-primary" value='<?php echo lang('save'); ?>'>
               </div>
                 
              <div class="col-sm-6">
@@ -278,14 +310,9 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function(){
-  // Chosen Select
-  jQuery("#country").chosen({'width':'100%','white-space':'nowrap'});
 
   $("[data-toggle='tooltip']").tooltip();
 
-  //datepicker
-  jQuery('#from_date').datepicker({ dateFormat: 'yy-mm-dd' });
-  jQuery('#to_date').datepicker({ dateFormat: 'yy-mm-dd' });
   // Tooltip
   jQuery('.tooltips').tooltip({ container: 'body'});
 

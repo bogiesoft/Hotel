@@ -270,6 +270,7 @@ class Reservation_actions extends MY_Controller {
 			'price' 		=> json_encode($this->input->post('price')),
 			'image' 		=> $this->input->post('extra_image'),
 			'max_person' 	=> $this->input->post('max_person'),
+			'forms' 		=> $this->input->post('forms'),
 			'available_days'=> null!==$this->input->post('available_days') ? implode(',',$this->input->post('available_days')) : '0',
 			'status'		=> $this->input->post('status'),
 			'hotel_id'		=> $hotel_id,
