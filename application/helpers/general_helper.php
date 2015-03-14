@@ -212,3 +212,107 @@ function formbuild($form){
 	}
 
 }
+
+function form_builder($json,$arr=array()){
+
+	$option['id'] 		= isset($arr['id']) ? $arr['id'] : 0;
+	$option['name'] 	= isset($arr['name']) ? $arr['name'] : 'default[]';
+	$option['class'] 	= isset($arr['class']) ? 'class="'.$arr['class'].'"' : 'class="form"';
+
+	//start form fields
+	$output = '';
+	$json = json_decode($json);
+	if (is_array($json)) {
+		
+		foreach ($json as $key => $form) {
+			
+			//if field = text
+			if($form->field_type == 'text'){
+				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<input type="text" name="'.$option['name'].'['.$form->label.']" '.$option['class'].'>';
+			}
+
+			//if field = paragraph
+			if($form->field_type == 'paragraph'){
+				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<textarea name="'.$option['name'].'['.$form->label.']" '.$option['class'].'></textarea>';
+			}
+
+
+			//if field = time
+			if($form->field_type == 'time'){
+				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<input type="text" name="'.$option['name'].'['.$form->label.'][hh]" '.$option['class'].' style="width:30px">';
+				$output .= '<input type="text" name="'.$option['name'].'['.$form->label.'][mm]" '.$option['class'].' style="width:30px">';
+				$output .= '<input type="text" name="'.$option['name'].'['.$form->label.'][ss]" '.$option['class'].' style="width:30px">';
+			}
+
+
+			//if field = date
+			if ($form->field_type == 'date') {
+				$class = substr_replace($option['class'], ' datepicker"', -1);
+				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<input type="text" name="'.$option['name'].'['.$form->label.']" '.$class.'>';
+
+			}
+
+
+			//if field = checkbox
+			if ($form->field_type == 'checkboxes') {
+				$output .= '<label>'.$form->label.'</label>';
+
+				foreach ($form->field_options->options as $opt => $checkbox) {
+					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
+					$output .= '<input type="checkbox" name="'.$option['name'].'['.$form->label.']" '.$option['class'].' '.$checked.'>';
+					$output .= '<label>'.$checkbox->label.'</label>';
+				}
+				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
+					$output .= '<input type="text" name="'.$option['name'].'['.$form->label.']" '.$option['class'].'>';
+					$output .= '<label>Other</label>';			
+				}
+
+			}
+
+			//if field = radio
+			if ($form->field_type == 'radio') {
+				$output .= '<label>'.$form->label.'</label>';
+
+				foreach ($form->field_options->options as $opt => $checkbox) {
+					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
+					$output .= '<input type="radio" name="'.$option['name'].'['.$form->label.']" '.$option['class'].' '.$checked.'>';
+					$output .= '<label>'.$checkbox->label.'</label>';
+				}
+				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
+					$output .= '<input type="text" name="'.$option['name'].'['.$form->label.']" '.$option['class'].'>';
+					$output .= '<label>Other</label>';			
+				}
+
+			}
+
+
+			//if field = dropdown
+			if ($form->field_type == 'dropdown') {
+				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<select name="'.$option['name'].'['.$form->label.']" '.$option['class'].'>';
+				foreach ($form->field_options->options as $opt => $checkbox) {
+					$selected = $checkbox->checked === true ? 'checked="checked"' : '';
+					$output .= '<option value="'.$checkbox->label.'" '.$selected.'>'.$checkbox->label.'</option>';
+				}
+				$output .= '</select>';
+
+			}
+
+			$output .= '<br>';
+
+
+		}
+
+		return $output;
+	}else{
+
+		return false;
+	}
+
+	
+
+}

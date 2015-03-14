@@ -561,19 +561,24 @@ $this->load->view('front/header');
                         <ul id="splash">
                             <?php foreach ($extras as $key => $extra) : ?>
                                 <?php
-                                /*
+                                //form_builder($extra['forms']);
                                 echo '<!--';
                                 echo '<pre>';
+                                
                                 print_r(json_decode($extra['forms']));
                                 echo '-->';
-                                */
+                               
                                 ?>
 
                             <li>
                                 <img src="<?php echo $extra['image']; ?>" alt="" />
                                 <div class="content">
                                     <strong><?php echo  $extra['title'] !=NULL ? $extra['title'] : $extra['name'] ;?></strong>
-                                    <p class="splash-text"><?php echo $extra['content'] !=NULL  ? $extra['content'] : $extra['description']; ?></p>
+                                    <p class="splash-text">
+                                    <?php echo $extra['content'] !=NULL  ? $extra['content'] : $extra['description']; ?>
+                                    <br>
+                                    <?php echo form_builder($extra['forms']); ?>
+                                    </p>
                                 </div>
                                 <?php 
                                 $prices = json_decode($extra['price']);

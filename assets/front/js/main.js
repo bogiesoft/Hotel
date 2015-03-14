@@ -292,5 +292,5 @@ $(function() {
         height: 240
     });
 
- 
+ $('.ui-datepicker-div').css('zIndex', 50);
 });
