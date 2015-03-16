@@ -436,6 +436,8 @@ class Hotel extends CI_Controller {
 
 	/*
 	* Print Currency Rates JSON
+	* DEPRECATED
+	* Currency Function used in General Helper
 	*/
 	public function currency_rates(){
 		// get current exchange rates
