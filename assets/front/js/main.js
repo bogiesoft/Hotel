@@ -294,3 +294,64 @@ $(function() {
 
  $('.ui-datepicker-div').css('zIndex', 50);
 });
+
+function form_to_arr(div){
+
+   var data =  $(div+' :input').serialize();
+
+   $.ajax({
+            url: base_url + "hotel/user_extras",
+            type: "POST",
+            data: data,
+            dataType: 'json',
+            success: function(ret){
+                consle.log(ret);
+            },
+            error:function(){
+
+            }   
+        }); 
+
+}
+function buildRequestStringData(form) {
+    var select = $(form).find('select'),
+        input = $(form).find('input'),
+        requestString = '{';
+    for (var i = 0; i < select.length; i++) {
+        requestString += '"' + $(select[i]).attr('name') + '": "' +$(select[i]).val() + '",';
+    }
+    if (select.length > 0) {
+        requestString = requestString.substring(0, requestString.length - 1);
+    }
+    for (var i = 0; i < input.length; i++) {
+        if ($(input[i]).attr('type') !== 'checkbox' || $(input[i]).attr('type') !== 'radio') {
+            requestString += '"' + $(input[i]).attr('name') + '":"' + $(input[i]).val() + '",';
+        } else {
+            if ($(input[i]).prop('checked',true)) {
+                requestString += '"' + $(input[i]).attr('name') +'":"' + $(input[i]).val() +'",';
+            }else if ($(input[i]).attr('selected')) {
+                requestString += '"' + $(input[i]).attr('name') +'":"' + $(input[i]).val() +'",';
+            }
+        }
+    }
+    if (input.length > 0) {
+        requestString = requestString.substring(0, requestString.length - 1);
+    }
+    requestString += '}';
+    return requestString;
+}
+
+
+function buildRequestStringData1(form) {
+    var inputValues = [];
+    $(form+' input').each(function() {
+        var type = $(this).attr("type");
+        if ((type == "checkbox" || type == "radio") && $(this).is(":checked")) {
+            inputValues.push($(this).val());
+        }
+        else if (type != "button" || type != "submit") {
+            inputValues.push($(this).val());
+        }
+    })
+    return inputValues.join(',');
+}

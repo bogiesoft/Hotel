@@ -577,7 +577,7 @@ $this->load->view('front/header');
                                     <p class="splash-text">
                                     <?php echo $extra['content'] !=NULL  ? $extra['content'] : $extra['description']; ?>
                                     <br>
-                                    <?php echo form_builder($extra['forms']); ?>
+                                    <?php echo form_builder($extra['forms'],array('id'=>$extra['id'])); ?>
                                     </p>
                                 </div>
                                 <?php 

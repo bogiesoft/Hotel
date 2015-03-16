@@ -15,7 +15,7 @@ class My_Controller extends CI_Controller
 		//load language
 
 		if ($this->session->userdata('user_lang')) {
-			$this->language = $$this->session->userdata('language');
+			$this->language = $this->session->userdata('language');
 		}
 
 		$this->lang->load('general',$this->language);

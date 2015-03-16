@@ -48,7 +48,7 @@ class Hotel extends CI_Controller {
 		//$this->setCurrency($hotel->currency);
 		
 		//$this->user_currency = isset($this->session->userdata('currency')) ? $this->session->userdata('currency') : $this->currency;
-		$this->user_currency= 'CAD';
+		$this->user_currency= 'TRY';
 		if ($this->user_currency != $this->currency) {
 			$this->currency_rate = currency_rates($this->currency,$this->user_currency);
 		}
@@ -430,6 +430,9 @@ class Hotel extends CI_Controller {
 		//print_r($this->session->userdata);
 	}
 
+	function user_extras(){
+		print_r($_POST);
+	}
 
 	/*
 	* Print Currency Rates JSON
