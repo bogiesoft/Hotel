@@ -561,34 +561,7 @@ $this->load->view('front/header');
                         <ul id="splash">
                             <?php foreach ($extras as $key => $extra) : ?>
                                 <?php
-                                //form_builder($extra['forms']);
-                                echo '<!--';
-                                echo '<pre>';
-                                
-                                print_r(json_decode($extra['forms']));
-                                echo '-->';
-                               
-                                ?>
-
-                            <li>
-                                <img src="<?php echo $extra['image']; ?>" alt="" />
-                                <div class="content">
-                                    <strong><?php echo  $extra['title'] !=NULL ? $extra['title'] : $extra['name'] ;?></strong>
-                                    <p class="splash-text">
-                                    <?php echo $extra['content'] !=NULL  ? $extra['content'] : $extra['description']; ?>
-                                    <br>
-                                    <?php echo form_builder($extra['forms'],array('id'=>$extra['id'])); ?>
-                                    </p>
-                                </div>
-                                <?php 
-                                $prices = json_decode($extra['price']);
-                                
-                                //set price per unit or person
-                                if($extra['per'] ==2){
-                                    $price = $prices->unit;
-                                }else{
-                                    $price = calculate_extra_price($prices,$options['adults']);
-                                }
+                                $price = $prices->extras->$extra['id']->price;
 
                                 //price descripton
                                 if($extra['per'] ==2){
@@ -596,7 +569,30 @@ $this->load->view('front/header');
                                 }else{
                                     $price_desc = 'for '.$options['adults'].' adult';
                                 }
+                                $extra_title    = $extra['title'] !=NULL ? $extra['title'] : $extra['name'];
+                                $extra_content  = $extra['content'] !=NULL  ? $extra['content'] : $extra['description'];
                                 ?>
+
+                            <li>
+                                <img src="<?php echo $extra['image']; ?>" alt="" />
+                                <div class="content">
+                                    <strong><?php echo $extra_title; ?></strong>
+                                    <p class="splash-text">
+                                    <?php echo  $extra_content; ?>
+                                    <br>
+                                    <?php 
+                                    $extra_options = array(
+                                        'id'            =>$extra['id'],
+                                        'extra_name'    =>$extra_title,
+                                        'currency'      =>$options['currency'],
+                                        'user_currency' =>$options['user_currency'],
+                                        'currency_rate' =>$options['currency_rate'],
+                                        'price'         =>$price);
+                                    echo form_builder($extra['forms'],$extra_options); 
+                                    ?>
+                                    </p>
+                                </div>
+                               
                                 <div class="price">
                                     <strong><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?> <?php echo $price_desc; ?></strong>
                                 </div>

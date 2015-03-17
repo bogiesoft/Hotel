@@ -142,7 +142,7 @@ class Hotel extends CI_Controller {
 		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
 
-		$data['extras']			= $this->front_model->get_extras($hotel_id,$default_lang);
+
 		//create prices and set session 
 		//by rooms and promotions
 		$this->calculate_room_prices($data['rooms']);
@@ -153,8 +153,13 @@ class Hotel extends CI_Controller {
 		}else{
 			$data['promotion']		= false;
 		}
+
+		
+		//Extras
+		$data['extras']			= $this->front_model->get_extras($hotel_id,$default_lang);
+		$this->calculate_extra_prices($data['extras']);
 				
-		$data['prices'] 		= $this->session->userdata('room_prices');
+		$data['prices'] 		= $this->session->userdata('prices_all');
 		echo '<!--';
 		echo '<pre>';
 		print_r($data);
@@ -180,11 +185,6 @@ class Hotel extends CI_Controller {
 		}elseif($this->adults >= 3){
 			$type = 'triple_price';
 		}
-
-		/* TO DO!!!!
-		* ekstra girilen fiyata çözüm bulunacak
-		*/
-		
 
 		//if rooms available
 		if (!is_array($arr)) {
@@ -237,7 +237,7 @@ class Hotel extends CI_Controller {
 
 		}
 
-		$this->session->set_userdata('room_prices',$total_room_price);
+		$this->session->set_userdata('prices_all',$total_room_price);
 
 	}
 	/*
@@ -264,7 +264,7 @@ class Hotel extends CI_Controller {
 	*/
 	private function calculate_promo_prices($promotions){
 
-		$room_prices = $this->session->userdata('room_prices');
+		$room_prices = $this->session->userdata('prices_all');
 
 		foreach ($room_prices as $rid => $room) {
 			
@@ -279,9 +279,38 @@ class Hotel extends CI_Controller {
 			}		
 		}
 
-		return $this->session->set_userdata('room_prices',$room_prices);
+		return $this->session->set_userdata('prices_all',$room_prices);
 	
 	}
+
+	/*
+	* Calculate extra prices
+	*/
+	private function calculate_extra_prices($extras){
+		$extra_prices = new StdClass();
+
+		$room_prices = $this->session->userdata('prices_all');
+
+		foreach ($extras as $key => $extra) {
+			$prices = json_decode($extra['price']);
+            
+            //set price per unit or person
+            if($extra['per'] ==2){
+                $price = $prices->unit;
+            }else{
+                $price = calculate_extra_price($prices,$this->adults);
+            }
+
+			@$extra_prices->$extra['id']->price = $price;
+		}
+		//print_r($extra_prices); exit;
+		//print_r($room_prices); exit;
+		$room_prices->extras = $extra_prices;
+		//print_r($room_prices); exit;
+		return $this->session->set_userdata('prices_all',$room_prices);
+
+	}
+
 
 	/*
 	* Set Promotion Rules
@@ -373,13 +402,7 @@ class Hotel extends CI_Controller {
 		$rate 		= $this->input->post('rate');
 		$currency 	= $this->input->post('currency');
 		$default_currency = $this->input->post('default_currency');
-		/*
-		$item = array('room_id' => $room_id,
-			'qty' => $qty,
-			'promotion' => $promotion);
-		*/
-
-		$room_prices = $this->session->userdata('room_prices');
+		$room_prices = $this->session->userdata('prices_all');
 
 		if ($this->input->post('type') == 'delete') {
 			foreach ($user_cart as $key => $c) {
@@ -416,7 +439,6 @@ class Hotel extends CI_Controller {
 		$response['currency_rate'] = $rate;
 		$response['default_currency'] = $default_currency;
 
-		//print_r($this->session->userdata('user_cart')); exit;
 		foreach ($user_cart as $r => $v) {
 			$response['user_price']  	+= show_price($v['price']*$v['qty'],$rate);
 			$response['total_price']  	+= $v['price']*$v['qty'];
@@ -426,8 +448,6 @@ class Hotel extends CI_Controller {
 		$response['details'] = $user_cart;
 
 		echo json_encode($response);
-		//print_r($user_cart); exit;
-		//print_r($this->session->userdata);
 	}
 
 	function user_extras(){

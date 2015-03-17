@@ -239,17 +239,21 @@ function formbuild($form){
 
 function form_builder($json,$arr=array()){
 
-	$option['id'] 		= isset($arr['id']) ? $arr['id'] : 0;
-	$option['name'] 	= isset($arr['name']) ? $arr['name'] : 'default[]';
-	$option['price'] 	= isset($arr['price']) ? $arr['price'] : '00';
-	$option['class'] 	= isset($arr['class']) ? 'class="'.$arr['class'].'"' : 'class="form"';
+	$option['id'] 			= isset($arr['id']) ? $arr['id'] : 0;
+	$option['name'] 		= isset($arr['name']) ? $arr['name'] : 'default[]';
+	$option['price'] 		= isset($arr['price']) ? $arr['price'] : '00';
+	$option['class'] 		= isset($arr['class']) ? 'class="'.$arr['class'].'"' : 'class="form"';
+	$option['extra_name']	= isset($arr['extra_name']) ? $arr['extra_name'] : '';
+	$option['currency']		= isset($arr['currency']) ? $arr['currency'] : 'EUR';
+	$option['user_currency']= isset($arr['user_currency']) ? $arr['user_currency'] : 'EUR';
+	$option['currency_rate']= isset($arr['currency_rate']) ? $arr['currency_rate'] : '1';
 
 	//start form fields
 	$output = '';
 	$json = json_decode($json);
 	if (is_array($json) and count($json) > 0) {
 
-		$output .= '<p class="extra_form'.$option['id'].'">';
+		$output .= '<p class="extra_form extra_form'.$option['id'].'">';
 
 		foreach ($json as $key => $form) {
 			
@@ -291,11 +295,11 @@ function form_builder($json,$arr=array()){
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<input type="checkbox" value="'.$checkbox->label.'" name="'.replace_chars($form->label).'[]" '.$option['class'].' '.$checked.'>';
-					$output .= '<label>'.$checkbox->label.'</label>';
+					$output .= $checkbox->label;
 				}
 				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
 					$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$option['class'].'>';
-					$output .= '<label>Other</label>';			
+					$output .= 'Other';			
 				}
 
 			}
@@ -307,11 +311,11 @@ function form_builder($json,$arr=array()){
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<input type="radio" value="'.$checkbox->label.'" name="'.replace_chars($form->label).'" '.$option['class'].' '.$checked.'>';
-					$output .= '<label>'.$checkbox->label.'</label>';
+					$output .= $checkbox->label;
 				}
 				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
 					$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$option['class'].'>';
-					$output .= '<label>Other</label>';			
+					$output .= 'Other';			
 				}
 
 			}
@@ -337,6 +341,10 @@ function form_builder($json,$arr=array()){
 		if ($output != '') {
 			$output .= '<input type="button" value="Get values!" id="button'.$option['id'].'" />';
 			$output .= '<input type="hidden" name="extra_id" value="'.$option['id'].'">';
+			$output .= '<input type="hidden" name="extra_name" value="'.$option['extra_name'].'">';
+			$output .= '<input type="hidden" name="currency" value="'.$option['currency'].'">';
+			$output .= '<input type="hidden" name="user_currency" value="'.$option['user_currency'].'">';
+			$output .= '<input type="hidden" name="currency_rate" value="'.$option['currency_rate'].'">';
 			$output .= '<input type="hidden" name="price" value="'.$option['price'].'">';
 			$output .= '<script>';
 			$output .= "$('#button".$option['id']."').click(function () {
