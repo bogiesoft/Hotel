@@ -766,18 +766,6 @@ $this->load->view('front/header');
                         show2
                         </div>
                     </div>
-                    <div class="row details">
-                        <div class="col-md-6">
-                        Additional information regarding your arrival
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <span class="dtls" id="dtls-h3">Details Hide <img src="<?php echo site_url('assets/front');?>/img/zt-d-arrow.png" /></span>
-                            <span class="dtls" id="dtls-sh3">Details View <img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /></span>
-                        </div>
-                        <div class="col-md-12" id="dtl-dtl3">
-                        show3
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-12 welcome">
                             <div class="row">
