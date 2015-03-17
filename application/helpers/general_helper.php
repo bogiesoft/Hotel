@@ -260,22 +260,22 @@ function form_builder($json,$arr=array()){
 			//if field = text
 			if($form->field_type == 'text'){
 				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$option['class'].'>';
+				$output .= '<input type="text" name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
 			}
 
 			//if field = paragraph
 			if($form->field_type == 'paragraph'){
 				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<textarea name="'.replace_chars($form->label).'" '.$option['class'].'></textarea>';
+				$output .= '<textarea name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'></textarea>';
 			}
 
 
 			//if field = time
 			if($form->field_type == 'time'){
 				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<input type="text" name="'.$form->label.'[hh]" '.$option['class'].' style="width:30px">';
-				$output .= '<input type="text" name="'.$form->label.'[mm]" '.$option['class'].' style="width:30px">';
-				$output .= '<input type="text" name="'.$form->label.'[ss]" '.$option['class'].' style="width:30px">';
+				$output .= '<input type="text" name="extra['.$option['id'].']['.$form->label.'][hh]" '.$option['class'].' style="width:30px">';
+				$output .= '<input type="text" name="extra['.$option['id'].']['.$form->label.'][mm]" '.$option['class'].' style="width:30px">';
+				$output .= '<input type="text" name="extra['.$option['id'].']['.$form->label.'][ss]" '.$option['class'].' style="width:30px">';
 			}
 
 
@@ -283,7 +283,7 @@ function form_builder($json,$arr=array()){
 			if ($form->field_type == 'date') {
 				$class = substr_replace($option['class'], ' datepicker"', -1);
 				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$class.'>';
+				$output .= '<input type="text" name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$class.'>';
 
 			}
 
@@ -294,11 +294,11 @@ function form_builder($json,$arr=array()){
 
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
-					$output .= '<input type="checkbox" value="'.$checkbox->label.'" name="'.replace_chars($form->label).'[]" '.$option['class'].' '.$checked.'>';
+					$output .= '<input type="checkbox" value="'.$checkbox->label.'" name="extra['.$option['id'].']['.replace_chars($form->label).'][]" '.$option['class'].' '.$checked.'>';
 					$output .= $checkbox->label;
 				}
 				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
-					$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$option['class'].'>';
+					$output .= '<input type="text" name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
 					$output .= 'Other';			
 				}
 
@@ -310,11 +310,11 @@ function form_builder($json,$arr=array()){
 
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
-					$output .= '<input type="radio" value="'.$checkbox->label.'" name="'.replace_chars($form->label).'" '.$option['class'].' '.$checked.'>';
+					$output .= '<input type="radio" value="'.$checkbox->label.'" name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].' '.$checked.'>';
 					$output .= $checkbox->label;
 				}
 				if (isset($form->field_options->include_other_option) and $form->field_options->include_other_option == 1) {
-					$output .= '<input type="text" name="'.replace_chars($form->label).'" '.$option['class'].'>';
+					$output .= '<input type="text" name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
 					$output .= 'Other';			
 				}
 
@@ -324,7 +324,7 @@ function form_builder($json,$arr=array()){
 			//if field = dropdown
 			if ($form->field_type == 'dropdown') {
 				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<select name="'.replace_chars($form->label).'" '.$option['class'].'>';
+				$output .= '<select name="extra['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$selected = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<option value="'.$checkbox->label.'" '.$selected.'>'.$checkbox->label.'</option>';
@@ -345,7 +345,7 @@ function form_builder($json,$arr=array()){
 			$output .= '<input type="hidden" name="currency" value="'.$option['currency'].'">';
 			$output .= '<input type="hidden" name="user_currency" value="'.$option['user_currency'].'">';
 			$output .= '<input type="hidden" name="currency_rate" value="'.$option['currency_rate'].'">';
-			$output .= '<input type="hidden" name="price" value="'.$option['price'].'">';
+			$output .= '<input type="hidden" name="type'.$option['id'].'" value="add">';
 			$output .= '<script>';
 			$output .= "$('#button".$option['id']."').click(function () {
 						    form_to_arr('.extra_form".$option['id']."');

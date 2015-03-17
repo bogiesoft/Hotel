@@ -154,7 +154,7 @@ class Hotel extends CI_Controller {
 			$data['promotion']		= false;
 		}
 
-		
+
 		//Extras
 		$data['extras']			= $this->front_model->get_extras($hotel_id,$default_lang);
 		$this->calculate_extra_prices($data['extras']);
@@ -451,7 +451,48 @@ class Hotel extends CI_Controller {
 	}
 
 	function user_extras(){
-		print_r($_POST);
+		$prices 		= $this->session->userdata('prices_all');
+		$extra_id 		= $this->input->post('extra_id');
+		$extra_name		= $this->input->post('extra_name');
+		$currency 		= $this->input->post('currency');
+		$user_currency 	= $this->input->post('user_currency');
+		$currency_rate 	= $this->input->post('currency_rate');
+		$user_currency 	= $this->input->post('user_currency');
+		$price 			= $prices->extras->$extra_id->price;
+		$type 			= $this->input->post('type'.$extra_id);
+		$extra 			= $this->input->post('extra');
+
+		$user_extras = $this->session->userdata('user_extras');
+		
+		$extra_details = '';
+		foreach ($extra as $key => $e) {
+			$extra_details = $e;
+		}
+			
+		//$user_extras = array();
+		if ($type == 'add') {
+			$user_extras[$extra_id] = array('name'=>$extra_name,'price'	=> $price,'details'=>$extra_details);
+
+			$this->session->set_userdata('user_extras',$user_extras);
+		}else{
+			unset($user_extras[$extra_id]);
+			$this->session->set_userdata('user_extras',$user_extras);
+		}
+
+		//get total items in cart
+		$response['total_price'] = 0;
+		$response['user_price'] = 0;
+		$response['currency'] = $currency;
+		$response['currency_rate'] = $currency_rate;
+		$response['user_currency'] = $user_currency;
+
+		foreach ($user_extras as $key => $extra) {
+			$response['user_price']  	+= show_price($extra['price'],$currency_rate);
+			$response['total_price']  	+= $extra['price'];
+		}
+
+		$response['details'] = $user_extras;
+		echo json_encode($response);
 	}
 
 	/*

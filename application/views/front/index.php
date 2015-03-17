@@ -355,18 +355,31 @@ $this->load->view('front/header');
                             <div><?php echo date('j F Y',strtotime($options['checkin'])); ?>- <?php echo date('j F Y',strtotime($options['checkout'])); ?></div>
                             <div><b id="total_room"></b> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
                         </div>
+                        <!--
                         <div id="lc-b">
                             <img src="<?php echo site_url('assets/front');?>/img/ecal-white.png" width="" alt="" />
                             <span>Need to Change Reservation</span>
                             <img src="<?php echo site_url('assets/front');?>/img/arr-dwn.png" class="fl-r mtb-5" width="" alt="" />
                         </div>
+
                         <div id="lc-b-in">
                             <div>Best Flexible Rete</div>
                             <div>
                             Subject to 8 % VAT, Breakfast is exclusive. Breakfast is 48 EUR per person, per day.
                             </div>
                         </div>
+                        -->
                         <div class="items_in_cart"></div>
+
+                        <div class="extras" style="display:none">
+                            <div class="park-view">Extras</div>
+                            <div class="extras_in_cart"></div>
+                            <div class="extra_info">
+                                <div>Best Available Rate/night</div>
+                                <div>280.00 TRY</div>
+                            </div>
+                        </div>
+
 
                         <div class="avrg" style="display:none">
                             <div>TOTAL</div>
