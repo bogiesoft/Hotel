@@ -374,10 +374,6 @@ $this->load->view('front/header');
                         <div class="extras" style="display:none">
                             <div class="park-view">Extras</div>
                             <div class="extras_in_cart"></div>
-                            <div class="extra_info">
-                                <div>Best Available Rate/night</div>
-                                <div>280.00 TRY</div>
-                            </div>
                         </div>
 
 

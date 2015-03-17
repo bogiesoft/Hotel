@@ -463,7 +463,7 @@ class Hotel extends CI_Controller {
 		$extra 			= $this->input->post('extra');
 
 		$user_extras = $this->session->userdata('user_extras');
-		
+
 		$extra_details = '';
 		foreach ($extra as $key => $e) {
 			$extra_details = $e;
@@ -480,6 +480,8 @@ class Hotel extends CI_Controller {
 		}
 
 		//get total items in cart
+		$response['extra_id'] = $extra_id;
+		$response['action'] = $type;
 		$response['total_price'] = 0;
 		$response['user_price'] = 0;
 		$response['currency'] = $currency;

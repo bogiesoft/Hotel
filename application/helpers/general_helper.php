@@ -339,13 +339,13 @@ function form_builder($json,$arr=array()){
 		}
 
 		if ($output != '') {
-			$output .= '<input type="button" value="Get values!" id="button'.$option['id'].'" />';
+			$output .= '<input type="button" value="Add" id="button'.$option['id'].'" />';
 			$output .= '<input type="hidden" name="extra_id" value="'.$option['id'].'">';
 			$output .= '<input type="hidden" name="extra_name" value="'.$option['extra_name'].'">';
 			$output .= '<input type="hidden" name="currency" value="'.$option['currency'].'">';
 			$output .= '<input type="hidden" name="user_currency" value="'.$option['user_currency'].'">';
 			$output .= '<input type="hidden" name="currency_rate" value="'.$option['currency_rate'].'">';
-			$output .= '<input type="hidden" name="type'.$option['id'].'" value="add">';
+			$output .= '<input type="hidden" name="type'.$option['id'].'" id="extra_type'.$option['id'].'" value="add">';
 			$output .= '<script>';
 			$output .= "$('#button".$option['id']."').click(function () {
 						    form_to_arr('.extra_form".$option['id']."');

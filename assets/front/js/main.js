@@ -305,7 +305,38 @@ function form_to_arr(div){
             data: data,
             dataType: 'json',
             success: function(ret){
-                consle.log(ret);
+
+            //change button value
+            if (ret.action == 'add') {
+                $('#button'+ret.extra_id).val('Remove');
+                $('#extra_type'+ret.extra_id).val('delete');
+            }else{
+                $('#button'+ret.extra_id).val('Add');
+                $('#extra_type'+ret.extra_id).val('add');
+            };
+            
+            //show extra info in cart
+
+            var cnt = Object.keys(ret.details).length;
+            if (cnt > 0) {
+                $('.extras').fadeIn();
+            }else{
+                $('.extras').fadeOut();
+            }
+            
+            $('.extra_info').remove();
+
+            //list user extras in cart
+            $.each(ret.details, function(i,val){
+            html = '<div class="extra_info">'+
+                    '<div>'+val.name+'</div>'+
+                    '<div>'+val.price+' '+ret.user_currency+'</div>'+
+                    '</div>';
+
+            $('.extras_in_cart').after(html);
+
+            });
+               // console.log(ret);
             },
             error:function(){
 
