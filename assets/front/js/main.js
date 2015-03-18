@@ -200,7 +200,7 @@ $(function() {
            form_builder(room_id);
         }else{
             //delete room preference
-            $('.preferences_'+room_id).remove();
+            $('.preferences_form'+room_id).remove();
         }
         
 
