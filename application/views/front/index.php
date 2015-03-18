@@ -816,7 +816,6 @@ $this->load->view('front/header');
     </div><!-- /tab-content ---------------------------------------------------------------------- -->
 </div>
 </div>
-
 <?php
 $this->load->view('front/footer');
 ?>
