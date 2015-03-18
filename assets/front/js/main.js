@@ -355,7 +355,7 @@ function form_to_arr(div){
             var total_user_price = parseInt(room_user_price)+ret.user_price;
             
             //$('.avrgdefault').html(total_price +' '+ret.user_currency);
-            $('.avrgtotal').html(total_user_price+' '+ret.currency);
+            $('.avrgtotal').html(total_user_price+' '+ret.user_currency);
 
             if(ret.currency != ret.user_currency){
                 $('.avrgdefault').html(total_price +' '+ret.currency);
