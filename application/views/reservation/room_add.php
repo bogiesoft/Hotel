@@ -29,6 +29,7 @@
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('general'); ?></strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translation'); ?></strong></a></li>
+          <li class=""><a href="#preferences" data-toggle="tab"><strong><?php echo lang('preferences'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -170,6 +171,27 @@
                 </div>
 
               </div> <!-- description end -->
+
+               <div class="tab-pane" id="preferences">
+                  <div class='fb-main'></div>
+                  <link href="<?php echo site_url('assets/back'); ?>/css/vendor.css" rel="stylesheet">
+                  <link href="<?php echo site_url('assets/back'); ?>/css/formbuilder.css" rel="stylesheet">
+                  <script type="text/javascript">
+                      $(function(){
+                        fb = new Formbuilder({
+                          selector: '.fb-main',
+                          bootstrapData: []
+                        });
+
+                        fb.on('save', function(payload){
+                          $('#form_input').val(JSON.stringify(payload));
+                          //console.log(JSON.stringify(payload));
+                        })
+                      });
+                    </script>
+                    <input type="hidden" name="forms" id="form_input" />
+              </div> <!-- forms end -->
+
             
             </div> <!-- tab content end -->
 

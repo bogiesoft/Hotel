@@ -148,6 +148,7 @@ class Reservation_actions extends MY_Controller {
 			'max_adult' 	=> $this->input->post('max_adult'),
 			'max_child' 	=> $this->input->post('max_child'),
 			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
+			'preferences' 	=> empty($this->input->post('forms')) ? 0 : $this->input->post('forms'),
 			'hotel_id'		=> $hotel_id,
 			'code'			=> $code);
 

@@ -43,6 +43,7 @@
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong><?php echo lang('general'); ?></strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translation'); ?></strong></a></li>
+          <li class=""><a href="#preferences" data-toggle="tab"><strong><?php echo lang('preferences'); ?></strong></a></li>
           <li class=""><a href="#photos" data-toggle="tab"><strong><?php echo lang('photos'); ?></strong></a></li>
       </ul>
     
@@ -226,6 +227,37 @@
 
               </div> <!-- description end -->
             
+              <div class="tab-pane" id="preferences">
+                  <div class='fb-main'></div>
+                  <link href="<?php echo site_url('assets/back'); ?>/css/vendor.css" rel="stylesheet">
+                  <link href="<?php echo site_url('assets/back'); ?>/css/formbuilder.css" rel="stylesheet">
+                  <script type="text/javascript">
+                      $(function(){
+                      var form_inputs = '<?php echo $room->preferences; ?>';
+
+                      var obj = '';
+                      if (form_inputs != null) {
+                        var obj = '<?php echo $room->preferences; ?>';
+                      }
+
+                      console.log(form_inputs);
+                        fb = new Formbuilder({
+                          selector: '.fb-main',
+                          bootstrapData:  JSON.parse(obj)
+                        });
+
+                        fb.on('save', function(payload){
+                          var value = JSON.stringify(fb.mainView.collection.toJSON());
+                          $('#form_input').val(value);
+                          console.log(value);
+
+                         // console.log(JSON.stringify(payload));
+                        })
+                      });
+                    </script>
+                    <input type="hidden" name="forms" id="form_input" />
+              </div> <!-- forms end -->
+
               
               <div class="tab-pane" id="photos">
 

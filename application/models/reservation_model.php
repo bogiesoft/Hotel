@@ -59,7 +59,7 @@ class Reservation_Model extends CI_Model
 
 	function get_hotel_rooms(){
 		$hotel_id = $this->session->userdata('hotel_id');
-		$rooms = $this->db->query("SELECT id,name,capacity,min_child,max_child FROM rooms WHERE hotel_id=$hotel_id order by id")->result();
+		$rooms = $this->db->query("SELECT id,name,capacity,min_child,max_child,preferences FROM rooms WHERE hotel_id=$hotel_id order by id")->result();
 		return $rooms;
 	}
 

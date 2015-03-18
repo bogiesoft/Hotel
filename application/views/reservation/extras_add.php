@@ -213,7 +213,7 @@
 
                         fb.on('save', function(payload){
                           $('#form_input').val(JSON.stringify(payload));
-                          console.log(JSON.stringify(payload));
+                          //console.log(JSON.stringify(payload));
                         })
                       });
                     </script>

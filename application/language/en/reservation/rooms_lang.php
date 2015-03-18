@@ -13,6 +13,7 @@ $lang['delete_confirm']	= 'All data of this room will be deleted. Are you sure?'
 
 $lang['general']		= 'General Info';
 $lang['translation']	= 'Translations';
+$lang['preferences']	= 'Preferences';
 $lang['photos']			= 'Photos';
 
 $lang['adults']			= 'Adults';
