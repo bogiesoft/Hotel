@@ -381,6 +381,10 @@ $this->load->view('front/header');
                             <div>TOTAL</div>
                             <div class="c-090 avrgtotal"></div>
                             <div class="c-090 avrgdefault"></div>
+                            <input type="hidden" value="00" id="rooms_total">
+                            <input type="hidden" value="00" id="rooms_total_user">
+                            <input type="hidden" value="00" id="extras_total">
+                            <input type="hidden" value="00" id="extras_total_user">
                             <div class="price_information"></div>
                         </div>
                         <div class="cancellation">

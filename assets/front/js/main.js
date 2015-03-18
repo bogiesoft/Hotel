@@ -200,11 +200,20 @@ $(function() {
 
                 });
 
-                $('.avrgtotal').html(data.user_price+' '+currency);
+                var extras_price = $('#extras_total').val();
+                var extras_user_price = $('#extras_total_user').val();
+                var total_price = parseInt(extras_price)+data.total_price;
+                var total_user_price = parseInt(extras_user_price)+data.user_price;
 
+
+                $('.avrgtotal').html(total_user_price+' '+currency);
+
+                $('#rooms_total').val(data.total_price);
+                $('#rooms_total_user').val(data.user_price);
                 //if user currency is different
                 if(data.currency != data.default_currency){
-                    $('.avrgdefault').html(data.total_price+' '+data.default_currency);
+
+                    $('.avrgdefault').html(total_price +' '+data.default_currency);
                     html ='<div>*'+data.currency+' rates are for information. The hotel accepts payment in '+default_currency+'</div>';
                     $('.price_information').html(html);
                 }
@@ -336,6 +345,24 @@ function form_to_arr(div){
             $('.extras_in_cart').after(html);
 
             });
+
+            $('#extras_total').val(ret.total_price);
+            $('#extras_total_user').val(ret.user_price);
+
+            var room_price = $('#rooms_total').val();
+            var room_user_price = $('#rooms_total_user').val();
+            var total_price = parseInt(room_price)+ret.total_price;
+            var total_user_price = parseInt(room_user_price)+ret.user_price;
+            
+            //$('.avrgdefault').html(total_price +' '+ret.user_currency);
+            $('.avrgtotal').html(total_user_price+' '+ret.currency);
+
+            if(ret.currency != ret.user_currency){
+                $('.avrgdefault').html(total_price +' '+ret.currency);
+                html ='<div>*'+ret.user_currency+' rates are for information. The hotel accepts payment in '+ret.currency+'</div>';
+                $('.price_information').html(html);
+            }
+             
                // console.log(ret);
             },
             error:function(){

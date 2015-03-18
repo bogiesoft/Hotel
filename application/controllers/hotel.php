@@ -403,8 +403,8 @@ class Hotel extends CI_Controller {
 		$currency 	= $this->input->post('currency');
 		$default_currency = $this->input->post('default_currency');
 		$room_prices = $this->session->userdata('prices_all');
-
-		if ($this->input->post('type') == 'delete') {
+		$action  	= $this->input->post('type');
+		if ($action == 'delete') {
 			foreach ($user_cart as $key => $c) {
 				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
 					unset($user_cart[$key]);
@@ -432,6 +432,7 @@ class Hotel extends CI_Controller {
 		$this->session->set_userdata('user_cart',$user_cart);
 		
 		//get total items in cart
+		$response['action'] = $action;
 		$response['total_price'] = 0;
 		$response['user_price'] = 0;
 		$response['total_qty'] = 0;
