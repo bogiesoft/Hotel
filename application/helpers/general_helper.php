@@ -257,7 +257,7 @@ function form_builder($json,$arr=array()){
 	$json = json_decode($json);
 	if (is_array($json) and count($json) > 0) {
 
-		$output .= '<p class="'.$arr['name'].'_form '.$arr['name'].'_form'.$option['id'].'">';
+		$output .= '<p class="'.$option['name'].'_form '.$option['name'].'_form'.$option['id'].'">';
 
 		foreach ($json as $key => $form) {
 			
