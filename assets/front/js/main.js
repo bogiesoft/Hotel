@@ -245,9 +245,16 @@ $(function() {
             });
     });*/
 // ---------------------------------- end select menus
-    $("#reserve").click(function(){
+    $("#reserve_button").click(function(e){
+         e.preventDefault();
+        //activaTab('tab_c');
         $("#ddd").click();
+
     });
+
+    function activaTab(tab){
+        $('.nav-pills a[href="#' + tab + '"]').tab('show');
+    };
 
     $('#persons').change(function(e){
         e.preventDefault();

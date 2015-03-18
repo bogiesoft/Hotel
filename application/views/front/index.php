@@ -315,7 +315,8 @@ $this->load->view('front/header');
                 <div id="fixed-rez">
                     <form method="post" action="#">
                         <div id="reserve">
-                            <input class="bb-no" type="submit" value="Reserve" />
+                            <!-- <a href="#tab_c" class="bb-no" data-toggle="pill" id="ddd">Reserve</a>-->
+                            <input class="bb-no" id="reserve_button" type="submit" value="Reserve" />
                         </div>
                         <p class="cent">Confirmation is immediate</p>
                         <div class="best-price">

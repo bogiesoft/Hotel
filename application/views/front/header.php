@@ -97,10 +97,10 @@
             </a>
         </div>
         <div class="col-md-3" id="tc2">
-            <a href="#tab_b" data-toggle="pill" class="active">1 Room &amp; Rates</a></li>
+            <a href="#tab_b" data-toggle="pill" class="nav-pills active">1 Room &amp; Rates</a></li>
         </div>
         <div class="col-md-6" id="tc3">
-            <a href="#tab_c" data-toggle="pill" id="ddd">2 Guest Details &amp;  Confirmation</a>
+            <a href="#tab_c" data-toggle="pill" class="nav-pills" id="ddd">2 Guest Details &amp;  Confirmation</a>
         </div>
     </div><!-- /tabs controls -->
     <div class="row top2" id="mdate">
