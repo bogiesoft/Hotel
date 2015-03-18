@@ -156,6 +156,31 @@ $(function() {
         });
     });
     */
+
+
+    function form_builder(room_id){
+     
+     $.ajax({
+            url: base_url + "actions/get_room_preferences",
+            data : {"room_id":room_id},
+            method: "POST",
+            dataType: "json",
+            success: function (response) {
+
+            var options = {"room_id":room_id,"data":response};
+            $.post(base_url + "actions/room_preferences_builder",options )
+                .done(function( data ) {
+                $('#room_preferences').after(data);        
+            });
+
+
+            }
+        });
+
+    }
+
+
+
    	$('.sl-menu').change(function(){
         var default_currency    = $(this).data('currency');
 		var room_id 	= $(this).find(':selected').data('room');
@@ -169,7 +194,17 @@ $(function() {
 		var currency 	= $(this).find(':selected').data('currency');
         
 		var data = {"default_currency":default_currency, "room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type, "name":name, "desc": desc,"rate":rate,"currency":currency};
-		$.ajax({
+		
+        //generate preferences form builder
+        if (qty != 0) {
+           form_builder(room_id);
+        }else{
+            //delete room preference
+            $('.preferences_'+room_id).remove();
+        }
+        
+
+        $.ajax({
 	        url: base_url + "hotel/user_cart",
 	        type: "POST",
 	        data: data,
@@ -217,7 +252,7 @@ $(function() {
                     html ='<div>*'+data.currency+' rates are for information. The hotel accepts payment in '+default_currency+'</div>';
                     $('.price_information').html(html);
                 }
-	        	console.log(data);
+	        	//console.log(data);
 	        },
 	        error:function(){
                 alert('Server error occured. Thats all we know.');

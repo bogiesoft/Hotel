@@ -4,6 +4,7 @@ $this->load->view('front/header');
 <script type="text/javascript">
     $(document).ready(function(){
 
+    /*
     $.ajax({
         url: base_url + "hotel/currency_rates?c=<?php echo $options['currency']; ?>",
         // the name of the callback parameter
@@ -15,8 +16,11 @@ $this->load->view('front/header');
            console.log(response); // server response
         }
     });
+*/
+    
 
 });
+
 </script>
     <div class="tab-content">
         <div class="tab-pane active po-re" id="tab_b"><!-- first tap -->
@@ -768,7 +772,7 @@ $this->load->view('front/header');
                             <span class="dtls" id="dtls-sh2">Details View <img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /></span>
                         </div>
                         <div class="col-md-12" id="dtl-dtl2">
-                        show2
+                        <div id="room_preferences"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -817,6 +821,10 @@ $this->load->view('front/header');
     </div><!-- /tab-content ---------------------------------------------------------------------- -->
 </div>
 </div>
+
+<script type="text/javascript">
+
+</script>
 <?php
 $this->load->view('front/footer');
 ?>

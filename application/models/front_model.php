@@ -84,4 +84,8 @@ class Front_Model extends CI_Model{
 			WHERE e.hotel_id = $hotel_id and ec.lang='$lang' and status=1")->result_array();
 	}
 
+	function room_preferences($id){
+		return $this->db->query("SELECT preferences FROM rooms where id=$id")->row();
+	}
+
 }

@@ -235,6 +235,9 @@ function formbuild($form){
 
 /*
 * Form Render
+*
+* TO DO : Bootstrap row yapısına geçirilecek
+* 		  Böyle çok salak bi html üretiyor.
 */
 
 function form_builder($json,$arr=array()){
@@ -254,7 +257,7 @@ function form_builder($json,$arr=array()){
 	$json = json_decode($json);
 	if (is_array($json) and count($json) > 0) {
 
-		$output .= '<p class="extra_form extra_form'.$option['id'].'">';
+		$output .= '<p class="'.$arr['name'].'_form '.$arr['name'].'_form'.$option['id'].'">';
 
 		foreach ($json as $key => $form) {
 			
@@ -339,22 +342,22 @@ function form_builder($json,$arr=array()){
 
 		}
 
-		if ($output != '') {
-			$output .= '<input type="button" value="Add" id="button'.$option['id'].'" />';
+		if ($output != '' and $option['button'] != false) {
+			
+
 			$output .= '<input type="hidden" name="'.$option['name'].'_id" value="'.$option['id'].'">';
 			$output .= '<input type="hidden" name="'.$option['name'].'_name" value="'.$option['extra_name'].'">';
 			$output .= '<input type="hidden" name="currency" value="'.$option['currency'].'">';
 			$output .= '<input type="hidden" name="user_currency" value="'.$option['user_currency'].'">';
 			$output .= '<input type="hidden" name="currency_rate" value="'.$option['currency_rate'].'">';
-
-			if ($option['button']) {
-				$output .= '<input type="hidden" name="type'.$option['id'].'" id="extra_type'.$option['id'].'" value="add">';
-				$output .= '<script>';
-				$output .= "$('#button".$option['id']."').click(function () {
-							    form_to_arr('.extra_form".$option['id']."');
-							});";
-				$output .= '</script>';
-			}
+			$output .= '<input type="button" value="Add" id="button'.$option['id'].'" />';
+			$output .= '<input type="hidden" name="type'.$option['id'].'" id="extra_type'.$option['id'].'" value="add">';
+			$output .= '<script>';
+			$output .= "$('#button".$option['id']."').click(function () {
+						    form_to_arr('.extra_form".$option['id']."');
+						});";
+			$output .= '</script>';
+		
 			
 			$output .= '</p>';
 		}
@@ -367,4 +370,9 @@ function form_builder($json,$arr=array()){
 
 	
 
+}
+
+
+function onAjaxTest(){
+	echo 'test';
 }
