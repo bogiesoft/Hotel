@@ -89,6 +89,8 @@ function date_range($strDateFrom,$strDateTo) {
 
 /*
 * Checks if promotion availablity and stoped
+* @USED IN : views/reservation/prices.php
+* @USED IN : controllers/hotel.php
 */
 function promotion_available($date,$pid,$room_id){
 	$ci =& get_instance();
@@ -106,6 +108,7 @@ function promotion_available($date,$pid,$room_id){
 
 /*
 * List room children age rules by room
+* @USED IN : views/reservation/prices_add.php
 */
 function room_children($room_id){
 	$ci =& get_instance();
