@@ -339,7 +339,7 @@ function form_to_arr(div){
             $.each(ret.details, function(i,val){
             html = '<div class="extra_info">'+
                     '<div>'+val.name+'</div>'+
-                    '<div>'+val.price+' '+ret.user_currency+'</div>'+
+                    '<div>'+ret.user_price+' '+ret.user_currency+'</div>'+
                     '</div>';
 
             $('.extras_in_cart').after(html);
