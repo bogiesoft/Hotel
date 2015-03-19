@@ -347,7 +347,11 @@ $(function() {
                         $.notify({
                             message: val
                         },{
-                            type: 'danger'
+                            type: 'danger',
+                            animate: {
+                                enter: 'animated fadeInDown',
+                                exit: 'animated fadeOutUp'
+                            }
                         });
                         //console.log(i+'-'+val);
                     };
