@@ -381,6 +381,21 @@ function form_builder($json,$arr=array()){
 
 }
 
+/*
+*	List Countries from cache, if not cached, get from db and cache
+*/
+function countries(){
+	$ci =& get_instance();
+	$ci->load->driver('cache',array('apdapter'=>'file','backup'=>'file'));
+	$file = 'countries';
+	if (!$cache = $ci->cache->get($file)) {
+		$cache = $ci->db->query("SELECT * FROM countries")->result();
+	 	$ci->cache->file->save('countries', $cache, 5000);
+	}
+
+	return $cache;
+
+}
 
 function onAjaxTest(){
 	echo 'test';

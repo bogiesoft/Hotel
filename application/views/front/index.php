@@ -475,8 +475,11 @@ $this->load->view('front/header');
                         Country: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
+                        <?php $countries = countries(); ?>
                             <select name="country"  class="w-220 b1s-000 mtb-5">
-                                <option></option>
+                            <?php foreach ($countries as $key => $country) {
+                              echo '<option value="'.$country->code.'">'.$country->name.'</option>';
+                            } ?>
                             </select>
                         </div>
                     </div>
@@ -539,10 +542,14 @@ $this->load->view('front/header');
                         </div>
                         <div class="col-md-4">
                             <select name="ccmonth" class="w-95 b1s-000 mtb-5">
-                                <option>01</option>
+                            <?php for ($i=01; $i < 13 ; $i++) { 
+                                 echo '<option value="'.$i.'">'.$i.'</option>';
+                            }?>
                             </select>
                             <select name="ccyear" class="w-95 b1s-000 mtb-5">
-                                <option>2015</option>
+                            <?php for ($i=2015; $i < 2025 ; $i++) { 
+                                 echo '<option value="'.$i.'">'.$i.'</option>';
+                            }?>
                             </select>
                         </div>
                     </div>
