@@ -7,7 +7,13 @@
 function replace_chars($text){
 	$search  = array('?', '-', '#', '!', '%','&','^',' ');
     $replace = array('', '', '', '', '', '', '','_');
-    return str_replace($search, $replace, $text);
+
+    $form = str_replace($search, $replace, $text);
+
+	$a  = array('ı', 'ş', 'ç','ö', 'ü', 'ğ','İ','Ğ','Ş','Ç','Ö','Ü');
+    $b = array('i', 's', 'c','o', 'ü', 'g','I','G','S','C','O','U');
+
+    return str_replace($a, $b, $form);
 }
 
 
@@ -378,4 +384,23 @@ function form_builder($json,$arr=array()){
 
 function onAjaxTest(){
 	echo 'test';
+}
+
+/*
+* Credit Card Luhn algorithm
+*/
+
+function luhn($str){
+    if(strspn($str,"0123456789") != strlen($str)){
+        return false; // non-digit found
+    }
+    $map=array(0,1,2,3,4,5,6,7,8,9,// for even indices
+        0,2,4,6,8,1,3,5,7,9); // for odd indices
+    $sum=0;
+    $last=strlen($str) - 1;
+    
+    for($i=0; $i <= $last; $i++){
+       $sum += $map[$str[$last - $i] + ($i & 1) * 10];
+    }
+    return $sum % 10 == 0;
 }

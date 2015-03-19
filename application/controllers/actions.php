@@ -31,4 +31,14 @@ class Actions extends CI_Controller {
 
 		echo  form_builder(json_encode($data),$options);
 	}
+
+	/*
+	* Finish Booking Ajax
+	*/
+	function finish_reservation(){
+		print_r($this->session->userdata('user_cart'));
+		print_r($this->session->userdata('user_extras'));
+		print_r($_POST);
+	}
+
 }

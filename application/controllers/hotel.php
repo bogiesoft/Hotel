@@ -526,14 +526,7 @@ class Hotel extends CI_Controller {
 		
 	}
 
+
 	
-	function setCurrency($currency){
-		$this->currency = $currency;
-	}
-
-	function getCurrency(){
-		return $this->currency;
-	}
-
 
 }

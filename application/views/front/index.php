@@ -90,7 +90,7 @@ $this->load->view('front/header');
                             <?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>
                             </div>
                             <!-- slider -->
-                            <div id="carousel" class="carousel slide magni" data-ride="carousel">
+                            <div id="carousel" class="carousel slide magni">
                                 <div class="magnify">
                                     <img src="<?php echo site_url('assets/front');?>/img/magnify.png" />
                                 </div>
@@ -407,6 +407,7 @@ $this->load->view('front/header');
                         </div>
                     </div><!-- end of second tap fixed part -->
                 </div><!-- end of left column  -->
+                <form id="booking_form">
                 <div class="col-md-9"><!-- right column  -->
                     <div class="row">
                         <div class="col-md-12">
@@ -418,7 +419,7 @@ $this->load->view('front/header');
                         Title
                         </div>
                         <div class="col-md-4">
-                            <select name="" class="w-220 b1s-000 mtb-5">
+                            <select name="name_title" class="w-220 b1s-000 mtb-5">
                                 <option>Mr.</option>
                                 <option>Mrs.</option>
                                 <option>Ms.</option>
@@ -433,7 +434,7 @@ $this->load->view('front/header');
                         First Name: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="first_name" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -441,7 +442,7 @@ $this->load->view('front/header');
                         Last Name <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="last_name" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -449,7 +450,7 @@ $this->load->view('front/header');
                         Street 1:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="street_1" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -457,7 +458,7 @@ $this->load->view('front/header');
                         Street 2:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />                            
+                            <input type="text" name="street_2" class="w-220 b1s-000 mtb-5" />                            
                         </div>
                     </div>
                     <div class="row">
@@ -465,8 +466,8 @@ $this->load->view('front/header');
                         Zip code / City: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-95 b1s-000 mtb-5" />
-                            <input type="text" name="" class="w-120 b1s-000 mtb-5" />
+                            <input type="text" name="zipcode" class="w-95 b1s-000 mtb-5" />
+                            <input type="text" name="city" class="w-120 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -484,9 +485,7 @@ $this->load->view('front/header');
                         Telephone:
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-70 b1s-000 mtb-5" />
-                            <input type="text" name="" class="w-70 b1s-000 mtb-5" />
-                            <input type="text" name="" class="w-70 b1s-000 mtb-5" />
+                            <input type="text" name="phone" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -494,7 +493,7 @@ $this->load->view('front/header');
                         Email: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="email" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -515,19 +514,13 @@ $this->load->view('front/header');
                         Card Details: <span class="c-f00">*</span>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-4 text-right">
-                        Credit card type: <span class="c-f00">*</span>
+                        Name of cardholder <span class="c-f00">*</span>
                         </div>
-                        <div class="col-md-4">
-                            <select name=""  class="w-220 b1s-000 mtb-5">
-                                <option>-----Please Select-----.</option>
-                                <option>-----Please Select-----.</option>
-                                <option>-----Please Select-----.</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <span class="c-f00">*</span> Required Field
+                        <div class="col-md-8">
+                            <input type="text" name="cc_holder_name" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -535,28 +528,30 @@ $this->load->view('front/header');
                         Credit card number <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="cc_number" class="w-220 b1s-000 mtb-5 cc_number" />
+                            <div class="showThis"></div>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-right">
                         Expiry date: <span class="c-f00">*</span>
                         </div>
-                        <div class="col-md-8">
-                            <select name="" class="w-95 b1s-000 mtb-5">
+                        <div class="col-md-4">
+                            <select name="cc_month" class="w-95 b1s-000 mtb-5">
                                 <option>01</option>
                             </select>
-                            <select name="" class="w-95 b1s-000 mtb-5">
+                            <select name="cc_year" class="w-95 b1s-000 mtb-5">
                                 <option>2015</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-right">
-                        Name of cardholder <span class="c-f00">*</span>
+                        CVV: <span class="c-f00">*</span>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text" name="" class="w-220 b1s-000 mtb-5" />
+                        <div class="col-md-4">
+                           <input type="text" name="cc_cvv" class="w-70 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -815,10 +810,15 @@ $this->load->view('front/header');
                         I have understood and agree to the <a href="#">Booking Conditions</a> and agree to Hotel Sultania <a href="#">Privacy Policy</a> .
                         </div>
                     </div>
-                </div><!-- end of right column --------------------------------------------------- -->
+                </div><!-- end of right column -->
+                </form>
+
+                <script type="text/javascript">
+                    
+                </script>
             </div>
-        </div><!-- end of second tap ------------------------------------------------------------- -->
-    </div><!-- /tab-content ---------------------------------------------------------------------- -->
+        </div><!-- end of second tap -->
+    </div><!-- /tab-content -->
 </div>
 </div>
 
