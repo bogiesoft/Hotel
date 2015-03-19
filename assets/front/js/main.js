@@ -348,6 +348,7 @@ $(function() {
                             message: val
                         },{
                             type: 'danger',
+                            mouse_over : 'pause',
                             animate: {
                                 enter: 'animated fadeInDown',
                                 exit: 'animated fadeOutUp'
