@@ -12,6 +12,9 @@ class Actions extends CI_Controller {
 	}
 
 	function get_room_preferences(){
+		if(!$this->input->is_ajax_request())
+		    exit('Opps.Trying to hack. What a brave!');
+		
 		$room_id = $this->input->post('room_id');
 
 		$preferences =   $this->front_model->room_preferences($room_id);
@@ -23,6 +26,9 @@ class Actions extends CI_Controller {
 	*/
 
 	function room_preferences_builder(){
+		if(!$this->input->is_ajax_request())
+		    exit('Opps.Trying to hack. What a brave!');
+
 		$data = $this->input->post('data');
 		//print_r($data);exit;
 		$options = array('id'=>$this->input->post('room_id'),
@@ -36,7 +42,9 @@ class Actions extends CI_Controller {
 	* Finish Booking Ajax
 	*/
 	function finish_reservation(){
-		
+		if(!$this->input->is_ajax_request())
+		    exit('Opps.Trying to hack. What a brave!');
+
 		$user_cart 		= $this->session->userdata('user_cart');
 		$user_extras 	= $this->session->userdata('user_extras');
 	
