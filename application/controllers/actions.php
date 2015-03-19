@@ -36,11 +36,15 @@ class Actions extends CI_Controller {
 	* Finish Booking Ajax
 	*/
 	function finish_reservation(){
-		/*
-		print_r($this->session->userdata('user_cart'));
-		print_r($this->session->userdata('user_extras'));
-		print_r($_POST);
-		*/
+		
+		$user_cart 		= $this->session->userdata('user_cart');
+		$user_extras 	= $this->session->userdata('user_extras');
+	
+		if (!$user_cart or count($user_cart) < 1) {
+			$error = array('no_room' => 'You did not select any room.');
+			exit(json_encode(array('status'=>'error','errors'=>$error)));
+		}
+
 
 		$this->load->helper(array('form', 'url'));
 
