@@ -341,10 +341,20 @@ $(function() {
         data: val,
         dataType: 'json',
         success: function(data){ 
-            console.log(data);
+            if (data.status == 'error') {
+                $.each(data.errors,function(i,val){
+                    if (val!='') {
+                        console.log(i+'-'+val);
+                    };
+
+                });
+            }else{
+
+            }
                     
         },
-        error:function(){
+        error:function(){  
+            alert('Server Error Occured. Thats all we know');
 
         }   
       }); 

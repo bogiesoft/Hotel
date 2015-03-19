@@ -475,7 +475,7 @@ $this->load->view('front/header');
                         Country: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <select name=""  class="w-220 b1s-000 mtb-5">
+                            <select name="country"  class="w-220 b1s-000 mtb-5">
                                 <option></option>
                             </select>
                         </div>
@@ -520,7 +520,7 @@ $this->load->view('front/header');
                         Name of cardholder <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="cc_holder_name" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="ccholder_name" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
@@ -528,7 +528,7 @@ $this->load->view('front/header');
                         Credit card number <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="cc_number" class="w-220 b1s-000 mtb-5 cc_number" />
+                            <input type="text" name="ccnumber" class="w-220 b1s-000 mtb-5 cc_number" />
                             <div class="showThis"></div>
                         </div>
                         
@@ -538,10 +538,10 @@ $this->load->view('front/header');
                         Expiry date: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-4">
-                            <select name="cc_month" class="w-95 b1s-000 mtb-5">
+                            <select name="ccmonth" class="w-95 b1s-000 mtb-5">
                                 <option>01</option>
                             </select>
-                            <select name="cc_year" class="w-95 b1s-000 mtb-5">
+                            <select name="ccyear" class="w-95 b1s-000 mtb-5">
                                 <option>2015</option>
                             </select>
                         </div>
@@ -551,7 +551,7 @@ $this->load->view('front/header');
                         CVV: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-4">
-                           <input type="text" name="cc_cvv" class="w-70 b1s-000 mtb-5" />
+                           <input type="text" name="cccvv" class="w-70 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
