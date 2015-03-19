@@ -344,7 +344,12 @@ $(function() {
             if (data.status == 'error') {
                 $.each(data.errors,function(i,val){
                     if (val!='') {
-                        console.log(i+'-'+val);
+                        $.notify({
+                            message: val
+                        },{
+                            type: 'danger'
+                        });
+                        //console.log(i+'-'+val);
                     };
 
                 });
