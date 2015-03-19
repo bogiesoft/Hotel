@@ -54,9 +54,11 @@ $(function() {
         
 // ---------------------------------- end header menus
 // ---------------------------------- Modify Date
-    $("#m-date").click(function(){
+    $(".m-date").click(function(){
         $("#mdate").slideToggle();
     });
+
+
 // ---------------------------------- end Modify Date
 // ---------------------------------- show room information
      $('.dtl-show').click(function(){

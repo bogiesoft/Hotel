@@ -399,7 +399,7 @@ $this->load->view('front/header');
                             <div>A Guarantee is mandatory to reserve the room</div>
                         </div>
                         <div id="change-search">
-                            <a href="">Need to Change Your Search ?</a>
+                            <a class="m-date" id="tc1">Need to Change Your Search ?</a>
                             <img src="<?php echo site_url('assets/front');?>/img/arr-rit.png" class="fl-r mtb-5" width="" alt="" />
                         </div>
                         <div class="scured-black">

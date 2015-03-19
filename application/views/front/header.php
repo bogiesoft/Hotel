@@ -94,7 +94,7 @@
 <div class="container">
     <div class="row top1"><!-- tabs controls -->
         <div class="col-md-3" id="tc1">
-            <a id="m-date">
+            <a class="m-date">
                 <img src="<?php echo site_url('assets/front');?>/img/modify.png" class="fl-l" alt="" /> Modify Date
             </a>
         </div>
