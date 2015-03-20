@@ -327,7 +327,7 @@ $this->load->view('front/header');
                             <p>
                             <input class="price hh1" id="rom" type="text" name="val[1][rooms]" value="0" readonly="" /> 
                              rooms for 
-                             <input class="price hh1" id="nits" type="text" name="val[1][nights]" value="1" readonly="" /> 
+                             <input class="price hh1" id="nits" type="text" name="val[1][nights]" value="<?php echo $options['nights']; ?>" readonly="" /> 
                               night
                             </p>
                            <input class="price hh2" id="tot" type="text" name="val[1][price]" value="0" readonly="" /> <?php echo $options['user_currency']; ?>
@@ -811,13 +811,17 @@ $this->load->view('front/header');
                             <input type="submit" value="SUBMIT" class="sbt-btn" />
                         </div>
                         <div class="col-md-1">
-                            <input type="checkbox" name="" />
+                            <input type="checkbox" name="confirmation" />
                         </div>
                         <div class="col-md-8 agree">
                         I have understood and agree to the <a href="#">Booking Conditions</a> and agree to Hotel Sultania <a href="#">Privacy Policy</a> .
                         </div>
                     </div>
                 </div><!-- end of right column -->
+                <input type="hidden" name="hotel_id" value="<?php echo $hotel_info->id;?>">
+                <input type="hidden" name="code" value="<?php echo $hotel_info->code;?>">
+                <input type="hidden" name="checkin" value="<?php echo $options['checkin'];?>">
+                <input type="hidden" name="checkout" value="<?php echo $options['checkout'];?>">
                 </form>
 
                 <script type="text/javascript">
@@ -829,9 +833,27 @@ $this->load->view('front/header');
 </div>
 </div>
 
-<script type="text/javascript">
+<!-- Modal -->
+<div class="modal fade" id="reserveSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Success!</h4>
+      </div>
+      <div class="modal-body">
 
-</script>
+      Dear <div id="name_title"></div> Your reservation is done. Details are below.
+    
+       <div class="reservation_details panel-info"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php
 $this->load->view('front/footer');
 ?>

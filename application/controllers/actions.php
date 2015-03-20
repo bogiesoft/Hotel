@@ -47,7 +47,8 @@ class Actions extends CI_Controller {
 
 		$user_cart 		= $this->session->userdata('user_cart');
 		$user_extras 	= $this->session->userdata('user_extras');
-	
+
+
 		if (!$user_cart or count($user_cart) < 1) {
 			$error = array('no_room' => 'You did not select any room.');
 			exit(json_encode(array('status'=>'error','errors'=>$error)));
@@ -58,6 +59,7 @@ class Actions extends CI_Controller {
 
         $this->load->library('form_validation');
 
+        $this->form_validation->set_rules('confirmation', 'Terms of Service and Booking Conditions', 'callback_confirmation_check');
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('street_1', 'Address Line', 'required');
@@ -74,6 +76,7 @@ class Actions extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
         	$data = array(
+                'confirmation' => form_error('confirmation'),
                 'first_name' => form_error('first_name'),
                 'last_name' => form_error('last_name'),
                 'street_1' => form_error('street_1'),
@@ -87,11 +90,68 @@ class Actions extends CI_Controller {
                 'cccvv' => form_error('cccvv'),
             );
         	echo json_encode(array('status'=>'error','errors'=>$data));
-            //echo validation_errors('<1>','</1>');
-        }
-        else
-        {
-            echo json_encode(array('status'=>'success'));
+
+        }else{
+
+        	$data['reservation_code']= rand_uniqid($this->input->post('phone').mt_rand(1000,9999)); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+        	$data['name_title'] 	= $this->input->post('name_title');
+        	$data['first_name']		= $this->input->post('first_name');
+        	$data['last_name'] 		= $this->input->post('last_name');
+        	$data['checkin'] 		= $this->input->post('checkin');
+        	$data['checkout'] 		= $this->input->post('checkout');
+        	$data['street_1'] 		= $this->input->post('street_1');
+        	$data['street_2'] 		= $this->input->post('street_2');
+        	$data['zipcode'] 		= $this->input->post('zipcode');
+        	$data['city'] 			= $this->input->post('city');
+        	$data['country'] 		= $this->input->post('country');
+        	$data['phone'] 			= $this->input->post('phone');
+        	$data['email'] 			= $this->input->post('email');
+        	$data['ccholder_name'] 	= $this->input->post('ccholder_name');
+        	$data['ccnumber'] 		= rand_uniqid($this->input->post('ccnumber'));
+        	$data['ccmonth'] 		= $this->input->post('ccmonth');
+        	$data['ccyear'] 		= $this->input->post('ccyear');
+        	$data['cccvv'] 			= $this->input->post('cccvv');
+        	$data['currency'] 		= $this->input->post('currency');
+        	$data['hotel_id'] 		= $this->input->post('hotel_id');
+        	$data['code'] 			= $this->input->post('code');
+
+        	$preferences = $this->input->post('preferences');
+	        	//generate room details
+	        	$room_details = array();
+	        	foreach ($user_cart as $key => $cart) {
+	        		$room_details[$cart['room_id'].'-'.$key] = $cart;
+	        		//generate room preferences
+	        		if (isset($preferences[$cart['room_id']])) {
+	        			$room_details[$cart['room_id'].'-'.$key]['preferences'] = $preferences[$cart['room_id']];
+	        		}
+	        	}
+
+	        	//calculate room prices
+	        	$room_price = '';
+	        	foreach ($user_cart as $key => $cart) {
+	        		$room_price += $cart['price'];
+	        	}
+
+        	$data['rooms'] 			= json_encode($room_details);
+        	$data['rooms_price'] 	= $room_price;
+
+		       	//generate extra prices
+	        	$extra_price = '';
+	        	foreach ($user_extras as $key => $cart) {
+	        		$extra_price += $cart['price'];
+	        	}
+	        $data['extras']			= json_encode($user_extras);
+        	$data['extras_price']	= $extra_price;
+        	$data['total_price']	= $room_price+$extra_price;
+        	//print_r($room_details);
+
+        	$insert = $this->db->insert('reservations',$data);
+        	if ($insert) {
+        		echo json_encode(array('status'=>'success','data'=>$data));
+        	}else{
+        		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
+        	}
+            
         }
 
 
@@ -113,5 +173,13 @@ class Actions extends CI_Controller {
 		}
 	}
 
+	/*
+	*Confirmation Check
+	*/
+	function confirmation_check(){
+		if (isset($_POST['confirmation'])) return true;
+	    $this->form_validation->set_message('confirmation_check', 'Please read and accept our terms and conditions.');
+	    return false;
+	}
 
 }

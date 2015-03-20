@@ -360,8 +360,53 @@ $(function() {
                     };
 
                 });
-            }else{
 
+            }else{
+                //set values inside modal
+                $('#name_title').html(data.data.name_title+' '+data.data.first_name+' '+data.data.last_name);
+
+                var total_price = parseInt(data.data.rooms_price)+parseInt(data.data.extras_price);
+                html = '<div class="panel-body">';
+                //insert rooms
+                var rooms_obj = jQuery.parseJSON(data.data.rooms);
+                $.each(rooms_obj,function(i,room){
+                    html += '<div class="row">'+
+                    '<div class="col-xs-8">'+
+                        '<h5 class="product-name"><strong>'+room.name+'</strong></h5>'+
+                        '<h4><small>'+room.desc+'</small></h4>'+
+                    '</div>'+
+                    '<div class="col-xs-4">'+
+                        '<div class="col-xs-6 text-right">'+
+                            '<h6><strong>'+room.price+' </strong></h6>'+
+                        '</div>'+
+                        '<div class="col-xs-6">'+
+                           '<h6><strong><span class="text-muted">x</span>'+room.qty+'</strong></h6>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '<hr>';
+                });
+                
+
+                html += '</div>';
+
+                html += '<div class="panel-footer">'+
+                    '<div class="row text-center">'+
+                        '<div class="col-xs-12">'+
+                            '<h4 class="text-right">Total <strong>'+parseInt(total_price)+' '+data.data.currency+'</strong></h4>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>';
+
+                $('.reservation_details').html(html);
+
+                //show modal
+                $('#reserveSuccess').modal();
+
+                //delete content on modal close
+                $('#reserveSuccess').on('hidden.bs.modal', function () {
+                       $('.reservation_details').html('');
+                })
             }
                     
         },
