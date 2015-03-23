@@ -23,7 +23,7 @@
 
       <!-- Stats Start -->
       <div class="row">
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-4">
           <div class="panel panel-success panel-stat">
             <div class="panel-heading">
 
@@ -58,8 +58,8 @@
         </div><!-- col-sm-6 -->
 
 
-        <div class="col-sm-6 col-md-3">
-          <div class="panel panel-dark panel-stat">
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-primary panel-stat">
             <div class="panel-heading">
 
               <div class="stat">
@@ -93,34 +93,8 @@
           </div><!-- panel -->
         </div><!-- col-sm-6 -->
 
-        <div class="col-sm-6 col-md-3">
-          <div class="panel panel-danger panel-stat">
-            <div class="panel-heading">
-
-              <div class="stat">
-                <div class="row">
-                  <div class="col-xs-4">
-                    <img src="<?php echo site_url('assets/back'); ?>/images/is-document.png" alt="">
-                  </div>
-                  <div class="col-xs-8">
-                    <small class="stat-label">% Unique Visitors</small>
-                    <h1>54.40%</h1>
-                  </div>
-                </div><!-- row -->
-
-                <div class="mb15"></div>
-
-                <small class="stat-label">Avg. Visit Duration</small>
-                <h4>01:80:22</h4>
-
-              </div><!-- stat -->
-
-            </div><!-- panel-heading -->
-          </div><!-- panel -->
-        </div><!-- col-sm-6 -->
-
-        <div class="col-sm-6 col-md-3">
-          <div class="panel panel-primary panel-stat">
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-warning panel-stat">
             <div class="panel-heading">
 
               <div class="stat">
