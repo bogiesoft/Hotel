@@ -8,13 +8,73 @@ class Dashboard extends MY_Controller {
 		if(empty($this->session->userdata('user_id'))){
 			redirect(site_url('login'));
 		}
+		$this->load->helper('general_helper');
 		
 	}
 
 	public function index(){
 		//echo $this->session->userdata('user_id');
 		$this->load->model('dashboard_model');
-		$data['events'] = $this->dashboard_model->calendar_events();
+
+		//set reservation stats
+		$today 			= date('Y-m-d');
+		$last_week 		= date('Y-m-d',strtotime("-7 DAY",strtotime($today)));
+		$last_month 	= date('Y-m-d',strtotime("-30 DAY",strtotime($today)));
+
+		$stats			= $this->dashboard_model->reservation_stats($today,$last_month);
+
+		/*
+		* Calculate reservation counts
+		*/
+		//todays reservation  count
+		$reservations = array();
+		$reservations['today']	= $stats[$today]['total'];
+
+		//last week reservation count
+		$reservations['last_week'] = 0;
+		foreach ($stats as $date => $value) {
+			if ($date >= $last_week) {
+				$reservations['last_week'] = $reservations['last_week'] + $value['total']; 
+			}
+		}
+
+		//last month reservation count
+		$reservations['last_month'] = 0;
+		foreach ($stats as $date => $value) {
+			$reservations['last_month'] = $reservations['last_month'] + $value['total']; 		
+		}
+
+		/*
+		* Calculate prices counts
+		*/
+		$prices = array();
+		$prices['today']	= $stats[$today]['total_price'];
+
+		//last week reservation count
+		$prices['last_week'] = 0;
+		foreach ($stats as $date => $value) {
+			if ($date >= $last_week) {
+				$prices['last_week'] = $prices['last_week'] + $value['total_price']; 
+			}
+		}
+
+		//last month reservation count
+		$prices['last_month'] = 0;
+		foreach ($stats as $date => $value) {
+			$prices['last_month'] = $prices['last_month'] + $value['total_price']; 		
+		}
+
+		//set default stats
+		foreach ($stats as $key => $value) {
+			 $chart[] = $value;
+		}
+
+		$data['stats']				= $chart;
+		$data['reservation_stats']	= $reservations;
+		$data['price_stats']		= $prices;
+		//$data['hotel_currency']		= $prices;
+		$data['events'] 			= $this->dashboard_model->calendar_events();
+
 		$this->load->view('dashboard',$data);
 
 	}

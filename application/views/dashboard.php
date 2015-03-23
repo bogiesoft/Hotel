@@ -2,6 +2,12 @@
 <link href="<?php echo site_url('assets/back'); ?>/css/fullcalendar.css" rel="stylesheet">
 <script src="<?php echo site_url('assets/back'); ?>/js/fullcalendar.min.js"></script>
 
+<!-- chart -->
+<link href="<?php echo site_url('assets/back'); ?>/css/morris.css" rel="stylesheet">
+<script src="<?php echo site_url('assets/back'); ?>/js/morris.min.js"></script>
+<script src="<?php echo site_url('assets/back'); ?>/js/raphael-2.1.0.min.js"></script>
+
+
     <div class="pageheader">
       <h2><i class="fa fa-home"></i> <?php echo lang('dashboard'); ?></h2>
       <div class="breadcrumb-wrapper">
@@ -14,6 +20,7 @@
     </div>
     
     <div class="contentpanel">
+
       <!-- Stats Start -->
       <div class="row">
         <div class="col-sm-6 col-md-3">
@@ -26,8 +33,8 @@
                     <img src="<?php echo site_url('assets/back'); ?>/images/is-user.png" alt="">
                   </div>
                   <div class="col-xs-8">
-                    <small class="stat-label">Visits Today</small>
-                    <h1>900k+</h1>
+                    <small class="stat-label">Reservations Today</small>
+                    <h1><?php echo $reservation_stats['today']; ?></h1>
                   </div>
                 </div><!-- row -->
 
@@ -35,13 +42,13 @@
 
                 <div class="row">
                   <div class="col-xs-6">
-                    <small class="stat-label">Pages / Visit</small>
-                    <h4>7.80</h4>
+                    <small class="stat-label">Last 7 Days</small>
+                    <h4><?php echo $reservation_stats['last_week']; ?></h4>
                   </div>
 
                   <div class="col-xs-6">
-                    <small class="stat-label">% New Visits</small>
-                    <h4>76.43%</h4>
+                    <small class="stat-label">Last 30 Days</small>
+                    <h4><?php echo $reservation_stats['last_month']; ?></h4>
                   </div>
                 </div><!-- row -->
               </div><!-- stat -->
@@ -62,7 +69,7 @@
                   </div>
                   <div class="col-xs-8">
                     <small class="stat-label">Today's Earnings</small>
-                    <h1>$655</h1>
+                    <h1><?php echo $price_stats['today']; ?></h1>
                   </div>
                 </div><!-- row -->
 
@@ -71,12 +78,12 @@
                 <div class="row">
                   <div class="col-xs-6">
                     <small class="stat-label">Last Week</small>
-                    <h4>$32,322</h4>
+                    <h4><?php echo $price_stats['last_week']; ?></h4>
                   </div>
 
                   <div class="col-xs-6">
                     <small class="stat-label">Last Month</small>
-                    <h4>$503,000</h4>
+                    <h4><?php echo $price_stats['last_month']; ?></h4>
                   </div>
                 </div><!-- row -->
 
@@ -141,6 +148,20 @@
       </div>
       <!-- stats end -->
 
+
+      <!-- chart start -->
+
+      <div class="row">
+        <div class="col-sm-6 col-md-12">
+            <div class="panel">
+              <div class="panel-heading">
+                  <div id="chart"></div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- chart end -->
+
       <!--calendar start -->
       <div class="row">
         <div class="col-md-12">
@@ -169,6 +190,15 @@
       droppable: false // this allows things to be dropped onto the calendar !!!
     });
     
+    Morris.Bar({
+      element: 'chart',
+      data:  <?php echo json_encode($stats);?>,
+      xkey: 'reservation_date',
+      ykeys: ['total', 'total_price'],
+      labels: ['Reservation', 'Earning'],
+      hideHover : false
+    });
+
   });
 
 </script>
