@@ -411,6 +411,7 @@ class Hotel extends CI_Controller {
 				}
 			} 
 			
+		//add item
 		}else{
 
 			if ($promotion != 0) {

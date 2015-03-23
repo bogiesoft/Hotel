@@ -13,9 +13,10 @@ class Dashboard extends MY_Controller {
 
 	public function index(){
 		//echo $this->session->userdata('user_id');
+		$this->load->model('dashboard_model');
+		$data['events'] = $this->dashboard_model->calendar_events();
+		$this->load->view('dashboard',$data);
 
-		$this->load->view('dashboard');
-		
 	}
 
 	function set_hotel(){
