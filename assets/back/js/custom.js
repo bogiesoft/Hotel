@@ -53,7 +53,12 @@ jQuery(document).ready(function() {
          jQuery('.mainpanel').height(docHeight);
    }
    
-
+   // Close Button in Panels
+   jQuery('.panel .panel-close').click(function(){
+      jQuery(this).closest('.panel').fadeOut(200);
+      return false;
+   });
+   
    // Minimize Button in Panels
    jQuery('.minimize').click(function(){
       var t = jQuery(this);

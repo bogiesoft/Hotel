@@ -153,8 +153,16 @@
 
       <div class="row">
         <div class="col-sm-6 col-md-12">
-            <div class="panel">
+            <div class="panel panel-default ">
               <div class="panel-heading">
+                <div class="panel-btns">
+                  <a href="" class="panel-close">&times;</a>
+                  <a href="" class="minimize">&minus;</a>
+                </div><!-- panel-btns -->
+                <h4 class="panel-title">Last 30 Days Reservations</h4>
+                <p>This chart shows data of daily reservation/total earnings</p>
+              </div><!-- panel-heading -->
+              <div class="panel-body">
                   <div id="chart"></div>
               </div>
             </div>
@@ -165,7 +173,19 @@
       <!--calendar start -->
       <div class="row">
         <div class="col-md-12">
-          <div id="calendar" class="fc fc-ltr"></div><!-- col-md-9 -->
+          <div class="panel panel-default ">
+            <div class="panel-heading">
+                <div class="panel-btns">
+                  <a href="" class="panel-close">&times;</a>
+                  <a href="" class="minimize">&minus;</a>
+                </div><!-- panel-btns -->
+                <h4 class="panel-title">Reservation Calendar</h4>
+                <p>You can see you guests C-In/C-Out dates of monthly</p>
+              </div><!-- panel-heading -->
+              <div class="panel-body">
+                <div id="calendar" class="fc fc-ltr"></div><!-- col-md-9 -->
+              </div>
+          </div>
       </div>
       <!-- calendar end -->
     </div>
