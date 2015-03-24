@@ -18,12 +18,20 @@
           <div class="row">
             <form class="form-inline">
                 <div class="form-group">
+                  <label class="sr-only" for="first_name"></label>
+                  <input type="text" name="first_name" class="form-control" id="first_name" placeholder="<?php echo lang('first_name'); ?>">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="last_name"></label>
+                  <input type="text" name="last_name" class="form-control" id="last_name" placeholder="<?php echo lang('last_name'); ?>">
+                </div>
+                <div class="form-group">
                   <label class="sr-only" for="start_date"></label>
-                  <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Name">
+                  <input type="text" name="start_date" class="form-control datepicker" id="start_date" placeholder="<?php echo lang('checkin'); ?>">
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="end_date"></label>
-                  <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Surname">
+                  <input type="text" name="end_date" class="form-control datepicker" id="end_date" placeholder="<?php echo lang('checkout'); ?>">
                 </div>
                 <button type="submit" id="LoadRecordsButton" class="btn btn-primary">Send</button>
               </form>
@@ -44,14 +52,14 @@
     </div><!-- contentpanel -->
 
 <script src="<?php echo site_url('assets'); ?>/jtable/jquery.jtable.min.js"></script>
-<link href="<?php echo site_url('assets'); ?>/jtable/themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo site_url('assets'); ?>/jtable/themes/metro/blue/jtable.css" rel="stylesheet">
-
 
 <script type="text/javascript">
  
     $(document).ready(function () {
     //Localization texts
+    $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+
           var messages = {
               serverCommunicationError: '<?php echo lang('server_communication_error'); ?>',
               loadingMessage: '<?php echo lang('loading_message'); ?>',
@@ -130,7 +138,9 @@
             e.preventDefault();
             $('#reservations').jtable('load', {
                 first_name: $('#first_name').val(),
-                last_name: $('#last_name').val()
+                last_name: $('#last_name').val(),
+                start_date : $('#start_date').val(),
+                end_date: $('#end_date').val(),
             });
         });
  

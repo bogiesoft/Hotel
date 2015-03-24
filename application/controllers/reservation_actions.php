@@ -1073,6 +1073,19 @@ class Reservation_actions extends MY_Controller {
     		$last_name = $this->input->post('last_name');
     		$whr .= ' and last_name LIKE "%'.$last_name.'%"';
     	}
+
+    	if ($this->input->post('start_date') and !empty($this->input->post('start_date'))) {
+    		$start_date = $this->input->post('start_date');
+    		$whr .= ' and date(checkin) = "'.$start_date.'" ';
+    	}
+
+    	if ($this->input->post('end_date') and !empty($this->input->post('end_date'))) {
+    		$end_date = $this->input->post('end_date');
+    		$whr .= ' and date(checkout) = "'.$end_date.'" ';
+    	}
+
+
+
     	$query = "SELECT id,name_title,first_name,last_name,checkin,checkout 
     	FROM reservations WHERE hotel_id=$hotel_id $whr ORDER BY $jtSorting LIMIT $jtStartIndex,$jtPageSize";
 
