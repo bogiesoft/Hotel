@@ -20,9 +20,10 @@
   <![endif]-->
 
   <script src="<?php echo site_url('assets/back'); ?>/js/jquery-1.10.2.min.js"></script>
-  
+  <?php if($this->uri->segment('2') != 'reservations') : ?>
   <script src="<?php echo site_url('assets/back'); ?>/js/vendor.js"></script>
   <script src="<?php echo site_url('assets/back'); ?>/js/formbuilder.js"></script>
+  <?php endif; ?>
   <script src="<?php echo site_url('assets'); ?>/jtable/jquery-ui.min.js"></script>
 
   

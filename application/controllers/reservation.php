@@ -246,4 +246,11 @@ class Reservation extends MY_Controller {
 		}
 	}
 
+
+	function reservations(){
+		//load language
+		$this->lang->load('reservation/reservations',$this->language);
+		$this->load->view('reservation/reservations');
+	}
+
 }

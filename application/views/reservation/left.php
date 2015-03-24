@@ -84,4 +84,14 @@ if ($uri == 'prices') {
   <a href="<?php echo site_url('reservation/prices'); ?>"><i class="fa fa-file-text"></i> <span><?php echo lang('rate_available_menu'); ?></span></a>
 </li>
 
+<?php 
+ $reservation = '';
+//'avalilable' menu active
+if ($uri == 'reservations') {
+ $reservation = 'active';
+}?>
+<li class="<?php echo $reservation; ?>">
+  <a href="<?php echo site_url('reservation/reservations'); ?>"><i class="fa fa-credit-card"></i> <span><?php echo lang('reservations'); ?></span></a>
+</li>
+
 </ul>

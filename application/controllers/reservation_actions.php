@@ -1050,4 +1050,43 @@ class Reservation_actions extends MY_Controller {
  
     }
 
+    /*
+    * List reservations for JTable
+    */
+    function list_reservations(){
+    	$hotel_id = $this->session->userdata('hotel_id');
+
+
+    	//get listing options
+    	$jtStartIndex 	= $this->input->get('jtStartIndex') ? $this->input->get('jtStartIndex') : 0;
+    	$jtPageSize		= $this->input->get('jtPageSize') ? $this->input->get('jtPageSize') : 5;
+    	$jtSorting		= $this->input->get('jtSorting') ? $this->input->get('jtSorting') : 'id DESC';
+
+    	//search criteria
+    	$whr = '';
+    	if ($this->input->post('first_name') and !empty($this->input->post('first_name'))) {
+    		$name = $this->input->post('first_name');
+    		$whr .= ' and first_name LIKE "%'.$name.'%"';
+    	}
+
+    	if ($this->input->post('last_name') and !empty($this->input->post('last_name'))) {
+    		$last_name = $this->input->post('last_name');
+    		$whr .= ' and last_name LIKE "%'.$last_name.'%"';
+    	}
+    	$query = "SELECT id,name_title,first_name,last_name,checkin,checkout 
+    	FROM reservations WHERE hotel_id=$hotel_id $whr ORDER BY $jtSorting LIMIT $jtStartIndex,$jtPageSize";
+
+    	//echo $query; exit;
+
+    	//ccount total items for pagination
+    	$total = "SELECT count(id) as total FROM reservations WHERE hotel_id=$hotel_id $whr";
+
+    	$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		$jTableResult['TotalRecordCount'] = $this->db->query($total)->row()->total;
+		$jTableResult['Records'] = $this->db->query($query)->result();
+		print json_encode($jTableResult);
+
+    }	
+
 }

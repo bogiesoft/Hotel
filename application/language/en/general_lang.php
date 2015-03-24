@@ -17,6 +17,7 @@ $lang['rate_available_menu']	= 'Rate Availibility Plan';
 $lang['price_update_menu'] 		= 'Bulk Price Update';	
 $lang['promotions_menu'] 		= 'Promotions';	
 $lang['add_promotion_menu'] 	= 'Add Promotion';
+$lang['reservations']		 	= 'Reservations';
 
 //breadcrumb
 $lang['you_are_here'] 	= 'You Are Here :';
