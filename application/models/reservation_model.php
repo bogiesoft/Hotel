@@ -211,7 +211,8 @@ class Reservation_Model extends CI_Model
 	}
 
 	function reservation_info($id){
-		return $this->db->query("SELECT * FROM reservations WHERE id=$id");
+		return $this->db->query("SELECT r.*,c.name as country_name FROM reservations as r 
+			INNER JOIN countries as c ON r.country=c.code  WHERE r.id=$id")->row();
 	}
 
 }

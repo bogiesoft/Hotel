@@ -822,6 +822,9 @@ $this->load->view('front/header');
                 <input type="hidden" name="code" value="<?php echo $hotel_info->code;?>">
                 <input type="hidden" name="checkin" value="<?php echo $options['checkin'];?>">
                 <input type="hidden" name="checkout" value="<?php echo $options['checkout'];?>">
+                <input type="hidden" name="adults" value="<?php echo $options['adults'];?>">
+                <input type="hidden" name="children" value="<?php echo $options['children'];?>">
+                <input type="hidden" name="nights" value="<?php echo $options['nights'];?>">
                 </form>
 
                 <script type="text/javascript">

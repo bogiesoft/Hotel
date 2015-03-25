@@ -106,6 +106,9 @@ class Actions extends CI_Controller {
         	$data['country'] 		= $this->input->post('country');
         	$data['phone'] 			= $this->input->post('phone');
         	$data['email'] 			= $this->input->post('email');
+        	$data['adults'] 		= $this->input->post('adults');
+        	$data['children'] 		= $this->input->post('children');
+        	$data['nights'] 		= $this->input->post('nights');
         	$data['ccholder_name'] 	= $this->input->post('ccholder_name');
         	$data['ccnumber'] 		= rand_uniqid($this->input->post('ccnumber'));
         	$data['ccmonth'] 		= $this->input->post('ccmonth');
@@ -129,7 +132,7 @@ class Actions extends CI_Controller {
 	        	//calculate room prices
 	        	$room_price = '';
 	        	foreach ($user_cart as $key => $cart) {
-	        		$room_price += $cart['price'];
+	        		$room_price += $cart['price']*$cart['qty'];
 	        	}
 
         	$data['rooms'] 			= json_encode($room_details);

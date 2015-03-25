@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2015 at 09:49 AM
+-- Generation Time: Mar 25, 2015 at 06:15 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.7
 
@@ -3003,8 +3003,8 @@ INSERT INTO `prices` (`id`, `room_id`, `hotel_id`, `price_date`, `price_type`, `
 (2945, 10, 1, '2015-03-21', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
 (2946, 10, 1, '2015-03-22', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
 (2947, 10, 1, '2015-03-23', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
-(2948, 10, 1, '2015-03-24', 1, 100, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
-(2949, 10, 1, '2015-03-25', 1, 100, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
+(2948, 10, 1, '2015-03-24', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
+(2949, 10, 1, '2015-03-25', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
 (2950, 10, 1, '2015-03-26', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
 (2951, 10, 1, '2015-03-27', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
 (2952, 10, 1, '2015-03-28', 1, 10, 0, 400.00, 0.00, 0.00, 0.00, 0.00, '{"1":{"min":"0","max":"3","price":""},"2":{"min":"3","max":"12","price":""},"3":{"min":"3","max":"15","price":""}}', 0.00, 1, 99, 0, 0, 1),
@@ -3038,7 +3038,7 @@ CREATE TABLE IF NOT EXISTS `price_plans` (
   PRIMARY KEY (`id`),
   KEY `hotel_id` (`hotel_id`,`code`),
   KEY `start_date` (`start_date`,`end_date`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `price_plans`
@@ -3051,7 +3051,8 @@ INSERT INTO `price_plans` (`id`, `promotion_name`, `promotion_type`, `promotion_
 (11, 'Early Booker', 3, 40, '2015-02-20', '2015-04-01', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '2015-06-02', '2015-06-07', 0, '0', '0000-00-00', '1', 1, 1),
 (17, '24 Hour', 5, 54, '2015-03-01', '2015-03-31', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '0000-00-00', '0000-00-00', 0, '0', '2015-03-05', '11,12', 12, 1),
 (13, '24 Hour Promotion', 5, 60, '2015-03-01', '2015-03-31', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '0000-00-00', '0000-00-00', 0, '0', '2015-03-19', '1', 1, 1),
-(18, 'Last Minute', 4, 20, '2015-03-06', '2015-04-06', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '0000-00-00', '0000-00-00', 14, 'hour', '0000-00-00', '1,6,10', 1, 1);
+(18, 'Last Minute', 4, 20, '2015-03-06', '2015-04-06', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '0000-00-00', '0000-00-00', 14, 'hour', '0000-00-00', '1,6,10', 1, 1),
+(19, 'Breakfast Non-Included', 1, 5, '2015-03-01', '2015-03-31', 'Sun,Mon,Tue,Wed,Thu,Fri,Sat', 0, '0000-00-00', '0000-00-00', 0, '0', '0000-00-00', '1,10', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3071,7 +3072,7 @@ CREATE TABLE IF NOT EXISTS `price_plans_availability` (
   KEY `room_id` (`room_id`),
   KEY `price_plan_id` (`price_plan_id`),
   KEY `stoped` (`stoped`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6093 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6201 ;
 
 --
 -- Dumping data for table `price_plans_availability`
@@ -4919,7 +4920,69 @@ INSERT INTO `price_plans_availability` (`id`, `available`, `price_date`, `discou
 (5867, 5, '2015-03-07', 20, 0, 1, 18),
 (5866, 5, '2015-03-06', 20, 0, 10, 18),
 (5865, 5, '2015-03-06', 20, 0, 6, 18),
-(5864, 5, '2015-03-06', 20, 0, 1, 18);
+(5864, 5, '2015-03-06', 20, 0, 1, 18),
+(6184, 5, '2015-03-23', 5, 0, 10, 19),
+(6183, 5, '2015-03-23', 5, 0, 1, 19),
+(6182, 5, '2015-03-22', 5, 0, 10, 19),
+(6181, 5, '2015-03-22', 5, 0, 1, 19),
+(6180, 5, '2015-03-21', 5, 0, 10, 19),
+(6179, 5, '2015-03-21', 5, 0, 1, 19),
+(6178, 5, '2015-03-20', 5, 0, 10, 19),
+(6177, 5, '2015-03-20', 5, 0, 1, 19),
+(6176, 5, '2015-03-19', 5, 0, 10, 19),
+(6175, 5, '2015-03-19', 5, 0, 1, 19),
+(6174, 5, '2015-03-18', 5, 0, 10, 19),
+(6173, 5, '2015-03-18', 5, 0, 1, 19),
+(6172, 5, '2015-03-17', 5, 0, 10, 19),
+(6171, 5, '2015-03-17', 5, 0, 1, 19),
+(6170, 5, '2015-03-16', 5, 0, 10, 19),
+(6169, 5, '2015-03-16', 5, 0, 1, 19),
+(6168, 5, '2015-03-15', 5, 0, 10, 19),
+(6167, 5, '2015-03-15', 5, 0, 1, 19),
+(6166, 5, '2015-03-14', 5, 0, 10, 19),
+(6165, 5, '2015-03-14', 5, 0, 1, 19),
+(6164, 5, '2015-03-13', 5, 0, 10, 19),
+(6163, 5, '2015-03-13', 5, 0, 1, 19),
+(6162, 5, '2015-03-12', 5, 0, 10, 19),
+(6161, 5, '2015-03-12', 5, 0, 1, 19),
+(6160, 5, '2015-03-11', 5, 0, 10, 19),
+(6159, 5, '2015-03-11', 5, 0, 1, 19),
+(6158, 5, '2015-03-10', 5, 0, 10, 19),
+(6157, 5, '2015-03-10', 5, 0, 1, 19),
+(6156, 5, '2015-03-09', 5, 0, 10, 19),
+(6155, 5, '2015-03-09', 5, 0, 1, 19),
+(6154, 5, '2015-03-08', 5, 0, 10, 19),
+(6153, 5, '2015-03-08', 5, 0, 1, 19),
+(6152, 5, '2015-03-07', 5, 0, 10, 19),
+(6151, 5, '2015-03-07', 5, 0, 1, 19),
+(6150, 5, '2015-03-06', 5, 0, 10, 19),
+(6149, 5, '2015-03-06', 5, 0, 1, 19),
+(6148, 5, '2015-03-05', 5, 0, 10, 19),
+(6147, 5, '2015-03-05', 5, 0, 1, 19),
+(6146, 5, '2015-03-04', 5, 0, 10, 19),
+(6145, 5, '2015-03-04', 5, 0, 1, 19),
+(6144, 5, '2015-03-03', 5, 0, 10, 19),
+(6143, 5, '2015-03-03', 5, 0, 1, 19),
+(6142, 5, '2015-03-02', 5, 0, 10, 19),
+(6141, 5, '2015-03-02', 5, 0, 1, 19),
+(6140, 5, '2015-03-01', 5, 0, 10, 19),
+(6139, 5, '2015-03-01', 5, 0, 1, 19),
+(6185, 5, '2015-03-24', 5, 0, 1, 19),
+(6186, 5, '2015-03-24', 5, 0, 10, 19),
+(6187, 5, '2015-03-25', 5, 0, 1, 19),
+(6188, 5, '2015-03-25', 5, 0, 10, 19),
+(6189, 5, '2015-03-26', 5, 0, 1, 19),
+(6190, 5, '2015-03-26', 5, 0, 10, 19),
+(6191, 5, '2015-03-27', 5, 0, 1, 19),
+(6192, 5, '2015-03-27', 5, 0, 10, 19),
+(6193, 5, '2015-03-28', 5, 0, 1, 19),
+(6194, 5, '2015-03-28', 5, 0, 10, 19),
+(6195, 5, '2015-03-29', 5, 0, 1, 19),
+(6196, 5, '2015-03-29', 5, 0, 10, 19),
+(6197, 5, '2015-03-30', 5, 0, 1, 19),
+(6198, 5, '2015-03-30', 5, 0, 10, 19),
+(6199, 5, '2015-03-31', 5, 0, 1, 19),
+(6200, 5, '2015-03-31', 5, 0, 10, 19);
 
 -- --------------------------------------------------------
 
@@ -4947,29 +5010,44 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `ccmonth` int(2) NOT NULL,
   `ccyear` int(4) NOT NULL,
   `cccvv` int(4) NOT NULL,
+  `adults` int(1) NOT NULL DEFAULT '0',
+  `children` int(1) NOT NULL DEFAULT '0',
+  `nights` int(3) NOT NULL DEFAULT '0',
   `rooms` text NOT NULL,
   `extras` text NOT NULL,
   `rooms_price` decimal(10,2) NOT NULL,
   `extras_price` decimal(10,2) NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
   `currency` varchar(3) NOT NULL,
+  `reservation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hotel_id` int(11) NOT NULL,
   `code` int(11) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`id`, `reservation_code`, `name_title`, `first_name`, `last_name`, `checkin`, `checkout`, `street_1`, `street_2`, `zipcode`, `city`, `country`, `phone`, `email`, `ccholder_name`, `ccnumber`, `ccmonth`, `ccyear`, `cccvv`, `rooms`, `extras`, `rooms_price`, `extras_price`, `total_price`, `currency`, `hotel_id`, `code`, `status`) VALUES
-(1, '7JLCLJJFF', 'Mr.', '4t4refdgd', 'sdsf', '0000-00-00', '0000-00-00', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 0.00, 'TRY', 1, 1, 1),
-(2, 'S5LCLJJFF', 'Mr.', '4t4refdgd', 'sdsf', '0000-00-00', '0000-00-00', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', 1, 1, 1),
-(3, 'UGLCLJJFF', 'Mr.', '4t4refdgd', 'sdsf', '0000-00-00', '0000-00-00', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', 1, 1, 1),
-(4, '9GLCLJJFF', 'Mr.', '4t4refdgd', 'sdsf', '0000-00-00', '0000-00-00', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', 1, 1, 1),
-(5, 'WBWTY4702', 'Mr.', 'rewerwerwer', 'reetrtry', '0000-00-00', '0000-00-00', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', 1, 1, 1),
-(6, '4S6AWW77', 'Mr.', 'rewerwerwer', 'reetrtry', '2015-03-20', '2015-03-23', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', 1, 1, 1);
+INSERT INTO `reservations` (`id`, `reservation_code`, `name_title`, `first_name`, `last_name`, `checkin`, `checkout`, `street_1`, `street_2`, `zipcode`, `city`, `country`, `phone`, `email`, `ccholder_name`, `ccnumber`, `ccmonth`, `ccyear`, `cccvv`, `adults`, `children`, `nights`, `rooms`, `extras`, `rooms_price`, `extras_price`, `total_price`, `currency`, `reservation_date`, `hotel_id`, `code`, `status`) VALUES
+(1, '7JLCLJJFF', 'Mr.', 'Tommy', 'Hilfiger', '2015-03-24', '2015-03-26', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, 2, 1, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-17 22:00:00', 1, 1, 1),
+(2, 'S5LCLJJFF', 'Mrs.', 'Gwen', 'Stefani', '2015-03-30', '2015-03-31', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-07 22:00:00', 1, 1, 1),
+(3, 'UGLCLJJFF', 'Mr.', 'Bill', 'Gates', '2015-03-28', '2015-03-30', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 0, 0, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-16 22:00:00', 1, 1, 1),
+(4, '9GLCLJJFF', 'Mr.', 'Linus', 'Torvalds', '2015-03-26', '2015-03-31', 'wdawdwad', '', '3245', 'wdsdsf', 'AF', '43534654654', 'aaa@ad.com', '324adaw', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-02-28 22:00:00', 1, 1, 1),
+(5, 'WBWTY4702', 'Mr.', 'Benjamin', 'Franklin', '2015-03-03', '2015-03-10', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-02-28 22:00:00', 1, 1, 1),
+(6, '4S6AWW77', 'Mrs.', 'Lady', 'Gaga', '2015-03-20', '2015-03-25', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-08 22:00:00', 1, 1, 1),
+(7, '4S6AWW77', 'Mrs.', 'Lady2', 'Gaga2', '2015-03-20', '2015-03-26', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-08 22:00:00', 1, 1, 1),
+(8, '4S6AWW77', 'Mrs.', 'Lady3', 'Gaga3', '2015-03-20', '2015-03-25', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-08 22:00:00', 1, 1, 1),
+(9, '4S6AWW77', 'Mrs.', 'Lady4', 'Gaga4', '2015-03-20', '2015-03-27', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-08 22:00:00', 1, 1, 1),
+(10, '4S6AWW77', 'Mrs.', 'Lady5', 'Gaga5', '2015-03-28', '2015-03-31', 'awadwd', '', '3435', 'dfdxf', 'AF', '5657757657', 'aaa@erg.com', 'wdadawd', 'WC8FAQ2PEC1', 1, 2015, 345, 0, 0, 0, '{"10-0":{"room_id":"10","qty":"1","promotion":"0","price":400,"user_price":"400.00","name":"Family Room","desc":"Best Available Rate"},"1-1":{"room_id":"1","qty":"1","promotion":"0","price":600,"user_price":"600.00","name":"Standart Triple Room","desc":"Best Available Rate"},"1-2":{"room_id":"1","qty":"1","promotion":"18","price":480,"user_price":"480.00","name":"Standart Triple Room","desc":"Last Minute"}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 1480.00, 120.00, 1600.00, 'TRY', '2015-03-22 22:00:00', 1, 1, 1),
+(11, 'I8T1E6M98', 'Mrs.', 'sdasd', 'adsasd', '2015-03-24', '2015-03-25', 'adasdas', 'asdasd', '32423423', '', 'TR', '2332243234', 'cc_a@hotmail.com', 'mmmm', 'D21R5CRI2G1', 1, 2015, 20, 0, 0, 0, '{"1-0":{"room_id":"1","qty":"1","promotion":"0","price":200,"user_price":"200.00","name":"Standart Triple Room","desc":"Best Available Rate","preferences":{"Yastik_Tipi":"Soft"}},"1-1":{"room_id":"1","qty":"1","promotion":"18","price":160,"user_price":"160.00","name":"Standart Triple Room","desc":"Last Minute","preferences":{"Yastik_Tipi":"Soft"}}}', '{"7":{"name":"Ooooo Havuz?","price":35,"details":{"Sessions":"1"}},"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 360.00, 155.00, 515.00, 'TRY', '2015-03-24 12:37:47', 1, 1, 1),
+(12, 'M7XBZNY6', 'Mr.', 'sercan', 'gundıgdu', '2015-03-24', '2015-03-25', 'hjygjhgjhg', 'hgfhgfhgf', '54564', '', 'AF', '54564564', 'fdsfds@hjgj.com', 'mk', 'T4V3201SIF1', 2, 2017, 20, 0, 0, 0, '{"1-0":{"room_id":"1","qty":"1","promotion":"0","price":200,"user_price":"200.00","name":"Standart Triple Room","desc":"Best Available Rate","preferences":{"Yastik_Tipi":"Soft"}}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"","Dou_you_want_this":"Yes","Arrival_Date":"","How_many_people_you_are":"1"}}}', 200.00, 120.00, 320.00, 'TRY', '2015-03-24 13:39:16', 1, 1, 1),
+(13, 'WZFR8TUKRWB', 'Mr.', 'Deneme', 'Test', '2015-03-25', '2015-03-26', '324324324', '', '4355465', 'Istanbul', 'TR', '4354546577657', 'aaa@ad.com', 'Deneme Test', '8APE6PEAIG1', 2, 2020, 578, 0, 0, 0, '{"1-0":{"room_id":"1","qty":"1","promotion":"0","price":169,"user_price":"169.00","name":"Standart Triple Room","desc":"Best Available Rate","preferences":{"sigara":"i\\u00e7ilmez"}},"1-1":{"room_id":"1","qty":"2","promotion":"19","price":160.55,"user_price":"160.55","name":"Standart Triple Room","desc":"Breakfast Non-Included","preferences":{"sigara":"i\\u00e7ilmez"}}}', '{"7":{"name":"Ooooo Havuz?","price":35,"details":{"Sessions":"1"}},"5":{"name":"Diner","price":120,"details":{"Flight_Number":"3454465","Dou_you_want_this":"Yes","check":["2","3"],"Arrival_Date":"11-03-2015","How_many_people_you_are":"2"}}}', 329.55, 155.00, 484.55, 'TRY', '2015-03-25 14:54:54', 1, 1, 1),
+(14, 'MYKR8TUKRWB', 'Mr.', 'Deneme 2', 'Test 2', '2015-03-25', '2015-03-26', '324324324', '', '4355465', 'Istanbul', 'TR', '4354546577657', 'aaa@ad.com', 'Deneme Test', '8APE6PEAIG1', 2, 2020, 578, 2, 0, 1, '{"1-0":{"room_id":"1","qty":"2","promotion":"19","price":160.55,"user_price":"160.55","name":"Standart Triple Room","desc":"Breakfast Non-Included","preferences":{"sigara":"i\\u00e7ilir"}},"10-1":{"room_id":"10","qty":"2","promotion":"18","price":320,"user_price":"320.00","name":"Family Room","desc":"Last Minute","preferences":{"Untitled":{"hh":"342","mm":"453","ss":"234"}}}}', '{"7":{"name":"Ooooo Havuz?","price":35,"details":{"Sessions":"1"}},"5":{"name":"Diner","price":120,"details":{"Flight_Number":"3454465","Dou_you_want_this":"Yes","check":["2","3"],"Arrival_Date":"11-03-2015","How_many_people_you_are":"2"}}}', 480.55, 155.00, 635.55, 'TRY', '2015-03-25 14:55:41', 1, 1, 1),
+(15, 'Y9IR8TUKRWB', 'Mr.', 'Deneme 3', 'Test 3', '2015-03-25', '2015-03-26', '324324324', '', '4355465', 'Istanbul', 'TR', '4354546577657', 'aaa@ad.com', 'Deneme Test', '8APE6PEAIG1', 2, 2020, 578, 0, 0, 0, '{"1-1":{"room_id":"1","qty":"1","promotion":"19","price":160.55,"user_price":"160.55","name":"Standart Triple Room","desc":"Breakfast Non-Included","preferences":{"sigara":"i\\u00e7ilmez"}},"10-2":{"room_id":"10","qty":"2","promotion":"18","price":320,"user_price":"320.00","name":"Family Room","desc":"Last Minute","preferences":{"Untitled":{"hh":"324","mm":"45","ss":"56"}}}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"3454465","Dou_you_want_this":"Yes","check":["2","3"],"Arrival_Date":"11-03-2015","How_many_people_you_are":"2"}}}', 480.55, 120.00, 600.55, 'TRY', '2015-03-25 15:21:10', 1, 1, 1),
+(16, 'QVHR8TUKRWB', 'Mr.', 'Deneme 3', 'Test 3', '2015-03-25', '2015-03-26', '324324324', '', '4355465', 'Istanbul', 'TR', '4354546577657', 'aaa@ad.com', 'Deneme Test', '8APE6PEAIG1', 2, 2020, 578, 0, 0, 0, '{"1-1":{"room_id":"1","qty":"1","promotion":"19","price":160.55,"user_price":"160.55","name":"Standart Triple Room","desc":"Breakfast Non-Included","preferences":{"sigara":"i\\u00e7ilmez"}},"10-2":{"room_id":"10","qty":"2","promotion":"18","price":320,"user_price":"320.00","name":"Family Room","desc":"Last Minute","preferences":{"Untitled":{"hh":"324","mm":"45","ss":"56"}}}}', '{"5":{"name":"Diner","price":120,"details":{"Flight_Number":"3454465","Dou_you_want_this":"Yes","check":["2","3"],"Arrival_Date":"11-03-2015","How_many_people_you_are":"2"}}}', 800.55, 120.00, 920.55, 'TRY', '2015-03-25 15:22:20', 1, 1, 1),
+(17, 'VZFR8TUKRWB', 'Mr.', 'Deneme 3', 'Test 3', '2015-03-25', '2015-03-26', '324324324', '', '4355465', 'Istanbul', 'TR', '4354546577657', 'aaa@ad.com', 'Deneme Test', '8APE6PEAIG1', 2, 2020, 578, 0, 0, 0, '{"1-1":{"room_id":"1","qty":"1","promotion":"19","price":160.55,"user_price":"160.55","name":"Standart Triple Room","desc":"Breakfast Non-Included","preferences":{"sigara":"i\\u00e7ilmez"}},"10-2":{"room_id":"10","qty":"2","promotion":"18","price":320,"user_price":"320.00","name":"Family Room","desc":"Last Minute","preferences":{"Untitled":{"hh":"324","mm":"45","ss":"56"}}}}', '[]', 800.55, 0.00, 800.55, 'TRY', '2015-03-25 15:22:39', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5001,7 +5079,7 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`, `capacity`, `min_capacity`, `max_capacity`, `min_adult`, `max_adult`, `min_child`, `max_child`, `child_age`, `room_units`, `preferences`, `hotel_id`, `code`) VALUES
-(1, '3 Kişilk oda', 3, 1, 3, 1, 3, 0, 3, 0, '1,4,6,7,9,10,21,22,25,29,31,33,36,40,42', '[{"label":"Yastık Tipi","field_type":"dropdown","required":true,"field_options":{"options":[{"label":"Soft","checked":false},{"label":"Hard","checked":false}],"include_blank_option":false,"description":"awsdwdaddadwdwadawdaw"},"cid":"c2"}]', 1, 1),
+(1, '3 Kişilk oda', 3, 1, 3, 1, 3, 0, 3, 0, '1,4,6,7,9,10,21,22,25,29,31,33,36,40,42', '[{"label":"sigara","field_type":"radio","required":true,"field_options":{"options":[{"label":"içilir","checked":false},{"label":"içilmez","checked":false}]},"cid":"c6"}]', 1, 1),
 (8, 'Deneme Otel Oda 2', 3, 1, 3, 1, 4, 0, 1, 0, '7,9,10,12,21,23,25,26,31,32,33,34,41', '0', 2, 1),
 (7, 'Deneme Hotel Oda 1', 2, 1, 2, 1, 2, 1, 2, 0, '1,6,8,11,12,13,29,31,32,36,39,41,42,44', '0', 2, 1),
 (9, 'Family Room', 4, 2, 5, 2, 4, 1, 3, 12, '12,13,17,19,21,24,26,33,35,37', '', 2, 1),
