@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_hotel'); ?> > <?php echo $hotel->name; ?></h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_hotel'); ?> > <?php echo @$hotel->name; ?></h2>
       <div class="breadcrumb-wrapper">
         <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
@@ -25,7 +25,7 @@
       </div>
     <?php endif; ?>
 
-    <?php if ($hotel->code != $this->session->userdata('code')) : ?>
+    <?php if (@$hotel->code != $this->session->userdata('code')) : ?>
       <div id="result" class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       <?php echo lang('error_wrong_hotel'); ?>

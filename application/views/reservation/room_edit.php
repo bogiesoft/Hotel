@@ -1,11 +1,11 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_room'); ?> > <?php echo $room->name;?> </h2>
+      <h2><i class="fa fa-building-o"></i> <?php echo lang('edit_room'); ?> > <?php echo @$room->name;?> </h2>
       <div class="breadcrumb-wrapper">
         <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
           <li><a href="<?php echo site_url('dashboard'); ?>"><?php echo lang('manage'); ?></a></li>
-          <li class="active"><?php echo lang('edit_room'); ?> > <?php echo $room->name;?></li>
+          <li class="active"><?php echo lang('edit_room'); ?> > <?php echo @$room->name;?></li>
         </ol>
       </div>
     </div>
@@ -26,7 +26,7 @@
       </div>
     <?php endif; ?>
 
-    <?php if ($room->code != $this->session->userdata('code')) : ?>
+    <?php if (@$room->code != $this->session->userdata('code')) : ?>
       <div id="result" class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
       <?php echo lang('warning_wrong_room'); ?>

@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
     <div class="pageheader">
-      <h2><i class="fa fa-building-o"></i> <?php echo lang('reservations'); ?></h2>
+      <h2><i class="fa fa-credit-card"></i> <?php echo lang('reservations'); ?></h2>
       <div class="breadcrumb-wrapper">
         <span class="label"><?php echo lang('you_are_here'); ?></span>
         <ol class="breadcrumb">
@@ -94,13 +94,6 @@
                 listAction: '<?php echo site_url("reservation_actions/list_reservations"); ?>'
             },
             fields: {
-                id: {
-                    key: true,
-                    create: false,
-                    edit: false,
-                    list: true,
-                    width: '4%'
-                },
                 name_title: {
                     title: '',
                     sorting: false,
@@ -127,7 +120,7 @@
                   width: '2%',
                   sorting: false,
                   display: function (data) {
-                      return $('<a href="'+base_url+'reservation/reservations/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
+                      return $('<a href="'+base_url+'reservation/reservations/view/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }
                 }
             }

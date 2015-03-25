@@ -208,6 +208,10 @@ class Reservation_Model extends CI_Model
 
 	function policy_detail($id){
 		return $this->db->query("SELECT * FROM policies WHERE id ='$id'")->row();
-	}	
+	}
+
+	function reservation_info($id){
+		return $this->db->query("SELECT * FROM reservations WHERE id=$id");
+	}
 
 }

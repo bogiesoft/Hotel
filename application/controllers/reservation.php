@@ -250,7 +250,17 @@ class Reservation extends MY_Controller {
 	function reservations(){
 		//load language
 		$this->lang->load('reservation/reservations',$this->language);
-		$this->load->view('reservation/reservations');
+		//print_r($this->uri->segment('3'));exit;
+		if ($this->uri->segment('3') == 'view') {
+			$id = $this->uri->segment('4');
+			$data['reservation'] = $this->reservation_model->reservation_info($id);
+			$this->load->view('reservation/reservation_detail',$data);
+
+		}else{
+			$this->load->view('reservation/reservations');
+		}
+
+		
 	}
 
 }
