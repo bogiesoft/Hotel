@@ -824,6 +824,7 @@ $this->load->view('front/header');
                 <input type="hidden" name="checkout" value="<?php echo $options['checkout'];?>">
                 <input type="hidden" name="adults" value="<?php echo $options['adults'];?>">
                 <input type="hidden" name="children" value="<?php echo $options['children'];?>">
+                <input type="hidden" name="children_ages" value='<?php echo $this->input->get('children_ages') ? json_encode($this->input->get('children_ages')) : '0';?>'>
                 <input type="hidden" name="nights" value="<?php echo $options['nights'];?>">
                 </form>
 
