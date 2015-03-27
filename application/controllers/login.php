@@ -35,6 +35,8 @@ class Login extends MY_Controller {
 
 			$hotel = $this->login_model->default_hotel($account->code);
 
+			//set last login
+			$this->login_model->set_last_login($account->id);
 			$user_data =  array('user_id'	=> $account->id,
 								'name' 		=> $account->name,
 								'surname'	=> $account->surname,

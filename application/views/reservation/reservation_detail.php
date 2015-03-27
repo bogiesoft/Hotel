@@ -123,6 +123,14 @@
                   <?php echo $reservation->nights; ?> <?php echo lang('nights'); ?>
                   <?php echo $reservation->adults; ?> <?php echo lang('adults'); ?>
                   <?php echo $reservation->children; ?> <?php echo lang('children'); ?>
+                  <?php if ($reservation->children != 0) { $children_ages = json_decode($reservation->children_ages); 
+                      echo '<br>'.lang('children').' '.lang('ages').'; ';
+                      foreach ($children_ages as $key => $ca) {
+                        $key = $key +1;
+                        echo $ca.lang('yo').' ';
+                      }
+
+                  }?>
                   </div>
               </div>
               <?php $rooms = json_decode($reservation->rooms); ?>

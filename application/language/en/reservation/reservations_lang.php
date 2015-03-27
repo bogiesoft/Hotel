@@ -22,6 +22,8 @@ $lang['zipcode']		= 'zipcode';
 $lang['nights']			= 'Nights';
 $lang['adults']			= 'Adults';
 $lang['children']		= 'Children';
+$lang['ages']			= 'Ages';
+$lang['yo']				= 'yo';
 
 $lang['room_name']		= 'Room Name';
 $lang['room_desc']		= 'Price Type';

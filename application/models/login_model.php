@@ -27,4 +27,9 @@ class Login_Model extends CI_Model
 		}
 	}
 
+	function set_last_login($id){
+		$data = array('last_login'=>date('Y-m-d H:i:s'));
+		$this->db->update('accounts', $data, array('id' => $id));
+	}
+
 }
