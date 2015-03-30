@@ -36,6 +36,32 @@ $(function() {
         $(this).parent().addClass('tc');
         $("#tc2").removeClass('tc');
      });
+
+    $('#check-out').datepicker({dateFormat: "yy-mm-dd"});
+    $("#check-in").datepicker({
+        minDate: 0,
+        dateFormat: "yy-mm-dd",
+        onSelect: function(dateStr) {
+           var newDate = $(this).datepicker('getDate');
+           if (newDate) { // Not null
+                   newDate.setDate(newDate.getDate() + 1);
+           }
+
+           $('#check-out').datepicker('setDate', newDate).datepicker('option', 'minDate', newDate).datepicker(); 
+    }
+    });
+
+    //calculate nights
+    $("#check-in,#check-out").change(function(){
+        var date1_val   = $('#check-in').datepicker('getDate');
+        var date2_val   = $('#check-out').datepicker('getDate');
+        var diffDays   = (date2_val - date1_val)/1000/60/60/24;
+
+        if (isNaN(diffDays)) {diffDays='0'};
+        $("#nights").val(diffDays);
+    });
+
+     /*
      $("#check-in,#check-out").change(function(){
         var date1_val = $("#check-in").val().split('-');
         date1_val = date1_val[2]+'-'+date1_val[1]+'-'+date1_val[0];
@@ -51,6 +77,8 @@ $(function() {
         if (isNaN(diffDays)) {diffDays='0'};
         $("#nights").val(diffDays);
      });
+    */
+    
         
 // ---------------------------------- end header menus
 // ---------------------------------- Modify Date
