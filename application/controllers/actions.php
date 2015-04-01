@@ -92,8 +92,9 @@ class Actions extends CI_Controller {
         	echo json_encode(array('status'=>'error','errors'=>$data));
 
         }else{
-
-        	$data['reservation_code']= rand_uniqid($this->input->post('phone').mt_rand(1000,9999)); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+        	$pincode = mt_rand(1000,9999);
+        	$data['reservation_code']= rand_uniqid($this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+        	$data['pincode'] 		= $pincode;
         	$data['name_title'] 	= $this->input->post('name_title');
         	$data['first_name']		= $this->input->post('first_name');
         	$data['last_name'] 		= $this->input->post('last_name');
