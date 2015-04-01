@@ -26,14 +26,61 @@
 <div id="header">
 <div class="container po-re">
     <div class="col-md-12 m2">
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
+   <!-- {
+    "base": "EUR",
+    "date": "2000-01-03",
+    "rates": {
+        "AUD": 1.5346,
+        "CAD": 1.4577,
+        "CHF": 1.6043,
+        "CYP": 0.5767,
+        "CZK": 36.063,
+        "DKK": 7.4404,
+        "EEK": 15.647,
+        "GBP": 0.6246,
+        "HKD": 7.8624,
+        "HUF": 254.53,
+        "ISK": 73.03,
+        "JPY": 102.75,
+        "KRW": 1140.02,
+        "LTL": 4.0454,
+        "LVL": 0.5916,
+        "MTL": 0.4151,
+        "NOK": 8.062,
+        "NZD": 1.9331,
+        "PLN": 4.1835,
+        "ROL": 18273,
+        "SEK": 8.552,
+        "SGD": 1.6769,
+        "SIT": 198.89,
+        "SKK": 42.317,
+        "TRL": 546131,
+        "USD": 1.009,
+        "ZAR": 6.2013
+    }
+}-->
+        <a href="<?php echo current_full_url(); ?>&cur=AUD"><span class="glyphicon glyphicon-chevron-right"></span> AUD</a>
+        <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="glyphicon glyphicon-chevron-right"></span> CAD</a>
+        <a href="<?php echo current_full_url(); ?>&cur=CYP"><span class="glyphicon glyphicon-chevron-right"></span> CYP</a>
+        <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="glyphicon glyphicon-chevron-right"></span> CZK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="glyphicon glyphicon-chevron-right"></span> DKK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=EEK"><span class="glyphicon glyphicon-chevron-right"></span> EEK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="glyphicon glyphicon-chevron-right"></span> GBP</a>
+        <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="glyphicon glyphicon-chevron-right"></span> HUF</a>
+        <a href="<?php echo current_full_url(); ?>&cur=JPY"><span class="glyphicon glyphicon-chevron-right"></span> JPY</a>
+        <a href="<?php echo current_full_url(); ?>&cur=KRW"><span class="glyphicon glyphicon-chevron-right"></span> KRW</a>
+        <a href="<?php echo current_full_url(); ?>&cur=LTL"><span class="glyphicon glyphicon-chevron-right"></span> LTL</a>
+        <a href="<?php echo current_full_url(); ?>&cur=LVL"><span class="glyphicon glyphicon-chevron-right"></span> LVL</a>
+        <a href="<?php echo current_full_url(); ?>&cur=NOK"><span class="glyphicon glyphicon-chevron-right"></span> NOK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=PLN"><span class="glyphicon glyphicon-chevron-right"></span> PLN</a>
+        <a href="<?php echo current_full_url(); ?>&cur=ROL"><span class="glyphicon glyphicon-chevron-right"></span> ROL</a>
+        <a href="<?php echo current_full_url(); ?>&cur=SEK"><span class="glyphicon glyphicon-chevron-right"></span> SEK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=SGD"><span class="glyphicon glyphicon-chevron-right"></span> SGD</a>
+        <a href="<?php echo current_full_url(); ?>&cur=SIT"><span class="glyphicon glyphicon-chevron-right"></span> SIT</a>
+        <a href="<?php echo current_full_url(); ?>&cur=SKK"><span class="glyphicon glyphicon-chevron-right"></span> SKK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=TRY"><span class="glyphicon glyphicon-chevron-right"></span> TRY</a>
+        <a href="<?php echo current_full_url(); ?>&cur=USD"><span class="glyphicon glyphicon-chevron-right"></span> USD</a>
+        <a href="<?php echo current_full_url(); ?>&cur=ZAR"><span class="glyphicon glyphicon-chevron-right"></span> ZAR</a>
     </div>
     <div class="col-md-12 m3">
         <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
@@ -63,7 +110,7 @@
         <div class="col-md-2">
             <div class="head-part">
                 <a id="money-link" href="#">
-                View Rates In <span class="sqr">EURO</span> <span class="caret"></span>
+                View Rates In <span class="sqr"><?php echo $options['user_currency']; ?></span> <span class="caret"></span>
                 </a>
             </div>
         </div>
