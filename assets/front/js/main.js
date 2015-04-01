@@ -500,18 +500,19 @@ function form_to_arr(div){
                 $('.extras').fadeOut();
             }
             
-            $('.extra_info').remove();
-
+            //$('.extra_info').remove();
             //list user extras in cart
-            $.each(ret.details, function(i,val){
-            html = '<div class="extra_info">'+
-                    '<div>'+val.name+'</div>'+
+            if (ret.action =='add') {
+                 html = '<div class="extra_info extra_'+ret.extra_id+'">'+
+                    '<div>'+ret.details[ret.extra_id].name+'</div>'+
                     '<div>'+ret.user_price+' '+ret.user_currency+'</div>'+
                     '</div>';
 
-            $('.extras_in_cart').after(html);
+                    $('.extras_in_cart').after(html).fadeIn('slow');
 
-            });
+            }else{
+                $('.extra_'+ret.extra_id).fadeOut('slow');
+            }
 
             $('#extras_total').val(ret.total_price);
             $('#extras_total_user').val(ret.user_price);
