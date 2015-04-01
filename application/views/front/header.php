@@ -29,55 +29,62 @@
    <!-- {
     "base": "EUR",
     "date": "2000-01-03",
+  "base": "EUR",
+    "date": "2015-03-31",
     "rates": {
-        "AUD": 1.5346,
-        "CAD": 1.4577,
-        "CHF": 1.6043,
-        "CYP": 0.5767,
-        "CZK": 36.063,
-        "DKK": 7.4404,
-        "EEK": 15.647,
-        "GBP": 0.6246,
-        "HKD": 7.8624,
-        "HUF": 254.53,
-        "ISK": 73.03,
-        "JPY": 102.75,
-        "KRW": 1140.02,
-        "LTL": 4.0454,
-        "LVL": 0.5916,
-        "MTL": 0.4151,
-        "NOK": 8.062,
-        "NZD": 1.9331,
-        "PLN": 4.1835,
-        "ROL": 18273,
-        "SEK": 8.552,
-        "SGD": 1.6769,
-        "SIT": 198.89,
-        "SKK": 42.317,
-        "TRL": 546131,
-        "USD": 1.009,
-        "ZAR": 6.2013
+        "AUD": 1.4154,
+        "BGN": 1.9558,
+        "BRL": 3.4958,
+        "CAD": 1.3738,
+        "CHF": 1.0463,
+        "CNY": 6.671,
+        "CZK": 27.533,
+        "DKK": 7.4697,
+        "GBP": 0.7273,
+        "HKD": 8.3422,
+        "HRK": 7.645,
+        "HUF": 299.43,
+        "IDR": 14053.78,
+        "ILS": 4.2795,
+        "INR": 67.274,
+        "JPY": 128.95,
+        "KRW": 1192.58,
+        "MXN": 16.512,
+        "MYR": 3.9873,
+        "NOK": 8.7035,
+        "NZD": 1.4388,
+        "PHP": 48.057,
+        "PLN": 4.0854,
+        "RON": 4.4098,
+        "RUB": 62.44,
+        "SEK": 9.2901,
+        "SGD": 1.4774,
+        "THB": 35.018,
+        "TRY": 2.8131,
+        "USD": 1.0759,
+        "ZAR": 13.132
+    }
     }
 }-->
         <a href="<?php echo current_full_url(); ?>&cur=AUD"><span class="glyphicon glyphicon-chevron-right"></span> AUD</a>
         <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="glyphicon glyphicon-chevron-right"></span> CAD</a>
-        <a href="<?php echo current_full_url(); ?>&cur=CYP"><span class="glyphicon glyphicon-chevron-right"></span> CYP</a>
+        <a href="<?php echo current_full_url(); ?>&cur=CHF"><span class="glyphicon glyphicon-chevron-right"></span> CHF</a>
         <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="glyphicon glyphicon-chevron-right"></span> CZK</a>
         <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="glyphicon glyphicon-chevron-right"></span> DKK</a>
-        <a href="<?php echo current_full_url(); ?>&cur=EEK"><span class="glyphicon glyphicon-chevron-right"></span> EEK</a>
         <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="glyphicon glyphicon-chevron-right"></span> GBP</a>
+        <a href="<?php echo current_full_url(); ?>&cur=HKD"><span class="glyphicon glyphicon-chevron-right"></span> HKD</a>
         <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="glyphicon glyphicon-chevron-right"></span> HUF</a>
+        <a href="<?php echo current_full_url(); ?>&cur=ILS"><span class="glyphicon glyphicon-chevron-right"></span> ILS</a>
+        <a href="<?php echo current_full_url(); ?>&cur=INR"><span class="glyphicon glyphicon-chevron-right"></span> INR</a>
         <a href="<?php echo current_full_url(); ?>&cur=JPY"><span class="glyphicon glyphicon-chevron-right"></span> JPY</a>
         <a href="<?php echo current_full_url(); ?>&cur=KRW"><span class="glyphicon glyphicon-chevron-right"></span> KRW</a>
-        <a href="<?php echo current_full_url(); ?>&cur=LTL"><span class="glyphicon glyphicon-chevron-right"></span> LTL</a>
-        <a href="<?php echo current_full_url(); ?>&cur=LVL"><span class="glyphicon glyphicon-chevron-right"></span> LVL</a>
         <a href="<?php echo current_full_url(); ?>&cur=NOK"><span class="glyphicon glyphicon-chevron-right"></span> NOK</a>
         <a href="<?php echo current_full_url(); ?>&cur=PLN"><span class="glyphicon glyphicon-chevron-right"></span> PLN</a>
-        <a href="<?php echo current_full_url(); ?>&cur=ROL"><span class="glyphicon glyphicon-chevron-right"></span> ROL</a>
+        <a href="<?php echo current_full_url(); ?>&cur=RON"><span class="glyphicon glyphicon-chevron-right"></span> RON</a>
+        <a href="<?php echo current_full_url(); ?>&cur=RUB"><span class="glyphicon glyphicon-chevron-right"></span> RUB</a>
         <a href="<?php echo current_full_url(); ?>&cur=SEK"><span class="glyphicon glyphicon-chevron-right"></span> SEK</a>
         <a href="<?php echo current_full_url(); ?>&cur=SGD"><span class="glyphicon glyphicon-chevron-right"></span> SGD</a>
-        <a href="<?php echo current_full_url(); ?>&cur=SIT"><span class="glyphicon glyphicon-chevron-right"></span> SIT</a>
-        <a href="<?php echo current_full_url(); ?>&cur=SKK"><span class="glyphicon glyphicon-chevron-right"></span> SKK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=THB"><span class="glyphicon glyphicon-chevron-right"></span> THB</a>
         <a href="<?php echo current_full_url(); ?>&cur=TRY"><span class="glyphicon glyphicon-chevron-right"></span> TRY</a>
         <a href="<?php echo current_full_url(); ?>&cur=USD"><span class="glyphicon glyphicon-chevron-right"></span> USD</a>
         <a href="<?php echo current_full_url(); ?>&cur=ZAR"><span class="glyphicon glyphicon-chevron-right"></span> ZAR</a>
