@@ -483,6 +483,70 @@ function rand_uniqid($in, $to_num = false, $pad_up = false, $passKey = null){
 }
 
 
+/*
+* Used in front select - option
+*/
+function checkCartRoom($room_id,$qty,$promo){
+	$response = false;
+
+	$ci =& get_instance();
+	$user_cart = $ci->session->userdata('user_cart');
+
+	if (!$user_cart) {
+		$response = false;
+	}
+	
+	foreach ($user_cart as $key => $cart) {
+		if ($cart['room_id'] == $room_id and $cart['qty'] == $qty and $cart['promotion'] ==$promo) {
+			$response = true;
+		}
+	}
+
+	if ($response == TRUE) {
+		echo 'selected="selected"';
+	}
+
+}
+
+function cart_info(){
+	$response = array();
+	$ci =& get_instance();
+
+	$options = $ci->session->userdata('options');
+
+	if ($ci->session->userdata('user_cart')) {
+		
+		$total_price = 0;
+		$total_user_price = 0;
+		$total_room  = 0;
+		foreach ($ci->session->userdata('user_cart') as $key => $cart) {
+			$total_price += $cart['price'] * $cart['qty'] * $options['nights'];
+			$total_user_price += $cart['user_price'] * $cart['qty'] * $options['nights'];
+			$total_room += $cart['qty'];
+		}
+
+		$response['cart']['total_price'] = show_price($total_price);
+		$response['cart']['total_user_price'] = show_price($total_user_price,$options['currency_rate']);
+		$response['cart']['total_room'] = $total_room;
+	}
+
+	if ($ci->session->userdata('user_extras')) {
+		$total_extra_price = 0;
+		foreach ($ci->session->userdata('user_extras') as $key => $cart) {
+			$total_extra_price += $cart['price'];
+		}
+
+		$response['extras']['total_price'] = show_price($total_extra_price);
+		$response['extras']['total_user_price'] = show_price($total_extra_price,$options['currency_rate']);
+	}
+
+	$response['total_price'] = $response['cart']['total_price'] + $response['extras']['total_price'];
+
+	return $response;
+
+}
+
+
 function onAjaxTest(){
 	echo 'test';
 }

@@ -198,7 +198,7 @@ $this->load->view('front/header');
                                     <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
 
                                     <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <option <?php checkCartRoom($rid,$i,0); ?> data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                     <?php } ?>
                                     </select><br />
                                      We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
@@ -272,7 +272,7 @@ $this->load->view('front/header');
                                     <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
                                         <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="<?php echo $pid; ?>" data-qty="0" data-price="0" value="0-0" data-type="delete">Select</option>
                                         <?php for ($i=1; $i <=5; $i++) { ?>
-                                        <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="<?php echo $promo['promotion_name']; ?>" data-promotion="<?php echo $pid; ?>" data-qty="<?php echo $i; ?>" data-type="add" data-price="<?php echo $prices->$rid->promotions->$pid->price * $i; ?>"><?php echo $i;?> - <?php echo show_price($prices->$rid->promotions->$pid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <option <?php checkCartRoom($rid,$i,$pid); ?> data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="<?php echo $promo['promotion_name']; ?>" data-promotion="<?php echo $pid; ?>" data-qty="<?php echo $i; ?>" data-type="add" data-price="<?php echo $prices->$rid->promotions->$pid->price * $i; ?>"><?php echo $i;?> - <?php echo show_price($prices->$rid->promotions->$pid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                         <?php }?>
                                     </select><br />
                                     We Have 3 rooms left!
@@ -323,6 +323,18 @@ $this->load->view('front/header');
                             <input class="bb-no" id="reserve_button" type="submit" value="Reserve" />
                         </div>
                         <p class="cent">Confirmation is immediate</p>
+                        <?php  if (NULL != $user_cart) : $cart_info = cart_info(); ?>
+                        <div class="best-price">
+                            <p>
+                            <input class="price hh1" id="rom" type="text" name="val[1][rooms]" value="<?php echo $cart_info['cart']['total_room']; ?>" readonly="" /> 
+                             rooms for 
+                             <input class="price hh1" id="nits" type="text" name="val[1][nights]" value="<?php echo $options['nights']; ?>" readonly="" /> 
+                              night
+                            </p>
+                           <input class="price hh2" id="tot" type="text" name="val[1][price]" value="<?php echo $cart_info['cart']['total_user_price']; ?>" readonly="" /> <?php echo $options['user_currency']; ?>
+                            <div id="best_price"></div>
+                        </div>
+                        <?php else: ?>
                         <div class="best-price">
                             <p>
                             <input class="price hh1" id="rom" type="text" name="val[1][rooms]" value="0" readonly="" /> 
@@ -333,6 +345,7 @@ $this->load->view('front/header');
                            <input class="price hh2" id="tot" type="text" name="val[1][price]" value="0" readonly="" /> <?php echo $options['user_currency']; ?>
                             <div id="best_price"></div>
                         </div>
+                        <?php endif; ?>
                     </form>
                     <div class="all-green cent f-b">
                         <p>
@@ -374,6 +387,17 @@ $this->load->view('front/header');
                             </div>
                         </div>
                         -->
+                        <?php  if (NULL != $user_cart) : $total_price = 0; ?>
+                        <?php foreach ($user_cart as $key => $cart) : $total_price += $cart['price'] ?>
+                        <div class="room">
+                            <div class="park-view"><?php echo $cart['name']; ?> x <?php echo $cart['qty']; ?></div>
+                            <div class="avrg">
+                                <div><?php echo $cart['desc']; ?>/night</div>
+                                <div><?php echo $cart['price']; ?> <?php echo $options['currency']; ?></div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                         <div class="items_in_cart"></div>
 
                         <div class="extras" style="display:none">
@@ -381,7 +405,18 @@ $this->load->view('front/header');
                             <div class="extras_in_cart"></div>
                         </div>
 
-
+                        <?php  if (NULL != $user_cart) : ?>
+                        <div class="avrg">
+                            <div>TOTAL</div>
+                            <div class="c-090 avrgtotal"><?php echo $total_price; ?></div>
+                            <div class="c-090 avrgdefault"></div>
+                            <input type="hidden" value="<?php echo $total_price; ?>" id="rooms_total">
+                            <input type="hidden" value="00" id="rooms_total_user">
+                            <input type="hidden" value="00" id="extras_total">
+                            <input type="hidden" value="00" id="extras_total_user">
+                            <div class="price_information"></div>
+                        </div>
+                        <?php else:; ?>
                         <div class="avrg" style="display:none">
                             <div>TOTAL</div>
                             <div class="c-090 avrgtotal"></div>
@@ -392,6 +427,7 @@ $this->load->view('front/header');
                             <input type="hidden" value="00" id="extras_total_user">
                             <div class="price_information"></div>
                         </div>
+                        <?php endif; ?>
                         <div class="cancellation">
                             <div>Cancellation policy:</div>
                             <div>Cancel by 6 PM local hotel time on Feb 11, 2015 to avoid a penalty charge of EUR 367.20</div>

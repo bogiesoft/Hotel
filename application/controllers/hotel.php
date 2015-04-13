@@ -138,6 +138,8 @@ class Hotel extends CI_Controller {
 			'user_currency' => $this->user_currency,
 			'currency_rate'=>$this->currency_rate);
 
+		$this->session->set_userdata('options',$data['options']);
+		
 		$data['hotel_info'] 	= $hotel;
 		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
@@ -160,10 +162,11 @@ class Hotel extends CI_Controller {
 		$this->calculate_extra_prices($data['extras']);
 				
 		$data['prices'] 		= $this->session->userdata('prices_all');
+		$data['user_cart'] 		= $this->session->userdata('user_cart');
+		$data['user_extras'] 		= $this->session->userdata('user_extras');
 		echo '<!--';
 		echo '<pre>';
 		print_r($data);
-		print_r($this->session->userdata('user_cart'));
 		echo '-->';
 		
 
