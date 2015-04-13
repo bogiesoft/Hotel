@@ -17,11 +17,30 @@ $this->load->view('front/header');
         }
     });
 */
-    
+    $(".price_chart").popover({ 
+        
+        trigger: "click",
+        html : true,
+        content: function() {
+        $('.arrow').css('top',0);
+        var room_id = $(this).data('room-id');
+        return room_id;
+        },
+        title: function() {
+          return 'adwdawdad';
+        }
+    });
 
 });
 
 </script>
+<style type="text/css">
+.popover{
+    width:300px;
+    height:150px;    
+}
+.popover .arrow{ display: :none;}
+</style>
     <div class="tab-content">
         <div class="tab-pane active po-re" id="tab_b"><!-- first tap -->
             <div class="row" id="fixed-row">
@@ -154,7 +173,7 @@ $this->load->view('front/header');
                                     <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> " data-currency="<?php echo $options['currency']; ?>">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
                                     <?php echo $options['user_currency']; ?></abbr>
-                                    <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title">
+                                    <span class="price_chart" data-room-id="<?php echo $rid; ?>" data-prices='<?php json_encode($prices->$rid); ?>' data-trigger="hover" data-placement="top" title="Price Info">
                                     <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
                                     
