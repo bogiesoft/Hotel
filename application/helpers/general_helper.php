@@ -541,6 +541,7 @@ function cart_info(){
 	}
 
 	$response['total_price'] = $response['cart']['total_price'] + $response['extras']['total_price'];
+	$response['total_user_price'] = $response['cart']['total_user_price'] + $response['extras']['total_user_price'];
 
 	return $response;
 

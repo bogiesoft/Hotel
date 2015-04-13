@@ -393,7 +393,7 @@ $this->load->view('front/header');
                             <div class="park-view"><?php echo $cart['name']; ?> x <?php echo $cart['qty']; ?></div>
                             <div class="avrg">
                                 <div><?php echo $cart['desc']; ?>/night</div>
-                                <div><?php echo $cart['price']; ?> <?php echo $options['currency']; ?></div>
+                                <div><?php echo $cart['user_price']; ?> <?php echo $options['user_currency']; ?></div>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -405,15 +405,17 @@ $this->load->view('front/header');
                             <div class="extras_in_cart"></div>
                         </div>
 
-                        <?php  if (NULL != $user_cart) : ?>
+                        <?php  if (NULL != $user_cart) : $cart_info = cart_info(); ?>
                         <div class="avrg">
                             <div>TOTAL</div>
-                            <div class="c-090 avrgtotal"><?php echo $total_price; ?></div>
-                            <div class="c-090 avrgdefault"></div>
-                            <input type="hidden" value="<?php echo $total_price; ?>" id="rooms_total">
-                            <input type="hidden" value="00" id="rooms_total_user">
-                            <input type="hidden" value="00" id="extras_total">
-                            <input type="hidden" value="00" id="extras_total_user">
+                            <div class="c-090 avrgtotal"><?php echo $cart_info['total_price']; ?> <?php echo $options['currency']; ?></div>
+                            <?php if ($options['currency'] != $options['user_currency']) : ?>
+                            <div class="c-090 avrgdefault"><?php echo $cart_info['total_user_price']; ?> <?php echo $options['user_currency']; ?></div>
+                            <?php endif; ?>
+                            <input type="hidden" value="<?php echo $cart_info['cart']['total_price']; ?>" id="rooms_total">
+                            <input type="hidden" value="<?php echo $cart_info['cart']['total_user_price']; ?>" id="rooms_total_user">
+                            <input type="hidden" value="<?php echo $cart_info['extras']['total_price']; ?>" id="extras_total">
+                            <input type="hidden" value="<?php echo $cart_info['extras']['total_user_price']; ?>" id="extras_total_user">
                             <div class="price_information"></div>
                         </div>
                         <?php else:; ?>
