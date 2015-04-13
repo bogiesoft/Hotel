@@ -139,7 +139,7 @@ class Hotel extends CI_Controller {
 			'currency_rate'=>$this->currency_rate);
 
 		$this->session->set_userdata('options',$data['options']);
-		
+
 		$data['hotel_info'] 	= $hotel;
 		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
@@ -398,6 +398,8 @@ class Hotel extends CI_Controller {
 	//burayı düzgünce yapmak lazım
 	public function user_cart(){
 		
+		$options = $this->session->userdata('options');
+		
 		$user_cart = $this->session->userdata('user_cart');
 		$room_id 	= $this->input->post('room');
 		$qty 		= $this->input->post('qty');
@@ -416,6 +418,12 @@ class Hotel extends CI_Controller {
 			
 		//add item
 		}else{
+
+			foreach ($user_cart as $key => $c) {
+				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
+					unset($user_cart[$key]);
+				}
+			} 
 
 			if ($promotion != 0) {
 				$price = $room_prices->$room_id->promotions->$promotion->price;
@@ -445,8 +453,8 @@ class Hotel extends CI_Controller {
 		$response['default_currency'] = $default_currency;
 
 		foreach ($user_cart as $r => $v) {
-			$response['user_price']  	+= show_price($v['price']*$v['qty'],$rate);
-			$response['total_price']  	+= $v['price']*$v['qty'];
+			$response['user_price']  	+= show_price($v['price']*$v['qty']*$options['nights'],$rate);
+			$response['total_price']  	+= $v['price']*$v['qty']*$options['nights'];
 			$response['total_qty'] 		+= $v['qty'];
 		}
 
