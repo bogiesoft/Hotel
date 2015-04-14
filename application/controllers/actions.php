@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Actions extends CI_Controller {
+class Actions extends RA_Controller {
 
 
 	function __construct(){
@@ -160,6 +160,18 @@ class Actions extends CI_Controller {
         }
 
 
+	}
+
+	/*
+	* Draw Chart
+	*/
+	function room_price_info(){
+		
+		$room_id = $this->input->post('room_id');
+		$options = json_decode($this->input->post('options'),true);
+		$start = $options['checkin'];
+
+		echo $start;
 	}
 
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Reservation_actions extends MY_Controller {
+class Reservation_actions extends ADMIN_Controller {
 
 	function list_hotels(){
 		$code = $this->session->userdata('code');

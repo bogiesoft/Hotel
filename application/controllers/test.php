@@ -1,6 +1,6 @@
 <?php
 
-class Test Extends MY_Controller{
+class Test Extends ADMIN_Controller{
 	
 	function ulke(){
 
