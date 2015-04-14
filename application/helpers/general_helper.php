@@ -494,13 +494,15 @@ function checkCartRoom($room_id,$qty,$promo){
 
 	if (!$user_cart) {
 		$response = false;
-	}
-	
-	foreach ($user_cart as $key => $cart) {
-		if ($cart['room_id'] == $room_id and $cart['qty'] == $qty and $cart['promotion'] ==$promo) {
-			$response = true;
+	}else{
+		foreach ($user_cart as $key => $cart) {
+			if ($cart['room_id'] == $room_id and $cart['qty'] == $qty and $cart['promotion'] ==$promo) {
+				$response = true;
+			}
 		}
 	}
+	
+	
 
 	if ($response == TRUE) {
 		echo 'selected="selected"';

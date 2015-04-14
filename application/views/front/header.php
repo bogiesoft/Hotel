@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/style.css" media="all" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/animate.min.css" media="all" />
+   
+   
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -17,6 +20,7 @@
     <script type="text/javascript" src="<?php echo site_url('assets/front'); ?>/js/jquery.zaccordion.min.js"></script>
     <script src="<?php echo site_url('assets/front'); ?>/js/countdown.js"></script>
     <script src="<?php echo site_url('assets/front'); ?>/js/main.js"></script>
+
     <script type="text/javascript">
     var base_url = '<?php echo site_url(); ?>';
     </script>

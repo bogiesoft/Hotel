@@ -2,6 +2,22 @@
 $this->load->view('front/header');
 ?>
 <script type="text/javascript">
+  // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart(data) {
+    // Create our data table out of JSON data loaded from server.
+    var data = new google.visualization.DataTable(jQuery.parseJSON(data));
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(data, {width: 400, height: 150});
+    }
+</script>
+<script type="text/javascript">
     $(document).ready(function(){
 
     /*
@@ -17,32 +33,76 @@ $this->load->view('front/header');
         }
     });
 */
+  
     var options = '<?php echo json_encode($options); ?>';
     
-    $('*[data-poload]').click(function() {
+    /*
+    $('*[data-poload]').hover(function() {
         var e=$(this);
         //e.off('hover');
         var room_id = e.data('room-id');
+        $('.popover-content').append("<div class='chart_div'"+room_id+"></div>")
         $.post( base_url + "actions/room_price_info", { room_id: room_id, options: options },function(d){
-             e.popover({content: d}).popover('show');
+
+            e.popover({html:true,content: '<div id="chart_div" style="width:400px; height:150px;"></div>'}).popover('show');
+            // Create our data table out of JSON data loaded from server.
+
+            var data = new google.visualization.DataTable(jQuery.parseJSON(data));
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, {width: 400, height: 150});
+
         });
  
     });
+    */
 
-    $(".price_chart2").popover({ 
-        trigger: "click",
-        html : true,
-        content: function() {
+    <?php if ($this->input->get('children_ages')){ 
+        echo "var children='".json_encode($this->input->get('children_ages'))."';";
+    }else{ 
+        echo "var children='';"; 
+    }  ?>
+
+    $(".price_chart").click(function(e) {
         var room_id = $(this).data('room-id');
-        var response = $.post( base_url + "actions/room_price_info", { room_id: room_id, options: options });
-        
-        response.always(function(data){
-            var output = data;
-            return output;
+        $(this).popover({
+            container:'body',
+            trigger: "click",
+            placement : 'top',
+            html : true,
+            content : '<div id="chart_div'+room_id+'" style="width:700px; height:150px;"></div>'
         });
+       
+        jQuery.post( base_url + "actions/room_price_info",{ room_id: room_id, options: options,children:children },function(data){
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable(jQuery.parseJSON(data));
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'+room_id));
+            
+            //var range1 = chart.getDataTable().getColumnRange(1);
 
-        //return output;
-        }
+
+
+            /* min max values option
+            var minMax = {
+                min: Math.min(data.getColumnRange(1).max),
+                max: Math.max(data.getColumnRange(1).min)
+            }
+            
+            //this goes into chart.draw option
+            vAxis: { 
+                viewWindowMode:'explicit',
+                viewWindow: {
+                    max:minMax.max,
+                    min:minMax.min
+                }
+            }
+            */
+            chart.draw(data, {
+                width: 400, height: 150,bar: {groupWidth: "95%"}
+            });
+        });
     });
 
 });
@@ -50,11 +110,18 @@ $this->load->view('front/header');
 </script>
 <style type="text/css">
 .popover{
-    width:300px;
-    height:150px;    
+    max-width: 450px;
+    height:200px;    
 }
 .popover .arrow{ display: :none;}
 </style>
+<div class="hidden" id="a1" style="display:none">
+    <div class="popover-heading">Price Info</div>
+    <div class="popover-body">
+        <div class="chart_div"></div>
+    </div>
+</div>
+
     <div class="tab-content">
         <div class="tab-pane active po-re" id="tab_b"><!-- first tap -->
             <div class="row" id="fixed-row">
