@@ -88,4 +88,12 @@ class Front_Model extends CI_Model{
 		return $this->db->query("SELECT preferences FROM rooms where id=$id")->row();
 	}
 
+	function get_room_price_for_chart($start,$room_id){
+		$end = date('Y-m-d',strtotime("+7 day",strtotime($start)));
+		return $this->db->query("SELECT * FROM prices 
+			WHERE room_id = $room_id 
+			and price_date >= '$start' and price_date <= '$end' order by price_date")->result_array();
+
+	}
+
 }

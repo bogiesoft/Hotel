@@ -170,8 +170,14 @@ class Actions extends RA_Controller {
 		$room_id = $this->input->post('room_id');
 		$options = json_decode($this->input->post('options'),true);
 		$start = $options['checkin'];
+		$prices = $this->front_model->get_room_price_for_chart($start,$room_id);
 
-		echo $start;
+		$data = array();
+		foreach ($prices as $key => $pr) {
+			$data[$room_id]['prices'][$pr['price_date']] = $pr;
+		}
+		$price = $this->calculate_room_prices($data,$options['adults']);
+		print_r($price);
 	}
 
 

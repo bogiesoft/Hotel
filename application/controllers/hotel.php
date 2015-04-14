@@ -2,16 +2,6 @@
 
 class Hotel extends RA_Controller {
 
-	var $total_room_price;
-	var $user_cart;
-	public $adults = 2;
-	public $children = 0;
-	public $nights = 1;
-	public $start_date;
-	public $end_date;
-	private $currency = 'EUR';
-	public $user_currency;
-	public $currency_rate = 1;
 
 	function __construct(){
 		parent::__construct();

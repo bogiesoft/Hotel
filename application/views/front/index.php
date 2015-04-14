@@ -19,9 +19,9 @@ $this->load->view('front/header');
 */
     var options = '<?php echo json_encode($options); ?>';
     
-    $('*[data-poload]').hover(function() {
+    $('*[data-poload]').click(function() {
         var e=$(this);
-        e.off('hover');
+        //e.off('hover');
         var room_id = e.data('room-id');
         $.post( base_url + "actions/room_price_info", { room_id: room_id, options: options },function(d){
              e.popover({content: d}).popover('show');

@@ -1,0 +1,255 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class RA_Controller extends MY_Controller{
+	
+
+	var $total_room_price;
+	var $user_cart;
+	public $adults = 2;
+	public $children = 0;
+	public $nights = 1;
+	public $start_date;
+	public $end_date;
+	public $currency = 'EUR';
+	public $user_currency;
+	public $currency_rate = 1;
+
+	function __construct(){
+
+		parent::__construct();
+
+	}
+
+	/*
+	* Calculate room prices
+	* Used in hotel controller and action controller
+	* 
+	*/
+	function calculate_room_prices($arr,$adult=NULL,$sess=false){
+
+		$total_room_price = new StdClass;
+
+		if (NULL != $adult) {
+			$adults = $adult;
+		}else{
+			$adults = $this->adults;
+		}
+
+		if ($adults == 1) {
+			$type = 'single_price';
+		}elseif($adults == 2){
+			$type = 'double_price';
+		}elseif($adults >= 3){
+			$type = 'triple_price';
+		}
+
+		//if rooms available
+		if (!is_array($arr)) {
+			$total_room_price = false;
+		}else{
+
+			foreach ($arr as $room_id => $r) {
+
+				$total_child_price = 0;
+				//unset first date (yoksa hem giriş gününe hemde çıkış gününe fiyat eklemiş oluyoruz mk)
+				unset($r['prices'][$this->start_date]);
+
+
+				foreach ($r['prices'] as $date => $p) {
+
+					//if price is unit price
+					if (isset($p['price_type']) and $p['price_type'] == 1) {
+						@$total_room_price->$room_id->price = $p['base_price'];
+					}else{
+
+						//if adults more than 3
+						if ($this->adults >= 4) {
+							$total_adult = $this->adults - 3;
+							$total_adult_price = $total_adult * $p['extra_adult'];
+							@$total_room_price->$room_id->price += $p['triple_price'];
+							@$total_room_price->$room_id->price += $total_adult_price;
+
+						}else{
+							@$total_room_price->$room_id->price += $p[$type];
+						}
+						
+					}
+
+					//calculate children prices
+					if ($this->children !=0 and isset($p['child_price'])) {
+						
+						$child_price = json_decode($p['child_price'],true);
+						$child_ages = $this->input->get('children_ages');
+						//print_r($child_price);
+						foreach ($child_ages as $key => $age) {
+							$total_child_price += $this->get_child_price_by_age($age,$child_price);
+						}
+
+					}
+							
+				}
+
+				$total_room_price->$room_id->price += $total_child_price;
+			}
+
+		}
+		//sess used in hotel controller
+		if ($sess==TRUE) {
+			$this->session->set_userdata('prices_all',$total_room_price);
+		}else{
+			return $total_room_price;
+		}
+		
+
+	}
+	/*
+	* Calculate children prices
+	* Used in calculate_room_prices()
+	*/
+	function get_child_price_by_age($age,$arr){
+		$price = 0;
+		if (is_array($arr)) {
+			$i = 0;
+			foreach ($arr as $key => $child) {
+				$i++;
+				if ($age >= $child['min'] && $age <= $child['max']) {
+					$price = $child['price'];
+				}
+			}
+		}
+		return $price;
+
+	}
+
+	/*
+	* Calculate promotion prices by promotion_discount
+	*/
+	function calculate_promo_prices($promotions){
+
+		$room_prices = $this->session->userdata('prices_all');
+
+		foreach ($room_prices as $rid => $room) {
+			
+			if (isset($promotions[$rid])) {
+				
+				foreach ($promotions[$rid] as $pid => $promo) {
+					$price = $room->price - ($room->price * $promo['promotion_discount'] / 100);
+					@$room->promotions->$pid->price = $price;
+
+				}
+
+			}		
+		}
+
+		return $this->session->set_userdata('prices_all',$room_prices);
+	
+	}
+
+	/*
+	* Calculate extra prices
+	*/
+	function calculate_extra_prices($extras){
+		$extra_prices = new StdClass();
+
+		$room_prices = $this->session->userdata('prices_all');
+
+		foreach ($extras as $key => $extra) {
+			$prices = json_decode($extra['price']);
+            
+            //set price per unit or person
+            if($extra['per'] ==2){
+                $price = $prices->unit;
+            }else{
+                $price = calculate_extra_price($prices,$this->adults);
+            }
+
+			@$extra_prices->$extra['id']->price = $price;
+		}
+		//print_r($extra_prices); exit;
+		//print_r($room_prices); exit;
+		$room_prices->extras = $extra_prices;
+		//print_r($room_prices); exit;
+		return $this->session->set_userdata('prices_all',$room_prices);
+
+	}
+
+
+	/*
+	* Set Promotion Rules
+	* 1=basic_deal, 2=minimum_stay, 3=early_booker,4=last_minute,5=24Hour
+	*/
+	function set_promotion_rules($promotions){
+
+		$new_arr = $promotions;
+
+		foreach ($promotions as $rid => $promo) {
+			
+			foreach ($promo as $pid => $p) {
+				//standart rules
+				//check promotion dates
+				if($p['promotion_type'] != 4){
+					if (strtotime(date('Y-m-d')) < strtotime($p['start_date']) or strtotime(date('Y-m-d')) > strtotime($p['end_date']) ) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+				//check room availibity or stoped values for reservation dates
+				foreach (date_range($this->start_date,$this->end_date) as $d => $date) {
+
+					$available = promotion_available($date,$pid,$rid);
+
+					if (!$available or $available['available'] < 1 or $available['stoped'] == 1) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				//minimum stay rules
+				if ($p['promotion_type'] == 2) {
+					//check total nights for minimum stay
+					if ($this->nights < $p['min_stay']) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				//early booker rules
+				if ($p['promotion_type'] == 3) {
+					//booking days for reservation
+					if (strtotime($this->start_date) < strtotime($p['booking_start']) or strtotime($this->end_date) > strtotime($p['booking_end']) ) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+				if ($p['promotion_type'] == 4) {
+					//if reservation dates are not between promo dates, disable promo
+					if (strtotime($this->start_date) < strtotime($p['start_date']) or strtotime($this->start_date) > strtotime($p['end_date']) ) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+
+					$promo_starts = date('Y-m-d H:i:s',strtotime("-".$p['last_min_qty'].' '.$p['last_min_val'], strtotime($this->start_date.' 00:00:00')));
+
+					//if today is lower than promo start, disable promo
+					if (strtotime(date('Y-m-d H:i:s')) <= strtotime($promo_starts)) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+
+					$new_arr[$rid][$pid]['promo_start'] = $promo_starts;
+				}
+
+				//24h rules
+				if ($p['promotion_type'] == 5) {
+					//$new_arr[$rid][$pid]['rule'] = strtotime($p['twentyfour_date'].' 23:59:59');
+
+					//$p['twentyfour_date'];
+					//booking days for reservation
+					if (strtotime(date('Y-m-d H:i:s')) >= strtotime($p['twentyfour_date'].' 23:59:59')) {
+						$new_arr[$rid][$pid]['rule'] = 0;
+					}
+				}
+
+			}
+
+		}
+		return $new_arr;
+
+	}
+
+}
