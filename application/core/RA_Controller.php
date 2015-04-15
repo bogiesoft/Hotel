@@ -25,21 +25,15 @@ class RA_Controller extends MY_Controller{
 	* Used in hotel controller and action controller
 	* 
 	*/
-	function calculate_room_prices($arr,$adult=NULL,$sess=false){
+	function calculate_room_prices($arr){
 
 		$total_room_price = new StdClass;
 
-		if (NULL != $adult) {
-			$adults = $adult;
-		}else{
-			$adults = $this->adults;
-		}
-
-		if ($adults == 1) {
+		if ($this->adults == 1) {
 			$type = 'single_price';
-		}elseif($adults == 2){
+		}elseif($this->adults == 2){
 			$type = 'double_price';
-		}elseif($adults >= 3){
+		}elseif($this->adults >= 3){
 			$type = 'triple_price';
 		}
 
@@ -93,12 +87,9 @@ class RA_Controller extends MY_Controller{
 			}
 
 		}
-		//sess used in hotel controller
-		if ($sess==TRUE) {
-			$this->session->set_userdata('prices_all',$total_room_price);
-		}else{
-			return $total_room_price;
-		}
+		
+		$this->session->set_userdata('prices_all',$total_room_price);
+	
 		
 
 	}

@@ -64,6 +64,7 @@ $this->load->view('front/header');
         echo "var children='';"; 
     }  ?>
 
+
     $(".price_chart").click(function(e) {
         var room_id = $(this).data('room-id');
         $(this).popover({
@@ -356,8 +357,9 @@ $this->load->view('front/header');
                                     <?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> 
                                     <?php echo $options['user_currency']; ?>
                                     </abbr>
+                                    <!--
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
-                                    Price for <?php echo $options['nights'];?> nights<br />
+                                    Price for <?php echo $options['nights'];?> nights<br /> -->
                                     <del class="c-f00 price">
                                     <abbr title="284">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']);?> 
