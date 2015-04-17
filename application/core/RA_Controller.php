@@ -84,6 +84,7 @@ class RA_Controller extends MY_Controller{
 				}
 
 				$total_room_price->$room_id->price += $total_child_price;
+				$total_room_price->$room_id->price = $total_room_price->$room_id->price * $this->nights;
 			}
 
 		}
