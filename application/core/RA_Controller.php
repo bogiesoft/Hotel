@@ -86,7 +86,7 @@ class RA_Controller extends MY_Controller{
 							
 				}
 				$sub_total = $adult_price + $total_child_price;
-				$total_room_price->$room_id->price += $sub_total;
+				@$total_room_price->$room_id->price += $sub_total;
 			}
 
 
