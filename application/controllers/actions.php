@@ -65,15 +65,20 @@ class Actions extends RA_Controller {
 			$total_child_price = 0;
 			$adult_price  = 0;
 
-			//if adults more than 3
-			if ($this->adults >= 4) {
-				$total_adult = $this->adults - 3;
-				$total_adult_price = $total_adult * $p['extra_adult'];
-				$adult_price += $p['triple_price'];
-				$adult_price += $total_adult_price;
-
+			//if price is unit price
+			if (isset($p['price_type']) and $p['price_type'] == 1) {
+				$adult_price = $p['base_price'];
 			}else{
-				$adult_price += $p[$type];
+				//if adults more than 3
+				if ($this->adults >= 4) {
+					$total_adult = $this->adults - 3;
+					$total_adult_price = $total_adult * $p['extra_adult'];
+					$adult_price += $p['triple_price'];
+					$adult_price += $total_adult_price;
+
+				}else{
+					$adult_price += $p[$type];
+				}
 			}
 
 			//calculate children prices
