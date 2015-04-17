@@ -154,7 +154,7 @@ class Hotel extends RA_Controller {
 				
 		$data['prices'] 		= $this->session->userdata('prices_all');
 		$data['user_cart'] 		= $this->session->userdata('user_cart');
-		$data['user_extras'] 		= $this->session->userdata('user_extras');
+		$data['user_extras'] 	= $this->session->userdata('user_extras');
 		
 		echo '<!--';
 		echo '<pre>';
@@ -230,8 +230,8 @@ class Hotel extends RA_Controller {
 		$response['default_currency'] = $default_currency;
 
 		foreach ($user_cart as $r => $v) {
-			$response['user_price']  	+= show_price($v['price']*$v['qty']*$options['nights'],$rate);
-			$response['total_price']  	+= $v['price']*$v['qty']*$options['nights'];
+			$response['user_price']  	+= show_price($v['price']*$v['qty'],$rate);
+			$response['total_price']  	+= $v['price']*$v['qty'];
 			$response['total_qty'] 		+= $v['qty'];
 		}
 
