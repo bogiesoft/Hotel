@@ -62,7 +62,8 @@ class Reservation extends ADMIN_Controller {
 		$this->load->helper('room');
 		if ($uri=='add_new') {
 
-			$this->load->view('reservation/room_add');
+			$data['policies']	 = $this->reservation_model->get_policies();
+			$this->load->view('reservation/room_add',$data);
 
 		}elseif($uri=='edit'){
 			$id = $this->uri->segment('4');
@@ -72,6 +73,8 @@ class Reservation extends ADMIN_Controller {
 			$data['description'] = $this->reservation_model->room_description($id);
 			$data['photos']		 = $this->reservation_model->room_photos($id);
 			$data['children']	 = $this->reservation_model->room_children($id);
+			$data['policies']	 = $this->reservation_model->get_policies();
+
 			$this->load->view('reservation/room_edit',$data);
 
 		}else{
@@ -208,6 +211,7 @@ class Reservation extends ADMIN_Controller {
 
 		if ($uri=='add_new') {
 			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+			$data['policies']	 = $this->reservation_model->get_policies();
 			$this->load->view('reservation/price_plans_add',$data);
 
 		}elseif($uri=='edit'){
@@ -217,6 +221,7 @@ class Reservation extends ADMIN_Controller {
 			//get hotel detail
 			$data['p'] 		 = $this->reservation_model->price_plan_detail($id);
 			$data['rooms']	 = $this->reservation_model->get_hotel_rooms();
+			$data['policies']	 = $this->reservation_model->get_policies();
 			$this->load->view('reservation/price_plans_edit',$data);
 
 		}else{

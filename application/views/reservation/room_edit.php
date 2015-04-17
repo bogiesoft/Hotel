@@ -183,6 +183,33 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('default_policy'); ?></label>
+                 <div class="row">
+                  <div class="col-sm-2">
+                    <div class="form-group">
+                      <?php if($policies) : ?>
+                      <select name="default_policy">
+                      <?php foreach ($policies as $key => $policy) {
+                        $selected = $room->default_policy == $policy->id ? 'selected="selected"' :'';
+                        echo '<option value="'.$policy->id.'">'.$policy->policy_name.'</option>';
+                      }
+                      ?>
+                      </select>
+                    <?php else: ?>
+                    <?php echo lang('no_policy'); ?>
+                    <?php endif; ?>
+                    </div>
+                  </div><!-- col-sm-6 -->
+                  </div>
+                  <div id="child-ages" style="display:none">
+                  <label class="col-sm-3 control-label"><?php echo lang('children_ages'); ?></label>
+                  <div id="child-ages-content"></div>
+
+                  </div>
+
+              </div>
+
             </div> <!-- general end -->
 
               <div class="tab-pane" id="description">

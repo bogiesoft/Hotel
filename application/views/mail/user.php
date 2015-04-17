@@ -89,15 +89,22 @@
                 <span class="val1 col-xs-9 right-align"><?php echo $first_name; ?> <?php echo $last_name; ?></span>
             </div>
         </div>
+        
         <div class="blue-box">
             <div class="t-row clearfix">
-                <?php foreach (json_decode($rooms) as $key => $value) : ?>
-                <span class="label1 col-xs-6 bold">Klasik İki Çift Kişilik Yataklı Oda</span>
-                <span class="val1 col-xs-6 bold">US$319</span>
+                <?php foreach (json_decode($rooms) as $key => $room) : ?>
+                <span class="label1 col-xs-6 bold"><?php echo $room->name; ?> (x <?php echo $room->qty; ?>)</span>
+                <span class="val1 col-xs-6 bold"><?php echo $room->price; ?> <?php echo $hotel->currency; ?></span>
+                <?php endforeach; ?>
+
+                <?php foreach (json_decode($extras) as $key => $extra) : ?>
+                <span class="label1 col-xs-6 bold"><?php echo $extra->name; ?> (x <?php echo $extra->qty; ?>)</span>
+                <span class="val1 col-xs-6 bold"><?php echo $extra->price; ?> <?php echo $hotel->currency; ?></span>
+                <?php endforeach; ?>
             </div>
             <div class="t-row clearfix no-border">
                 <span class="label1 col-xs-6 bold toplam">Toplam ücret</span>
-                <span class="val1 col-xs-6 bold toplam">US$319</span>
+                <span class="val1 col-xs-6 bold toplam"><?php echo $total_price; ?> <?php echo $hotel->currency; ?></span>
             </div>
             <div class="t-row clearfix no-border">
                 <span class="label1 col-xs-6 bold">&nbsp;</span>
@@ -112,6 +119,10 @@
                 Gösterilen toplam fiyat tesise ödeyeceğiniz miktardır. Booking.com hiçbir rezervasyon ücreti, idari veya başka herhangi bir ücret almaz.
             </div>
         </div>
+
+        <fieldset class="table-legend">
+            <legend class="table-legend">Oda (isim) Detayları</legend>
+        
 
         <div class="title4">Oda bilgileri </div>
         <p>
@@ -153,6 +164,7 @@
                 </span>
             </div>
         </div>
+        </fieldset>
 
         <div class="title4 bold">Önemli Bilgiler</div>
         <p>

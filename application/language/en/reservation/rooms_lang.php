@@ -39,6 +39,9 @@ $lang['make_default']	= 'Make Default';
 $lang['save_photos']	= 'Save Photos';
 $lang['close']			= 'Close';
 
+$lang['default_policy'] = 'Default Policy';
+$lang['no_policy'] 		= 'You have not added policy yet. Please Add a policy first.';
+
 //specs
 $lang['room_service']	= 'Room Service';
 $lang['air_condition']	= 'Air Condition';

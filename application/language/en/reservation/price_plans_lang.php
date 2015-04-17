@@ -25,6 +25,8 @@ $lang['early_booker_desc']		= '<b>Early booker</b> deals are for people booking 
 $lang['last_minute_desc']		= '<b>Last minute</b> deals are only available to people booking very late. Restrict it to the last few days or hours before arrival!';
 $lang['twentyfourhour_desc']	= '<b>24 hour promotions</b>  are limited time offers that can only be booked on one particular day.';
 
+$lang['default_policy'] = 'Default Policy';
+$lang['no_policy'] 		= 'You have not added policy yet. Please Add a policy first.';
 
 //fields
 $lang['set_name']		= 'Set Name';

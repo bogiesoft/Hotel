@@ -150,6 +150,18 @@ class Reservation_Model extends CI_Model
 		
 	}
 
+	function get_policies(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$proms = $this->db->query("SELECT * FROM policies WHERE hotel_id = $hotel_id");
+
+		if ($proms->num_rows() >0) {
+			return $proms->result();
+		}else{
+			return false;
+		}
+		
+	}
+
 	/*
 	* On rates page
 	*/
