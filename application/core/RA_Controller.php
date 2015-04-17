@@ -27,7 +27,7 @@ class RA_Controller extends MY_Controller{
 	*/
 	function calculate_room_prices($arr){
 
-		$total_room_price = new StdClass;
+		$total_room_price = new stdClass();
 
 		if ($this->adults == 1) {
 			$type = 'single_price';
@@ -42,9 +42,12 @@ class RA_Controller extends MY_Controller{
 			$total_room_price = false;
 		}else{
 
+			$sub_total = 0;
+
 			foreach ($arr as $room_id => $r) {
 
 				$total_child_price = 0;
+				$adult_price = 0;
 				//unset first date (yoksa hem giriş gününe hemde çıkış gününe fiyat eklemiş oluyoruz mk)
 				unset($r['prices'][$this->start_date]);
 
@@ -53,18 +56,18 @@ class RA_Controller extends MY_Controller{
 
 					//if price is unit price
 					if (isset($p['price_type']) and $p['price_type'] == 1) {
-						@$total_room_price->$room_id->price = $p['base_price'];
+						$adult_price += $p['base_price'];
 					}else{
 
 						//if adults more than 3
 						if ($this->adults >= 4) {
 							$total_adult = $this->adults - 3;
 							$total_adult_price = $total_adult * $p['extra_adult'];
-							@$total_room_price->$room_id->price += $p['triple_price'];
-							@$total_room_price->$room_id->price += $total_adult_price;
+							$adult_price += $p['triple_price'];
+							$adult_price += $total_adult_price;
 
 						}else{
-							@$total_room_price->$room_id->price += $p[$type];
+							$adult_price += $p[$type];
 						}
 						
 					}
@@ -82,12 +85,12 @@ class RA_Controller extends MY_Controller{
 					}
 							
 				}
-
-				$total_room_price->$room_id->price += $total_child_price;
+				$sub_total = $adult_price + $total_child_price;
+				@$total_room_price->$room_id->price += $sub_total;
 			}
 
 
-			$total_room_price->$room_id->price = $total_room_price->$room_id->price * $this->nights;
+			//$total_room_price->$room_id->price = $total_room_price->$room_id->price * $this->nights;
 
 		}
 		
