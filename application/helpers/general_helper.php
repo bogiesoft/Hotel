@@ -280,45 +280,94 @@ function form_builder($json,$arr=array()){
 	$json = json_decode($json);
 	if (is_array($json) and count($json) > 0) {
 
-		$output .= '<p class="'.$option['name'].'_form '.$option['name'].'_form'.$option['id'].'">';
+		$output .= '<div class="'.$option['name'].'_form '.$option['name'].'_form'.$option['id'].'">';
+
+		//eğer preferecences ise forma guest name surname ekle
+		if($option['name'] == 'preferences'){
+			$output .= '<div class="row">
+		    <div class="col-md-4 text-right">
+		    Full Guest Name:<span class="c-f00">*</span>
+		    </div>';
+			$output .= '<div class="col-md-8">
+			<input type="text" name="'.$option['name'].'['.$option['id'].'][guest_name]" '.$option['class'].' value="Guest Name">
+			</div>
+			</div>
+			';
+			
+			//$output .= '<br />';
+		}
+
 
 		foreach ($json as $key => $form) {
 			
 			//if field = text
 			if($form->field_type == 'text'){
-				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<input type="text" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+				$output .= '<div class="col-md-8">
+				<input type="text" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>
+				</div>
+				</div>
+				';
 			}
 
 			//if field = paragraph
 			if($form->field_type == 'paragraph'){
-				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<textarea name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'></textarea>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+				$output .= '<div class="col-md-8">
+				<textarea name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'></textarea>
+				</div>
+				</div>
+				';
 			}
+
+
 
 
 			//if field = time
 			if($form->field_type == 'time'){
-				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+			    $output .='<div class="col-md-8">';
 				$output .= '<input type="text" name="'.$option['name'].'['.$option['id'].']['.$form->label.'][hh]" '.$option['class'].' style="width:30px">';
 				$output .= '<input type="text" name="'.$option['name'].'['.$option['id'].']['.$form->label.'][mm]" '.$option['class'].' style="width:30px">';
 				$output .= '<input type="text" name="'.$option['name'].'['.$option['id'].']['.$form->label.'][ss]" '.$option['class'].' style="width:30px">';
+				$output .= '</div>
+				</div>';
 			}
 
 
 			//if field = date
 			if ($form->field_type == 'date') {
 				$class = substr_replace($option['class'], ' datepicker"', -1);
-				$output .= '<label>'.$form->label.'</label>';
-				$output .= '<input type="text" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$class.'>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+				$output .= '<div class="col-md-8">
+				<input type="text" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$class.'>
+				</div>
+				</div>';
 
 			}
 
 
+
 			//if field = checkbox
 			if ($form->field_type == 'checkboxes') {
-				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
 
+			    $output .= '<div class="col-md-8">';
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<input type="checkbox" value="'.$checkbox->label.'" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).'][]" '.$option['class'].' '.$checked.'>';
@@ -329,12 +378,18 @@ function form_builder($json,$arr=array()){
 					$output .= 'Other';			
 				}
 
+				$output .= ' </div>
+				</div>';
 			}
+
 
 			//if field = radio
 			if ($form->field_type == 'radio') {
-				$output .= '<label>'.$form->label.'</label>';
-
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+			    $output .='<div class="col-md-8">';
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$checked = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<input type="radio" value="'.$checkbox->label.'" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].' '.$checked.'>';
@@ -345,19 +400,27 @@ function form_builder($json,$arr=array()){
 					$output .= 'Other';			
 				}
 
+				$output .= '   </div>
+				</div>';
+
 			}
 
 
 			//if field = dropdown
 			if ($form->field_type == 'dropdown') {
-				$output .= '<label>'.$form->label.'</label>';
+				$output .= '<div class="row">
+			    <div class="col-md-4 text-right">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </div>';
+			    $output .='<div class="col-md-8">';
 				$output .= '<select name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>';
 				foreach ($form->field_options->options as $opt => $checkbox) {
 					$selected = $checkbox->checked === true ? 'checked="checked"' : '';
 					$output .= '<option value="'.$checkbox->label.'" '.$selected.'>'.$checkbox->label.'</option>';
 				}
 				$output .= '</select>';
-
+				$output .= '   </div>
+				</div>';
 			}
 
 			$output .= '<br>';
@@ -365,6 +428,7 @@ function form_builder($json,$arr=array()){
 
 		}
 
+		
 		if ($output != '' and $option['button'] != false) {
 			
 
@@ -382,7 +446,7 @@ function form_builder($json,$arr=array()){
 			$output .= '</script>';
 		
 			
-			$output .= '</p>';
+			$output .= '</div>';
 		}
 		
 		return $output;
@@ -515,6 +579,8 @@ function cart_info(){
 	$ci =& get_instance();
 
 	$options = $ci->session->userdata('options');
+	$response['extras']['total_user_price'] = 0;
+	$response['extras']['total_price'] = 0;
 
 	if ($ci->session->userdata('user_cart')) {
 		

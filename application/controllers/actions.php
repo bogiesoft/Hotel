@@ -22,7 +22,7 @@ class Actions extends RA_Controller {
 	}
 
 	/*
-	* Generate room preferences forms
+	* Generate room preferences forms comes from ajax
 	*/
 
 	function room_preferences_builder(){
@@ -37,6 +37,91 @@ class Actions extends RA_Controller {
 
 		echo  form_builder(json_encode($data),$options);
 	}
+
+	/*
+	* Draw Chart
+	*/
+	function room_price_info(){
+		//print_r($this->input->post('children')); exit;
+		$room_id = $this->input->post('room_id');
+		$options = json_decode($this->input->post('options'),true);
+		$start = $options['checkin'];
+		$adults = $options['adults'];
+		$child_ages = json_decode($this->input->post('children'));
+		//get prices for 7 days
+		$prices = $this->front_model->get_room_price_for_chart($start,$room_id);
+
+
+		if ($adults == 1) {
+			$type = 'single_price';
+		}elseif($adults == 2){
+			$type = 'double_price';
+		}elseif($adults >= 3){
+			$type = 'triple_price';
+		}
+
+		$data = array();
+		foreach ($prices as $key => $p) {
+			$total_child_price = 0;
+			$adult_price  = 0;
+
+			//if adults more than 3
+			if ($this->adults >= 4) {
+				$total_adult = $this->adults - 3;
+				$total_adult_price = $total_adult * $p['extra_adult'];
+				$adult_price += $p['triple_price'];
+				$adult_price += $total_adult_price;
+
+			}else{
+				$adult_price += $p[$type];
+			}
+
+			//calculate children prices
+			if ($options['children'] !=0 and isset($p['child_price']) and count($child_ages)>0) {
+				
+				$child_price = json_decode($p['child_price'],true);
+				//print_r($child_price);
+				foreach ($child_ages as $key => $age) {
+					$total_child_price += $this->get_child_price_by_age($age,$child_price);
+				}
+
+			}
+
+			$total_price =  $adult_price + $total_child_price;
+
+			$data[$p['price_date']]['date'] = $p['price_date'];
+			$data[$p['price_date']]['price'] = $total_price;
+		}
+
+		//google chart için datayuı şekillendir
+		/*
+		$arr2=array_keys($data);
+		$arr1=array_values($data);
+
+		for($i=0;$i<count($arr1);$i++)
+		{
+		    $chart_array[$i]=array((string)$arr2[$i],intval($arr1[$i]));
+		}
+		$data=json_encode($chart_array);
+		*/
+
+		$rows = array();
+		foreach ($data as $key => $value) {
+			$cell0["v"]=date('D',strtotime($value['date']));
+			$cell1["v"]=$value['price'];
+			$row["c"]=array($cell0,$cell1);
+ 	
+ 			array_push($rows,$row);
+			//$a['rows']['c'][] = array('v'=>array($value['date'])),array('v'=>array($value['price']));
+		}
+
+		$a['cols'] = array(array('label'=>'Day','type'=>'string'),array('label'=>'Price','type'=>'number'));
+    	$a['rows'] = $rows;
+		$data['content'] = json_encode($a);
+		echo json_encode($a);
+		//echo $this->load->view('front/chart',$data);
+	}
+
 
 	/*
 	* Finish Booking Ajax
@@ -153,6 +238,9 @@ class Actions extends RA_Controller {
         	$insert = $this->db->insert('reservations',$data);
         	if ($insert) {
         		echo json_encode(array('status'=>'success','data'=>$data));
+        		//send mail
+        		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
+        		$this->send_information_mail($data);
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
         	}
@@ -162,89 +250,14 @@ class Actions extends RA_Controller {
 
 	}
 
-	/*
-	* Draw Chart
-	*/
-	function room_price_info(){
-		//print_r($this->input->post('children')); exit;
-		$room_id = $this->input->post('room_id');
-		$options = json_decode($this->input->post('options'),true);
-		$start = $options['checkin'];
-		$adults = $options['adults'];
-		$child_ages = json_decode($this->input->post('children'));
-		//get prices for 7 days
-		$prices = $this->front_model->get_room_price_for_chart($start,$room_id);
+	function send_information_mail($data){
+		//send mail to user
+		$user_mail = $data['email'];
 
 
-		if ($adults == 1) {
-			$type = 'single_price';
-		}elseif($adults == 2){
-			$type = 'double_price';
-		}elseif($adults >= 3){
-			$type = 'triple_price';
-		}
-
-		$data = array();
-		foreach ($prices as $key => $p) {
-			$total_child_price = 0;
-			$adult_price  = 0;
-
-			//if adults more than 3
-			if ($this->adults >= 4) {
-				$total_adult = $this->adults - 3;
-				$total_adult_price = $total_adult * $p['extra_adult'];
-				$adult_price += $p['triple_price'];
-				$adult_price += $total_adult_price;
-
-			}else{
-				$adult_price += $p[$type];
-			}
-
-			//calculate children prices
-			if ($options['children'] !=0 and isset($p['child_price']) and count($child_ages)>0) {
-				
-				$child_price = json_decode($p['child_price'],true);
-				//print_r($child_price);
-				foreach ($child_ages as $key => $age) {
-					$total_child_price += $this->get_child_price_by_age($age,$child_price);
-				}
-
-			}
-
-			$total_price =  $adult_price + $total_child_price;
-
-			$data[$p['price_date']]['date'] = $p['price_date'];
-			$data[$p['price_date']]['price'] = $total_price;
-		}
-
-		//google chart için datayuı şekillendir
-		/*
-		$arr2=array_keys($data);
-		$arr1=array_values($data);
-
-		for($i=0;$i<count($arr1);$i++)
-		{
-		    $chart_array[$i]=array((string)$arr2[$i],intval($arr1[$i]));
-		}
-		$data=json_encode($chart_array);
-		*/
-
-		$rows = array();
-		foreach ($data as $key => $value) {
-			$cell0["v"]=date('D',strtotime($value['date']));
-			$cell1["v"]=$value['price'];
-			$row["c"]=array($cell0,$cell1);
- 	
- 			array_push($rows,$row);
-			//$a['rows']['c'][] = array('v'=>array($value['date'])),array('v'=>array($value['price']));
-		}
-
-		$a['cols'] = array(array('label'=>'Day','type'=>'string'),array('label'=>'Price','type'=>'number'));
-    	$a['rows'] = $rows;
-		$data['content'] = json_encode($a);
-		echo json_encode($a);
-		//echo $this->load->view('front/chart',$data);
+		//$hotel_email =
 	}
+
 
 
 	/*
