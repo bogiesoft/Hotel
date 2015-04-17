@@ -177,6 +177,7 @@ class Hotel extends RA_Controller {
 		
 		$user_cart = $this->session->userdata('user_cart');
 		$room_id 	= $this->input->post('room');
+		$policy 	= $this->input->post('policy');
 		$qty 		= $this->input->post('qty');
 		$promotion 	= $this->input->post('promotion');
 		$rate 		= $this->input->post('rate');
@@ -208,6 +209,7 @@ class Hotel extends RA_Controller {
 
 			$arr =  array('room_id'=>$room_id, 
 				'qty'=>$qty,
+				'policy'=>$policy,
 				'promotion'=>$promotion,
 				'price'=>$price,
 				'user_price'=>show_price($price,$rate),
