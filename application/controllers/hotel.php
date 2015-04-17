@@ -185,7 +185,7 @@ class Hotel extends RA_Controller {
 		$action  	= $this->input->post('type');
 		if ($action == 'delete') {
 			foreach ($user_cart as $key => $c) {
-				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
+				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion and isset($user_cart[$key])) {
 					unset($user_cart[$key]);
 				}
 			} 
@@ -239,6 +239,7 @@ class Hotel extends RA_Controller {
 
 	function user_extras(){
 		$prices 		= $this->session->userdata('prices_all');
+
 		$extra_id 		= $this->input->post('extra_id');
 		$extra_name		= $this->input->post('extra_name');
 		$currency 		= $this->input->post('currency');
