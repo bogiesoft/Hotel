@@ -745,6 +745,7 @@ class Reservation_actions extends ADMIN_Controller {
 			'last_min_qty' 		=> $this->input->post('last_min_qty'),
 			'last_min_val' 		=> $this->input->post('last_min_val'),
 			'twentyfour_date' 	=> $this->input->post('twentyfour_date'),
+			'default_policy' 	=> $this->input->post('default_policy'),
 			'rooms' 			=> implode(',',$this->input->post('rooms')),
 			'promotion_type' 	=> $this->input->post('promotion_type'),
 			'code'				=> $code
