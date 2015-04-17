@@ -87,6 +87,7 @@ class Hotel extends RA_Controller {
 					$arr['rooms'][$r->id]['max_capacity']= $r->max_capacity;
 					$arr['rooms'][$r->id]['max_adult']	= $r->max_adult;
 					$arr['rooms'][$r->id]['max_child']	= $r->max_child;
+					$arr['rooms'][$r->id]['default_policy']	= $r->default_policy;
 					$arr['rooms'][$r->id]['photos'] 	= $this->front_model->get_room_photos($r->id);
 					$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
 					$arr['rooms'][$r->id]['prices'][$d]['room_name'] = $r->name;
