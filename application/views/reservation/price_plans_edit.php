@@ -256,8 +256,8 @@
                       <?php if($policies) : ?>
                       <select name="default_policy">
                       <?php foreach ($policies as $key => $policy) {
-                        $selected = $room->default_policy == $policy->id ? 'selected="selected"' :'';
-                        echo '<option value="'.$policy->id.'">'.$policy->policy_name.'</option>';
+                        $selected = $p->default_policy == $policy->id ? 'selected="selected"' :'';
+                        echo '<option value="'.$policy->id.'" '.$selected.'>'.$policy->policy_name.'</option>';
                       }
                       ?>
                       </select>

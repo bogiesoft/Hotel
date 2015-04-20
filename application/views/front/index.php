@@ -64,7 +64,6 @@ $this->load->view('front/header');
         echo "var children='';"; 
     }  ?>
 
-
     $(".price_chart").click(function(e) {
         var room_id = $(this).data('room-id');
         $(this).popover({
@@ -81,9 +80,9 @@ $this->load->view('front/header');
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'+room_id));
             
+            var max_price= data.getColumnRange(1).max +10;
+            var min_price= 0;
             //var range1 = chart.getDataTable().getColumnRange(1);
-
-
 
             /* min max values option
             var minMax = {
@@ -99,9 +98,16 @@ $this->load->view('front/header');
                     min:minMax.min
                 }
             }
+            bar: {groupWidth: "10%"}
             */
             chart.draw(data, {
-                width: 400, height: 150,bar: {groupWidth: "95%"}
+                width: 500, height: 150, vAxis: { 
+                viewWindowMode:'explicit',
+                viewWindow: {
+                    max:max_price,
+                    min:min_price
+                }
+            }
             });
         });
     });
@@ -111,7 +117,7 @@ $this->load->view('front/header');
 </script>
 <style type="text/css">
 .popover{
-    max-width: 450px;
+    max-width: 550px;
     height:200px;    
 }
 .popover .arrow{ display: :none;}
@@ -178,7 +184,9 @@ $this->load->view('front/header');
                 <!-- room details -->
                 <?php if(is_array($rooms)) : ?>
 
-                <?php foreach ($rooms as $rid => $room) : ?>
+                <?php foreach ($rooms as $rid => $room) : 
+                $policy = $room['default_policy'];
+                ?>
                 <?php if($prices->$rid->price != '0.00') : ?>
                 <div class="row one-room max-person max-<?php echo $room['max_capacity']; ?>">
                         <div class="col-md-3 nopadding" id="slider-content">
@@ -255,7 +263,7 @@ $this->load->view('front/header');
                                     <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> " data-currency="<?php echo $options['currency']; ?>">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
                                     <?php echo $options['user_currency']; ?></abbr>
-                                    <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top" title="Price Info">
+                                    <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
                                     <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
                                     
@@ -296,10 +304,10 @@ $this->load->view('front/header');
                                     $available = $room['prices'][$options['checkin']]['available'];
                                 ?>
                                     <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
-                                    <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
+                                    <option  data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
 
                                     <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option <?php checkCartRoom($rid,$i,0); ?> data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <option <?php checkCartRoom($rid,$i,0); ?> data-policy="<?php echo $policy; ?>" data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                     <?php } ?>
                                     </select><br />
                                      We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
@@ -309,7 +317,9 @@ $this->load->view('front/header');
                             </div>
                             <!-- promotions of room start -->
                             <?php if(isset($promotion[$rid])) : ?>
-                            <?php foreach ($promotion[$rid] as $pid => $promo) : ?>
+                            <?php foreach ($promotion[$rid] as $pid => $promo) : 
+                            $policy = $promo['default_policy'];
+                            ?>
                                 <?php if($promo['rule'] == 1) : ?>
                             <div class="row data-row">
                                 <div class="col-md-3 cent">
@@ -374,7 +384,7 @@ $this->load->view('front/header');
                                     <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
                                         <option data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="<?php echo $pid; ?>" data-qty="0" data-price="0" value="0-0" data-type="delete">Select</option>
                                         <?php for ($i=1; $i <=5; $i++) { ?>
-                                        <option <?php checkCartRoom($rid,$i,$pid); ?> data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="<?php echo $promo['promotion_name']; ?>" data-promotion="<?php echo $pid; ?>" data-qty="<?php echo $i; ?>" data-type="add" data-price="<?php echo $prices->$rid->promotions->$pid->price * $i; ?>"><?php echo $i;?> - <?php echo show_price($prices->$rid->promotions->$pid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                        <option <?php checkCartRoom($rid,$i,$pid); ?> data-policy="<?php echo $policy; ?>" data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="<?php echo $promo['promotion_name']; ?>" data-promotion="<?php echo $pid; ?>" data-qty="<?php echo $i; ?>" data-type="add" data-price="<?php echo $prices->$rid->promotions->$pid->price * $i; ?>"><?php echo $i;?> - <?php echo show_price($prices->$rid->promotions->$pid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                         <?php }?>
                                     </select><br />
                                     We Have 3 rooms left!

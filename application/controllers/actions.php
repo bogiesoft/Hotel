@@ -47,6 +47,7 @@ class Actions extends RA_Controller {
 		$options = json_decode($this->input->post('options'),true);
 		$start = $options['checkin'];
 		$adults = $options['adults'];
+		$rate  = $options['currency_rate'];
 		$child_ages = json_decode($this->input->post('children'));
 		//get prices for 7 days
 		$prices = $this->front_model->get_room_price_for_chart($start,$room_id);
@@ -67,7 +68,7 @@ class Actions extends RA_Controller {
 
 			//if price is unit price
 			if (isset($p['price_type']) and $p['price_type'] == 1) {
-				$adult_price = $p['base_price'];
+				$adult_price += $p['base_price'];
 			}else{
 				//if adults more than 3
 				if ($this->adults >= 4) {
@@ -95,7 +96,7 @@ class Actions extends RA_Controller {
 			$total_price =  $adult_price + $total_child_price;
 
 			$data[$p['price_date']]['date'] = $p['price_date'];
-			$data[$p['price_date']]['price'] = $total_price;
+			$data[$p['price_date']]['price'] = show_price($total_price,$rate);
 		}
 
 		//google chart için datayuı şekillendir
@@ -113,6 +114,7 @@ class Actions extends RA_Controller {
 		$rows = array();
 		foreach ($data as $key => $value) {
 			$cell0["v"]=date('D',strtotime($value['date']));
+			$cell0["v"]=substr($cell0["v"], 0,-2);
 			$cell1["v"]=$value['price'];
 			$row["c"]=array($cell0,$cell1);
  	
@@ -241,8 +243,9 @@ class Actions extends RA_Controller {
         	//print_r($room_details);
 
         	$insert = $this->db->insert('reservations',$data);
+        	//$insert = true;
         	if ($insert) {
-        		echo json_encode(array('status'=>'success','data'=>$data));
+        		//echo json_encode(array('status'=>'success','data'=>$data));
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
         		$this->send_information_mail($data);
@@ -257,10 +260,35 @@ class Actions extends RA_Controller {
 
 	function send_information_mail($data){
 		//send mail to user
+		$this->lang->load('reservation/policies','en');
+		$this->lang->load('reservation/mail','en');
+
 		$user_mail = $data['email'];
 
+		    $config = array(
+			  'protocol' => 'smtp',
+			  'smtp_host' => 'mail.metinkoca.co.uk',
+			  'smtp_port' => 26,
+			  'smtp_user' => 'booking_test@metinkoca.co.uk', 
+			  'smtp_pass' => '1q2w3e4r', 
+			  'mailtype' => 'html',
+			  'charset' => 'UTF-8',
+			  'wordwrap' => TRUE);
 
-		//$hotel_email =
+			$message = $this->load->view('mail/user',$data,TRUE);
+
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+			$this->email->from('booking_test@metinkoca.co.uk'); 
+			$this->email->to($user_mail);
+			$this->email->subject('New Reservation');
+			$this->email->message($message);
+			if($this->email->send()){
+				echo 'Email sent.';
+			}else{
+				show_error($this->email->print_debugger());
+			}
+
 	}
 
 

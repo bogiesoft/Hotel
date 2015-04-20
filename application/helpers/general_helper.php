@@ -615,6 +615,35 @@ function cart_info(){
 
 }
 
+/* GENERATE POLICIES START */
+function get_policy($id){
+	$ci =& get_instance();
+	$p = $ci->db->query("SELECT policy_details FROM policies WHERE id=$id")->row();
+	return json_decode($p->policy_details);
+}
+
+function checkbox_selected($value){
+	if (isset($value)) {
+		return true;
+	}else{
+		return false;
+	}
+	
+}
+
+function no_show_select($value=NULL){
+
+	if ($value == 'no_show_days') {
+		$lang  = 'no_show_method_days';
+	}elseif ($value == 'no_show_perc') {
+		$lang = 'no_show_method_perc';
+	}else{
+		$lang = 'no_show_method_fix';
+	}
+
+	return $lang;
+}
+/* GENERATE POLICIES END */
 
 function onAjaxTest(){
 	echo 'test';

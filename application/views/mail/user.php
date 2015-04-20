@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-US">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
 <head>
     <meta charset="utf-8" />
     <title></title>
@@ -23,26 +24,13 @@
             </a>
         </div>
         <div class="title1 row">
-            Teşekkürler, <?php echo $name_title; ?>  <?php echo $first_name; ?> <?php echo $last_name; ?> Rezervasyonunuz onaylandı.
+            <?php echo sprintf(lang('thank_you'),$name_title.' '.$first_name.' '.$last_name); ?>
         </div>
         <div class="contact-block row bold" style="">
-            <div style="margin-bottom:7px">
-                <span class="title"><?php echo $hotel_info->name; ?></span>
-
-                <a href="#" style="display:inline-block;background-color:#d7dbe6;padding:4px 8px;color:#47518a;font-weight:bold">
-                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                    İş  Seyehati
-                </a>
-                &nbsp;
-                <a href="#" style="display:inline-block;background-color:#d7dbe6;padding:4px 8px;color:#47518a;font-weight:bold">
-                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                    İş  Seyehati
-                </a>
-            </div>
             <div style="margin-bottom:3px">
                 <span class="label1">Adres:</span>
                 <span class="val1">
-                    <?php echo $hotel_info->address; ?> <br/>
+                    <?php echo $hotel_info->adress; ?> <br/>
                     
                 </span>
             </div>
@@ -94,17 +82,17 @@
             <div class="t-row clearfix">
                 <?php foreach (json_decode($rooms) as $key => $room) : ?>
                 <span class="label1 col-xs-6 bold"><?php echo $room->name; ?> (x <?php echo $room->qty; ?>)</span>
-                <span class="val1 col-xs-6 bold"><?php echo $room->price; ?> <?php echo $hotel->currency; ?></span>
+                <span class="val1 col-xs-6 bold"><?php echo $room->price; ?> <?php echo $hotel_info->currency; ?></span>
                 <?php endforeach; ?>
 
                 <?php foreach (json_decode($extras) as $key => $extra) : ?>
-                <span class="label1 col-xs-6 bold"><?php echo $extra->name; ?> (x <?php echo $extra->qty; ?>)</span>
-                <span class="val1 col-xs-6 bold"><?php echo $extra->price; ?> <?php echo $hotel->currency; ?></span>
+                <span class="label1 col-xs-6 bold"><?php echo $extra->name; ?></span>
+                <span class="val1 col-xs-6 bold"><?php echo $extra->price; ?> <?php echo $hotel_info->currency; ?></span>
                 <?php endforeach; ?>
             </div>
             <div class="t-row clearfix no-border">
                 <span class="label1 col-xs-6 bold toplam">Toplam ücret</span>
-                <span class="val1 col-xs-6 bold toplam"><?php echo $total_price; ?> <?php echo $hotel->currency; ?></span>
+                <span class="val1 col-xs-6 bold toplam"><?php echo $total_price; ?> <?php echo $hotel_info->currency; ?></span>
             </div>
             <div class="t-row clearfix no-border">
                 <span class="label1 col-xs-6 bold">&nbsp;</span>
@@ -112,7 +100,8 @@
             </div>
             <br/>
             <div>
-                New York Hilton Midtown tesisinde konaklamanız sırasında ödeme yapacaksınız<br/>
+                <?php echo sprintf(lang('payment_box'),$hotel_info->name); ?>
+                <br/>
                 %14,75 Vergi hariçtir.<br />
                 Gecelik 3,50 US$ şehir vergisi hariçtir.<br />
                 Önemli: İlave özellikler (ek yatak gibi) bu toplama eklenmemektedir.<br />
@@ -120,95 +109,122 @@
             </div>
         </div>
 
+        <?php foreach (json_decode($rooms) as $key => $room) : ?>
+        <?php $p = get_policy($room->policy);?>
         <fieldset class="table-legend">
-            <legend class="table-legend">Oda (isim) Detayları</legend>
+        <legend class="table-legend"><?php echo $room->name; ?></legend>
         
-
-        <div class="title4">Oda bilgileri </div>
-        <p>
-            Bu odada ücretsiz banyo malzemeleri ile donatılmış en-suite banyo ve düz ekran kablo TV vardır.
-            Bu odaya ilave yatak konulamamaktadır. 
-        </p>
         <div class="details-block">
+            <?php if (isset($room->preferences->guest_name)) { ?>
             <div class="t-row clearfix">
                 <span class="label1 col-xs-3 bold">Konuk adı</span>
-                <span class="val1 col-xs-9">metin koca Konuk ismini düzenle </span>
+                <span class="val1 col-xs-9"><?php echo $room->preferences->guest_name; ?></span>
             </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Konuk sayısı</span>
-                <span class="val1 col-xs-9">en fazla 4 kişi. Konuk sayısını düzenle</span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Öğün Planı</span>
-                <span class="val1 col-xs-9">Bu oda için oda fiyatına dahil öğün bulunmamaktadır.</span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Ön ödeme</span>
-                <span class="val1 col-xs-9">Teminat tahsil edilmeyecektir.</span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">İptal koşulları</span>
-                <span class="val1 col-xs-9">
-                    İptalin varış tarihinden 2 gün öncesine kadar yapılması durumunda ücret uygulanmaz. İptalin geç yapılması veya rezervasyonun kullanılmaması durumunda ilk gecenin yüzde 100 kadarı tahsil edilecektir.</br />
-                    Tüm iptal ve değişiklik ücretleri tesis tarafından belirlenir.<br/>
-                     Bütün ek ücretlerin ödemesini tesise yapacaksınız. 
-                </span>
-            </div>
-            <div class="t-row clearfix no-border">
-                <span class="label1 col-xs-3 bold">İptal ücreti</span>
-                <span class="val1 col-xs-9">
-                    26 Nisan 2015 23:59 [New York] öncesi: US$0<br/>
-                    27 Nisan 2015 00:00 [New York] sonrası: US$319<br/>
-                    <br/>
-                    <a href="#">Rezervasyonunu iptal et</a> 
-                </span>
-            </div>
+            <?php } ?>
         </div>
-        </fieldset>
-
+       
         <div class="title4 bold">Önemli Bilgiler</div>
         <p>
             Havaalanı servisi sadece belirli saatlerde hizmet vermektedir. Bu hizmet ek ücrete tabi olabilir. Ayrıntılı bilgi için tesisle irtibata geçiniz.<br/>
             Check-in sırasında konukların fotoğraflı kimlik belgesi ve kredi kartı göstermesi gerekmektedir. Özel İsteklerin doluluk durumuna bağlı olduğunu ve ek ücrete tabi olabileceğini lütfen unutmayın.
         </p>
-        <br/>
-        <div class="title4 bold">Ödeme</div>
         <p>
-            Rezervasyonunuzu kredi kartınız ile onayladınız ve garanti altına aldınız.<br/>
-            Koşullar da aksi belirtilmediği sürece, tüm ödemeler konaklamanız sırasında tesise yapılmaktadır.<br/>
-            Varışınızdan önce kredi kartınızdan ön-provizyon çekilebileceğini lütfen unutmayın.<br/>
-            Bu konaklama tesisi şu ödeme biçimlerini kabul etmektedir:<br/>
-            American Express, Visa, Euro/Mastercard, Diners Club, JCB, Discover
+            <?php echo $p->extra; ?>
         </p>
         <br/>
-        <div class="title4 bold">Rezervasyon koşulları </div>
-        <div class="details-block">
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Konuk park yeri</span>
-                <span class="val1 col-xs-9">Otelde (rezervasyon gerekli değildir) özel park yeri mevcuttur ve ücreti günlük 55 USD'dir.</span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">İnternet</span>
-                <span class="val1 col-xs-9">Wi-fi ortak alanlarda mevcuttur ve ücretsizdir.</span>
-            </div>
-            <div class="t-row clearfix no-border">
-                <span class="label1 col-xs-12 bold"><a href="#">Tüm rezervasyon koşullarını göster</a></span>
-            </div>
-        </div>
+        <div class="title4 bold"><?php echo lang('sales_policy'); ?></div>
+        <p>
+        <?php if(checkbox_selected(@$p->sales->policy_note)){
+            echo lang('policy_note');
+        }
+        if(checkbox_selected(@$p->sales->credit_card)){
+            echo lang('credit_card');
+        }
+
+        if(checkbox_selected(@$p->sales->valid_card->status)){
+            $value  = $p->sales->valid_card->no_card_depozit_value;
+            $days   = $p->sales->valid_card->no_card_depozit_days;
+            
+            echo sprintf(lang('valid_card'),$value,$p->sales->valid_card->no_card_depozit_method,$days); 
+
+        }
+
+        if(checkbox_selected(@$p->sales->depozit_after_resv->status)){
+            $days = $p->sales->depozit_after_resv->days;
+            echo sprintf(lang('depozit_after_resv'), $days);
+        }
+
+        if(checkbox_selected(@$p->sales->taxes)){
+            echo lang('taxes');
+        }
+
+        if(checkbox_selected(@$p->sales->checkin->status)){
+            echo sprintf(lang('checkin'),$p->sales->checkin->value);
+        }
+
+        if(checkbox_selected(@$p->sales->checkout->status)){
+            echo sprintf(lang('checkout'),$p->sales->checkout->value);
+        }
+
+        if(checkbox_selected(@$p->sales->child_age->status)){
+           echo sprintf(lang('child_age'),$p->sales->child_age->value);
+        }
+        if(checkbox_selected(@$p->sales->payment)){
+            echo lang('payment');
+        }
+
+        if(checkbox_selected(@$p->sales->info_rate)){
+            echo lang('info_rate');
+        }
+
+        if(checkbox_selected(@$p->sales->resv_cancel)){
+            echo lang('resv_cancel');
+        }
+
+        if(checkbox_selected(@$p->sales->resv_contact)){
+            echo lang('resv_contact');
+        }
+
+        if(checkbox_selected(@$p->sales->taxes)){
+            echo lang('taxes');
+        }
+        ?>
+        </p>
+        <br/>
+
+        <div class="title4 bold"><?php echo lang('cancellation_policy'); ?></div>
+        <p>
+        <?php if(checkbox_selected(@$p->cancel->cancellation_time->status)){
+            echo sprintf(lang('cancellation_time'),$p->cancel->cancellation_time->value);
+        }
+        if(checkbox_selected(@$p->cancel->no_show_value->status)){
+           $value = $p->cancel->no_show_value->value;
+           echo sprintf(lang('no_show_value'),$value,lang(no_show_select($p->cancel->no_show_value->no_card_depozit_method)));
+        }
+
+        if(checkbox_selected(@$p->cancel->client_can_cancel)){
+            echo lang('client_can_cancel');
+        }
+
+        ?>
+        </p>
+        <br/>
+        </fieldset>
+        <?php endforeach; ?>
         <br />
-        <div class="title4 bold">Rezervasyonunuzla ilgili desteğe mi ihtiyacınız var?</div>
+        <div class="title4 bold"><?php echo lang('need_support'); ?></div>
         <div class="details-block">
             <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Tesisle iletişime geçin</span>
-                <span class="val1 col-xs-9">Telefon: +12125867000</span>
+                <span class="label1 col-xs-3 bold"><?php echo lang('contact_to_hotel'); ?></span>
+                <span class="val1 col-xs-9"><?php echo lang('phone'); ?>: <?php echo $hotel_info->phone; ?></span>
             </div>
             <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Rezervasyonunuzu yönetin</span>
+                <span class="label1 col-xs-3 bold"><?php echo lang('manage_reservation'); ?></span>
                 <span class="val1 col-xs-9 bold">
                     Dilediğiniz zaman çevrimiçi olarak rezervasyonunuzu görüntüleyebilir veya<br/>
-                    <a href="#"> değişiklik yapabilirsiniz.<br /></a>
+                    <a href="<?php echo $hotel_info->website; ?>"> değişiklik yapabilirsiniz.<br /></a>
                     <br/>
-                    <a href="#"> Müşteri hizmetlerine e-posta gönderin</a>
+                    <a href="mailto:<?php echo $hotel_info->email; ?>"> Müşteri hizmetlerine e-posta gönderin.</a>
                 </span>
             </div>
             <div class="t-row clearfix no-border">

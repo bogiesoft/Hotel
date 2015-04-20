@@ -227,9 +227,10 @@ $(function() {
         var name        = $(this).find(':selected').data('room-name');
         var desc        = $(this).find(':selected').data('desc');
         var rate        = $(this).find(':selected').data('rate');
-		var currency 	= $(this).find(':selected').data('currency');
+        var currency    = $(this).find(':selected').data('currency');
+		var policy 	    = $(this).find(':selected').data('policy');
         
-		var data = {"default_currency":default_currency, "room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type, "name":name, "desc": desc,"rate":rate,"currency":currency};
+		var data = {"policy":policy, "default_currency":default_currency, "room":room_id, "promotion":promotion, "qty":qty, "price":price, "type":type, "name":name, "desc": desc,"rate":rate,"currency":currency};
 		
         //generate preferences form builder
         if (qty != 0) {
