@@ -4,76 +4,56 @@ $this->load->view('front/header');
 <script type="text/javascript">
   // Load the Visualization API and the piechart package.
     google.load('visualization', '1', {'packages':['corechart']});
-
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
-
-    function drawChart(data) {
-    // Create our data table out of JSON data loaded from server.
-    var data = new google.visualization.DataTable(jQuery.parseJSON(data));
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, {width: 400, height: 150});
-    }
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
 
-    /*
-    $.ajax({
-        url: base_url + "hotel/currency_rates?c=<?php echo $options['currency']; ?>",
-        // the name of the callback parameter
-        jsonp: "callback",
-        // tell jQuery we're expecting JSONP
-        dataType: "jsonp",
-        // work with the response
-        success: function (response) {
-           console.log(response); // server response
-        }
-    });
-*/
-  
     var options = '<?php echo json_encode($options); ?>';
     
-    /*
-    $('*[data-poload]').hover(function() {
-        var e=$(this);
-        //e.off('hover');
-        var room_id = e.data('room-id');
-        $('.popover-content').append("<div class='chart_div'"+room_id+"></div>")
-        $.post( base_url + "actions/room_price_info", { room_id: room_id, options: options },function(d){
-
-            e.popover({html:true,content: '<div id="chart_div" style="width:400px; height:150px;"></div>'}).popover('show');
-            // Create our data table out of JSON data loaded from server.
-
-            var data = new google.visualization.DataTable(jQuery.parseJSON(data));
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-            chart.draw(data, {width: 400, height: 150});
-
-        });
- 
-    });
-    */
-
     <?php if ($this->input->get('children_ages')){ 
         echo "var children='".json_encode($this->input->get('children_ages'))."';";
     }else{ 
         echo "var children='';"; 
     }  ?>
 
-    $(".price_chart").click(function(e) {
+    var isVisible = false;
+
+    var hideAllPopovers = function() {
+       $('.price_chart').each(function() {
+            $(this).popover('hide');
+        });  
+    };
+
+    $(".price_chart").popover({
+        container:'body',
+        trigger: "manual",
+        placement : 'top',
+        html : true,
+        content : function(){
+            var room_id = $(this).data('room-id');
+            html = '<div id="chart_div'+room_id+'" style="width:700px; height:150px;"></div>';
+            return html;
+        }
+    }).on('click', function(e) {
+
         var room_id = $(this).data('room-id');
-        $(this).popover({
-            container:'body',
-            trigger: "click",
-            placement : 'top',
-            html : true,
-            content : '<div id="chart_div'+room_id+'" style="width:700px; height:150px;"></div>'
+        // if any other popovers are visible, hide them
+        if(isVisible) {
+            hideAllPopovers();
+        }
+
+        $(this).popover('show');
+
+        // handle clicking on the popover itself
+        $('.popover').off('click').on('click', function(e) {
+            e.stopPropagation(); // prevent event for bubbling up => will not get caught with document.onclick
         });
-       
+
+        isVisible = true;
+        e.stopPropagation();
+
         jQuery.post( base_url + "actions/room_price_info",{ room_id: room_id, options: options,children:children },function(data){
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable(jQuery.parseJSON(data));
@@ -110,7 +90,14 @@ $this->load->view('front/header');
             }
             });
         });
+
     });
+
+    $(document).on('click', function(e) {
+        hideAllPopovers();
+        isVisible = false;
+    });
+
 
 });
 
