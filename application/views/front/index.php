@@ -274,7 +274,7 @@ $this->load->view('front/header');
                                 //güne göre available kontrolü
                                 foreach ($room['prices'] as $d => $a) {
 
-                                    if (!is_null($a['available']) and $a['available'] < 1) {
+                                    if (isset($a['available']) and !is_null($a['available']) and $a['available'] < 1) {
                                         $available_error .= $d.',';
                                     }
                                 }
@@ -297,7 +297,7 @@ $this->load->view('front/header');
                                         <option <?php checkCartRoom($rid,$i,0); ?> data-policy="<?php echo $policy; ?>" data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
                                     <?php } ?>
                                     </select><br />
-                                     We Have <?php echo $room['prices'][$options['checkout']]['available']; ?> rooms left!
+                                     We Have <?php echo $room['prices'][$options['checkin']]['available']; ?> rooms left!
                                 <?php } ?>
                                    
                                 </div>
@@ -918,7 +918,7 @@ $this->load->view('front/header');
                         <div class="col-md-12 welcome">
                             <div class="row">
                                 <div class="col-md-3">
-                                <img src="<?php echo site_url('assets/front');?>/img/logo.png" alt="" />
+                                <img src="<?php echo $hotel_info->hotel_logo;?>" alt="" />
                                 </div>
                                 <div class="col-md-9">
                                 <h3>We would love to welcome you.</h3>
