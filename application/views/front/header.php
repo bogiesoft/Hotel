@@ -75,6 +75,7 @@
         <a href="<?php echo current_full_url(); ?>&cur=CHF"><span class="glyphicon glyphicon-chevron-right"></span> CHF</a>
         <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="glyphicon glyphicon-chevron-right"></span> CZK</a>
         <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="glyphicon glyphicon-chevron-right"></span> DKK</a>
+        <a href="<?php echo current_full_url(); ?>&cur=EUR"><span class="glyphicon glyphicon-chevron-right"></span> EUR</a>
         <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="glyphicon glyphicon-chevron-right"></span> GBP</a>
         <a href="<?php echo current_full_url(); ?>&cur=HKD"><span class="glyphicon glyphicon-chevron-right"></span> HKD</a>
         <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="glyphicon glyphicon-chevron-right"></span> HUF</a>
