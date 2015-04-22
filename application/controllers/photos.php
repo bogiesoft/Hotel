@@ -12,7 +12,7 @@ class Photos extends ADMIN_Controller {
             $fileExt    = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
             $fileName   = time().'_'.rand(0,100).'.'.$fileExt;
 
-            $dirname    = $hotel_id.'_hotel/';
+            $dirname    = $hotel_id.'/hotel/';
 
             //control directory
             if (!is_dir('uploads/'.$dirname)) {
@@ -51,7 +51,7 @@ class Photos extends ADMIN_Controller {
             $fileExt    = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
             $fileName   = time().'_'.rand(0,100).'.'.$fileExt;
 
-            $dirname    = $hotel_id.'_rooms/';
+            $dirname    = $hotel_id.'/rooms/';
 
             //control directory
             if (!is_dir('uploads/'.$dirname)) {
