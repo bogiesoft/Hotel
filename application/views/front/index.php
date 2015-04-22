@@ -194,7 +194,7 @@ $this->load->view('front/header');
                                 <?php foreach ($room['photos'] as $pid => $photo) : ?>
                                     <div class="item <?php echo $pid==0 ? 'active' : ''; ?>" data-thumb="0">
                                         <a class="fancybox" rel="group<?php echo $rid; ?>" href="<?php echo $photo['photo_url'];?>">
-                                        <img src="<?php echo $photo['photo_url'];?>" />
+                                        <img src="<?php echo $photo['photo_url'];?>" height="160px" />
                                         </a>
                                     </div>
                                 <?php endforeach; ?>
@@ -206,7 +206,7 @@ $this->load->view('front/header');
                                     <div class="item active">
                                     <?php $i=0; foreach ($room['photos'] as $pid => $photo) : $i++;?>
                                         <div data-target="#carousel" data-slide-to="<?php echo $pid; ?>" class="thumb">
-                                        <img src="<?php echo $photo['photo_url'];?>" />
+                                        <img src="<?php echo $photo['photo_url'];?>" width="60px" height="45px"/>
                                         </div>
                                     <?php if($i % 4 ==0): ?>
                                     </div><!-- /item -->
