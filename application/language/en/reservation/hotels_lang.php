@@ -20,6 +20,7 @@ $lang['hotel_specs']	= 'Property Amenities';
 $lang['translations']	= 'Translations';
 $lang['bank_accounts']	= 'Bank Accounts';
 $lang['hotel_photos']	= 'Photos';
+$lang['logo']			= 'Logo';
 
 $lang['category']		= 'Category';
 $lang['cat_0_star']		= 'Undifened';

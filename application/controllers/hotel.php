@@ -89,7 +89,21 @@ class Hotel extends RA_Controller {
 					$arr['rooms'][$r->id]['max_child']	= $r->max_child;
 					$arr['rooms'][$r->id]['default_policy']	= $r->default_policy;
 					$arr['rooms'][$r->id]['photos'] 	= $this->front_model->get_room_photos($r->id);
-					$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
+					
+					//check if price is set for the day
+					if ($this->front_model->get_bar_by_room($d,$r->id)) {
+						$arr['rooms'][$r->id]['prices'][$d] = $this->front_model->get_bar_by_room($d,$r->id);
+					}else{
+						$arr['rooms'][$r->id]['prices'][$d]['available'] = 0;
+						$arr['rooms'][$r->id]['prices'][$d]['stoped_arrival'] = 1;
+						$arr['rooms'][$r->id]['prices'][$d]['stoped_departure'] = 1;
+						$arr['rooms'][$r->id]['prices'][$d]['base_price'] = 0;
+						$arr['rooms'][$r->id]['prices'][$d]['single_price'] = 0;
+						$arr['rooms'][$r->id]['prices'][$d]['double_price'] = 0;
+						$arr['rooms'][$r->id]['prices'][$d]['triple_price'] = 0;
+						$arr['rooms'][$r->id]['prices'][$d]['extra_adult'] = 0;
+					}
+
 					$arr['rooms'][$r->id]['prices'][$d]['room_name'] = $r->name;
 					$arr['rooms'][$r->id]['prices'][$d]['room_id'] = $r->id;
 					$arr['rooms'][$r->id]['prices'][$d]['room_capacity'] = $r->capacity;

@@ -113,8 +113,8 @@ class Actions extends RA_Controller {
 
 		$rows = array();
 		foreach ($data as $key => $value) {
-			$cell0["v"]=date('D',strtotime($value['date']));
-			$cell0["v"]=substr($cell0["v"], 0,-2);
+			$cell0["v"]=date('D-m-Y',strtotime($value['date']));
+			//$cell0["v"]=substr($cell0["v"], 0,-2);
 			$cell1["v"]=$value['price'];
 			$row["c"]=array($cell0,$cell1);
  	

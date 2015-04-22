@@ -38,6 +38,7 @@
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translations'); ?></strong></a></li>
           <li class=""><a href="#accounts" data-toggle="tab"><strong><?php echo lang('bank_accounts'); ?></strong></a></li>
           <li class=""><a href="#photos" data-toggle="tab"><strong><?php echo lang('hotel_photos'); ?></strong></a></li>
+          <li class=""><a href="#logo" data-toggle="tab"><strong><?php echo lang('logo'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -462,6 +463,18 @@
 
             </div> <!-- photos end -->
 
+            <div class="tab-pane" id="logo">
+            <div class="row">
+                <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('logo'); ?></label>
+                <div class="col-sm-6">
+                <div id="logo_image"><?php if($hotel->hotel_logo) {echo '<img src="'.$hotel->hotel_logo.'" />'; } ?></div>
+                <input type="file" name="userfile" id="uploadedfile">
+                <input type="hidden" name="logo_image_value" id="logo_image_value" value="<?php echo $hotel->hotel_logo; ?>">
+                </div>
+              </div>
+            </div>
+            </div> <!-- logo end -->
           
             </div> <!-- tab content end -->
 
@@ -685,6 +698,20 @@ function delete_photos(){
   if (url.match('#')) {
       $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
   } 
+
+</script>
+<script src="<?php echo site_url('assets/back'); ?>/js/jupload.js"></script>
+<script type="text/javascript">
+  $(function() {
+      $('#uploadedfile').change(function() {
+          $(this).upload(base_url + 'reservation_actions/upload_hotel_logo', function(res) {
+            var obj = jQuery.parseJSON( res );
+            html = '<img src="'+obj.image+'" />';
+            $('#logo_image').html(html);
+            $('#logo_image_value').val(obj.image);
+          }, 'html');
+      });
+  });
 
 </script>
 <?php $this->load->view('footer'); ?>

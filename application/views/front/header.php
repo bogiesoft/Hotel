@@ -30,46 +30,6 @@
 <div id="header">
 <div class="container po-re">
     <div class="col-md-12 m2">
-   <!-- {
-    "base": "EUR",
-    "date": "2000-01-03",
-  "base": "EUR",
-    "date": "2015-03-31",
-    "rates": {
-        "AUD": 1.4154,
-        "BGN": 1.9558,
-        "BRL": 3.4958,
-        "CAD": 1.3738,
-        "CHF": 1.0463,
-        "CNY": 6.671,
-        "CZK": 27.533,
-        "DKK": 7.4697,
-        "GBP": 0.7273,
-        "HKD": 8.3422,
-        "HRK": 7.645,
-        "HUF": 299.43,
-        "IDR": 14053.78,
-        "ILS": 4.2795,
-        "INR": 67.274,
-        "JPY": 128.95,
-        "KRW": 1192.58,
-        "MXN": 16.512,
-        "MYR": 3.9873,
-        "NOK": 8.7035,
-        "NZD": 1.4388,
-        "PHP": 48.057,
-        "PLN": 4.0854,
-        "RON": 4.4098,
-        "RUB": 62.44,
-        "SEK": 9.2901,
-        "SGD": 1.4774,
-        "THB": 35.018,
-        "TRY": 2.8131,
-        "USD": 1.0759,
-        "ZAR": 13.132
-    }
-    }
-}-->
         <a href="<?php echo current_full_url(); ?>&cur=AUD"><span class="glyphicon glyphicon-chevron-right"></span> AUD</a>
         <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="glyphicon glyphicon-chevron-right"></span> CAD</a>
         <a href="<?php echo current_full_url(); ?>&cur=CHF"><span class="glyphicon glyphicon-chevron-right"></span> CHF</a>
@@ -143,7 +103,7 @@
     </div>
     <div class="row ptb-5">
         <div class="col-md-12">
-            <img src="<?php echo site_url('assets/front');?>/img/logo.png" />
+            <img src="<?php echo $hotel_info->hotel_logo;?>" />
         </div>
     </div>
 </div>
