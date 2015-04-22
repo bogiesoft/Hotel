@@ -186,7 +186,7 @@ $this->load->view('front/header');
                             <?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>
                             </div>
                             <!-- slider -->
-                            <div id="carousel" class="carousel slide magni">
+                            <div id="carousel_<?php echo $rid;?>" class="carousel slide magni">
                                 <div class="magnify">
                                     <img src="<?php echo site_url('assets/front');?>/img/magnify.png" />
                                 </div>
@@ -201,11 +201,11 @@ $this->load->view('front/header');
                                 </div>
                             </div> 
                         <div class="clearfix">
-                            <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                            <div id="thumbcarousel_<?php echo $rid;?>" class="carousel slide" data-interval="false">
                                 <div class="carousel-inner">
                                     <div class="item active">
                                     <?php $i=0; foreach ($room['photos'] as $pid => $photo) : $i++;?>
-                                        <div data-target="#carousel" data-slide-to="<?php echo $pid; ?>" class="thumb">
+                                        <div data-target="#carousel_<?php echo $rid;?>" data-slide-to="<?php echo $pid; ?>" class="thumb">
                                         <img src="<?php echo $photo['photo_url'];?>" width="60px" height="45px"/>
                                         </div>
                                     <?php if($i % 4 ==0): ?>
@@ -217,17 +217,21 @@ $this->load->view('front/header');
                                     </div><!-- /item -->
                                 </div><!-- /carousel-inner -->
                                 <?php if(count($room['photos']) > 4 ): //if count greager than 4?>
-                                <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                                <a class="left carousel-control" href="#thumbcarousel_<?php echo $rid;?>" role="button" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                 </a>
-                                <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                                <a class="right carousel-control" href="#thumbcarousel_<?php echo $rid;?>" role="button" data-slide="next">
                                     <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                                 <?php endif; ?>
                             </div> <!-- /thumbcarousel -->
                         </div><!-- /clearfix -->
                         </div><!-- /slider -->
-
+                        <script type="text/javascript">
+                        $(function() {
+                            $('#carousel_<?php echo $rid;?>').carousel();
+                        });
+                        </script>
                         <div class="col-md-9">
                             <div class="row data-row">
                                 <div class="col-md-3 cent">
