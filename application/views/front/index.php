@@ -2,10 +2,10 @@
 $this->load->view('front/header');
 ?>
 <script type="text/javascript">
-  // Load the Visualization API and the piechart package.
+    // Load the Visualization API and the piechart package.
     google.load('visualization', '1', {'packages':['corechart']});
     // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
+    google.setOnLoadCallback();
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
