@@ -990,7 +990,8 @@ class Reservation_actions extends ADMIN_Controller {
 
 
 	function upload_extra_image(){
-		$config['upload_path']   =   "uploads/extras/";
+		$hotel_id = $this->session->userdata('hotel_id');
+		$config['upload_path']   =   "uploads/".$hotel_id."/extras/";
 
 		if (!is_dir($config['upload_path'])) {
 		    mkdir($config['upload_path'], 0777, TRUE);
@@ -1007,7 +1008,7 @@ class Reservation_actions extends ADMIN_Controller {
 
 		$this->load->library('upload',$config);
 
-		$file_name = $this->session->userdata('hotel_id').'-'.time();
+		$file_name = $hotel_id.'-'.time();
 
 		if(!$this->upload->do_upload('userfile',$file_name)){
 		   echo $this->upload->display_errors();
@@ -1028,7 +1029,7 @@ class Reservation_actions extends ADMIN_Controller {
 				echo json_encode(array('status'=>'error'));  
 			}else{
 				$file_name =$finfo['raw_name'].$finfo['file_ext'];
-				$response = site_url('uploads/extras/'.$file_name);
+				$response = site_url('uploads/'.$hotel_id.'/extras/'.$file_name);
 
 				echo json_encode(array('status'=>'success','image'=>$response));
 			}
@@ -1043,7 +1044,8 @@ class Reservation_actions extends ADMIN_Controller {
 	*/
 
 	function upload_hotel_logo(){
-		$config['upload_path']   =   "uploads/logos/";
+		$hotel_id = $this->session->userdata('hotel_id');
+		$config['upload_path']   =   "uploads/".$hotel_id."/logos/";
 
 		if (!is_dir($config['upload_path'])) {
 		    mkdir($config['upload_path'], 0777, TRUE);
@@ -1057,7 +1059,8 @@ class Reservation_actions extends ADMIN_Controller {
 		$config['maintain_ratio']   = FALSE;      
         $config['width'] = "200";      
         $config['height'] = "100";
-		$file_name = $this->session->userdata('hotel_id').'-'.time();
+        $config2['overwrite'] = TRUE;
+		$file_name = $hotel_id.'_logo';
 		$config['file_name'] = $file_name;
 
 		$this->load->library('upload',$config);
@@ -1082,7 +1085,7 @@ class Reservation_actions extends ADMIN_Controller {
 				echo json_encode(array('status'=>'error'));  
 			}else{
 				$file_name =$finfo['raw_name'].$finfo['file_ext'];
-				$response = site_url('uploads/logos/'.$file_name);
+				$response = site_url('uploads/'.$hotel_id.'/logos/'.$file_name);
 
 				echo json_encode(array('status'=>'success','image'=>$response));
 			}
