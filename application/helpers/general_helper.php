@@ -284,13 +284,13 @@ function form_builder($json,$arr=array()){
 
 		//eğer preferecences ise forma guest name surname ekle
 		if($option['name'] == 'pref'){
-			$output .= '<div class="row">
-		    <div class="col-md-4 text-right">
+			$output .= '<div class="f-row">
+		    <span class="frm-label">
 		    Full Guest Name:<span class="c-f00">*</span>
-		    </div>';
-			$output .= '<div class="col-md-8">
+		    </span>';
+			$output .= '<span class="frm-val">
 			<input type="text" name="'.$option['name'].'['.$option['id'].'][guest_name]" '.$option['class'].' value="Guest Name">
-			</div>
+			</span>
 			</div>
 			';
 			
