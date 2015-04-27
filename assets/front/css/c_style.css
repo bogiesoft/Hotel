@@ -18,7 +18,7 @@
 .extra-info .p-btn-book{width:49px;float:right}
 
 .extra-overlay{position:absolute;left:141px;right:0;top:0;height:210px;background-color:#2A2C30;overflow:hidden;padding:20px 20px 0 9px;font-size:12px}
-.btn-close {display:block;width:13px;height:13px;position:absolute;top:5px;right:5px;background:transparent url(../img/close.png) no-repeat;cursor:pointer}
+.btn-close {display:block;width:13px;height:13px;position:absolute;top:5px;right:5px;background:transparent url(../img/close2.png) no-repeat;cursor:pointer}
 .extra-desc{position:absolute;top:20px;left:20px;width:180px}
 .extra-form{position:absolute;top:20px;right:20px;width:300px;height:140px;overflow-x:hidden;overflow-y:auto;background-color:#2a2c30}
 

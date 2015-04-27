@@ -470,33 +470,34 @@ $(function() {
     });
 
  $('.ui-datepicker-div').css('zIndex', 50);
+
+/* form inside buttons */
+$('.p-btn-book').click(function () {
+    ToggleForm($(this));
+})
+
+$('.btn-close').click(function () {
+    CloseForm($(this));
+})
+
+
 });
 
 
 /* FORM BUILDER START */
 
-function form_to_arr(div){
-
+function form_to_arr(div,type){
    var data =  $(div+' :input').serialize();
 
    $.ajax({
-            url: base_url + "hotel/user_extras",
+            url: base_url + "hotel/user_extras?type=" + type,
             type: "POST",
             data: data,
             dataType: 'json',
             success: function(ret){
 
-            //change button value
-            if (ret.action == 'add') {
-                $('#button'+ret.extra_id).val('Remove');
-                $('#extra_type'+ret.extra_id).val('delete');
-            }else{
-                $('#button'+ret.extra_id).val('Add');
-                $('#extra_type'+ret.extra_id).val('add');
-            };
-            
+            if (ret.status!='error') {
             //show extra info in cart
-
             var cnt = Object.keys(ret.details).length;
             if (cnt > 0) {
                 $('.extras').fadeIn();
@@ -534,23 +535,18 @@ function form_to_arr(div){
                 html ='<div>*'+ret.user_currency+' rates are for information. The hotel accepts payment in '+ret.currency+'</div>';
                 $('.price_information').html(html);
             }
-             
+
+            }else{
+                alert('Fill The Form');
+            };
                // console.log(ret);
             },
             error:function(){
-
             }   
         }); 
 
+
 }
-
-$('.p-btn-book').click(function () {
-    ToggleForm($(this));
-})
-
-$('.btn-close').click(function () {
-    CloseForm($(this));
-})
 
 function OpenForm(sender)
 {
@@ -606,6 +602,7 @@ function ToggleForm(sender)
         OpenForm(sender);
 }
 
+/* FORMS END */
 
 function detectCardType(number) {
     var re = {

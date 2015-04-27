@@ -32,7 +32,7 @@ class Actions extends RA_Controller {
 		$data = $this->input->post('data');
 		//print_r($data);exit;
 		$options = array('id'=>$this->input->post('room_id'),
-			'name'	 => 'preferences',
+			'name'	 => 'pref',
 			'button' => false);
 
 		echo  form_builder(json_encode($data),$options);

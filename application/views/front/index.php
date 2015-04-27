@@ -719,191 +719,56 @@ $this->load->view('front/header');
                             <span class="dtls" id="dtls-sh1">Details View <img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /></span>
                         </div> 
                         <div id="dtl-dtl1">
-                        <ul id="splash">
-                            <?php foreach ($extras as $key => $extra) : ?>
-                                <?php
-                                $price = $prices->extras->$extra['id']->price;
 
-                                //price descripton
-                                if($extra['per'] ==2){
-                                    $price_desc = 'for Unit';
-                                }else{
-                                    $price_desc = 'for '.$options['adults'].' adult';
-                                }
-                                $extra_title    = $extra['title'] !=NULL ? $extra['title'] : $extra['name'];
-                                $extra_content  = $extra['content'] !=NULL  ? $extra['content'] : $extra['description'];
-                                ?>
+<div class="extra-cont">
+       <?php foreach ($extras as $key => $extra) : ?>
+            <?php
+            $price = $prices->extras->$extra['id']->price;
 
-                            <li>
-                                <img src="<?php echo $extra['image']; ?>" alt="" />
-                                <div class="content">
-                                    <strong><?php echo $extra_title; ?></strong>
-                                    <p class="splash-text">
-                                    <?php echo  $extra_content; ?>
-                                    <br>
-                                    <?php 
-                                    $extra_options = array(
-                                        'id'            =>$extra['id'],
-                                        'extra_name'    =>$extra_title,
-                                        'currency'      =>$options['currency'],
-                                        'user_currency' =>$options['user_currency'],
-                                        'currency_rate' =>$options['currency_rate'],
-                                        'price'         =>$price);
-                                    echo form_builder($extra['forms'],$extra_options); 
-                                    ?>
-                                    </p>
-                                </div>
-                               
-                                <div class="price">
-                                    <strong><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?> <?php echo $price_desc; ?></strong>
-                                </div>
-                            </li>
-                            <?php endforeach; ?>
-                        </ul>
-                        </div>
-                        <!--
-                        <div class="col-md-12" id="dtl-dtl1">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="accordion">
-                                        <div class="stay">
-                                            <div class="stay-show">
-                                                <img src="<?php echo site_url('assets/front');?>/img/stay0.png" width="" alt="" />
-                                                <div class="stay-txt">
-                                                Welcome Service
-                                                EURO 220,00 <a href="">BOOK</a>
-                                                </div>
-                                            </div>
-                                            <div class="stay-hide">
-                                            hide
-                                            </div>
-                                        </div>
-                                        <div class="stay">
-                                            <div class="stay-show">
-                                                <img src="<?php echo site_url('assets/front');?>/img/stay.png" width="" alt="" />
-                                                <div class="stay-txt">
-                                                Welcome Service
-                                                EURO 220,00 <a href="">BOOK</a>
-                                                </div>
-                                            </div>
-                                            <div class="stay-hide">
-                                            hide
-                                            </div>
-                                        </div>
-                                        <div class="stay">
-                                            <div class="stay-show">
-                                                <img src="<?php echo site_url('assets/front');?>/img/stay2.png" width="" alt="" />
-                                                <div class="stay-txt">
-                                                Welcome Service
-                                                EURO 220,00 <a href="">BOOK</a>
-                                                </div>
-                                            </div>
-                                            <div class="stay-hide">
-                                            hide
-                                            </div>
-                                        </div>
-                                        <div class="stay">
-                                            <div class="stay-show">
-                                                <img src="<?php echo site_url('assets/front');?>/img/stay3.png" width="" alt="" />
-                                                <div class="stay-txt">
-                                                    <p>
-                                                    Welcome Service
-                                                    </p>
-                                                    <p>
-                                                    Welcome Service
-                                                    </p>
-                                                    <p class="c-b7b">
-                                                    EURO 220,00 <a href="" class="sqr">BOOK</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="stay-hide">
-                                                <div class="text-right">
-                                                    <img src="<?php echo site_url('assets/front');?>/img/close.png" id="close-img" width="16" alt="" />
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <p>
-                                                        Start to an energetic day with a rich, organic breakfast with the Bosphorus view at the backdrop. The price is calculated per person per day and exclusive of 18% VAT.
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <form method="" action="">
-                                                            <div class="row">
-                                                                <div class="col-md-6 text-right">
-                                                                Number of Persons 
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="">
-                                                                        <option>1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6 text-right">
-                                                                 Arrival Date 
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <input type="text" class="datepicker w-120 c-000" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6 text-right">
-                                                                Arrival Time  
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="">
-                                                                        <option>1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                    </select> - 
-                                                                    <select name="">
-                                                                        <option>1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6 text-right">
-                                                                    <span id="close-link">Cancel</span> 
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <input type="submit" value="CONFIRM" />
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="stay">
-                                            <div class="stay-show">
-                                                <img src="<?php echo site_url('assets/front');?>/img/stay4.png" width="" alt="" />
-                                                <div class="stay-txt">
-                                                Welcome Service
-                                                EURO 220,00 <a href="">BOOK</a>
-                                                </div>
-                                            </div>
-                                            <div class="stay-hide">
-                                            hide
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                            <span class="dtls" id="dtls-h1in"><img src="<?php echo site_url('assets/front');?>/img/zt-d-arrow.png" /> Show Fewer Packages</span>
-                            <span class="dtls" id="dtls-sh1in"><img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /> Show More Packages</span>
-                        </div>
-                        <div class="col-md-12" id="dtl-dtl1in">
-                        show more
-                        </div>
-                        </div>
+            //price descripton
+            if($extra['per'] ==2){
+                $price_desc = 'for Unit';
+            }else{
+                $price_desc = 'for '.$options['adults'].' adult';
+            }
+            $extra_title    = $extra['title'] !=NULL ? $extra['title'] : $extra['name'];
+            $extra_content  = $extra['content'] !=NULL  ? $extra['content'] : $extra['description'];
+            ?>
+        <div class="extra-placeholder">
+            <div class="extra-pack" style="z-index: 0; width: 140px;">
+                <div class="extra-info">
+                    <img class="p-img" src="<?php echo $extra['image']; ?>" width="140px" height="115px" alt="">
+                    <span class="p-title">
+                        <?php echo $extra_title; ?>
+                    </span>
+                    <span class="p-book">
+                        <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?> <?php echo $price_desc; ?></span>
+                        <span class="p-btn p-btn-book">Book</span>
+                    </span>
+                </div>
+                <div class="extra-overlay">
+                    <a class="btn-close"></a>
+                    <div class="extra-desc">
+                        <?php echo $extra_content; ?>
+                    </div>
 
-                        -->
+                    <?php 
+                    $extra_options = array(
+                        'id'            =>$extra['id'],
+                        'extra_name'    =>$extra_title,
+                        'currency'      =>$options['currency'],
+                        'user_currency' =>$options['user_currency'],
+                        'currency_rate' =>$options['currency_rate'],
+                        'price'         =>$price);
+                    echo form_builder($extra['forms'],$extra_options); 
+                    ?>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+</div>
+
+                        </div>
                     </div>
                     <?php endif; ?>
                     <div class="row details">
@@ -915,7 +780,9 @@ $this->load->view('front/header');
                             <span class="dtls" id="dtls-sh2">Details View <img src="<?php echo site_url('assets/front');?>/img/zt-r-arrow.png" /></span>
                         </div>
                         <div class="col-md-12" id="dtl-dtl2">
-                        <div id="room_preferences"></div>
+                        <div class="pref-cont">
+                            <div id="room_preferences"></div>
+                        </div>
                         </div>
                     </div>
                     <div class="row">

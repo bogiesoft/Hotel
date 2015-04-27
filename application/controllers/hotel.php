@@ -264,8 +264,13 @@ class Hotel extends RA_Controller {
 		$currency_rate 	= $this->input->post('currency_rate');
 		$user_currency 	= $this->input->post('user_currency');
 		$price 			= $prices->extras->$extra_id->price;
-		$type 			= $this->input->post('type'.$extra_id);
+		$type 			= $this->input->get('type');
 		$extra 			= $this->input->post('extra');
+
+		if (!$extra) {
+			echo json_encode(array('status'=>'error'));
+			exit;
+		}
 
 		$user_extras = $this->session->userdata('user_extras');
 
@@ -285,6 +290,7 @@ class Hotel extends RA_Controller {
 		}
 
 		//get total items in cart
+		$response['status'] = 'success';
 		$response['extra_id'] = $extra_id;
 		$response['action'] = $type;
 		$response['total_price'] = 0;
