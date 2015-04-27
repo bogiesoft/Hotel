@@ -27,7 +27,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][policy_note]" <?php checkbox_selected(@$p->sales->policy_note); ?> id="policy_note" checked="checked" />
+              <input type="checkbox" name="policy[sales][policy_note]" <?php checkbox_selected_admin(@$p->sales->policy_note); ?> id="policy_note" checked="checked" />
               <label for="policy_note"></label>
             </div>
             </td>
@@ -36,7 +36,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][credit_card]" <?php checkbox_selected(@$p->sales->credit_card); ?> id="credit_card" checked="checked" />
+              <input type="checkbox" name="policy[sales][credit_card]" <?php checkbox_selected_admin(@$p->sales->credit_card); ?> id="credit_card" checked="checked" />
               <label for="credit_card"></label>
             </div>
             </td>
@@ -45,7 +45,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][valid_card][status]" <?php checkbox_selected(@$p->sales->valid_card->status); ?> id="valid_card" />
+              <input type="checkbox" name="policy[sales][valid_card][status]" <?php checkbox_selected_admin(@$p->sales->valid_card->status); ?> id="valid_card" />
               <label for="valid_card"></label>
             </div>
             </td>
@@ -62,7 +62,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][depozit_after_resv][status]" <?php checkbox_selected(@$p->sales->depozit_after_resv->status); ?> id="depozit_after_resv" />
+              <input type="checkbox" name="policy[sales][depozit_after_resv][status]" <?php checkbox_selected_admin(@$p->sales->depozit_after_resv->status); ?> id="depozit_after_resv" />
               <label for="depozit_after_resv"></label>
             </div>
             </td>
@@ -75,7 +75,7 @@
            <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][taxes]" <?php checkbox_selected(@$p->sales->taxes); ?> id="taxes" />
+              <input type="checkbox" name="policy[sales][taxes]" <?php checkbox_selected_admin(@$p->sales->taxes); ?> id="taxes" />
               <label for="taxes"></label>
             </div>
             </td>
@@ -86,7 +86,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][checkin][status]" <?php checkbox_selected(@$p->sales->checkin->status); ?> id="checkin" />
+              <input type="checkbox" name="policy[sales][checkin][status]" <?php checkbox_selected_admin(@$p->sales->checkin->status); ?> id="checkin" />
               <label for="checkin"></label>
             </div>
             </td>
@@ -98,7 +98,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][checkout][status]" <?php checkbox_selected(@$p->sales->checkout->status); ?> id="checkout" />
+              <input type="checkbox" name="policy[sales][checkout][status]" <?php checkbox_selected_admin(@$p->sales->checkout->status); ?> id="checkout" />
               <label for="checkout"></label>
             </div>
             </td>
@@ -110,7 +110,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][child_age][status]" <?php checkbox_selected(@$p->sales->child_age->status); ?> id="child_age" />
+              <input type="checkbox" name="policy[sales][child_age][status]" <?php checkbox_selected_admin(@$p->sales->child_age->status); ?> id="child_age" />
               <label for="child_age"></label>
             </div>
             </td>
@@ -122,7 +122,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][payment]" <?php checkbox_selected(@$p->sales->payment); ?> id="payment" />
+              <input type="checkbox" name="policy[sales][payment]" <?php checkbox_selected_admin(@$p->sales->payment); ?> id="payment" />
               <label for="payment"></label>
             </div>
             </td>
@@ -132,7 +132,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][info_rate]" <?php checkbox_selected(@$p->sales->info_rate); ?>id="info_rate" />
+              <input type="checkbox" name="policy[sales][info_rate]" <?php checkbox_selected_admin(@$p->sales->info_rate); ?>id="info_rate" />
               <label for="info_rate"></label>
             </div>
             </td>
@@ -142,7 +142,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][resv_cancel]" <?php checkbox_selected(@$p->sales->resv_cancel); ?> id="resv_cancel" />
+              <input type="checkbox" name="policy[sales][resv_cancel]" <?php checkbox_selected_admin(@$p->sales->resv_cancel); ?> id="resv_cancel" />
               <label for="resv_cancel"></label>
             </div>
             </td>
@@ -152,7 +152,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[sales][resv_contact]" <?php checkbox_selected(@$p->sales->resv_contact); ?> id="resv_contact" />
+              <input type="checkbox" name="policy[sales][resv_contact]" <?php checkbox_selected_admin(@$p->sales->resv_contact); ?> id="resv_contact" />
               <label for="resv_contact"></label>
             </div>
             </td>
@@ -172,7 +172,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[cancel][cancellation_time][status]" <?php checkbox_selected(@$p->cancel->cancellation_time->status); ?> id="cancellation_time" checked="checked" />
+              <input type="checkbox" name="policy[cancel][cancellation_time][status]" <?php checkbox_selected_admin(@$p->cancel->cancellation_time->status); ?> id="cancellation_time" checked="checked" />
               <label for="cancellation_time"></label>
             </div>
             </td>
@@ -184,14 +184,14 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[cancel][no_show_value][status]" <?php checkbox_selected(@$p->cancel->no_show_value->status); ?> id="no_show_value" />
+              <input type="checkbox" name="policy[cancel][no_show_value][status]" <?php checkbox_selected_admin(@$p->cancel->no_show_value->status); ?> id="no_show_value" />
               <label for="no_show_value"></label>
             </div>
             </td>
             <td>
             <?php
             $value = '<input type="text" name="policy[cancel][no_show_value][value]" value="'.$p->cancel->no_show_value->value.'" style="width: 36px;height: 20px;">';
-            echo sprintf(lang('no_show_value'),$value,no_show_select($p->cancel->no_show_value->no_card_depozit_method));
+            echo sprintf(lang('no_show_value'),$value,no_show_select_admin($p->cancel->no_show_value->no_card_depozit_method));
             ?>
             
             </td>
@@ -209,7 +209,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[cancel][client_can_cancel]" <?php checkbox_selected(@$p->cancel->client_can_cancel); ?> id="client_can_cancel"/>
+              <input type="checkbox" name="policy[cancel][client_can_cancel]" <?php checkbox_selected_admin(@$p->cancel->client_can_cancel); ?> id="client_can_cancel"/>
               <label for="client_can_cancel"></label>
             </div>
             </td>
@@ -219,7 +219,7 @@
           <tr>
             <td>
             <div class="ckbox ckbox-success">
-              <input type="checkbox" name="policy[cancel][client_confirmation]" <?php checkbox_selected(@$p->cancel->client_confirmation); ?> id="client_confirmation"/>
+              <input type="checkbox" name="policy[cancel][client_confirmation]" <?php checkbox_selected_admin(@$p->cancel->client_confirmation); ?> id="client_confirmation"/>
               <label for="client_confirmation"></label>
             </div>
             </td>

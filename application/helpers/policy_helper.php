@@ -22,7 +22,7 @@ function age_selectbox($name,$value=NULL){
 	return $output;
 }
 
-function no_show_select($value=NULL){
+function no_show_select_admin($value=NULL){
 
 	$no_show_days = $value=="no_show_days" ? 'selected="selected"' : '';
 	$no_show_perc = $value=="no_show_perc" ? 'selected="selected"' : '';
@@ -51,7 +51,7 @@ function valid_card_select($value=NULL){
 }
 
 
-function checkbox_selected($value){
+function checkbox_selected_admin($value){
 	if (isset($value)) {
 		$selected = $value =='on' ? 'checked="checked"' : '';
 	}else{
