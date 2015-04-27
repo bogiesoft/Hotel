@@ -1003,8 +1003,8 @@ class Reservation_actions extends ADMIN_Controller {
 		$config['max_height']    =   "2400";
 
 		$config['maintain_ratio']   = FALSE;      
-        $config['width'] = "600";      
-        $config['height'] = "280";
+        $config['width'] = "140";      
+        $config['height'] = "115";
 
 		$this->load->library('upload',$config);
 
