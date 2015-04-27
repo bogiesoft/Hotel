@@ -1,0 +1,52 @@
+﻿.extra-cont{position:relative;width:700px}
+.extra-placeholder{height:210px;float:left;width:140px;color:#e2e1dd;background-color:#2A2C30}
+.extra-pack{position:relative;height:210px;float:left;width:140px;background-color:#2A2C30;overflow:hidden}
+.extra-pack .p-btn{font-size:11px;height:20px;display:inline-block;cursor:pointer;text-align:center;border:solid 1px #fff;line-height:18px;text-transform:uppercase}
+.extra-pack .p-btn-confirm{position:absolute;right:20px;bottom:20px;width:100px;}
+.extra-pack .p-btn-confirm{text-decoration:none}
+.extra-pack .btn-cancel{position:absolute;right:140px;bottom:22px;color:#bf2426;text-decoration:underline}
+
+.extra-pack  a{color:#e2e1dd}
+
+.extra-info{height:210px;width:140px;background-color:#2A2C30;border-right:solid 1px #fff}
+.extra-info .p-img{width:139px;height:114px;display:block}
+.extra-info .p-title{display:block;padding:5px 5px 0; height:50px;}
+.extra-info .p-book{display:block;padding:0px 5px; height:30px;}
+.extra-info .p-price{font-size:11px;font-weight:bold}
+.extra-pack.open .extra-info .p-price{color:#a9b300}
+
+.extra-info .p-btn-book{width:49px;float:right}
+
+.extra-overlay{position:absolute;left:141px;right:0;top:0;height:210px;background-color:#2A2C30;overflow:hidden;padding:20px 20px 0 9px;font-size:12px}
+.btn-close {display:block;width:13px;height:13px;position:absolute;top:5px;right:5px;background:transparent url(../img/close.png) no-repeat;cursor:pointer}
+.extra-desc{position:absolute;top:20px;left:20px;width:180px}
+.extra-form{position:absolute;top:20px;right:20px;width:300px;height:140px;overflow-x:hidden;overflow-y:auto;background-color:#2a2c30}
+
+.extra-form .f-row{margin-bottom:6px;white-space:nowrap}
+.extra-form .frm-label{display:inline-block;width:116px;text-align:right;margin-right:20px;font-weight:bold;vertical-align:top}
+.extra-form .frm-val{display:inline-block;width:160px}
+.extra-form input, .extra-form select{color:#000}
+.extra-form input{padding:1px 2px;}
+.extra-form label{margin:0}
+
+.extra-form .f-row input[type=text]{width:130px}
+.extra-form .f-row.date input[type=text]{width:100px;margin-right:5px}
+.extra-form .f-row.time select{width:auto;}
+
+
+.pref-cont{width:700px;border-top:solid 1px #ccc;border-bottom:solid 2px #000;padding:10px 0 20px 0;font-size:12px}
+.pref-form{margin:0 auto;width:400px;overflow-x:hidden;overflow-y:auto;color:#000;max-height:185px}
+.pref-form .f-row{margin-bottom:6px;white-space:nowrap}
+.pref-form .frm-label{display:inline-block;width:130px;text-align:right;margin-right:20px;font-weight:bold;vertical-align:top}
+.pref-form .frm-val{display:inline-block;width:220px}
+.pref-form input, .pref-form select, .pref-form textarea{border:solid #696969 1px}
+.pref-form input{padding:0 4px;}
+.pref-form label{margin:0}
+
+.pref-form .f-row input[type=text]{width:200px}
+.pref-form .f-row select{width:200px}
+.pref-form .f-row textarea{width:200px}
+
+.pref-form .f-row.date input[type=text]{width:176px;margin-right:5px}
+.pref-form .f-row.time select{width:auto;}
+

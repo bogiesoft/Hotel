@@ -472,6 +472,9 @@ $(function() {
  $('.ui-datepicker-div').css('zIndex', 50);
 });
 
+
+/* FORM BUILDER START */
+
 function form_to_arr(div){
 
    var data =  $(div+' :input').serialize();
@@ -539,6 +542,68 @@ function form_to_arr(div){
             }   
         }); 
 
+}
+
+$('.p-btn-book').click(function () {
+    ToggleForm($(this));
+})
+
+$('.btn-close').click(function () {
+    CloseForm($(this));
+})
+
+function OpenForm(sender)
+{
+    var ph = sender.parents('.extra-placeholder');
+    var pack = $('.extra-pack', ph);
+    var contWidth = $('.extra-cont').width();
+
+    $('.extra-form').scrollTop(0);
+
+    pack.css('position', 'absolute');
+    pack.css('left', ph.position.left);
+    pack.css('z-index', '1');
+    pack.addClass('open');
+
+    pack.animate({
+        width: contWidth,
+        left: 0
+    }, {
+        duration: 300
+    });
+
+}
+
+function CloseForm(sender)
+{
+    var ph = sender.parents('.extra-placeholder');
+    var pack = $('.extra-pack', ph);
+
+    var pos = ph.position();
+    var w = ph.width();
+
+    pack.removeClass('open');
+
+    pack.animate({
+        width: w,
+        left: pos.left
+    }, {
+        duration: 300,
+        complete: function () {
+            pack.css('position', '');
+            pack.css('left', '');
+            pack.css('z-index', '0');
+        }
+    });
+}
+
+function ToggleForm(sender)
+{
+    var pack = sender.parents('.extra-pack');
+    if (pack.hasClass('open'))
+        CloseForm(sender);
+    else
+        OpenForm(sender);
 }
 
 
