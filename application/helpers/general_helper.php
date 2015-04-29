@@ -448,10 +448,8 @@ function form_builder($json,$arr=array()){
 				form_to_arr('.extra_form".$option['id']."','add');
 				var pack = $(this).parents('.extra-pack');
 			    $('.p-btn-book', pack).html('<img src=\"".site_url('assets/front/img')."/check.png\" alt=\"Ok\" />');
-
 				CloseForm($(this));
-			
-
+				$('#button".$option['id']."').fadeOut();
 			    
 			})
 
@@ -460,7 +458,7 @@ function form_builder($json,$arr=array()){
 				var pack = $(this).parents('.extra-pack');
 		    	$('.p-btn-book', pack).html('Book');
 			    CloseForm($(this));
-				
+				$('#button".$option['id']."').fadeIn();
 			    
 			})
 			});
