@@ -471,8 +471,8 @@ $this->load->view('front/header');
                             <img src="<?php echo site_url('assets/front');?>/img/arr-dwn.png" class="fl-r mtb-5" width="" alt="" />
                         </div>
                         <div id="lc-a-in">
-                            <div>Hotel Sultania</div>
-                            <div>Istanbul , Tukey</div>
+                            <div><?php echo $hotel_info->name; ?></div>
+                            <div><?php echo $hotel_info->city; ?>, <?php echo $hotel_info->country; ?></div>
                             <div><?php echo date('j F Y',strtotime($options['checkin'])); ?>- <?php echo date('j F Y',strtotime($options['checkout'])); ?></div>
                             <div><b id="total_room"></b> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
                         </div>
@@ -742,7 +742,7 @@ $this->load->view('front/header');
                         <?php echo $extra_title; ?>
                     </span>
                     <span class="p-book">
-                        <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?> <?php echo $price_desc; ?></span>
+                        <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
                         <span class="p-btn p-btn-book">Book</span>
                     </span>
                 </div>

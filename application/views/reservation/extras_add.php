@@ -212,8 +212,8 @@
                         });
 
                         fb.on('save', function(payload){
-                          $('#form_input').val(JSON.stringify(payload));
-                          //console.log(JSON.stringify(payload));
+                          var value = JSON.stringify(fb.mainView.collection.toJSON());
+                          $('#form_input').val(value);
                         })
                       });
                     </script>

@@ -274,15 +274,16 @@
                         });
 
                         fb.on('save', function(payload){
+                          $('#form_input').val('');
                           var value = JSON.stringify(fb.mainView.collection.toJSON());
                           $('#form_input').val(value);
-                          console.log(value);
+                          console.log(payload);
 
                          // console.log(JSON.stringify(payload));
                         })
                       });
                     </script>
-                    <input type="hidden" name="forms" id="form_input" />
+                    <input type="hidden" name="forms" id="form_input" value='<?php echo $room->preferences; ?>'/>
               </div> <!-- forms end -->
 
               

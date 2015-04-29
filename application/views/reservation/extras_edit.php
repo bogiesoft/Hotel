@@ -265,22 +265,23 @@
                       if (form_inputs != null) {
                         var obj = '<?php echo $extra->forms; ?>';
                       }
-                      //console.log(form_inputs);
+                      console.log(form_inputs);
                         fb = new Formbuilder({
                           selector: '.fb-main',
                           bootstrapData:  JSON.parse(obj)
                         });
 
                         fb.on('save', function(payload){
+                          $('#form_input').val('');
                           var value = JSON.stringify(fb.mainView.collection.toJSON());
                           $('#form_input').val(value);
-                          console.log(value);
+                          console.log(payload);
 
                          // console.log(JSON.stringify(payload));
                         })
                       });
                     </script>
-                    <input type="hidden" name="forms" id="form_input"/>
+                    <input type="hidden" name="forms" id="form_input" value='<?php echo $extra->forms; ?>'/>
               </div> <!-- forms end -->
 
             </div> <!-- tab content end -->

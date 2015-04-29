@@ -150,7 +150,7 @@ class Reservation_actions extends ADMIN_Controller {
 			'max_child' 	=> $this->input->post('max_child'),
 			'default_policy'=> $this->input->post('default_policy'),
 			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
-			'preferences' 	=> empty($this->input->post('forms')) ? 0 : $this->input->post('forms'),
+			'preferences' 	=> empty($this->input->post('forms')) ? '[]' : $this->input->post('forms'),
 			'hotel_id'		=> $hotel_id,
 			'code'			=> $code);
 
@@ -298,7 +298,7 @@ class Reservation_actions extends ADMIN_Controller {
 			'price' 		=> json_encode($this->input->post('price')),
 			'image' 		=> $this->input->post('extra_image'),
 			'max_person' 	=> $this->input->post('max_person'),
-			'forms' 		=> empty($this->input->post('forms')) ? 0 : $this->input->post('forms'),
+			'forms' 		=> empty($this->input->post('forms')) ? '[]' : $this->input->post('forms'),
 			'available_days'=> null!==$this->input->post('available_days') ? implode(',',$this->input->post('available_days')) : '0',
 			'status'		=> $this->input->post('status'),
 			'hotel_id'		=> $hotel_id,
@@ -366,6 +366,17 @@ class Reservation_actions extends ADMIN_Controller {
 			}
 		}
 
+	}
+
+	function delete_extras(){
+		$extra_id = $this->input->post('id');
+
+		$this->db->delete('extras',array('id'=>$extra_id));
+		$this->db->delete('extras_contents',array('extra_id'=>$extra_id));
+
+		$jTableResult = array();
+		$jTableResult['Result'] = "OK";
+		print json_encode($jTableResult);
 	}
 
 	function seasons(){
