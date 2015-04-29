@@ -330,6 +330,7 @@ function form_builder($json,$arr=array()){
 
 
 			//if field = time
+			/*
 			if($form->field_type == 'time'){
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
@@ -342,7 +343,38 @@ function form_builder($json,$arr=array()){
 				$output .= '</span>
 				</div>';
 			}
+			*/
 
+			//if field = time
+			if($form->field_type == 'time'){
+
+				//set hours select option
+				$hours = '<select name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).'][hh]" />';
+				for ($i=0; $i <= 24 ; $i++) { 
+					$hours .= '<option value="'.$i.':00">'.$i.':00</option>';
+				}
+				$hours .= '</select>';
+
+				//set minutes select option
+
+				//set hours select option
+				$minutes = '<select name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).'][mm]" />';
+				for ($i=0; $i <= 6 ; $i++) {
+					$k = $i *10;
+					$minutes .= '<option value="'.$k.'">'.$k.'</option>';
+				}
+				$minutes .= '</select>';
+
+				$output .= '<div class="f-row">
+			    <span class="frm-label">
+			    '.$form->label.' :<span class="c-f00">*</span>
+			    </span>';
+			    $output .='<span class="frm-val">';
+			    $output .=$hours;
+			    $output .=$minutes;				
+				$output .= '</span>
+				</div>';
+			}
 
 			//if field = date
 			if ($form->field_type == 'date') {

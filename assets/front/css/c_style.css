@@ -1,7 +1,7 @@
 ﻿.extra-cont{position:relative;width:840px}
 .extra-placeholder{height:210px;float:left;width:140px;color:#e2e1dd;background-color:#2A2C30}
 .extra-pack{position:relative;height:210px;float:left;width:140px;background-color:#2A2C30;overflow:hidden}
-.extra-pack .p-btn{font-size:11px;height:20px;display:inline-block;cursor:pointer;text-align:center;border:solid 1px #fff;line-height:18px;text-transform:uppercase}
+.extra-pack .p-btn{font-size:11px;height:20px;display:inline-block;cursor:pointer;text-align:center;background:#797979;line-height:18px;text-transform:uppercase}
 .extra-pack .p-btn-confirm{position:absolute;right:20px;bottom:20px;width:100px;}
 .extra-pack .p-btn-confirm{text-decoration:none}
 .extra-pack .btn-cancel{position:absolute;right:140px;bottom:22px;color:#bf2426;text-decoration:underline}
@@ -10,7 +10,7 @@
 
 .extra-info{height:210px;width:140px;background-color:#2A2C30;border-right:solid 1px #fff}
 .extra-info .p-img{width:139px;height:114px;display:block}
-.extra-info .p-title{display:block;padding:5px 5px 0; height:50px; font-size:12px;}
+.extra-info .p-title{display:block;padding:5px 5px 0; height:50px; font-size:12px;font-weight:400;}
 .extra-info .p-book{display:block;padding:0px 5px; height:30px;}
 .extra-info .p-price{font-size:11px;font-weight:bold}
 .extra-pack.open .extra-info .p-price{color:#a9b300}
