@@ -472,7 +472,7 @@ $this->load->view('front/header');
                         </div>
                         <div id="lc-a-in">
                             <div><?php echo $hotel_info->name; ?></div>
-                            <div><?php echo $hotel_info->city; ?>, <?php echo $hotel_info->country; ?></div>
+                            <div><?php echo $hotel_info->city; ?>, <?php echo $hotel_info->country_name; ?></div>
                             <div><?php echo date('j F Y',strtotime($options['checkin'])); ?>- <?php echo date('j F Y',strtotime($options['checkout'])); ?></div>
                             <div><b id="total_room"></b> room for <?php echo $options['adults']; ?> adult and  <?php echo $options['children']; ?>  Child</div>
                         </div>

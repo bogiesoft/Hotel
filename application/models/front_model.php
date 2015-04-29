@@ -7,7 +7,9 @@ class Front_Model extends CI_Model{
 
 	function hotel_info($id){
 
-		$q = $this->db->query("SELECT * FROM hotels WHERE id  = $id");
+		$q = $this->db->query("SELECT h.*,c.name as country_name FROM hotels as h 
+			INNER JOIN countries as c ON h.country = c.id
+			WHERE h.id  = $id");
 
 		if ($q->num_rows() > 0) {
 			return $q->row();
