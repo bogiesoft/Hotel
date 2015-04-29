@@ -301,7 +301,7 @@ function form_builder($json,$arr=array()){
 		foreach ($json as $key => $form) {
 			
 			//if field = text
-			if($form->field_type == 'text'){
+			if(@$form->field_type == 'text'){
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
@@ -314,7 +314,7 @@ function form_builder($json,$arr=array()){
 			}
 
 			//if field = paragraph
-			if($form->field_type == 'paragraph'){
+			if(@$form->field_type == 'paragraph'){
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
@@ -325,9 +325,6 @@ function form_builder($json,$arr=array()){
 				</div>
 				';
 			}
-
-
-
 
 			//if field = time
 			/*
@@ -346,7 +343,7 @@ function form_builder($json,$arr=array()){
 			*/
 
 			//if field = time
-			if($form->field_type == 'time'){
+			if(@$form->field_type == 'time'){
 
 				//set hours select option
 				$hours = '<select name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).'][hh]" />';
@@ -377,7 +374,7 @@ function form_builder($json,$arr=array()){
 			}
 
 			//if field = date
-			if ($form->field_type == 'date') {
+			if (@$form->field_type == 'date') {
 				$class = substr_replace($option['class'], ' datepicker"', -1);
 				$output .= '<div class="row">
 			    <span class="frm-label">
@@ -393,7 +390,7 @@ function form_builder($json,$arr=array()){
 
 
 			//if field = checkbox
-			if ($form->field_type == 'checkboxes') {
+			if (@$form->field_type == 'checkboxes') {
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
@@ -416,7 +413,7 @@ function form_builder($json,$arr=array()){
 
 
 			//if field = radio
-			if ($form->field_type == 'radio') {
+			if (@$form->field_type == 'radio') {
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
@@ -439,7 +436,7 @@ function form_builder($json,$arr=array()){
 
 
 			//if field = dropdown
-			if ($form->field_type == 'dropdown') {
+			if (@$form->field_type == 'dropdown') {
 				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>

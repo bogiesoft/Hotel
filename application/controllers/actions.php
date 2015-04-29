@@ -245,7 +245,7 @@ class Actions extends RA_Controller {
         	$insert = $this->db->insert('reservations',$data);
         	//$insert = true;
         	if ($insert) {
-        		//echo json_encode(array('status'=>'success','data'=>$data));
+        		echo json_encode(array('status'=>'success','data'=>$data));
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
         		$this->send_information_mail($data);
@@ -283,11 +283,7 @@ class Actions extends RA_Controller {
 			$this->email->to($user_mail);
 			$this->email->subject('New Reservation');
 			$this->email->message($message);
-			if($this->email->send()){
-				echo 'Email sent.';
-			}else{
-				show_error($this->email->print_debugger());
-			}
+
 
 	}
 
