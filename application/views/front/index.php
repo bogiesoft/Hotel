@@ -863,8 +863,8 @@ $this->load->view('front/header');
                                 <div class="col-md-9">
                                 <h3>We would love to welcome you.</h3>
                                 <p>
-                                Book online on hotelsultania.com and get the guaranteed best rates <br />
-                                available at any  Hotel Sultania.
+                                Book online on <?php echo $hotel_info->website; ?> and get the guaranteed best rates <br />
+                                available at any  <?php echo $hotel_info->name; ?>.
                                 </p>
                                 </div>
                             </div>
@@ -891,7 +891,8 @@ $this->load->view('front/header');
                             <input type="checkbox" name="confirmation" />
                         </div>
                         <div class="col-md-8 agree">
-                        I have understood and agree to the <a href="#">Booking Conditions</a> and agree to Hotel Sultania <a href="#">Privacy Policy</a> .
+                        I have understood and agree to the <a href="#">Booking Conditions</a> and agree to 
+                        <?php echo $hotel_info->name; ?> <a href="#">Privacy Policy</a> .
                         </div>
                     </div>
                 </div><!-- end of right column -->
