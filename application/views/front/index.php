@@ -720,9 +720,11 @@ $this->load->view('front/header');
                         </div> 
                         <div id="dtl-dtl1">
 
-<div class="extra-cont">
-       <?php foreach ($extras as $key => $extra) : ?>
+    <div class="extra-cont">
+       <?php $i=0; foreach ($extras as $key => $extra) : $i++;?>
             <?php
+            if ($key <= 5) {
+
             $price = $prices->extras->$extra['id']->price;
 
             //price descripton
@@ -734,39 +736,106 @@ $this->load->view('front/header');
             $extra_title    = $extra['title'] !=NULL ? $extra['title'] : $extra['name'];
             $extra_content  = $extra['content'] !=NULL  ? $extra['content'] : $extra['description'];
             ?>
-        <div class="extra-placeholder">
-            <div class="extra-pack" style="z-index: 0; width: 140px;">
-                <div class="extra-info">
-                    <img class="p-img" src="<?php echo $extra['image']; ?>" width="140px" height="115px" alt="">
-                    <span class="p-title">
-                        <?php echo $extra_title; ?>
-                    </span>
-                    <span class="p-book">
-                        <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
-                        <span class="p-btn p-btn-book">Book</span>
-                    </span>
-                </div>
-                <div class="extra-overlay">
-                    <a class="btn-close"></a>
-                    <div class="extra-desc">
-                        <?php echo $extra_content; ?>
-                    </div>
 
-                    <?php 
-                    $extra_options = array(
-                        'id'            =>$extra['id'],
-                        'extra_name'    =>$extra_title,
-                        'currency'      =>$options['currency'],
-                        'user_currency' =>$options['user_currency'],
-                        'currency_rate' =>$options['currency_rate'],
-                        'price'         =>$price);
-                    echo form_builder($extra['forms'],$extra_options); 
-                    ?>
+            
+            <div class="extra-placeholder">
+                <div class="extra-pack" style="z-index: 0; width: 140px;">
+                    <div class="extra-info">
+                        <img class="p-img" src="<?php echo $extra['image']; ?>" width="140px" height="115px" alt="">
+                        <span class="p-title">
+                            <?php echo $extra_title; ?>
+                        </span>
+                        <span class="p-book">
+                            <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
+                            <span class="p-btn p-btn-book">Book</span>
+                        </span>
+                    </div>
+                    <div class="extra-overlay">
+                        <a class="btn-close"></a>
+                        <div class="extra-desc">
+                            <?php echo $extra_content; ?>
+                        </div>
+
+                        <?php 
+                        $extra_options = array(
+                            'id'            =>$extra['id'],
+                            'extra_name'    =>$extra_title,
+                            'currency'      =>$options['currency'],
+                            'user_currency' =>$options['user_currency'],
+                            'currency_rate' =>$options['currency_rate'],
+                            'price'         =>$price);
+                        echo form_builder($extra['forms'],$extra_options); 
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php endforeach; ?>
+
+        <?php } endforeach; ?>
 </div>
+
+<?php if (count($extras) > 5): ?>
+    
+           
+    <div class="clearfix"></div>
+    <div class="btn-show-more" style="">
+        Show More Packages
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="extra-cont more-packages">
+       <?php $i=0; foreach ($extras as $key => $extra) : $i++;?>
+            <?php
+            if ($key > 5) {
+
+            $price = $prices->extras->$extra['id']->price;
+
+            //price descripton
+            if($extra['per'] ==2){
+                $price_desc = 'for Unit';
+            }else{
+                $price_desc = 'for '.$options['adults'].' adult';
+            }
+            $extra_title    = $extra['title'] !=NULL ? $extra['title'] : $extra['name'];
+            $extra_content  = $extra['content'] !=NULL  ? $extra['content'] : $extra['description'];
+            ?>
+
+            
+            <div class="extra-placeholder">
+                <div class="extra-pack" style="z-index: 0; width: 140px;">
+                    <div class="extra-info">
+                        <img class="p-img" src="<?php echo $extra['image']; ?>" width="140px" height="115px" alt="">
+                        <span class="p-title">
+                            <?php echo $extra_title; ?>
+                        </span>
+                        <span class="p-book">
+                            <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
+                            <span class="p-btn p-btn-book">Book</span>
+                        </span>
+                    </div>
+                    <div class="extra-overlay">
+                        <a class="btn-close"></a>
+                        <div class="extra-desc">
+                            <?php echo $extra_content; ?>
+                        </div>
+
+                        <?php 
+                        $extra_options = array(
+                            'id'            =>$extra['id'],
+                            'extra_name'    =>$extra_title,
+                            'currency'      =>$options['currency'],
+                            'user_currency' =>$options['user_currency'],
+                            'currency_rate' =>$options['currency_rate'],
+                            'price'         =>$price);
+                        echo form_builder($extra['forms'],$extra_options); 
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+        <?php } endforeach; ?>
+</div>
+
+<?php endif; ?>
 
                         </div>
                     </div>

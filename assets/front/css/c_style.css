@@ -50,3 +50,15 @@
 .pref-form .f-row.date input[type=text]{width:176px;margin-right:5px}
 .pref-form .f-row.time select{width:auto;}
 
+.btn-show-more {
+  color: #a9b300;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 0;
+}
+
+.more-packages {
+  display: none;
+}
+

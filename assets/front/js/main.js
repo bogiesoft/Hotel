@@ -480,6 +480,11 @@ $('.btn-close').click(function () {
     CloseForm($(this));
 })
 
+$('.btn-show-more').click(function () {
+    $('.more-packages').slideToggle();
+})
+
+
 
 });
 
