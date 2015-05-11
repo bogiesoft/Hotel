@@ -1,4 +1,39 @@
 $(function() {
+// ---------------------------------- header menus
+
+    $(function () {
+        $("#lang-link").click(function () {
+            if ($(this).parent().hasClass("menu-selected")) {
+                $(this).parent().removeClass("menu-selected");
+                $("#lang-menu").hide();
+            } else {
+                $(this).parent().addClass("menu-selected");
+                $("#lang-menu").show();
+            }
+        });
+
+        $('#btn-close-lang').click(function () {
+            CloseLangMenu();
+        });
+    });
+
+    function CloseLangMenu()
+    {
+        $("#lang-link").parent().removeClass("menu-selected");
+        $("#lang-menu").hide();
+    }
+        
+     $("#money-link").click(function(){
+        $(".m2").toggle();
+        if($(this).parent().hasClass("menu-selected")) {
+            $(this).parent().removeClass("menu-selected");
+        } else {
+            $(this).parent().addClass("menu-selected");
+        }
+    });
+    
+// ---------------------------------- end header menus
+
 // ---------------------------------- on page loade
 
     $('#carousel').carousel();

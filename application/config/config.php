@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://mk.dev:8888/hotel/';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------

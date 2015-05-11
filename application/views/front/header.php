@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/style.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/sprites.css" media="all" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/c_style.css" media="all" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/animate.min.css" media="all" />
    
@@ -55,16 +56,230 @@
         <a href="<?php echo current_full_url(); ?>&cur=USD"><span class="glyphicon glyphicon-chevron-right"></span> USD</a>
         <a href="<?php echo current_full_url(); ?>&cur=ZAR"><span class="glyphicon glyphicon-chevron-right"></span> ZAR</a>
     </div>
-    <div class="col-md-12 m3">
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-        <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
+
+
+
+    <div id="lang-menu">
+        <div href="#" id="btn-close-lang"></div>
+        <div class="lang-title">Most often used by people in Turkey</div>
+        <div class="common-langs">
+            <ul class="lang-col-short">
+                <li>
+                    <a href="#"><span class="flag flag-68"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-33"></span> Lang 1</a>
+                </li>
+            </ul>
+            <ul class="lang-col-short">
+                <li>
+                    <a href="#"><span class="flag flag-14"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-16"></span> Lang 1</a>
+                </li>
+            </ul>
+            <ul class="lang-col-short">
+                <li>
+                    <a href="#"><span class="flag flag-39"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-26"></span> Lang 1</a>
+                </li>
+            </ul>
+            <ul class="lang-col-short">
+                <li>
+                    <a href="#"><span class="flag flag-55"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-41"></span> Lang 1</a>
+                </li>
+            </ul>
+            <ul class="lang-col-short">
+                <li>
+                    <a href="#"><span class="flag flag-5"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-28"></span> Lang 1</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="lang-title">All Languages</div>
+        <div class="all-langs">
+            <ul class="lang-col-long">
+                <li>
+                    <a href="#"><span class="flag flag-0"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a class="lang-selected" href="#"><span class="flag flag-1"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-2"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-3"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-4"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-5"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-6"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-7"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-8"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-9"></span> Lang 1</a>
+                </li>
+
+            </ul>
+            <ul class="lang-col-long">
+                <li>
+                    <a href="#"><span class="flag flag-10"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-11"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-12"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-13"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-14"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-15"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-16"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-17"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-18"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-19"></span> Lang 1</a>
+                </li>
+
+            </ul>
+            <ul class="lang-col-long">
+                <li>
+                    <a href="#"><span class="flag flag-20"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-21"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-22"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-23"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-24"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-25"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-26"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-27"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-28"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-29"></span> Lang 1</a>
+                </li>
+
+            </ul>
+            <ul class="lang-col-long">
+                <li>
+                    <a href="#"><span class="flag flag-30"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-31"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-32"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-33"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-34"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-35"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-36"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-37"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-38"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-39"></span> Lang 1</a>
+                </li>
+
+            </ul>
+            <ul class="lang-col-long">
+                <li>
+                    <a href="#"><span class="flag flag-40"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-41"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-42"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-43"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-44"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-45"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-46"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-47"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-48"></span> Lang 1</a>
+                </li>
+                <li>
+                    <a href="#"><span class="flag flag-49"></span> Lang 1</a>
+                </li>
+
+            </ul>
+
+        </div>
     </div>
+
+
+   
+
     <div class="row bg-333 c-fff">
         <div class="col-md-6">
             <div class="dropdown head-part">
