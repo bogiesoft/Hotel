@@ -335,42 +335,58 @@
                                         <li>
                                             <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="currency-symb">CAD</span> Canadian Dollar</a>
                                         </li>
-                                    </ul>
-                                    <ul class="drop-col-short">
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=CHH"><span class="currency-symb">CHF</span> Currency 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="currency-symb">CZK</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=JPY"><span class="currency-symb">JPY</span> Australlian Dollar</a>
                                         </li>
                                     </ul>
                                     <ul class="drop-col-short">
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="currency-symb">DKK</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=CHF"><span class="currency-symb">CHF</span> İsveç Frangı</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=EUR"><span class="currency-symb">EUR</span> Currency 1</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="drop-col-short">
-                                        <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="currency-symb">GBP</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="currency-symb">CZK</span> Çek Cumhuriyeti Korunası</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=HKD"><span class="currency-symb">HKD</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=RUB"><span class="currency-symb">RUB</span> Rusya Rublesi</a>
                                         </li>
                                     </ul>
                                     <ul class="drop-col-short">
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="currency-symb">HUF</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="currency-symb">DKK</span> Danimarka Kronu</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo current_full_url(); ?>&cur=ILS"><span class="currency-symb">ILS</span> Currency 1</a>
+                                            <a href="<?php echo current_full_url(); ?>&cur=EUR"><span class="currency-symb">EUR</span> Euro</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=TRY"><span class="currency-symb">TRY</span> Türk Lirası</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="currency-symb">GBP</span> İngiltere Sterlini</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=HKD"><span class="currency-symb">HKD</span> Hong Kong Dolar</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=USD"><span class="currency-symb">USD</span> U.S. Dollar</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="currency-symb">HUF</span> Macar Forinti </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=ILS"><span class="currency-symb">ILS</span> Yeni İsrail Şekeli</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=SEK"><span class="currency-symb">SEK</span> İsveç Kronu </a>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="clearfix"></div>
+                                <!--
                                 <div class="drop-menu-title">All Currencies</div>
                                 <div class="all-langs">
                                     <ul class="drop-col-long">
@@ -535,6 +551,7 @@
                                     </ul>
 
                                 </div>
+                                -->
                             </div>
                         </div>
                     </div>
