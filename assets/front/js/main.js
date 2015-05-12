@@ -24,7 +24,7 @@ $(function() {
     }
         
      $("#money-link").click(function(){
-        $(".m2").toggle();
+        $("#cur-menu").toggle();
         if($(this).parent().hasClass("menu-selected")) {
             $(this).parent().removeClass("menu-selected");
         } else {
@@ -51,7 +51,7 @@ $(function() {
         }
     });
     $("#lang-link").click(function(){
-        $(".m3").toggle();
+        //$(".m3").toggle();
         if($(this).parent().hasClass("bg-000")) {
             $(this).parent().removeClass("bg-000");
         } else {

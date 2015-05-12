@@ -75,3 +75,9 @@
 .flag-70{background-position:-60px -680px}
 .flag-71{background-position:-60px -700px}
 
+
+.sprite{background:transparent url(main-sprite.png) no-repeat;display:inline-block}
+.tick-green{background-position:-23px -202px}
+
+.email-blue{background-position:-205px -25px}
+.email-blue-sized{background-position:-205px -25px;width:21px;height:17px}

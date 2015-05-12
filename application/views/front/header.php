@@ -29,9 +29,529 @@
 </head>
 <body>
 <div id="main">
-<div id="header">
-<div class="container po-re">
-    <div class="col-md-12 m2">
+        <div id="header">
+            <div class="container" style="position: relative;">
+                <div class="col-md-12 m2">
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
+                    <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
+                </div>
+                <div class="row" style="background: #333;color: #fff;">
+                    <div class="col-md-6">
+                        <div class="dropdown head-part">
+                            <a class="m1-link" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                <img src="<?php echo site_url('assets/front');?>/img/upside.png" alt="" />
+                            </a>
+                            <div class="dropdown-menu m1" role="menu" aria-labelledby="dLabel">
+                                <h4>Sultania Hotel Istanbul</h4>
+                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
+                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
+                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
+                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right" style="position:relative">
+                        <div class="dropdown head-part">
+                            <a id="dLabel2" href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="glyphicon glyphicon-edit"></span>My Reservation <span class="caret"></span>
+                            </a>
+                            <div id="reservation-menu" class="drop-menu">
+                                <div class="reserv-manage">
+                                    <div class="drop-menu-title">Manage An Exsiting Booking</div>
+                                    <div>No registration required</div>
+                                    <div class="reserv-form">
+                                        <input type="text" name="bnum" placeholder="Booking Number" />
+                                        <input type="text" name="pin" placeholder="PIN Code" />
+                                        <div style="width:122px;float:left;padding:2px 6px">
+                                            Where can I find this information?
+                                        </div>
+                                        <div style="width:68px;float:left">
+                                            <button class="btn-go">
+                                                Go
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reserv-info">
+                                    <span class="sprite tick-green">Change dates</span><br />
+                                    <span class="sprite tick-green">Edit guest details</span><br />
+                                    <span class="sprite tick-green">Contact the property</span><br />
+                                    <span class="sprite tick-green">Upgrade room</span><br />
+                                    <span class="sprite tick-green">Cancel booking</span><br />
+                                    <span class="sprite tick-green">And more...</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="email-confirm">
+                                    Can't find your confirmation email?&nbsp;
+                                    <span class="sprite email-blue-sized"></span>&nbsp;<a href="http://google.com">We'll resend it to you</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="head-part">
+                            <a id="lang-link" href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                Languages <span class="sqr">EN</span> <span class="caret"></span>
+                            </a>
+                            <div id="lang-menu" class="drop-menu">
+                                <div href="#" id="btn-close-lang" class="btn-close-menu"></div>
+                                <div class="drop-menu-title">Most often used by people in Turkey</div>
+                                <div class="common-langs">
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="#"><span class="flag flag-68"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-33"></span> Lang 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="#"><span class="flag flag-14"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-16"></span> Lang 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="#"><span class="flag flag-39"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-26"></span> Lang 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="#"><span class="flag flag-55"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-41"></span> Lang 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="#"><span class="flag flag-5"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-28"></span> Lang 1</a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="drop-menu-title">All Languages</div>
+                                <div class="all-langs">
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="flag flag-0"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a class="lang-selected" href="#"><span class="flag flag-1"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-2"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-3"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-4"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-5"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-6"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-7"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-8"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-9"></span> Lang 1</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="flag flag-10"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-11"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-12"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-13"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-14"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-15"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-16"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-17"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-18"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-19"></span> Lang 1</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="flag flag-20"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-21"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-22"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-23"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-24"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-25"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-26"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-27"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-28"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-29"></span> Lang 1</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="flag flag-30"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-31"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-32"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-33"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-34"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-35"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-36"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-37"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-38"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-39"></span> Lang 1</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="flag flag-40"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-41"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-42"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-43"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-44"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-45"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-46"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-47"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-48"></span> Lang 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="flag flag-49"></span> Lang 1</a>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="head-part">
+                            <a id="currency-link" href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                View Rates In <span class="sqr"><?php echo $options['user_currency']; ?></span> <span class="caret"></span>
+                            </a>
+                            <div id="currency-menu" class="drop-menu">
+                                <div href="#" id="btn-close-lang" class="btn-close-menu"></div>
+                                <div class="drop-menu-title">Top Currencies</div>
+                                <div class="common-langs">
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=AUD"><span class="currency-symb">AUD</span> Australlian Dollar</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="currency-symb">CAD</span> Canadian Dollar</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=CHH"><span class="currency-symb">CHF</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=CZK"><span class="currency-symb">CZK</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=DKK"><span class="currency-symb">DKK</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=EUR"><span class="currency-symb">EUR</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=GBP"><span class="currency-symb">GBP</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=HKD"><span class="currency-symb">HKD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-short">
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=HUF"><span class="currency-symb">HUF</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo current_full_url(); ?>&cur=ILS"><span class="currency-symb">ILS</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="drop-menu-title">All Currencies</div>
+                                <div class="all-langs">
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="drop-col-long">
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><span class="currency-symb">USD</span> Currency 1</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="<?php echo $hotel_info->hotel_logo;?>" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+<!--
+
+
+    <div class="col-md-12 m2" id="cur-menu">
         <a href="<?php echo current_full_url(); ?>&cur=AUD"><span class="glyphicon glyphicon-chevron-right"></span> AUD</a>
         <a href="<?php echo current_full_url(); ?>&cur=CAD"><span class="glyphicon glyphicon-chevron-right"></span> CAD</a>
         <a href="<?php echo current_full_url(); ?>&cur=CHF"><span class="glyphicon glyphicon-chevron-right"></span> CHF</a>
@@ -57,273 +577,7 @@
         <a href="<?php echo current_full_url(); ?>&cur=ZAR"><span class="glyphicon glyphicon-chevron-right"></span> ZAR</a>
     </div>
 
-
-
-    <div id="lang-menu">
-        <div href="#" id="btn-close-lang"></div>
-        <div class="lang-title">Most often used by people in Turkey</div>
-        <div class="common-langs">
-            <ul class="lang-col-short">
-                <li>
-                    <a href="#"><span class="flag flag-68"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-33"></span> Lang 1</a>
-                </li>
-            </ul>
-            <ul class="lang-col-short">
-                <li>
-                    <a href="#"><span class="flag flag-14"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-16"></span> Lang 1</a>
-                </li>
-            </ul>
-            <ul class="lang-col-short">
-                <li>
-                    <a href="#"><span class="flag flag-39"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-26"></span> Lang 1</a>
-                </li>
-            </ul>
-            <ul class="lang-col-short">
-                <li>
-                    <a href="#"><span class="flag flag-55"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-41"></span> Lang 1</a>
-                </li>
-            </ul>
-            <ul class="lang-col-short">
-                <li>
-                    <a href="#"><span class="flag flag-5"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-28"></span> Lang 1</a>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="lang-title">All Languages</div>
-        <div class="all-langs">
-            <ul class="lang-col-long">
-                <li>
-                    <a href="#"><span class="flag flag-0"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a class="lang-selected" href="#"><span class="flag flag-1"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-2"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-3"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-4"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-5"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-6"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-7"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-8"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-9"></span> Lang 1</a>
-                </li>
-
-            </ul>
-            <ul class="lang-col-long">
-                <li>
-                    <a href="#"><span class="flag flag-10"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-11"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-12"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-13"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-14"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-15"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-16"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-17"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-18"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-19"></span> Lang 1</a>
-                </li>
-
-            </ul>
-            <ul class="lang-col-long">
-                <li>
-                    <a href="#"><span class="flag flag-20"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-21"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-22"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-23"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-24"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-25"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-26"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-27"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-28"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-29"></span> Lang 1</a>
-                </li>
-
-            </ul>
-            <ul class="lang-col-long">
-                <li>
-                    <a href="#"><span class="flag flag-30"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-31"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-32"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-33"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-34"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-35"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-36"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-37"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-38"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-39"></span> Lang 1</a>
-                </li>
-
-            </ul>
-            <ul class="lang-col-long">
-                <li>
-                    <a href="#"><span class="flag flag-40"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-41"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-42"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-43"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-44"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-45"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-46"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-47"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-48"></span> Lang 1</a>
-                </li>
-                <li>
-                    <a href="#"><span class="flag flag-49"></span> Lang 1</a>
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
-
-
-   
-
-    <div class="row bg-333 c-fff">
-        <div class="col-md-6">
-            <div class="dropdown head-part">
-                <a class="m1-link" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                    <img src="<?php echo site_url('assets/front');?>/img/upside.png" alt="" />
-                </a>
-                <div class="dropdown-menu m1" role="menu" aria-labelledby="dLabel">
-                <h4>Sultania Hotel Istanbul</h4>
-                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="head-part">
-                <a id="money-link" href="#">
-                View Rates In <span class="sqr"><?php echo $options['user_currency']; ?></span> <span class="caret"></span>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="head-part">
-                <a id="lang-link" href="#">
-                Languages <span class="sqr">EN</span> <span class="caret"></span>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="head-part">
-                <a href="#">
-                <span class="glyphicon glyphicon-edit"></span>My Reservation <span class="caret"></span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row ptb-5">
-        <div class="col-md-12">
-            <img src="<?php echo $hotel_info->hotel_logo;?>" />
-        </div>
-    </div>
-</div>
-</div>
+-->
 <?php //print_r($this->input->get('children_ages')); ?>
 <div id="content">
 <div class="container">
