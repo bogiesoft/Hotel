@@ -6,8 +6,8 @@ class Login extends ADMIN_Controller {
 	{	
 		$data['title'] = 'Login';
 		$this->load->view('login');
-		$this->session->unset_userdata('options');
-		$this->session->unset_userdata('prices_all');
+		//first destroy all session
+		$this->session->sess_destroy();
 
 	}
 

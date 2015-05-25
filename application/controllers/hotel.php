@@ -206,6 +206,10 @@ class Hotel extends RA_Controller {
 		$currency 	= $this->input->post('currency');
 		$default_currency = $this->input->post('default_currency');
 		$room_prices = $this->session->userdata('prices_all');
+
+		print_r($room_prices);
+		exit;
+
 		$action  	= $this->input->post('type');
 		if ($action == 'delete') {
 			foreach ($user_cart as $key => $c) {

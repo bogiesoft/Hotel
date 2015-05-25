@@ -251,7 +251,7 @@ class Actions extends RA_Controller {
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
         		//send mail
-        		$this->send_information_mail($data);
+        		//$this->send_information_mail($data);
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
         	}
