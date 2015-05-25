@@ -6,17 +6,17 @@ class Login extends ADMIN_Controller {
 	{	
 		$data['title'] = 'Login';
 		$this->load->view('login');
+		$this->session->unset_userdata('options');
+		$this->session->unset_userdata('prices_all');
+
 	}
 
 	function post(){
 		$code = $this->input->post('code');
 		$pass = $this->input->post('password');
-		var_dump(empty($code));
 
-		$this->load->model('login_model');
-		$account = $this->login_model->check_account($code,$pass);
 
-		if(empty($code) or empty($pass)){
+		if(empty($code)){
 			$this->session->set_flashdata('error', 'Kullanıcı Kodunu Giriniz');
 			redirect(site_url('login'));
 			die;
@@ -28,6 +28,10 @@ class Login extends ADMIN_Controller {
 			die;
 		}
 
+		$this->load->model('login_model');
+		$account = $this->login_model->check_account($code,$pass);
+
+
 		if(!$account){
 			$this->session->set_flashdata('error', 'Kullanıcı Bilgileri Hatalı!');
 			redirect(site_url('login'));
@@ -37,6 +41,7 @@ class Login extends ADMIN_Controller {
 
 			//set last login
 			$this->login_model->set_last_login($account->id);
+
 			$user_data =  array('user_id'	=> $account->id,
 								'name' 		=> $account->name,
 								'surname'	=> $account->surname,
@@ -45,7 +50,9 @@ class Login extends ADMIN_Controller {
 								'hotel_id'  => $hotel->id,
 								'hotel_name'=> $hotel->name);
 			
-			$this->session->set_userdata($user_data);
+			$set = $this->session->set_userdata($user_data);
+			//echo '<pre>';
+			//var_dump($this->session->all_userdata());
 			//print_r($this->session->userdata);
 			redirect(site_url('dashboard'));
 		}

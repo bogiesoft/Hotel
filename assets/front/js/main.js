@@ -393,6 +393,11 @@ $(function() {
                 });
 
             }else{
+                var reservation_url =  base_url + "hotel/reservation?code=" + data.res_id;
+
+                window.location.replace(reservation_url);
+
+                /*
                 //set values inside modal
                 $('#name_title').html(data.data.name_title+' '+data.data.first_name+' '+data.data.last_name);
 
@@ -438,6 +443,7 @@ $(function() {
                 $('#reserveSuccess').on('hidden.bs.modal', function () {
                        $('.reservation_details').html('');
                 })
+                */
             }
                     
         },

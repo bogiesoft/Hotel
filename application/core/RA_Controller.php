@@ -125,6 +125,11 @@ class RA_Controller extends MY_Controller{
 
 		$room_prices = $this->session->userdata('prices_all');
 
+		if (NULL == $room_prices) {
+			return false;
+
+		}
+
 		foreach ($room_prices as $rid => $room) {
 			
 			if (isset($promotions[$rid])) {
@@ -150,6 +155,11 @@ class RA_Controller extends MY_Controller{
 
 		$room_prices = $this->session->userdata('prices_all');
 
+		if (NULL == $room_prices) {
+			return false;
+
+		}
+		
 		foreach ($extras as $key => $extra) {
 			$prices = json_decode($extra['price']);
             

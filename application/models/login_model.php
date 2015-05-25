@@ -23,7 +23,7 @@ class Login_Model extends CI_Model
 		if ($check->num_rows()>0) {
 			return $check->row();
 		}else{
-			return false;
+			return '0';
 		}
 	}
 

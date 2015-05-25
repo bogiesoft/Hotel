@@ -81,3 +81,50 @@
 
 .email-blue{background-position:-205px -25px}
 .email-blue-sized{background-position:-205px -25px;width:21px;height:17px}
+
+.email-gray{background-position:-228px -26px;width:21px;height:17px}
+
+.email-white{background-position:-251px -26px;width:21px;height:17px}
+
+.hwt-logo{background-position:-1px -2px;width:103px;height:18px}
+/*.hwt-logo:hover{background-position:-107px -2px}*/
+
+.wifi{background-position:-1px -177px;width:24px;height:24px}
+/*.wifi:hover{background-position:-26px -177px}*/
+
+.food{background-position:-51px -177px;width:24px;height:24px;}
+/*.food:hover{background-position:-76px -177px}*/
+
+.parking{background-position:-101px -177px;width:24px;height:24px}
+/*.parking:hover{background-position:-126px -177px}*/
+
+.cafe{background-position:-151px -177px;width:24px;height:24px}
+/*.cafe:hover{background-position:-176px -177px}*/
+
+.printer-white{background-position:-303px -910px;width:15px;height:14px}
+
+.pencil-white{background-position:-254px -636px;width:14px;height:13px}
+
+.calender-white{background-position:-59px -635px;width:14px;height:14px}
+
+.creditcard-white{background-position:-87px -638px;width:14px;height:9px}
+
+.cancel-white{background-position:-144px -635px;width:14px;height:14px}
+
+.user-white{background-position:-115px -636px;width:14px;height:12px}
+
+.key-white{background-position:-310px -635px;width:14px;height:14px}
+
+.add-blue{background-position:-257px -607px;width:14px;height:14px}
+
+.parking-black{background-position:-115px -607px;width:14px;height:14px}
+
+.time-black{background-position:-87px -607px;width:14px;height:14px}
+
+.write-black{background-position:-59px -607px;width:14px;height:14px}
+
+.food-black{background-position:-31px -607px;width:14px;height:14px}
+
+.bed-black{background-position:-144px -607px;width:14px;height:14px}
+
+.bed2-black{background-position:-172px -607px;width:14px;height:14px}

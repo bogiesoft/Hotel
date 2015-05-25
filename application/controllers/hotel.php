@@ -131,6 +131,8 @@ class Hotel extends RA_Controller {
 			}
 
 			$arr['promotions'] 	= $promotion;
+		}else{
+			$arr['promotions'] = [];
 		}
 
 		$data['options'] 		= array(
@@ -180,8 +182,14 @@ class Hotel extends RA_Controller {
 
 	}
 
+	/*
+	* Reservation Detail Page.
+	*
+	*/
+	public function reservation(){
 
-
+		$this->load->view('front/reservation');
+	}
 
 	//add to cart başlasın
 	//burayı düzgünce yapmak lazım

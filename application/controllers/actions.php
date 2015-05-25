@@ -243,11 +243,14 @@ class Actions extends RA_Controller {
         	//print_r($room_details);
 
         	$insert = $this->db->insert('reservations',$data);
+        	$data['res_id'] = rand_uniqid($this->db->insert_id());
+
         	//$insert = true;
         	if ($insert) {
         		echo json_encode(array('status'=>'success','data'=>$data));
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
+        		//send mail
         		$this->send_information_mail($data);
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));

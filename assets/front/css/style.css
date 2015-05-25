@@ -201,3 +201,53 @@ a.m1-link:hover{background-color:#333}
 
 .drop-menu a{color:#026dc5;}
 .drop-menu a:hover{text-decoration:underline}
+
+
+/* ---------------------------------------------------- confirm page */
+.bold{font-weight:bold}
+.underline{text-decoration:underline}
+
+.confirm-msg{float:left;background-color:#61900c;padding:6px 8px;border:solid 3px #ddd;color:#fff;min-width:697px;font-weight:bold;font-size:18px;height:43px}
+.c-btn{background-color:#008cff;padding:6px 13px;border:solid 3px #ddd;color:#fff;font-weight:bold;font-size:13px;height:43px}
+.c-btn:hover{background-color:#003580}
+.confirm-actions{padding:25px 0;border-bottom:solid 1px #000}
+.confirm-actions .a-text{font-weight:bold;line-height:1.8em;font-size:15px;padding-left:0}
+.confirm-actions .a-text span{padding-left: 28px;background:transparent url(tick1.png) no-repeat left center}
+.btn-edit{width:75px;height:40px}
+.booking-refs{margin:4px 0;font-size:15px}
+.btn-cancel-booking{background-color:#ec2141}
+.btn-cancel-booking:hover{background-color:#88000D}
+
+
+.booking-info-head{height:294px;background-color:#000;overflow:hidden;position:relative;text-align:center;font-size:15px}
+.b-info-address{width:259px;height:100%;position:absolute;right:0;top:0;background-color:rgba(218,218,218,0.9);text-align:left;padding:10px 20px;line-height:1.7em}
+.b-info-address .address{}
+.booking-info-cont a{color:#333}
+.booking-info-cont a:hover{text-decoration:underline}
+.booking-info-head .map-sep{border-bottom:solid 1px #8e8e8e;margin:12px 0}
+
+a.c-editor-ok{color:#5dab09;text-decoration:underline}
+a.c-editor-cancel{color:#ff0000;text-decoration:underline}
+
+.room-details{background:#f8f8f8 url(keys.png) no-repeat 30px 80px;border:solid 1px #ddd;padding:15px;margin-bottom:15px}
+.room-details-item{padding:20px 15px;border-left:solid 1px #aaa;margin-left:98px}
+.room-details-title{font-weight:bold;font-size:15px;margin-bottom:10px}
+.room-details-desc{line-height:1.1em;margin-bottom:6px}
+
+.enhance-cont{background:#f8f8f8 url(bag.png) no-repeat 30px 80px;border:solid 1px #ddd;padding:15px;margin-bottom:15px}
+.enhance-item{padding:20px 15px;border-left:solid 1px #aaa;margin-left:98px;border-bottom:solid 1px #aaa}
+.enhance-label{font-weight:bold;width:200px;display:inline-block}
+
+a.add-room{padding:5px;border:dashed 2px #7fc5ff;text-align:center;color:#008cff;font-weight:bold;display:block}
+a.add-room:hover{text-decoration:none;background-color:#eef7ff}
+.va-middle{vertical-align:middle}
+.stay-settings{background:#fff url(gear.png) no-repeat 30px 10px;padding:15px;margin-bottom:15px}
+.stay-block{padding:5px;border-left:solid 1px #aaa;margin-left:98px;}
+
+.stay-settings table{width:100%}
+.stay-settings table tr{background-color:#ddd;border-bottom:solid 1px #fff}
+.stay-settings table tr:hover{background-color:#e9e9e9;}
+.stay-settings table td{padding:13px;border-right:solid 1px #fff;vertical-align:top}
+.stay-settings table tr td:first-child{width:55px;text-align:center}
+
+img.ui-datepicker-trigger{cursor:pointer}
