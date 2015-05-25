@@ -393,7 +393,9 @@ $(function() {
                 });
 
             }else{
-                var reservation_url =  base_url + "hotel/reservation?code=" + data.res_id;
+                var reservation_url =  base_url + "hotel/reservation?code=" + data.data.res_id+"&hash="+data.data.hash;
+
+                //console.log(data);
 
                 window.location.replace(reservation_url);
 

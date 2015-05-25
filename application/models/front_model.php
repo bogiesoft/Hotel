@@ -98,4 +98,19 @@ class Front_Model extends CI_Model{
 
 	}
 
+
+	function get_reservation_details($id){
+		return $this->db->select('*')
+			->from('reservations')
+			->where('id',$id)
+			->get()->row();
+	}
+
+
+	function get_room_details($id){
+		return $this->db->select('*')
+			->from('rooms')
+			->where('id',$id)
+			->get()->row();
+	}
 }

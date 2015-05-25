@@ -194,7 +194,11 @@ $this->load->view('front/header');
                                 <?php foreach ($room['photos'] as $pid => $photo) : ?>
                                     <div class="item <?php echo $pid==0 ? 'active' : ''; ?>" data-thumb="0">
                                         <a class="fancybox" rel="group<?php echo $rid; ?>" href="<?php echo $photo['photo_url'];?>">
-                                        <img src="<?php echo $photo['photo_url'];?>" height="160px" />
+                                        <!-- 
+                                        Image Crop böyle.
+                                        <img src="http://i0.wp.com/<?php echo $photo['photo_url'];?>?resize=250,175" height="160px" />
+                                        --> 
+                                        <img src="<?php echo $photo['photo_url'];?>?resize=250,175" height="160px" />
                                         </a>
                                     </div>
                                 <?php endforeach; ?>

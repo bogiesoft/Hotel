@@ -187,8 +187,55 @@ class Hotel extends RA_Controller {
 	*
 	*/
 	public function reservation(){
+		$my_session  = $this->session->userdata('my_session_id');
 
-		$this->load->view('front/reservation');
+		//echo 'Hash : '.$this->input->get('hash').'<br>';
+		//echo 'Sess : '.$my_session.'<br>';
+
+		if (!$this->input->get('hash')) {
+			echo 'No Hash';
+		}
+
+		if (!$this->input->get('code')) {
+			echo 'No Reservation';
+		}
+
+		$this->load->helper('room_helper');
+
+		$res_id = $this->input->get('code');
+
+		//get reservationm details
+		$reservation = $this->front_model->get_reservation_details($res_id);
+
+		//get hotel details
+		$hotel		 = $this->front_model->hotel_info($reservation->hotel_id);
+
+		//rooms details
+		$rooms = json_decode($reservation->rooms);
+
+		$total_room = 0;
+		foreach ($rooms as $r => $room) {
+			unset($rooms->$r);
+			$room_id = explode('-', $r);
+			$room_id = $room_id['0'];
+
+			@$rooms->booked->$r = $room;
+			$rooms->booked->$r->details = $this->front_model->get_room_details($room_id);
+			$total_room += $room->qty;
+		}
+
+		$rooms->total_room = $total_room;
+
+		//generate data to send view
+		$data['reservation'] 	= $reservation;
+		$data['rooms'] 			= $rooms;
+		$data['hotel']			= $hotel;
+
+		//echo '<pre>';
+		//print_r($data);
+		//echo '</pre>';
+
+		$this->load->view('front/reservation',$data);
 	}
 
 	//add to cart başlasın
@@ -207,8 +254,8 @@ class Hotel extends RA_Controller {
 		$default_currency = $this->input->post('default_currency');
 		$room_prices = $this->session->userdata('prices_all');
 
-		print_r($room_prices);
-		exit;
+		//print_r($room_prices);
+		//exit;
 
 		$action  	= $this->input->post('type');
 		if ($action == 'delete') {

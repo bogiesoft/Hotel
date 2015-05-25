@@ -234,16 +234,29 @@ class Actions extends RA_Controller {
 
 		       	//generate extra prices
 	        	$extra_price = '';
-	        	foreach ($user_extras as $key => $cart) {
-	        		$extra_price += $cart['price'];
+
+	        	if (!empty($user_extras)) {
+	        		foreach ($user_extras as $key => $cart) {
+	        			$extra_price += $cart['price'];
+	        		}
 	        	}
+	        	
+
 	        $data['extras']			= json_encode($user_extras);
         	$data['extras_price']	= $extra_price;
         	$data['total_price']	= $room_price+$extra_price;
         	//print_r($room_details);
 
+        	//generate session id
+        	$uniqueId = uniqid($this->input->ip_address(), TRUE);
+        	$uniqidId = md5($uniqueId);
+			$this->session->set_userdata("my_session_id", $uniqueId);
+			$data['rhash'] = $uniqidId;
+
         	$insert = $this->db->insert('reservations',$data);
-        	$data['res_id'] = rand_uniqid($this->db->insert_id());
+
+        	$data['res_id'] = $this->db->insert_id();
+			$data['ip'] = $this->input->ip_address();
 
         	//$insert = true;
         	if ($insert) {

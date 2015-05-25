@@ -711,3 +711,21 @@ function no_show_select($value=NULL){
 function onAjaxTest(){
 	echo 'test';
 }
+
+
+/*
+* Get diffirence by two dates
+* @param YYYY-MM-DD
+* @param YYYY-MM-DD
+* @var format information http://php.net/manual/tr/function.date-diff.php#115065
+*/
+function dateDifference($date_1 , $date_2 , $differenceFormat = '%d' )
+{
+    $datetime1 = date_create($date_1);
+    $datetime2 = date_create($date_2);
+    
+    $interval = date_diff($datetime1, $datetime2);
+    
+    return $interval->format($differenceFormat);
+    
+}
