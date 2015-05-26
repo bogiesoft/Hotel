@@ -6,3 +6,4 @@
 */cache/!.htaccess
 uploads/*
 .htaccess
+.DS_Store
