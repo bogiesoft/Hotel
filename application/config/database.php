@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'proje';
+$db['default']['username'] = 'rabookingcom';
+$db['default']['password'] = '2236e6d1-698e-4cd5-9046-47d871edf19f';
+$db['default']['database'] = 'rabookingcom';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
