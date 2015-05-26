@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '176.31.162.93';
+$db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'rabookingcom';
 $db['default']['password'] = '2236e6d1-698e-4cd5-9046-47d871edf19f';
 $db['default']['database'] = 'rabooking';
