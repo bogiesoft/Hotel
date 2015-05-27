@@ -201,6 +201,8 @@ class RA_Controller extends MY_Controller{
 						$new_arr[$rid][$pid]['rule'] = 0;
 					}
 				}
+
+				
 				//check room availibity or stoped values for reservation dates
 				foreach (date_range($this->start_date,$this->end_date) as $d => $date) {
 

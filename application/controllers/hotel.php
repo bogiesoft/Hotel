@@ -221,6 +221,7 @@ class Hotel extends RA_Controller {
 
 			@$rooms->booked->$r = $room;
 			$rooms->booked->$r->details = $this->front_model->get_room_details($room_id);
+			$rooms->booked->$r->photos = $this->front_model->get_room_photos($room_id);
 			$total_room += $room->qty;
 		}
 
@@ -231,9 +232,9 @@ class Hotel extends RA_Controller {
 		$data['rooms'] 			= $rooms;
 		$data['hotel']			= $hotel;
 
-		//echo '<pre>';
-		//print_r($data);
-		//echo '</pre>';
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
 
 		$this->load->view('front/reservation',$data);
 	}

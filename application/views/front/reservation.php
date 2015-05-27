@@ -138,7 +138,10 @@
                     <?php foreach ($rooms->booked as $key => $room) : ?>
                     <div class="room-details">
                         <div class="room-details-item">
-                            <div class="pull-left"><img src="<?php echo site_url('assets/front'); ?>/img/room-img.jpg" /></div>
+                            <div class="pull-left">
+                                <!-- <img src="<?php echo site_url('assets/front'); ?>/img/room-img.jpg" /> -->
+                                <img src="<?php echo $room->photos['0']['photo_url']; ?>" width="200" height="150" />
+                            </div>
                             <div style="margin-left:207px">
                                 <div class="room-details-title"><?php echo $room->name; ?></div>
                                 <div style="margin-bottom:10px">
