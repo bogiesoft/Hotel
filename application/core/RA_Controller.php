@@ -202,7 +202,12 @@ class RA_Controller extends MY_Controller{
 					}
 				}
 
-				
+				/*
+				* TODO:
+				* Burası için algoritma değişecek
+				* Seçilen tarihlerde 1 tane stoped varsa hiç gösterilmiyor promotion
+				* Fiyat hesaplarken stoped olmayan tarihler yerine normal fiyat üzerinden hesaplanacak
+				*/
 				//check room availibity or stoped values for reservation dates
 				foreach (date_range($this->start_date,$this->end_date) as $d => $date) {
 
@@ -212,6 +217,7 @@ class RA_Controller extends MY_Controller{
 						$new_arr[$rid][$pid]['rule'] = 0;
 					}
 				}
+				/* TODO  END*/ 
 
 				//minimum stay rules
 				if ($p['promotion_type'] == 2) {

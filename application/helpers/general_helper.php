@@ -729,3 +729,10 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%d' )
     return $interval->format($differenceFormat);
     
 }
+
+
+function get_extra_forms($id){
+	$ci =& get_instance();
+	$e = $ci->db->query("SELECT forms FROM extras WHERE id=$id")->row();
+	return json_decode($e->forms);
+}

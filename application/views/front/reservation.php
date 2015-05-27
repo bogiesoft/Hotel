@@ -161,9 +161,14 @@
                                     <?php $specs = $room->details->room_units;
                                     $specs = explode(',', $specs);
                                     //print_r($specs);
-                                    
+                                    $spec_cnt = count($specs);
                                     foreach ($specs as $key => $spec) {
-                                       echo room_specs($spec).' * '; 
+                                        if ($key == $spec_cnt-1) {
+                                            echo room_specs($spec); 
+                                        }else{
+                                            echo room_specs($spec).' * '; 
+                                        }
+                                       
                                     }
 
                                     ?>
@@ -186,13 +191,20 @@
                     <a id="addRoom" class="add-room" href="#">
                         <span class="sprite add-blue va-middle"></span>&nbsp;&nbsp;&nbsp;Add another room
                     </a>
+                    <pre>
+                    <?php 
+                    print_r(json_decode($reservation->extras)); 
+                    ?>
+                    </pre>
+                    <?php if ($reservation->extras): ?> 
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="enhance-cont">
+                        <?php foreach (json_decode($reservation->extras) as $eid => $extra) : ?>
                         <div class="enhance-item">
                             <div class="pull-left">
                                 <img src="<?php echo site_url('assets/front'); ?>/img/enhance-img.jpg" /><br />
-                                Welcome service<br />
-                                <span style="font-weight:bold;color:#b7b300">220 Euro</span>
+                                <?php  echo $extra->name; ?><br />
+                                <span style="font-weight:bold;color:#b7b300"><?php echo $extra->price; ?> <?php echo $reservation->currency; ?></span>
                             </div>
                             <div style="margin-left:154px">
                                 <div style="margin-bottom:3px">
@@ -237,11 +249,13 @@
                                     <span class="enhance-label">Location</span>
                                     <span>Hagia Sophia</span>
                                 </div>
+                                <?php print_r(get_extra_forms($eid)); ?>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-
+                        <?php endforeach; //extra item end ?>
                     </div>
+                    <?php endif; //end of extras ?>
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="stay-settings">
                         <div class="stay-block">
