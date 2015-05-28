@@ -8,7 +8,7 @@ $this->load->view('front/header');
     google.setOnLoadCallback();
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(function () {
 
     var options = '<?php echo json_encode($options); ?>';
     
@@ -33,7 +33,11 @@ $this->load->view('front/header');
         html : true,
         content : function(){
             var room_id = $(this).data('room-id');
-            html = '<div id="chart_div'+room_id+'" style="width:700px; height:150px;"></div>';
+            html = '<div id="chart_div'+room_id+'" style="width:520px; height:150px; padding-left:50px;position:relative;padding-top:10px">'+
+                    '<div class="bars-cont"></div>'+
+                    '<div class="desc-cont" style=""></div>'+
+                    '<div class="max-price"></div>'+
+                    '<div class="checkin-label">Check-in Date</div>'+'</div>';
             return html;
         }
     }).on('click', function(e) {
@@ -55,6 +59,33 @@ $this->load->view('front/header');
         e.stopPropagation();
 
         jQuery.post( base_url + "actions/room_price_info",{ room_id: room_id, options: options,children:children },function(data){
+
+            data = $.parseJSON( data );
+            opt = $.parseJSON( options );
+
+            var maxPrice = Math.max.apply(Math, data.map(function (o) { return o.price; }));
+            var maxHeight = $('.bars-cont').height();
+            var barIndex = 0;  
+
+            $.each(data, function (index, element) {
+                var left = 17 * barIndex
+                var height = Math.round(((element.price) / maxPrice) * maxHeight);
+
+                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="Price: ' + element.price + ' '+opt.currency+'" data-toggle="tooltip" data-placement="bottom"></div>');
+                bar.addClass(element.cclass);
+                $('.bars-cont').append(bar);
+
+                var desc = $('<div class="day"><div class="day-num">' + element.dayNum + '</div><div class="day-abr">' + element.dayAbr + '</div></div>');
+                $('.desc-cont').append(desc);
+                desc.addClass(element.cclass);
+
+                $('.max-price').text('$' + maxPrice);
+                barIndex++;
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            /* google chart
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable(jQuery.parseJSON(data));
             // Instantiate and draw our chart, passing in some options.
@@ -79,7 +110,7 @@ $this->load->view('front/header');
                 }
             }
             bar: {groupWidth: "10%"}
-            */
+            
             chart.draw(data, {
                 width: 500, height: 150, vAxis: { 
                 viewWindowMode:'explicit',
@@ -89,6 +120,7 @@ $this->load->view('front/header');
                 }
             }
             });
+            */
         });
 
     });

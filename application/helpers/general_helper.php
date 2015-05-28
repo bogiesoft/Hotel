@@ -730,9 +730,17 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%d' )
     
 }
 
-
+/*
+* DEPRECATED
+*/
 function get_extra_forms($id){
 	$ci =& get_instance();
 	$e = $ci->db->query("SELECT forms FROM extras WHERE id=$id")->row();
 	return json_decode($e->forms);
+}
+
+function get_extra_image($id){
+	$ci =& get_instance();
+	$e = $ci->db->query("SELECT image FROM extras WHERE id=$id")->row();
+	return $e->image;
 }

@@ -139,13 +139,13 @@
                     <div class="room-details">
                         <div class="room-details-item">
                             <div class="pull-left">
-                                <!-- <img src="<?php echo site_url('assets/front'); ?>/img/room-img.jpg" /> -->
                                 <img src="<?php echo $room->photos['0']['photo_url']; ?>" width="200" height="150" />
                             </div>
                             <div style="margin-left:207px">
                                 <div class="room-details-title"><?php echo $room->name; ?></div>
                                 <div style="margin-bottom:10px">
                                     for <span class="editable">{guest name}</span>
+                                    <!--
                                     <button class="c-btn btn-edit edit-btn">
                                         <span class="sprite pencil-white"></span>&nbsp;Edit
                                     </button>
@@ -154,7 +154,7 @@
                                         <a class="c-editor-ok" href="#">Save</a>
                                         <a class="c-editor-cancel" href="#">Cancel</a>
                                     </span>
-
+                                    -->
                                 </div>
                                 <div class="room-details-desc">
 
@@ -191,31 +191,30 @@
                     <a id="addRoom" class="add-room" href="#">
                         <span class="sprite add-blue va-middle"></span>&nbsp;&nbsp;&nbsp;Add another room
                     </a>
-                    <pre>
-                    <?php 
-                    print_r(json_decode($reservation->extras)); 
-                    ?>
-                    </pre>
                     <?php if ($reservation->extras): ?> 
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="enhance-cont">
                         <?php foreach (json_decode($reservation->extras) as $eid => $extra) : ?>
                         <div class="enhance-item">
                             <div class="pull-left">
-                                <img src="<?php echo site_url('assets/front'); ?>/img/enhance-img.jpg" /><br />
+                                <img src="<?php echo get_extra_image($eid); ?>" width="140" height="115"/><br />
                                 <?php  echo $extra->name; ?><br />
                                 <span style="font-weight:bold;color:#b7b300"><?php echo $extra->price; ?> <?php echo $reservation->currency; ?></span>
                             </div>
                             <div style="margin-left:154px">
+                            <?php foreach ($extra->details as $name => $value) : ?>
                                 <div style="margin-bottom:3px">
-                                    <span class="enhance-label">Name Surname</span>
-                                    <a class="editable edit-btn" href="#"> Name surname</a>
-                                    <span class="c-editor" style="display:none">
-                                        <input type="text" value="Name Surname" />
-                                        <a class="c-editor-ok" href="#">Save</a>
-                                        <a class="c-editor-cancel" href="#">Cancel</a>
-                                    </span>
+                                    <span class="enhance-label"><?php echo str_replace('_', ' ', $name); ?></span>
+                                    <?php 
+                                    if (is_array($value)) {
+                                        echo implode(',', $value);
+                                    }else{
+                                        echo $value;
+                                    } 
+                                    ?>
                                 </div>
+                            <?php endforeach; ?>
+                            <!--
                                 <div style="margin-bottom:3px">
                                     <span class="enhance-label">Date</span>
                                     <a class="editable edit-btn" href="#"> 15/5/2015</a>
@@ -249,7 +248,7 @@
                                     <span class="enhance-label">Location</span>
                                     <span>Hagia Sophia</span>
                                 </div>
-                                <?php print_r(get_extra_forms($eid)); ?>
+                                -->
                             </div>
                             <div class="clearfix"></div>
                         </div>

@@ -99,17 +99,33 @@ class Actions extends RA_Controller {
 			$data[$p['price_date']]['price'] = show_price($total_price,$rate);
 		}
 
+		//chart json data
+		$chart_detail = '';
+		$chart_data = array();
+		foreach ($data as $date => $value) {
+			$day = date('l',strtotime($date));
+			$dayNum = date('d',strtotime($date));
+
+			$class = ($day == 'Sunday' or $day == 'Saturday') ? 'weekend' : '';
+			$class .= ($date == date('Y-m-d')) ? 'today' : '';
+			
+
+			$price = $value['price'];
+
+			$chart_data[] = array('dayAbr'=>substr($day,0,1), 'dayNum' => $dayNum, 'price' => $price, 'cclass' => $class);
+			//$chart_detail .= "{ dayAbr: '".substr($day,0,1)."', dayNum: ".$i.", price: ".$price.", cclass:'".$class."' },";
+			
+			//$chart_detail .= '{"dayAbr":"'.substr($day,0,1).'", "dayNum": '.$i.', "price": '.$price.', "cclass": "'.$class.'" },';
+		
+		}
+		//$chart_detail .= ']';
+		//$this->output->set_content_type('application/json');
+		//echo substr($chart_detail,0,-1);
+		//echo $chart_detail;
+		echo json_encode($chart_data);
+
 		//google chart için datayuı şekillendir
 		/*
-		$arr2=array_keys($data);
-		$arr1=array_values($data);
-
-		for($i=0;$i<count($arr1);$i++)
-		{
-		    $chart_array[$i]=array((string)$arr2[$i],intval($arr1[$i]));
-		}
-		$data=json_encode($chart_array);
-		*/
 
 		$rows = array();
 		foreach ($data as $key => $value) {
@@ -122,11 +138,12 @@ class Actions extends RA_Controller {
 			//$a['rows']['c'][] = array('v'=>array($value['date'])),array('v'=>array($value['price']));
 		}
 
+
 		$a['cols'] = array(array('label'=>'Day','type'=>'string'),array('label'=>'Price','type'=>'number'));
     	$a['rows'] = $rows;
-		$data['content'] = json_encode($a);
+		
 		echo json_encode($a);
-		//echo $this->load->view('front/chart',$data);
+		*/
 	}
 
 

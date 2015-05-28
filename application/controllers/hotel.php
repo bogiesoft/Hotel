@@ -232,10 +232,11 @@ class Hotel extends RA_Controller {
 		$data['rooms'] 			= $rooms;
 		$data['hotel']			= $hotel;
 
+		/*
 		echo '<pre>';
 		print_r($data);
 		echo '</pre>';
-
+		*/
 		$this->load->view('front/reservation',$data);
 	}
 

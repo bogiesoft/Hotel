@@ -62,3 +62,20 @@
   display: none;
 }
 
+
+
+/* CHART CSS */
+
+.bars-cont{width:512px;height:90px;position:relative;border-top:dashed 1px #519BF7}
+.desc-cont{width:512px;border:solid 1px transparent;white-space:nowrap}
+.bar{width:16px;background-color:#c7ddfc;position:absolute;bottom:0;cursor:pointer}
+.bar.weekend{background-color:#afcefa}
+.bar.today{background-color:#90B8F7}
+.bar:hover{background-color:#90B8F7}
+
+.day{float:left;display:inline-block;width:16px;margin-right:1px;font-family:Arial;font-size:10px;vertical-align:top;text-align:center}
+.day-num{color:#777}
+.day-abr{color:#aaa}
+
+.max-price{position:absolute;top:5px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
+.checkin-label{position:absolute;top:100px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
