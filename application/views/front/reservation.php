@@ -25,7 +25,7 @@
                 <br />
                 <div>
                     <div class="confirm-msg">
-                        Thanks <?php echo $reservation->first_name; ?> ! Your booking is now confirmed.
+                        Thanks <?php echo $reservation->first_name; ?> <?php echo $reservation->last_name; ?>! Your booking is now confirmed.
                     </div>
                     <button class="c-btn pull-right">
                         <span class="sprite printer-white"></span>&nbsp;&nbsp;&nbsp;Print Confirmation
