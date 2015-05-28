@@ -71,7 +71,7 @@ $this->load->view('front/header');
                 var left = 17 * barIndex
                 var height = Math.round(((element.price) / maxPrice) * maxHeight);
 
-                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="Price: ' + element.price + ' '+opt.currency+'" data-toggle="tooltip" data-placement="bottom"></div>');
+                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="'+element.date+' ' + element.price + ' '+opt.currency+'" data-toggle="tooltip" data-placement="top"></div>');
                 bar.addClass(element.cclass);
                 $('.bars-cont').append(bar);
 

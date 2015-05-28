@@ -112,16 +112,15 @@ class Actions extends RA_Controller {
 
 			$price = $value['price'];
 
-			$chart_data[] = array('dayAbr'=>substr($day,0,1), 'dayNum' => $dayNum, 'price' => $price, 'cclass' => $class);
-			//$chart_detail .= "{ dayAbr: '".substr($day,0,1)."', dayNum: ".$i.", price: ".$price.", cclass:'".$class."' },";
-			
-			//$chart_detail .= '{"dayAbr":"'.substr($day,0,1).'", "dayNum": '.$i.', "price": '.$price.', "cclass": "'.$class.'" },';
-		
+			$chart_data[] = array('dayAbr'=>substr($day,0,1), 
+				'dayNum' => $dayNum,
+				'date'	=> date('M d',strtotime($date)),
+				'price' => $price, 
+				'cclass' => $class
+				);
+
 		}
-		//$chart_detail .= ']';
-		//$this->output->set_content_type('application/json');
-		//echo substr($chart_detail,0,-1);
-		//echo $chart_detail;
+
 		echo json_encode($chart_data);
 
 		//google chart için datayuı şekillendir
