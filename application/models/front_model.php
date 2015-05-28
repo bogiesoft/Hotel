@@ -91,7 +91,7 @@ class Front_Model extends CI_Model{
 	}
 
 	function get_room_price_for_chart($start,$room_id){
-		$end = date('Y-m-d',strtotime("+25 day",strtotime($start)));
+		$end = date('Y-m-d',strtotime("+30 day",strtotime($start)));
 		return $this->db->query("SELECT * FROM prices 
 			WHERE room_id = $room_id 
 			and price_date >= '$start' and price_date <= '$end' order by price_date")->result_array();

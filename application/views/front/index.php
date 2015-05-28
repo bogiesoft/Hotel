@@ -33,7 +33,7 @@ $this->load->view('front/header');
         html : true,
         content : function(){
             var room_id = $(this).data('room-id');
-            html = '<div id="chart_div'+room_id+'" style="width:520px; height:150px; padding-left:50px;position:relative;padding-top:10px">'+
+            html = '<div id="chart_div'+room_id+'" style="height:150px; padding-left:50px;position:relative;padding-top:10px">'+
                     '<div class="bars-cont"></div>'+
                     '<div class="desc-cont" style=""></div>'+
                     '<div class="max-price"></div>'+
@@ -71,7 +71,7 @@ $this->load->view('front/header');
                 var left = 17 * barIndex
                 var height = Math.round(((element.price) / maxPrice) * maxHeight);
 
-                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="'+element.date+' ' + element.price + ' '+opt.currency+'" data-toggle="tooltip" data-placement="top"></div>');
+                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="'+element.date+' <strong>' + element.price + '</strong> '+opt.user_currency+' / night" data-toggle="tooltip" data-placement="top"></div>');
                 bar.addClass(element.cclass);
                 $('.bars-cont').append(bar);
 
@@ -79,11 +79,11 @@ $this->load->view('front/header');
                 $('.desc-cont').append(desc);
                 desc.addClass(element.cclass);
 
-                $('.max-price').text('$' + maxPrice);
+                $('.max-price').text(maxPrice +' '+ opt.user_currency);
                 barIndex++;
             });
 
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').tooltip({html:true});
 
             /* google chart
             // Create our data table out of JSON data loaded from server.
@@ -136,7 +136,7 @@ $this->load->view('front/header');
 </script>
 <style type="text/css">
 .popover{
-    max-width: 550px;
+    min-width: 620px;
     height:200px;    
 }
 .popover .arrow{ display: :none;}
@@ -287,7 +287,7 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> " data-currency="<?php echo $options['currency']; ?>">
+                                    <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> <?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-currency="<?php echo $options['currency']; ?>">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
                                     <?php echo $options['user_currency']; ?></abbr>
                                     <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
@@ -390,22 +390,23 @@ $this->load->view('front/header');
                                     </div>
                                 </div>
                                 <div class="col-md-3 cent">
-                                    <abbr class="price" title="142" data-price="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> ">
+                                    <abbr class="price" title="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?><?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> ">
                                     <?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> 
                                     <?php echo $options['user_currency']; ?>
+                                    <?php $price = $prices->$rid->price-$prices->$rid->promotions->$pid->price; ?>
                                     </abbr>
                                     <!--
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights'];?> nights<br /> -->
                                     <del class="c-f00 price">
-                                    <abbr title="284">
+                                    <abbr title="-<?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?>">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']);?> 
                                     <?php echo $options['user_currency']; ?></abbr>
                                     </del>
                                     <br />
-                                    You save <?php 
-                                    $price = $prices->$rid->price-$prices->$rid->promotions->$pid->price;
-                                    echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?>
+                                    You save 
+
+                                    <?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?>
                                 </div>
                                 <div class="col-md-3">
                                     <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">

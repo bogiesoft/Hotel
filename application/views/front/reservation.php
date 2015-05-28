@@ -191,23 +191,31 @@
                     <a id="addRoom" class="add-room" href="#">
                         <span class="sprite add-blue va-middle"></span>&nbsp;&nbsp;&nbsp;Add another room
                     </a>
+
                     <?php if ($reservation->extras): ?> 
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="enhance-cont">
-                        <?php foreach (json_decode($reservation->extras) as $eid => $extra) : ?>
+                        <?php foreach (json_decode($reservation->extras,TRUE) as $eid => $extra) : ?>
                         <div class="enhance-item">
                             <div class="pull-left">
                                 <img src="<?php echo get_extra_image($eid); ?>" width="140" height="115"/><br />
-                                <?php  echo $extra->name; ?><br />
-                                <span style="font-weight:bold;color:#b7b300"><?php echo $extra->price; ?> <?php echo $reservation->currency; ?></span>
+                                <?php  echo $extra['name']; ?><br />
+                                <span style="font-weight:bold;color:#b7b300"><?php echo $extra['price']; ?> <?php echo $reservation->currency; ?></span>
                             </div>
                             <div style="margin-left:154px">
-                            <?php foreach ($extra->details as $name => $value) : ?>
+                            <?php foreach ($extra['details'] as $name => $value) : ?>
                                 <div style="margin-bottom:3px">
                                     <span class="enhance-label"><?php echo str_replace('_', ' ', $name); ?></span>
                                     <?php 
                                     if (is_array($value)) {
-                                        echo implode(',', $value);
+
+                                        //time ise
+                                        if (isset($value['hh'])) {
+                                            echo substr($value['hh'],0,-2).$value['mm'];                                        
+                                        }else{
+                                            echo implode(',', $value);
+                                        }
+                                        
                                     }else{
                                         echo $value;
                                     } 

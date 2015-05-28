@@ -66,8 +66,8 @@
 
 /* CHART CSS */
 
-.bars-cont{width:440px;height:90px;position:relative;border-top:dashed 1px #519BF7}
-.desc-cont{width:512px;border:solid 1px transparent;white-space:nowrap}
+.bars-cont{width:525px;height:90px;position:relative;border-top:dashed 1px #519BF7}
+.desc-cont{width:600px;border:solid 1px transparent;white-space:nowrap}
 .bar{width:16px;background-color:#c7ddfc;position:absolute;bottom:0;cursor:pointer}
 .bar.weekend{background-color:#afcefa}
 .bar.today{background-color:#90B8F7}
@@ -79,3 +79,4 @@
 
 .max-price{position:absolute;top:5px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
 .checkin-label{position:absolute;top:100px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
+.popover-content {margin-top:20px;}
