@@ -452,7 +452,7 @@ function form_builder($json,$arr=array()){
 				</div>';
 			}
 
-			$output .= '<br>';
+			//$output .= '<br>';
 
 
 		}
