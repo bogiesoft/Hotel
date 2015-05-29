@@ -228,7 +228,7 @@ $this->load->view('front/header');
                                         <a class="fancybox" rel="group<?php echo $rid; ?>" href="<?php echo $photo['photo_url'];?>">
                                         <!-- 
                                         Image Crop böyle.--> 
-                                        <img src="http://i0.wp.com/<?php echo $photo['photo_url'];?>?resize=250,175" height="160px" />
+                                        <img src="http://i0.wp.com/<?php echo substr($photo['photo_url'], 7);?>?resize=250,175" height="160px" />
                                         
                                         <!-- <img src="<?php echo $photo['photo_url'];?>?resize=250,175" height="160px" /> -->
                                         </a>
