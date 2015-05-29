@@ -263,6 +263,7 @@
                         <?php endforeach; //extra item end ?>
                     </div>
                     <?php endif; //end of extras ?>
+                    <!--
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="stay-settings">
                         <div class="stay-block">
@@ -309,6 +310,7 @@
                         </div>
 
                     </div>
+                    -->
                 </div>
             </div>
         </div>

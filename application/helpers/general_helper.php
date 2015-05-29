@@ -306,7 +306,7 @@ function form_builder($json,$arr=array()){
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
 			    </span>';
-				$output .= '<span class="fmr-val">
+				$output .= '<span class="frm-val">
 				<input type="text" name="'.$option['name'].'['.$option['id'].']['.replace_chars($form->label).']" '.$option['class'].'>
 				</span>
 				</div>
@@ -376,7 +376,7 @@ function form_builder($json,$arr=array()){
 			//if field = date
 			if (@$form->field_type == 'date') {
 				$class = substr_replace($option['class'], ' datepicker"', -1);
-				$output .= '<div class="row">
+				$output .= '<div class="f-row">
 			    <span class="frm-label">
 			    '.$form->label.' :<span class="c-f00">*</span>
 			    </span>';
