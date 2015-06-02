@@ -27,6 +27,11 @@ class Hotel extends RA_Controller {
 			exit('Hotel not found.');
 		}
 
+		//if change reservation
+		if ($this->input->get('res_code')) {
+			$this->session->set_userdata('res_code',$this->input->get('res_code'));
+		}
+
 		//options
 		$default_lang 		= $this->session->userdata('default_lang') ? $this->session->userdata('default_lang') : 'en';
 		$this->start_date 	= $this->input->get('checkin') ? $this->input->get('checkin') : date('d-m-Y');

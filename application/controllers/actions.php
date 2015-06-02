@@ -269,9 +269,25 @@ class Actions extends RA_Controller {
 			$this->session->set_userdata("my_session_id", $uniqueId);
 			$data['rhash'] = $uniqidId;
 
-        	$insert = $this->db->insert('reservations',$data);
+			//if reservation changes
+			$res_code = $this->session->userdata('res_code');
+			if ($res_code) {
 
-        	$data['res_id'] = $this->db->insert_id();
+				//TODO buraya reservation history yapılacak,sadece tek satır update edilmyecek
+				$insert = $this->db->update('reservations',$data,
+					array('reservation_code'=>$res_code,'hotel_id'=> $data['hotel_id']));
+
+				$data['res_id'] = $this->front_model->get_reservation_id($res_code,$data['hotel_id']);
+
+			}else{ //else insert new resevation
+
+				$insert = $this->db->insert('reservations',$data);
+        		$data['res_id'] = $this->db->insert_id();
+
+			}
+        	
+
+
 			$data['ip'] = $this->input->ip_address();
 
         	//$insert = true;

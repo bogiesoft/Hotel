@@ -318,13 +318,10 @@
     </div>
     <script>
         $(function () {
+            var base_url = '<?php echo site_url(); ?>';
             $('.edit-btn').click(function () {
-                var editor = $('.c-editor', $(this).parent());
-                $(this).hide();
-                $('.editable', editor.parent()).hide();
-
-                $('input[type=text]', editor).val($('.editable', editor.parent()).text());
-                editor.show();
+                var url = base_url + 'hotel?hotel_id=<?php echo $reservation->hotel_id; ?>&checkin=<?php echo $reservation->checkin; ?>&checkout=<?php echo $reservation->checkout;?>&adults=<?php echo $reservation->adults; ?>&res_code=<?php echo $reservation->reservation_code; ?>';
+                window.Location.replace(url);
                 return false;
             });
 
@@ -345,11 +342,8 @@
             });
 
             $('#editConf').click(function () {
-                BootstrapDialog.show({
-                    title: 'Edit Confirmation',
-                    closeByKeyboard: true,
-                    message: $('<div></div>').load('dialog_pages/edit_conf.html')
-                });
+                var url = base_url + 'hotel?hotel_id=<?php echo $reservation->hotel_id; ?>&checkin=<?php echo $reservation->checkin; ?>&checkout=<?php echo $reservation->checkout;?>&adults=<?php echo $reservation->adults; ?>&res_code=<?php echo $reservation->reservation_code; ?>';
+                window.location.replace(url);
             });
 
             $('#changeDates').click(function () {

@@ -129,4 +129,15 @@ class Front_Model extends CI_Model{
 		}
 
 	}
+
+	function get_reservation_id($res_code,$hotel_id){
+		$query = $this->db->select('id')
+			->from('reservations')
+			->where('reservation_code',$res_code)
+			->where('hotel_id',$hotel_id)
+			->get()->row();
+			
+		return $query->id;
+
+	}
 }
