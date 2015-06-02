@@ -224,7 +224,11 @@ class RA_Controller extends MY_Controller{
 
 		foreach ($promotions as $rid => $promo) {
 			
+
 			foreach ($promo as $pid => $p) {
+
+				
+
 				//standart rules
 				//check promotion dates
 				if($p['promotion_type'] != 4){

@@ -45,7 +45,7 @@ class Front_Model extends CI_Model{
 		GROUP BY
 		    r.id
 		    ORDER BY
-		    r.id");
+		    r.max_capacity");
 
 		if ($rooms->num_rows() > 0) {
 			return $rooms->result();
@@ -58,7 +58,7 @@ class Front_Model extends CI_Model{
 
 	function get_promotions($hotel_id){
 		//$hotel_id = $this->session->userdata('hotel_id');
-		$proms = $this->db->query("SELECT * FROM price_plans WHERE hotel_id = $hotel_id");
+		$proms = $this->db->query("SELECT * FROM price_plans WHERE hotel_id = $hotel_id ORDER BY promotion_discount DESC");
 
 		if ($proms->num_rows() >0) {
 			return $proms->result_array();
@@ -136,7 +136,7 @@ class Front_Model extends CI_Model{
 			->where('reservation_code',$res_code)
 			->where('hotel_id',$hotel_id)
 			->get()->row();
-			
+
 		return $query->id;
 
 	}

@@ -268,85 +268,13 @@ $this->load->view('front/header');
                         });
                         </script>
                         <div class="col-md-9">
-                            <div class="row data-row">
-                                <div class="col-md-3 cent">
-                                    <img src="<?php echo site_url('assets/front');?>/img/3persons.png" />
-                                </div>
-                                <div class="col-md-3">
-                                    <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Best Available Rate</abbr>
-                                    <br /><br />
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
-                                    </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/spoon.png" /> INCLUDES ALL MEALS
-                                    </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/parking.png" /> FREE PARKING
-                                    </div>
-                                </div>
-                                <div class="col-md-3 cent">
-                                    <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> <?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-currency="<?php echo $options['currency']; ?>">
-                                    <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
-                                    <?php echo $options['user_currency']; ?></abbr>
-                                    <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
-                                    <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
-                                    Price for <?php echo $options['nights']; ?> nights<br />
-                                    
-                                </div>
-                                <div class="col-md-3">
-                                <?php
-                                //check stoped arrival or stoped departure
-                                $stoped_a = false;
-                                $check_a = @$room['prices'][$options['checkin']]['stoped_arrival'];
-                                if (!is_null($check_a) and $check_a == 1) {
-                                    $stoped_a = true;
-                                }
-
-                                $stoped_d = false;
-                                $check_d = @$room['prices'][$options['checkout']]['stoped_departure'];
-                                if (!is_null($check_d) and $check_d== 1) {
-                                    $stoped_d = true;
-                                }
-
-                                $available_error = false;
-                                //güne göre available kontrolü
-                                foreach ($room['prices'] as $d => $a) {
-
-                                    if (isset($a['available']) and !is_null($a['available']) and $a['available'] < 1) {
-                                        $available_error .= $d.',';
-                                    }
-                                }
-
-                                //print_r($available_error);
-
-                                if ($stoped_a) {
-                                   echo 'Bu tarihte checkin olmaz';
-                                }elseif($stoped_d){
-                                    echo 'Bu tarihte checkout olmaz';
-                                }elseif($available_error){
-                                    echo $available_error.' dates are not available';
-                                }else{
-                                    $available = $room['prices'][$options['checkin']]['available'];
-                                ?>
-                                    <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
-                                    <option  data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
-
-                                    <?php for ($i=1; $i <= $available ; $i++) { ?>
-                                        <option <?php checkCartRoom($rid,$i,0); ?> data-policy="<?php echo $policy; ?>" data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
-                                    <?php } ?>
-                                    </select><br />
-                                     We Have <?php echo $room['prices'][$options['checkin']]['available']; ?> rooms left!
-                                <?php } ?>
-                                   
-                                </div>
-                            </div>
+                           
                             <!-- promotions of room start -->
                             <?php if(isset($promotion[$rid])) : ?>
                             <?php foreach ($promotion[$rid] as $pid => $promo) : 
                             $policy = $promo['default_policy'];
                             ?>
-                                <?php if($promo['rule'] == 1) : ?>
+                            <?php if($promo['rule'] == 1) : ?>
                             <div class="row data-row">
                                 <div class="col-md-3 cent">
                                     <img src="<?php echo site_url('assets/front');?>/img/2persons.png" />
@@ -421,6 +349,79 @@ $this->load->view('front/header');
                         <?php endforeach; ?>
                         <?php endif; //if promotion available end ?>
                             <!-- promotions of room end -->
+                             <div class="row data-row">
+                                <div class="col-md-3 cent">
+                                    <img src="<?php echo site_url('assets/front');?>/img/3persons.png" />
+                                </div>
+                                <div class="col-md-3">
+                                    <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Best Available Rate</abbr>
+                                    <br /><br />
+                                    <div class="ftr">
+                                        <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
+                                    </div>
+                                    <div class="ftr">
+                                        <img src="<?php echo site_url('assets/front');?>/img/spoon.png" /> INCLUDES ALL MEALS
+                                    </div>
+                                    <div class="ftr">
+                                        <img src="<?php echo site_url('assets/front');?>/img/parking.png" /> FREE PARKING
+                                    </div>
+                                </div>
+                                <div class="col-md-3 cent">
+                                    <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> <?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-currency="<?php echo $options['currency']; ?>">
+                                    <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
+                                    <?php echo $options['user_currency']; ?></abbr>
+                                    <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
+                                    <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
+                                    Price for <?php echo $options['nights']; ?> nights<br />
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                <?php
+                                //check stoped arrival or stoped departure
+                                $stoped_a = false;
+                                $check_a = @$room['prices'][$options['checkin']]['stoped_arrival'];
+                                if (!is_null($check_a) and $check_a == 1) {
+                                    $stoped_a = true;
+                                }
+
+                                $stoped_d = false;
+                                $check_d = @$room['prices'][$options['checkout']]['stoped_departure'];
+                                if (!is_null($check_d) and $check_d== 1) {
+                                    $stoped_d = true;
+                                }
+
+                                $available_error = false;
+                                //güne göre available kontrolü
+                                foreach ($room['prices'] as $d => $a) {
+
+                                    if (isset($a['available']) and !is_null($a['available']) and $a['available'] < 1) {
+                                        $available_error .= $d.',';
+                                    }
+                                }
+
+                                //print_r($available_error);
+
+                                if ($stoped_a) {
+                                   echo 'Bu tarihte checkin olmaz';
+                                }elseif($stoped_d){
+                                    echo 'Bu tarihte checkout olmaz';
+                                }elseif($available_error){
+                                    echo $available_error.' dates are not available';
+                                }else{
+                                    $available = $room['prices'][$options['checkin']]['available'];
+                                ?>
+                                    <select class="sl-menu" data-currency="<?php echo $options['currency']; ?>">
+                                    <option  data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-promotion="0" data-qty="0" data-price="0" data-type="delete" value="<?php echo $rid; ?>-0">Select</option>
+
+                                    <?php for ($i=1; $i <= $available ; $i++) { ?>
+                                        <option <?php checkCartRoom($rid,$i,0); ?> data-policy="<?php echo $policy; ?>" data-currency="<?php echo $options['user_currency']; ?>" data-rate="<?php echo $options['currency_rate'];?>" data-room="<?php echo $rid; ?>" data-room-name="<?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>" data-desc="Best Available Rate" data-promotion="0" data-qty="<?php echo $i; ?>" data-price="<?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?>" data-type="add"><?php echo $i; ?> - <?php echo show_price($prices->$rid->price*$i,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></option>
+                                    <?php } ?>
+                                    </select><br />
+                                     We Have <?php echo $room['prices'][$options['checkin']]['available']; ?> rooms left!
+                                <?php } ?>
+                                   
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row max-person max-<?php echo $room['max_capacity']; ?>">
