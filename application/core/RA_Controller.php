@@ -20,6 +20,15 @@ class RA_Controller extends MY_Controller{
 
 		$this->lang->load('reservation/rooms','en');
 
+
+		//generate session id
+		if (!$this->session->userdata('my_session_id')) {
+			$uniqueId = uniqid($this->input->ip_address(), TRUE);
+    		$uniqidId = md5($uniqueId);
+			$this->session->set_userdata("my_session_id", $uniqueId);
+		}
+    	
+
 	}
 
 	/*

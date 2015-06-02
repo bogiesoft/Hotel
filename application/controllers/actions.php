@@ -263,11 +263,8 @@ class Actions extends RA_Controller {
         	$data['total_price']	= $room_price+$extra_price;
         	//print_r($room_details);
 
-        	//generate session id
-        	$uniqueId = uniqid($this->input->ip_address(), TRUE);
-        	$uniqidId = md5($uniqueId);
-			$this->session->set_userdata("my_session_id", $uniqueId);
-			$data['rhash'] = $uniqidId;
+        	
+			$data['rhash'] = $this->session->userdata('my_session_id');
 
 			//if reservation changes
 			$res_code = $this->session->userdata('res_code');
