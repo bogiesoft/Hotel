@@ -64,19 +64,20 @@
                             <div id="reservation-menu" class="drop-menu">
                                 <div class="reserv-manage">
                                     <div class="drop-menu-title">Manage An Exsiting Booking</div>
-                                    <div>No registration required</div>
+                                    <div class="reserror">No registration required</div>
+                                    <form name="reserv-login" method="POST">
                                     <div class="reserv-form">
-                                        <input type="text" name="bnum" placeholder="Booking Number" />
-                                        <input type="text" name="pin" placeholder="PIN Code" />
+                                        <input type="text" name="code" placeholder="Booking Number" />
+                                        <input type="text" name="pincode" placeholder="PIN Code" />
+                                        <input type="hidden" name="hotel_id" value="<?php echo $this->input->get('hotel_id'); ?>" />
                                         <div style="width:122px;float:left;padding:2px 6px">
                                             Where can I find this information?
                                         </div>
                                         <div style="width:68px;float:left">
-                                            <button class="btn-go">
-                                                Go
-                                            </button>
+                                        <input type="submit" class="btn-go" value="Go">
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                                 <div class="reserv-info">
                                     <span class="sprite tick-green">Change dates</span><br />
@@ -703,6 +704,36 @@ $(document).ready(function(){
 
     });
 
+
+    $('form[name=reserv-login]').submit(function(e) {
+       e.preventDefault();
+
+       var data = $(this).serialize();
+       var url = base_url + "hotel/check_reservation";
+
+   
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: data, // serializes the form's elements.
+           success: function(response){
+           
+                if (response.status=='error') {
+                    $('.reserror').html(response.message);
+                    $('.reserror').css('color','red');
+                }
+
+                if(response.status=='success'){
+                    var re_url = base_url + "hotel/reservation?code=" +response.code+"&hash=" +response.hash+"&sess="+response.sess;
+                
+                    window.location.replace(re_url);
+                }
+           }
+         });
+
+        return false; // avoid to execute the actual submit of the form.
+       
+    });
 
 });
 

@@ -113,4 +113,20 @@ class Front_Model extends CI_Model{
 			->where('id',$id)
 			->get()->row();
 	}
+
+	function reservation_login($code,$pincode,$hotel_id){
+		$query = $this->db->select('*')
+			->from('reservations')
+			->where('reservation_code',$code)
+			->where('pincode',$pincode)
+			->where('hotel_id',$hotel_id)
+			->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		}else{
+			return false;
+		}
+
+	}
 }

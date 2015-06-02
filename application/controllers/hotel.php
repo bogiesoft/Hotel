@@ -369,6 +369,37 @@ class Hotel extends RA_Controller {
 		echo json_encode($response);
 	}
 
+	function check_reservation(){
+
+		$code 		= $this->input->post('code');
+		$pincode 	= $this->input->post('pincode');
+		$hotel_id 	= $this->input->post('hotel_id');
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('code', 'Reservation Id', 'required');
+		$this->form_validation->set_rules('pincode', 'Pincode', 'required');
+
+		$this->output->set_content_type('application/json');
+
+		if ($this->form_validation->run() == FALSE){
+			echo json_encode(array('status' =>'error','message'=> validation_errors()));
+		}else{
+
+			$check = $this->front_model->reservation_login($code,$pincode,$hotel_id);
+			if (!$check) {
+				echo json_encode(array('status' =>'error','message'=> 'No Reservation Found, Please check your pincode.'));
+			}else{
+				echo json_encode(array('status' =>'success',
+					'hash'=> $check->rhash,
+					'code'=> $check->id,
+					'sess'=> $this->session->userdata('my_session_id')));
+			}
+		}
+
+
+	}
+
 	/*
 	* Print Currency Rates JSON
 	* DEPRECATED

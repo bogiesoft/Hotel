@@ -30,6 +30,9 @@
                     <button class="c-btn pull-right">
                         <span class="sprite printer-white"></span>&nbsp;&nbsp;&nbsp;Print Confirmation
                     </button>
+                    <button id="editConf" class="c-btn pull-right">
+                            <span class="sprite pencil-white"></span>&nbsp;Edit
+                    </button>
                     <div class="clearfix"></div>
                 </div>
                 <div class="confirm-actions">
@@ -38,9 +41,7 @@
                         <span>We notified <?php echo $hotel->name; ?> of your upcoming stay </span>
                     </div>
                     <div class="col-md-6">
-                        <button id="editConf" class="c-btn btn-edit">
-                            <span class="sprite pencil-white"></span>&nbsp;Edit
-                        </button>
+                        
                     </div>
                     <div class="clearfix"></div>
                 </div>

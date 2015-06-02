@@ -1,4 +1,7 @@
 $(function() {
+ $('#reservation-menu').click(function (e) {
+            e.stopPropagation();
+        });
 
 
 // ---------------------------------- on page loade

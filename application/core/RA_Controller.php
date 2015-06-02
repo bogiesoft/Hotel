@@ -241,6 +241,7 @@ class RA_Controller extends MY_Controller{
 				}
 				/* TODO  END*/ 
 
+
 				//minimum stay rules
 				if ($p['promotion_type'] == 2) {
 					//check total nights for minimum stay

@@ -130,7 +130,6 @@ $this->load->view('front/header');
         isVisible = false;
     });
 
-
 });
 
 </script>
