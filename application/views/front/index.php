@@ -42,6 +42,7 @@ $this->load->view('front/header');
         }
     }).on('click', function(e) {
 
+        var discount = $(this).data('discount');
         var room_id = $(this).data('room-id');
         // if any other popovers are visible, hide them
         if(isVisible) {
@@ -58,7 +59,7 @@ $this->load->view('front/header');
         isVisible = true;
         e.stopPropagation();
 
-        jQuery.post( base_url + "actions/room_price_info",{ room_id: room_id, options: options,children:children },function(data){
+        jQuery.post( base_url + "actions/room_price_info",{ discount:discount, room_id: room_id, options: options,children:children },function(data){
 
             data = $.parseJSON( data );
             opt = $.parseJSON( options );
@@ -281,6 +282,7 @@ $this->load->view('front/header');
                                 </div>
                                 <div class="col-md-3">
                                     <abbr id="free-cancellation" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="You can cancel this booking right up to Feb 2, 2015 for free. You may be charged if you cancel or change your booking after that. And we can’t refund you if you check out early or don’t turn up at the hotel."><?php echo $promo['promotion_name']; ?></abbr>
+                                    
                                     <br />
                                     <?php if($promo['promotion_type'] == 5){ ?>
                                     <div class="countdown<?php echo $rid.'-'.$pid; ?>"></div>
@@ -322,6 +324,8 @@ $this->load->view('front/header');
                                     <?php echo $options['user_currency']; ?>
                                     <?php $price = $prices->$rid->price-$prices->$rid->promotions->$pid->price; ?>
                                     </abbr>
+                                    <span data-poload="1" class="price_chart" data-discount="<?php echo $promo['promotion_discount']; ?>"  data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
+                                    <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     <!--
                                     <span class="white-tooltip" data-toggle="tooltip" data-placement="top" title="some title"><img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights'];?> nights<br /> -->
@@ -370,7 +374,7 @@ $this->load->view('front/header');
                                     <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> <?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-currency="<?php echo $options['currency']; ?>">
                                     <?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> 
                                     <?php echo $options['user_currency']; ?></abbr>
-                                    <span data-poload="1" class="price_chart" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
+                                    <span data-poload="1" class="price_chart" data-discount="0" data-room-id="<?php echo $rid; ?>" data-trigger="hover" data-placement="top">
                                     <img src="<?php echo site_url('assets/front');?>/img/i.png" /></span><br />
                                     Price for <?php echo $options['nights']; ?> nights<br />
                                     

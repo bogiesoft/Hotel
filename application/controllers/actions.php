@@ -48,6 +48,7 @@ class Actions extends RA_Controller {
 		$start = $options['checkin'];
 		$adults = $options['adults'];
 		$rate  = $options['currency_rate'];
+		$discount = $this->input->post('discount');
 		$child_ages = json_decode($this->input->post('children'));
 		//get prices for 7 days
 		$prices = $this->front_model->get_room_price_for_chart($start,$room_id);
@@ -96,7 +97,10 @@ class Actions extends RA_Controller {
 			$total_price =  $adult_price + $total_child_price;
 
 			$data[$p['price_date']]['date'] = $p['price_date'];
-			$data[$p['price_date']]['price'] = show_price($total_price,$rate);
+
+			$price = $total_price - ($total_price * $discount / 100);
+
+			$data[$p['price_date']]['price'] = show_price($price,$rate);
 		}
 
 		//chart json data
