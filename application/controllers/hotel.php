@@ -291,11 +291,12 @@ class Hotel extends RA_Controller {
 		//add item
 		}else{
 
+			/*
 			foreach ($user_cart as $key => $c) {
 				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
 					unset($user_cart[$key]);
 				}
-			} 
+			}*/
 
 			if ($promotion != 0) {
 				$price = $room_prices->$room_id->promotions->$promotion->price;
