@@ -7,13 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/mail'); ?>/css/style.css" media="all" />
+    <!-- <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/mail'); ?>/css/style.css" media="all" /> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="<?php echo site_url('assets/mail'); ?>/js/jquery.carouFredSel-6.0.4-packed.js"></script>
     <script src="<?php echo site_url('assets/mail'); ?>/js/main.js"></script>
 </head>
+<style type="text/css">
+/* ------------------------------------------------------------------- controls */
+body{color:#333;}
+a {color: #4393ff;}
+a:hover {}
+p{font-size:13px}
+
+.bold{font-weight:bold}
+.no-border{border:none !important}
+
+.header{padding-top:17px;margin-bottom:30px}
+.print-btn{display:block;background-color:#0896ff;color:#fff;padding:4px 8px;margin-top:52px}
+.right-align{text-align:right}
+
+.title1{font-size:20px;margin-bottom:18px}
+
+.contact-block{margin-bottom:40px}
+.contact-block .title{font-size:22px;display:inline-block;width:200px;vertical-align:middle}
+.contact-block .label1{display:inline-block;width:200px;padding-left:100px;vertical-align:top}
+.contact-block .val1{display:inline-block;vertical-align:top}
+
+.title2{font-size:16px;color:#4393ff;text-align:center;margin-bottom:18px}
+
+.details-block{margin-bottom:29px}
+.details-block .t-row{border-bottom:dotted 1px #333}
+.details-block .label1{padding:0 4px;display:inline-block;}
+.details-block .val1{padding:0 4px;display:inline-block;}
+
+.blue-box{background-color:#e6edf6;border:solid 1px #b3cae6;padding:12px;margin-bottom:22px}
+.blue-box .t-row{border-bottom:dotted 1px #333}
+.blue-box .label1{padding:0 4px;display:inline-block;font-size:13px}
+.blue-box .val1{padding:0 4px;display:inline-block;text-align:right;font-size:13px}
+.blue-box .toplam{font-size:18px}
+
+.title4{font-size:20px;margin-bottom:7px}
+
+
+fieldset.table-legend {
+border: 1px groove #ddd !important;
+padding: 0 1.4em 1.4em 1.4em !important;
+margin: 0 0 1.5em 0 !important;
+-webkit-box-shadow: 0px 0px 0px 0px #000;
+box-shadow: 0px 0px 0px 0px #000;
+}
+legend.table-legend {
+font-size: 1.2em !important;
+font-weight: bold !important;
+text-align: left !important;
+width: auto;
+padding: 0 10px;
+border-bottom: none;
+    }
+
+</style>
 <body style="color:#333;font-size:12px">
     <div class="container">
         <div class="row header">
