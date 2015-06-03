@@ -208,7 +208,7 @@ a:hover {text-decoration: none;color: #fff;}
             </div>
         </div>
         <div class="title2">
-            <img src="<?php site_url('assets/mail'); ?>/img/gear.png" />&nbsp;
+            <img src="<?php echo site_url('assets/mail'); ?>/img/gear.png" />&nbsp;
             Rezervasyonunuzu yönetin 
         </div>
         <div class="details-block">

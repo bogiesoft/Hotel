@@ -305,7 +305,7 @@ class Actions extends RA_Controller {
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
         		//send mail
-        		$this->send_information_mail($data);
+        		$this->send_information_mail($data,$res_code);
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
         	}
@@ -315,10 +315,16 @@ class Actions extends RA_Controller {
 
 	}
 
-	function send_information_mail($data){
+	function send_information_mail($data,$res_code){
 		//send mail to user
 		$this->lang->load('reservation/policies','en');
 		$this->lang->load('reservation/mail','en');
+
+		if ($res_code) {
+			$subject = 'Rezervayon Düzenleme - '.$res_code;
+		}else{
+			$subject = 'Yeni Rezervayon';
+		}
 
 		$user_mail = $data['email'];
 
@@ -338,7 +344,7 @@ class Actions extends RA_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from('info@rabooking.com'); 
 			$this->email->to($user_mail);
-			$this->email->subject('New Reservation');
+			$this->email->subject($subject);
 			$this->email->message($message);
 
 
