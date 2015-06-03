@@ -48,13 +48,13 @@
             </div>
         </div>
         <div class="title2">
-            <img src="img/gear.png" />&nbsp;
+            <img src="<?php site_url('assets/mail'); ?>/img/gear.png" />&nbsp;
             Rezervasyonunuzu yönetin 
         </div>
         <div class="details-block">
             <div class="t-row clearfix">
                 <span class="label1 col-xs-3 bold">Rezervasyon numarası</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $reservation_code; ?>/span>
+                <span class="val1 col-xs-9 right-align"><?php echo $reservation_code; ?></span>
             </div>
             <div class="t-row clearfix">
                 <span class="label1 col-xs-3 bold">PIN kodu</span>
