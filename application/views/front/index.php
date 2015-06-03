@@ -242,7 +242,7 @@ $this->load->view('front/header');
                                     <div class="item active">
                                     <?php $i=0; foreach ($room['photos'] as $pid => $photo) : $i++;?>
                                         <div data-target="#carousel_<?php echo $rid;?>" data-slide-to="<?php echo $pid; ?>" class="thumb">
-                                        <img src="<?php echo $photo['photo_url'];?>" width="60px" height="45px"/>
+                                        <img src="http://i0.wp.com/<?php echo substr($photo['photo_url'], 7);?>?resize=60,45" width="60px" height="45px"/>
                                         </div>
                                     <?php if($i % 4 ==0): ?>
                                     </div><!-- /item -->
