@@ -206,7 +206,7 @@ class Actions extends RA_Controller {
         }else{
         	//if reservation changes
 			$res_code = $this->session->userdata('res_code');
-			
+
         	$pincode = mt_rand(1000,9999);
 
         	if ($res_code) {
@@ -305,7 +305,7 @@ class Actions extends RA_Controller {
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
         		//send mail
-        		//$this->send_information_mail($data);
+        		$this->send_information_mail($data);
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
         	}
