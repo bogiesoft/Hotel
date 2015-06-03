@@ -204,8 +204,17 @@ class Actions extends RA_Controller {
         	echo json_encode(array('status'=>'error','errors'=>$data));
 
         }else{
+        	//if reservation changes
+			$res_code = $this->session->userdata('res_code');
+			
         	$pincode = mt_rand(1000,9999);
-        	$data['reservation_code']= rand_uniqid($this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+
+        	if ($res_code) {
+        		$data['reservation_code']=$res_code;
+        	}else{
+        		$data['reservation_code']= rand_uniqid($this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+        	}
+
         	$data['pincode'] 		= $pincode;
         	$data['name_title'] 	= $this->input->post('name_title');
         	$data['first_name']		= $this->input->post('first_name');
@@ -270,8 +279,7 @@ class Actions extends RA_Controller {
         	
 			$data['rhash'] = $this->session->userdata('my_session_id');
 
-			//if reservation changes
-			$res_code = $this->session->userdata('res_code');
+			
 			if ($res_code) {
 
 				//TODO buraya reservation history yapılacak,sadece tek satır update edilmyecek
@@ -316,10 +324,10 @@ class Actions extends RA_Controller {
 
 		    $config = array(
 			  'protocol' => 'smtp',
-			  'smtp_host' => 'mail.metinkoca.co.uk',
-			  'smtp_port' => 26,
-			  'smtp_user' => 'booking_test@metinkoca.co.uk', 
-			  'smtp_pass' => '1q2w3e4r', 
+			  'smtp_host' => '176.31.162.93',
+			  'smtp_port' => 25,
+			  'smtp_user' => 'info@rabooking.com', 
+			  'smtp_pass' => '1234az!1', 
 			  'mailtype' => 'html',
 			  'charset' => 'UTF-8',
 			  'wordwrap' => TRUE);
@@ -328,11 +336,13 @@ class Actions extends RA_Controller {
 
 			$this->load->library('email', $config);
 			$this->email->set_newline("\r\n");
-			$this->email->from('booking_test@metinkoca.co.uk'); 
+			$this->email->from('info@rabooking.com'); 
 			$this->email->to($user_mail);
 			$this->email->subject('New Reservation');
 			$this->email->message($message);
 
+
+			$this->email->send();
 
 	}
 

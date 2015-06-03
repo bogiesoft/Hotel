@@ -12,6 +12,8 @@ class Hotel extends RA_Controller {
 
 	}
 
+
+
 	function index(){
 		//print_r($this->total_room_price);
 		$hotel_id = $this->input->get('hotel_id');
@@ -27,9 +29,22 @@ class Hotel extends RA_Controller {
 			exit('Hotel not found.');
 		}
 
+		//set reservation info false
+		$data['reservation'] = false;
+
 		//if change reservation
 		if ($this->input->get('res_code')) {
-			$this->session->set_userdata('res_code',$this->input->get('res_code'));
+			$reservation = $this->front_model->get_reservation($this->input->get('res_code'),$hotel_id);
+			if ($reservation) {
+				$data['reservation'] = $reservation;
+
+				//set user extras
+				$this->session->set_userdata('user_extras',json_decode($reservation->extras,TRUE));
+
+				//set reservation code on session
+				$this->session->set_userdata('res_code',$this->input->get('res_code'));
+			}
+			
 		}
 
 		//options
@@ -58,6 +73,7 @@ class Hotel extends RA_Controller {
 		}
 
 		//salaklar geçmişe dönük rezervasyon yapmak isterse
+		
 		if (strtotime($this->start_date) < strtotime(date('Y-m-d'))) {
 			exit('Checkin Date Error');
 		}

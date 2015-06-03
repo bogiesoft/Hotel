@@ -17,7 +17,7 @@
 <body style="color:#333;font-size:12px">
     <div class="container">
         <div class="row header">
-            <img src="img/logo.png" />
+            <img src="<?php echo $hotel_info->hotel_logo; ?>" />
             <a class="print-btn pull-right bold" href="#" style="">
                 <span class="glyphicon glyphicon-print"></span>&nbsp;
                 Yazdırılabilir versiyonu alın

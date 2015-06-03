@@ -21,7 +21,12 @@ class Welcome extends MY_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+	function test(){
+		echo sha1(md5('10'));
+	}
 }
+
 
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

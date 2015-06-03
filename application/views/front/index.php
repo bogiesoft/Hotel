@@ -544,10 +544,23 @@ $this->load->view('front/header');
                         <?php endif; ?>
                         <div class="items_in_cart"></div>
 
+                        <?php if($user_extras) : ?>
+                        <div class="extras">
+                            <div class="park-view">Extras</div>
+                            <div class="extras_in_cart"></div>
+                                <?php foreach ($user_extras as $eid => $extra) : ?>
+                                <div class="extra_info extra_<?php echo $eid; ?>">
+                                    <div><?php echo $extra['name']; ?></div>
+                                    <div><?php echo $extra['price']; ?> <?php echo $options['currency']; ?></div>
+                                </div>
+                                <?php endforeach; ?>
+                        </div>
+                        <?php else:?>
                         <div class="extras" style="display:none">
                             <div class="park-view">Extras</div>
                             <div class="extras_in_cart"></div>
                         </div>
+                        <?php endif; ?>
 
                         <?php  if (NULL != $user_cart) : $cart_info = cart_info(); ?>
                         <div class="avrg">
@@ -591,7 +604,174 @@ $this->load->view('front/header');
                 </div><!-- end of left column  -->
                 <form id="booking_form">
                 <div class="col-md-9"><!-- right column  -->
+
+                <?php if ($reservation): // if edit reservation?>
                     <div class="row">
+                        <div class="col-md-12">
+                        Guest Details
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Title
+                        </div>
+                        <div class="col-md-4">
+                            <select name="name_title" class="w-220 b1s-000 mtb-5">
+                                <option value="Mr." <?php echo $reservation->name_title =='Mr.' ? 'selected="selected"' : ''; ?> >Mr.</option>
+                                <option value="Mrs." <?php echo $reservation->name_title =='Mrs.' ? 'selected="selected"' : ''; ?>>Mrs.</option>
+                                <option value="Ms." <?php echo $reservation->name_title =='Ms.' ? 'selected="selected"' : ''; ?>>Ms.</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="c-f00">*</span> Required Field
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        First Name: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="first_name" value="<?php echo $reservation->first_name; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Last Name <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="last_name" value="<?php echo $reservation->last_name; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Street 1:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="street_1" value="<?php echo $reservation->street_1; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Street 2:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="street_2" value="<?php echo $reservation->street_2; ?>" class="w-220 b1s-000 mtb-5" />                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Zip code / City: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="zipcode" value="<?php echo $reservation->zipcode; ?>" class="w-95 b1s-000 mtb-5" />
+                            <input type="text" name="city" value="<?php echo $reservation->city; ?>" class="w-120 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Country: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                        <?php $countries = countries(); ?>
+                            <select name="country"  class="w-220 b1s-000 mtb-5">
+                            <?php foreach ($countries as $key => $country) {
+                                $selected = ($reservation->country == $country->code) ? 'selected="selected"' : ''; 
+                                echo '<option value="'.$country->code.'" '.$selected.'>'.$country->name.'</option>';
+                            } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Telephone:
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="phone" value="<?php echo $reservation->phone; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Email: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="email" value="<?php echo $reservation->email; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                        
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mail-msg">
+                            Please ensure that the email address is entered correctly. The confirmation of your booking will be sent to this email address.
+                            </p> 
+                        </div>
+                        <div class="col-md-4">
+                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        Card Details: <span class="c-f00">*</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Name of cardholder <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="ccholder_name" value="<?php echo $reservation->ccholder_name; ?>"class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Credit card number <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" name="ccnumber" value="<?php echo rand_uniqid($reservation->ccnumber,TRUE); ?>" class="w-220 b1s-000 mtb-5 cc_number" />
+                            <div class="showThis"></div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Expiry date: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="ccmonth" class="w-95 b1s-000 mtb-5">
+                            <?php for ($i=01; $i < 13 ; $i++) {
+                                $selected = ($reservation->ccmonth == $i) ? 'selected="selected"' : '';
+                                 echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+                            }?>
+                            </select>
+                            <select name="ccyear" class="w-95 b1s-000 mtb-5">
+                            <?php for ($i=2015; $i < 2025 ; $i++) { 
+                                $selected = ($reservation->ccyear == $i) ? 'selected="selected"' : '';
+                                 echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+                            }?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        CVV: <span class="c-f00">*</span>
+                        </div>
+                        <div class="col-md-4">
+                           <input type="text" name="cccvv" value="<?php echo $reservation->cccvv; ?>" class="w-70 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                       <div class="row">
+                            <div class="col-md-12">
+                            <p class="deposit">
+                            A deposit is not required for guarantee of your reservation
+                            </p>
+                            </div>
+                        </div>
+                    <input type="hidden" name="res_code" value="<?php echo $this->input->get('res_code'); ?>">
+                    <?php else: //if new reservation ?>
+
+                        <div class="row">
                         <div class="col-md-12">
                         Guest Details
                         </div>
@@ -681,6 +861,14 @@ $this->load->view('front/header');
                             <input type="text" name="email" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                        <p class="deposit">
+                        A deposit is not required for guarantee of your reservation
+                        </p>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-4">
                         
@@ -750,6 +938,9 @@ $this->load->view('front/header');
                         </p>
                         </div>
                     </div>
+                    <input type="hidden" name="res_code" value="0">
+                    <?php endif; //guest details end?>
+                    
                     <?php if(is_array($extras)) : ?>
                     <div class="row details">
                         <div class="col-md-6">
@@ -788,7 +979,13 @@ $this->load->view('front/header');
                         </span>
                         <span class="p-book">
                             <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
-                            <span class="p-btn p-btn-book">Book</span>
+                            <?php if (isset($user_extras[$extra['id']])) : ?>
+                            <span class="p-btn p-btn-book">
+                                <img src="http://localhost/hotel/assets/front/img/check.png" alt="Ok">
+                            </span>
+                            <?php else: ?>
+                                <span class="p-btn p-btn-book">Book</span>
+                            <?php endif; ?>
                         </span>
                     </div>
                     <div class="extra-overlay">
