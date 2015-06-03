@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://176.31.162.93/';
+$config['base_url']	= 'http://rabooking.com/';
 
 /*
 |--------------------------------------------------------------------------
