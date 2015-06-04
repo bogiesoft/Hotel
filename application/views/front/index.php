@@ -981,7 +981,7 @@ $this->load->view('front/header');
                             <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
                             <?php if (isset($user_extras[$extra['id']])) : ?>
                             <span class="p-btn p-btn-book">
-                                <img src="http://localhost/hotel/assets/front/img/check.png" alt="Ok">
+                                <img src="<?php echo site_url('assets/front/img'); ?>/check.png" alt="Ok">
                             </span>
                             <?php else: ?>
                                 <span class="p-btn p-btn-book">Book</span>
@@ -1047,7 +1047,13 @@ $this->load->view('front/header');
                         </span>
                         <span class="p-book">
                             <span class="p-price"><?php echo show_price($price,$options['currency_rate']); ?> <?php echo $options['user_currency']; ?></span>
-                            <span class="p-btn p-btn-book">Book</span>
+                            <?php if (isset($user_extras[$extra['id']])) : ?>
+                            <span class="p-btn p-btn-book">
+                                <img src="<?php echo site_url('assets/front/img'); ?>/check.png" alt="Ok">
+                            </span>
+                            <?php else: ?>
+                                <span class="p-btn p-btn-book">Book</span>
+                            <?php endif; ?>
                         </span>
                     </div>
                     <div class="extra-overlay">
