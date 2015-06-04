@@ -40,6 +40,7 @@ class Hotel extends RA_Controller {
 
 				//set user extras
 				$this->session->set_userdata('user_extras',json_decode($reservation->extras,TRUE));
+				$this->session->set_userdata('user_cart',json_decode($reservation->rooms,TRUE));
 
 				//set reservation code on session
 				$this->session->set_userdata('res_code',$this->input->get('res_code'));

@@ -103,6 +103,7 @@ class Actions extends RA_Controller {
 			$data[$p['price_date']]['price'] = show_price($price,$rate);
 		}
 
+
 		//chart json data
 		$chart_detail = '';
 		$chart_data = array();
@@ -115,17 +116,53 @@ class Actions extends RA_Controller {
 			
 
 			$price = $value['price'];
+			$ymd = date('Y-m-d',strtotime($date));
 
-			$chart_data[] = array('dayAbr'=>substr($day,0,1), 
+			$chart_data[$ymd] = array('dayAbr'=>substr($day,0,1), 
 				'dayNum' => $dayNum,
 				'date'	=> date('M d',strtotime($date)),
+				'ymd'	=> $ymd,
 				'price' => $price, 
 				'cclass' => $class
 				);
 
 		}
+		
 
-		echo json_encode($chart_data);
+		$start_date = $options['checkin'];
+		$date_range = date_range($start_date, date('Y-m-d',strtotime('+30 day',strtotime($start_date))));
+
+		
+		$chart = array();
+
+		foreach ($date_range as $key => $date) {
+			$day = date('l',strtotime($date));
+			$dayNum = date('d',strtotime($date));
+			$class = ($day == 'Sunday' or $day == 'Saturday') ? 'weekend' : '';
+			$class .= ($date == date('Y-m-d')) ? 'today' : '';
+				
+			if (!isset($chart_data[$date])) {
+				$chart[] = array('dayAbr'=>substr($day,0,1), 
+				'dayNum' => $dayNum,
+				'date'	=> date('M d',strtotime($date)),
+				'price' => 0,
+				'cclass' => $class
+				);
+
+			}else{
+				$chart[] = array('dayAbr'=>substr($day,0,1), 
+				'dayNum' => $dayNum,
+				'date'	=> date('M d',strtotime($date)),
+				'price' => $chart_data[$date]['price'],
+				'cclass' => $class
+				);
+
+			}
+
+		}
+		
+		echo json_encode($chart);
+
 
 		//google chart için datayuı şekillendir
 		/*

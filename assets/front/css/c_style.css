@@ -77,6 +77,7 @@
 .day-num{color:#777}
 .day-abr{color:#aaa}
 
+.bar.grey-bar{background-color:#878787;}
 .max-price{position:absolute;top:5px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
 .checkin-label{position:absolute;top:100px;left:0px;font-family:Arial;font-size:11px;width:40px;color:#777}
 .popover-content {margin-top:20px;}

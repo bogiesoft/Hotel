@@ -72,8 +72,12 @@ $this->load->view('front/header');
                 var left = 17 * barIndex
                 var height = Math.round(((element.price) / maxPrice) * maxHeight);
 
-                var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="'+element.date+' <strong>' + element.price + '</strong> '+opt.user_currency+' / night" data-toggle="tooltip" data-placement="top"></div>');
-                bar.addClass(element.cclass);
+                if (element.price == 0) {
+                    var bar = $('<div class="grey-bar bar" style="height:10px;left:' + left + 'px" title="'+element.date+' <strong>' + element.price + '</strong> '+opt.user_currency+' / night" data-toggle="tooltip" data-placement="top"></div>');
+                }else{
+                    var bar = $('<div class="bar" style="height:' + height + 'px;left:' + left + 'px" title="'+element.date+' <strong>' + element.price + '</strong> '+opt.user_currency+' / night" data-toggle="tooltip" data-placement="top"></div>');
+                    bar.addClass(element.cclass);
+                }
                 $('.bars-cont').append(bar);
 
                 var desc = $('<div class="day"><div class="day-num">' + element.dayNum + '</div><div class="day-abr">' + element.dayAbr + '</div></div>');
