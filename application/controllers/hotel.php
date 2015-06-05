@@ -240,7 +240,7 @@ class Hotel extends RA_Controller {
 		foreach ($rooms as $r => $room) {
 			unset($rooms->$r);
 			$room_id = explode('-', $r);
-			$room_id = $room->room_id;
+			$room_id = $rooms->room_id;
 
 			@$rooms->booked->$r = $room;
 			$rooms->booked->$r->details = $this->front_model->get_room_details($room_id);
