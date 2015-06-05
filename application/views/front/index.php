@@ -845,7 +845,7 @@ $this->load->view('front/header');
                         $phone_code = '';
                         $countries = countries(); 
                         ?>
-                        <?php $user_country = geoip_country_code_by_name($this->input->ip_address()); ?> 
+                        <?php $user_country = user_location($this->input->ip_address()); ?> 
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
                              $selected =  ($user_country == $country->iso) ? 'selected="selected"' : '';
