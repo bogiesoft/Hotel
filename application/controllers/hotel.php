@@ -235,7 +235,7 @@ class Hotel extends RA_Controller {
 		//rooms details
 		$rooms = json_decode($reservation->rooms);
 
-		//print_r($rooms); exit;
+		print_r($rooms); exit;
 		$total_room = 0;
 		foreach ($rooms as $r => $room) {
 			unset($rooms->$r);
