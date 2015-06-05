@@ -136,7 +136,8 @@
                     </div>
                     <div style="font-weight:bold;margin:20px 0">Room Details</div>
 
-                    <?php foreach ($rooms->booked as $key => $room) : ?>
+                    <?php echo '<pre>'; print_r($rooms); echo '</pre>'; 
+                    foreach ($rooms->booked as $key => $room) : ?>
                     <div class="room-details">
                         <div class="room-details-item">
                             <div class="pull-left">
