@@ -848,10 +848,14 @@ $this->load->view('front/header');
                         <?php $user_country = user_location($this->input->ip_address()); ?> 
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
-                             $selected =  ($user_country == $country->iso) ? 'selected="selected"' : '';
-                             $phone_code = ($user_country == $country->iso) ? $country->phonecode : '';
+                                if ($user_country == $country->iso) {
+                                    $selected   = 'selected="selected"';
+                                    $phone_code =  $country->phonecode;
+                                }else{
+                                    $selected   = '';
+                                }
 
-                              echo '<option value="'.$country->iso.'" '.$selected.'>'.$country->name.'</option>';
+                              echo '<option value="'.$country->iso.'" '.$selected.'>'.$country->nicename.'</option>';
                             }?>
                             </select>
                         </div>
