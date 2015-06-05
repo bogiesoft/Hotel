@@ -44,16 +44,13 @@
                 <div class="row" style="background: #333;color: #fff;">
                     <div class="col-md-6">
                         <div class="dropdown head-part">
-                            <a class="m1-link" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                            <a class="m1-link" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true">
                                 <img src="<?php echo site_url('assets/front');?>/img/upside.png" alt="" />
                             </a>
-                            <div class="dropdown-menu m1" role="menu" aria-labelledby="dLabel">
-                                <h4>Sultania Hotel Istanbul</h4>
-                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> My Reservation</a>
-                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Packages Map &amp; Directions</a>
-                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
-                                <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
-                            </div>
+                            <div class="hotel-drop-menu" role="menu" aria-labelledby="dLabel">
+
+                            wdadwadawdwadw
+                            </div><!-- hotel detail end -->
                         </div>
                     </div>
                     <div class="pull-right" style="position:relative">

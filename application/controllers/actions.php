@@ -249,7 +249,7 @@ class Actions extends RA_Controller {
         	if ($res_code) {
         		$data['reservation_code']=$res_code;
         	}else{
-        		$data['reservation_code']= rand_uniqid($this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
+        		$data['reservation_code']= rand_uniqid((int)$this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
         	}
 
         	$data['pincode'] 		= $pincode;

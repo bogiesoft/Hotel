@@ -253,3 +253,59 @@ a.add-room:hover{text-decoration:none;background-color:#eef7ff}
 .stay-settings table tr td:first-child{width:55px;text-align:center}
 
 img.ui-datepicker-trigger{cursor:pointer}
+
+
+/* ---------------------------------------------------- hotel details page */
+
+.hsd-cont{width:260px;float:left;min-height:150px;padding:30px 14px 0 10px;position:relative;font-size:12px}
+.hsd-shadow{position:absolute;top:0;left:260px;width:58px;height:539px;background:transparent url(hsd-shadow.png) no-repeat}
+.hsd-logo{text-align:center;margin-bottom:40px}
+.hsd-gallery{margin-bottom:15px;padding-left:9px;overflow:hidden}
+.hsd-gallery img{float:left;width:74px;height:50px;border:solid 1px #fff;}
+.hsd-title-o{height:61px;background:transparent url(hsd-title.png) no-repeat;padding:8px 0 0 14px;font-weight:bold}
+.hsd-ta-logo{padding:20px;margin-bottom:30px;margin-top:10px}
+.cdsROW.narrow{margin:0 auto}
+.hsd-title-b{height:61px;background:transparent url(hsd-title-b.png) no-repeat;padding:8px 0 0 14px;font-weight:bold;color:#fff;display:inline-block;width:100%}
+.hsd-map{height:150px;margin-top:-28px;background:#f0f0f0;margin-bottom:50px}
+
+.hrd-cont{margin-left:260px;min-height:150px;font-size:12px;padding-right:35px;}
+.hrd-desc{height:134px;padding:50px 0 0 20px}
+.hrd-cover{background-color:#000}
+.hrd-cover img{height:244px}
+.hrd-title{display:inline-block;margin-bottom:10px}
+.hrd-title2{text-transform:uppercase;color:#003580;font-weight:bold;margin:15px 0}
+.hrd-box{padding:16px;border:solid 1px #d9e1ec;background-color:#f7f7f7;overflow:hidden}
+.hrd-rsn{margin-bottom:15px}
+.hrd-rsn-text{display:block;margin-left:44px}
+
+.fac-title{margin-bottom:5px;}
+.fac ul{list-style-type:none}
+
+.hrd-row{padding:10px 0;border-bottom:solid 1px #c0d1e7}
+.hrd-row:last-child{border:none}
+
+.hrd-label{display:inline-block;width:150px;font-weight:bold;vertical-align:top}
+.hrd-val{display:inline-block;padding-left:10px;}
+
+.hotel-info-menu {
+  right: 0;
+  left: auto;
+  width: 450px;
+  color: #333;
+  padding: 0;
+}
+
+.hotel-drop-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  padding: 16px;
+  font-family: Arial;
+  font-size: 12px;
+  background-color: #fff;
+  color: #000;
+  z-index: 10000;
+  box-shadow: 0 0 100px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
