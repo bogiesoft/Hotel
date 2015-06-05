@@ -530,7 +530,7 @@ function countries(){
 	$ci->load->driver('cache',array('apdapter'=>'file','backup'=>'file'));
 	$file = 'countries';
 	if (!$cache = $ci->cache->get($file)) {
-		$cache = $ci->db->query("SELECT * FROM countries")->result();
+		$cache = $ci->db->query("SELECT * FROM country")->result();
 	 	$ci->cache->file->save('countries', $cache, 5000);
 	}
 

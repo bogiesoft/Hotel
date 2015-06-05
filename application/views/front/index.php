@@ -841,12 +841,17 @@ $this->load->view('front/header');
                         Country: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                        <?php $countries = countries(); ?>
-                        <?php $user_country = user_location($this->input->ip_address()); ?> 
+                        <?php
+                        $phone_code = '';
+                        $countries = countries(); 
+                        ?>
+                        <?php $user_country = geoip_country_code_by_name($this->input->ip_address()); ?> 
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
-                             $selected =  ($user_country == $country->code) ? 'selected="selected"' : '';
-                              echo '<option value="'.$country->code.'" '.$selected.'>'.$country->name.'</option>';
+                             $selected =  ($user_country == $country->iso) ? 'selected="selected"' : '';
+                             $phone_code = ($user_country == $country->iso) ? $country->phonecode : '';
+
+                              echo '<option value="'.$country->iso.'" '.$selected.'>'.$country->name.'</option>';
                             }?>
                             </select>
                         </div>
@@ -855,8 +860,9 @@ $this->load->view('front/header');
                         <div class="col-md-4 text-right">
                         Telephone:
                         </div>
+                       
                         <div class="col-md-8">
-                            <input type="text" name="phone" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="phone" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5" />
                         </div>
                     </div>
                     <div class="row">
