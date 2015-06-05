@@ -49,7 +49,7 @@
                             </a>
                             <div class="hotel-drop-menu" role="menu" aria-labelledby="dLabel">
 
-                            wdadwadawdwadw
+                            
                             </div><!-- hotel detail end -->
                         </div>
                     </div>
