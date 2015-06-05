@@ -842,12 +842,10 @@ $this->load->view('front/header');
                         </div>
                         <div class="col-md-8">
                         <?php $countries = countries(); ?>
-                       <!-- <?php $user_ip = user_location($this->input->ip_address()); ?> -->
-                       <!-- <?php echo $user_ip; ?> -->
-                       <!-- <?php echo $this->input->ip_address(); ?> -->
+                        <?php $user_country = user_location($this->input->ip_address()); ?> 
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
-                             $selected =  ($user_ip == $country->code) ? 'selected="selected"' : '';
+                             $selected =  ($user_country == $country->code) ? 'selected="selected"' : '';
                               echo '<option value="'.$country->code.'" '.$selected.'>'.$country->name.'</option>';
                             }?>
                             </select>
