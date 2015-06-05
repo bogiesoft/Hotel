@@ -237,7 +237,7 @@ class Hotel extends RA_Controller {
 
 		
 		$total_room = 0;
-		echo '<pre>'; print_r($rooms); echo '</pre>'; 
+		//echo '<pre>'; print_r($rooms); echo '</pre>'; 
 		foreach ($rooms as $r => $room) {
 
 			$room_id = explode('-', $r);
@@ -250,7 +250,7 @@ class Hotel extends RA_Controller {
 
 			unset($rooms[$r]);
 		}
-		echo '<pre>'; print_r($rooms); echo '</pre>';
+		//echo '<pre>'; print_r($rooms); echo '</pre>';
 
 		$rooms['total_room'] = $total_room;
 
