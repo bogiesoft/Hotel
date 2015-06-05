@@ -233,7 +233,7 @@ class Hotel extends RA_Controller {
 		$hotel		 = $this->front_model->hotel_info($reservation->hotel_id);
 
 		//rooms details
-		$rooms = json_decode($reservation->rooms);
+		$rooms = json_decode($reservation->rooms,TRUE);
 
 		
 		$total_room = 0;
@@ -241,17 +241,18 @@ class Hotel extends RA_Controller {
 		foreach ($rooms as $r => $room) {
 
 			$room_id = explode('-', $r);
-			$room_id = $room->room_id;
+			$room_id = $room['room_id'];
 
-			@$rooms->booked->$room_id = $room;
-			$rooms->booked->$room_id->details = $this->front_model->get_room_details($room_id);
-			$rooms->booked->$room_id->photos = $this->front_model->get_room_photos($room_id);
-			$total_room += $room->qty;
+			@$rooms['booked'][$room_id]['info'] = $room;
+			$rooms['booked'][$room_id]['details'] = $this->front_model->get_room_details($room_id);
+			$rooms['booked'][$room_id]['photos'] = $this->front_model->get_room_photos($room_id);
+			$total_room += $room['qty'];
 
-			unset($rooms->$r);
+			unset($rooms[$r]);
 		}
+		echo '<pre>'; print_r($rooms); echo '</pre>';
 
-		$rooms->total_room = $total_room;
+		$rooms['total_room'] = $total_room;
 
 		//generate data to send view
 		$data['reservation'] 	= $reservation;

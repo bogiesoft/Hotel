@@ -92,7 +92,7 @@
                         <div class="col-md-2" style="height:135px;border-right:solid 1px #999;text-align:center">
                             <span style="line-height:1.2em;display:inline-block;padding:0">
                                 ROOM<br />
-                                <span style="font-size:68px;font-weight:bold;line-height:1em"><?php echo $rooms->total_room; ?></span><br />
+                                <span style="font-size:68px;font-weight:bold;line-height:1em"><?php echo $rooms['total_room']; ?></span><br />
                             </span>
                             <span style="font-size:68px;font-weight:bold;line-height:1em;color:#878787">/</span>
                             <span style="line-height:1.2em;display:inline-block;padding:0">
@@ -137,14 +137,14 @@
                     <div style="font-weight:bold;margin:20px 0">Room Details</div>
 
                     <?php
-                    foreach ($rooms->booked as $key => $room) : ?>
+                    foreach ($rooms['booked'] as $key => $room) : ?>
                     <div class="room-details">
                         <div class="room-details-item">
                             <div class="pull-left">
-                                <img src="<?php echo $room->photos['0']['photo_url']; ?>" width="200" height="150" />
+                                <img src="<?php echo $room['photos']['0']['photo_url']; ?>" width="200" height="150" />
                             </div>
                             <div style="margin-left:207px">
-                                <div class="room-details-title"><?php echo $room->name; ?></div>
+                                <div class="room-details-title"><?php echo $room['info']['name']; ?></div>
                                 <div style="margin-bottom:10px">
                                     for <span class="editable">{guest name}</span>
                                     <!--
@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="room-details-desc">
 
-                                    <?php $specs = $room->details->room_units;
+                                    <?php $specs = $room['details']->room_units;
                                     $specs = explode(',', $specs);
                                     //print_r($specs);
                                     $spec_cnt = count($specs);
