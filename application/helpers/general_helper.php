@@ -749,7 +749,7 @@ function get_extra_image($id){
 * Get user location 
 */
 function user_location($ip){
-	$query = @unserialize(file_get_contents('http://ip-api.com/php2/'.$ip));
+	$query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
 
 	if($query && $query['status'] == 'success') {
 		return $query['countryCode'];
