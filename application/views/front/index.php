@@ -842,8 +842,9 @@ $this->load->view('front/header');
                         </div>
                         <div class="col-md-8">
                         <?php $countries = countries(); ?>
-                       <?php $user_ip = ip_info($this->input->ip_address(), "countrycode"); ?>
+                       <!-- <?php $user_ip = user_location($this->input->ip_address()); ?> -->
                        <!-- <?php echo $user_ip; ?> -->
+                       <!-- <?php echo $this->input->ip_address(); ?> -->
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
                              $selected =  ($user_ip == $country->code) ? 'selected="selected"' : '';
