@@ -1,8 +1,12 @@
 $(function() {
- $('#reservation-menu').click(function (e) {
-            e.stopPropagation();
-        });
-
+ 
+    $('#reservation-menu').click(function (e) {
+        e.stopPropagation();
+    });
+    
+    $('#hotel-details').click(function (e) {
+        e.stopPropagation();
+    });
 
 // ---------------------------------- on page loade
 

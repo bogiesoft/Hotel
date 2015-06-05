@@ -42,15 +42,208 @@
                     <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
                 </div>
                 <div class="row" style="background: #333;color: #fff;">
-                    <div class="col-md-6">
-                        <div class="dropdown head-part">
-                            <a class="m1-link" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="true">
-                                <img src="<?php echo site_url('assets/front');?>/img/upside.png" alt="" />
+                    <div class="pull-left">
+                        <div class="head-part">
+                            <a class="dropdown-toggle" id="dLabel" data-target="#" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                                <?php echo $hotel_info->name; ?> | View Details 
                             </a>
-                            <div class="hotel-drop-menu" role="menu" aria-labelledby="dLabel">
+                            <div id="hotel-details" class="drop-menu" role="menu">
+                                <div>
+                                    <div class="hsd-cont">
+                                        <div class="hsd-shadow"></div>
+                                        <div class="hsd-logo">
+                                            <img src="<?php  echo $hotel_info->hotel_logo; ?>">
+                                        </div>
+                                        <div class="hsd-gallery">
+                                            <?php 
+                                            foreach ($hotel_photos as $key => $photo): ?>
+                                            
+                                            <a href="<?php echo $photo->photo_url; ?>" class="fancybox">
+                                                <img src="http://i0.wp.com/<?php echo substr($photo->photo_url, 7);?>?resize=75,50"/>
+                                        
+                                            </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="hsd-title-o">
+                                            Why stay a {hotel name}
+                                        </div>
+                                        <div style="line-height:1.6em">
+                                            <span class="bold">
+                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;Best Price Guaranteed
+                                            </span>
+                                            <br>
+                                            <span class="bold">
+                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;Low rates
+                                            </span>
+                                            <br>
+                                            <span class="bold">
+                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;The best of Istanbul
+                                            </span>
+                                            <br>
 
-                            
-                            </div><!-- hotel detail end -->
+                                        </div>
+                                        <div class="hsd-ta-logo">
+                                            <div id="TA_cdsratingsonlynarrow706" class="TA_cdsratingsonlynarrow"><div id="CDSRATINGWIDGET706" class="cdsROW white    narrow "> <div id="CDSROWCONTAINER706" class="cdsROWContainer"> <div id="CDSROWLOC706" class="cdsComponent cdsLocName"> <a id="CDSLOCINNER" target="_blank" href="http://www.tripadvisor.com/Hotel_Review-g293974-d1732739-Reviews-Hotel_Sultania-Istanbul.html" onclick="ta.cds.handleTALink($cdsConfig.getMcid()); return true;">Hotel Sultania</a> </div> <div id="CDSROWRATING706" class="cdsComponent cdsRating"> <img src="http://e2.tacdn.com/img2/t4b/bldashboard/bubbleratings/5.0.png" alt="5.0 of 5 stars"> <span> 2,069 Reviews </span> </div> <div id="CDSROWLOGO706" class="cdsComponent logo"> <a target="_blank" href="http://www.tripadvisor.com/"><img src="http://www.tripadvisor.com/img/cdsi/img2/branding/tripadvisor_logo_transp_340x80-18034-2.png" alt="TripAdvisor"></a> </div> </div> </div>  </div>
+                                            <script src="http://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=706&amp;locationId=1732739&amp;lang=en_US&amp;border=false&amp;display_version=2"></script><script src="http://www.tripadvisor.com/WidgetEmbed-cdsratingsonlynarrow?border=false&amp;display_version=2&amp;locationId=1732739&amp;uniq=706&amp;lang=en_US"></script>
+                                        </div>
+                                        <div class="hsd-title-b">
+                                            Show map | <span style="font-weight:normal;font-style:italic">Were we are</span>
+                                        </div>
+                                        <div class="hsd-map">
+
+                                        </div>
+                                        <img src="img/adv.jpg">
+                                    </div>
+                                    <div class="hrd-cont">
+                                        <div class="hrd-desc">
+                                            <span class="bold hrd-title">WELCOME TO HOTEL SULTANIA HOTEL ISTANBUL</span><br>
+                                            “Feel like a Sultan” in Hotel Sultania, a luxury boutique hotel in the old city Istanbul.<br>
+                                            Hotel Sultania will make you "feel like a sultan" in its 42 luxury rooms, each of which harmonizes the modern lifestyle with traditional Ottoman touch.
+                                        </div>
+                                        <div class="hrd-cover">
+                                            <img src="img/hrd-img.jpg">
+                                        </div>
+                                        <div style="padding:0 0 0 20px">
+                                            <br>
+                                            The Sultania's guests have free access to the hotel's indoor pool and well-equipped gym. A traditional Turkish hammam and sauna are also available, and staff at the 24-hour reception desk can arrange car rental service.<br>
+                                            <br>
+                                            Hotel Sultania is less than a 5-minute walk from many central Istanbul attractions including Topkapi Palace and Gülhane Park. Many restaurants and boutiques are within a 10-minute walk. The tram station is within a 4-minute walking distance.<br>
+
+                                            <div class="hrd-title2">3 reasons to choose  { hotel name }</div>
+
+                                            <div class="hrd-box">
+                                                <div class="col-md-6 hrd-rsn">
+                                                    <span class="sprite check-rblue pull-left"></span>
+                                                    <span class="hrd-rsn-text">
+                                                        <span class="bold">The staff speak English</span><br>
+                                                        Hotel Sultania's staff speak: Arabic, English, Russian and Spanish<br>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6 hrd-rsn">
+                                                    <span class="sprite check-rblue pull-left"></span>
+                                                    <span class="hrd-rsn-text">
+                                                        <span class="bold">The staff speak English</span><br>
+                                                        Hotel Sultania's staff speak: Arabic, English, Russian and Spanish<br>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6 hrd-rsn">
+                                                    <span class="sprite check-rblue pull-left"></span>
+                                                    <span class="hrd-rsn-text">
+                                                        <span class="bold">The staff speak English</span><br>
+                                                        Hotel Sultania's staff speak: Arabic, English, Russian and Spanish<br>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="hrd-title2">Facilities of  { hotel name }</div>
+                                            <div style="overflow:hidden">
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 fac">
+                                                    <span class="bold fac-title">Bathroom</span>
+                                                    <ul>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
+                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="hrd-box">
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Check-in</span>
+                                                    <span class="hrd-val">From 13:00 hours </span>
+                                                </div>
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Check-out</span>
+                                                    <span class="hrd-val">From 13:00 hours </span>
+                                                </div>
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Cancellation / prepayment</span>
+                                                    <span class="hrd-val">
+                                                        Cancellation and prepayment policies vary according to room type.<br>
+                                                        Please check the room conditions when selecting your room above.
+                                                    </span>
+                                                </div>
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Children and extra beds</span>
+                                                    <span class="hrd-val">
+                                                        All children are welcome.<br>
+                                                        Free! All children under 7 years stay free of charge when using existing beds.<br>
+                                                        Free! All children under 2 years stay free of charge for children's cots/cribs.<br>
+                                                        The maximum number of children's cots/cribs in a room is 1.
+                                                    </span>
+                                                </div>
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Pets</span>
+                                                    <span class="hrd-val">Pets are not allowed.</span>
+                                                </div>
+                                                <div class="hrd-row">
+                                                    <span class="hrd-label">Cards accepted at this property</span>
+                                                    <span class="hrd-val">
+                                                        <span class="credit-card visa"></span>
+                                                        <span class="credit-card master"></span>
+                                                        <span class="credit-card maestro"></span>
+                                                        <span class="credit-card club"></span>
+                                                        <span class="credit-card discover"></span>
+                                                        <br>
+                                                        <br>
+                                                        Hover over the cards for more details
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                            $(".fancybox").fancybox();
+                                       
+                                    </script>
+                                </div>
+                            </div><!-- detail end -->
+
+
                         </div>
                     </div>
                     <div class="pull-right" style="position:relative">

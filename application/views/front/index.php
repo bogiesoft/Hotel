@@ -862,12 +862,33 @@ $this->load->view('front/header');
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-right">
-                        Telephone:
+                        Telephone: <span class="c-f00">*</span>
                         </div>
                        
                         <div class="col-md-8">
                             <input type="text" name="phone" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5" />
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Mobile:
+                        </div>
+                       
+                        <div class="col-md-8">
+                            <input type="text" name="mobile" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Send Information Sms: 
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" name="sendsms" value="1" class="b1s-000 mtb-5" checked /> Yes
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" name="sendsms" value="0" class="b1s-000 mtb-5" /> No
+                        </div>
+                        <div class="col-md-4"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-right">

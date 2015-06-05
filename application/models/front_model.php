@@ -19,6 +19,14 @@ class Front_Model extends CI_Model{
 
 	}
 
+	function get_hotel_photos($id){
+		return $this->db->select('*')
+			->from('hotel_photos')
+			->where('hotel_id',$id)
+			->get()
+			->result();
+	}
+
 
 	function get_hotel_rooms($hotel_id,$arr=array()){
 		$child 		= $arr['child'];

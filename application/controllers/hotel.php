@@ -170,6 +170,7 @@ class Hotel extends RA_Controller {
 		$this->session->set_userdata('options',$data['options']);
 
 		$data['hotel_info'] 	= $hotel;
+		$data['hotel_photos']	= $this->front_model->get_hotel_photos($hotel_id);
 		//$data['rooms'] 			= array_orderby($arr['rooms'],'single_price',SORT_ASC);
 		$data['rooms'] 			= $arr['rooms'];
 

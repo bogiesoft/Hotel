@@ -264,6 +264,7 @@ class Actions extends RA_Controller {
         	$data['city'] 			= $this->input->post('city');
         	$data['country'] 		= $this->input->post('country');
         	$data['phone'] 			= $this->input->post('phone');
+        	$data['mobile'] 		= $this->input->post('mobile');
         	$data['email'] 			= $this->input->post('email');
         	$data['adults'] 		= $this->input->post('adults');
         	$data['children'] 		= $this->input->post('children');
@@ -314,8 +315,8 @@ class Actions extends RA_Controller {
         	//print_r($room_details);
 
         	
-			$data['rhash'] = $this->session->userdata('my_session_id');
-
+			$data['rhash'] = $this->session->userdata('my_session_id');			
+        		
 			
 			if ($res_code) {
 
@@ -341,8 +342,15 @@ class Actions extends RA_Controller {
         		echo json_encode(array('status'=>'success','data'=>$data));
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
+
         		//send mail
         		$this->send_information_mail($data,$res_code);
+        		
+        		//send sms
+        		if ($this->input->post('sendsms')) {
+        			$this->send_information_sms($data,$res_code);
+        		}
+        		
         	}else{
         		echo json_encode(array('status'=>'error','errors'=>'Database Error'));
         	}
@@ -390,6 +398,60 @@ class Actions extends RA_Controller {
 	}
 
 
+	/*
+	* Send Sms
+	*/
+	function send_information_sms($data,$res_code){
+
+		$hotel_name = url_slug($data['hotel_info']->name);
+		$res_code  = $data['reservation_code'];
+		$pincode  = $data['pincode'];
+		$from = $data['checkin'];
+		$to  = $data['checkout'];
+		$price = $data['total_price'];
+		$currency = $data['hotel_info']->currency;
+
+		$msj = $hotel_name."\n"."Reservation Code:".$res_code."\n"."Pincode:".$pincode."\n"."From:".$from."\n"."To:".$to."\n"."Total:".$price.$currency."\n";
+
+		$msj = urlencode($msj);
+		
+		$user = "metinkoca";
+		$password = "eZWdaZaOJDcVNG";
+		$api_id = "3545801";
+		$baseurl ="http://api.clickatell.com";
+
+		//$text = urlencode("This is an example message");
+		$text = $msj;
+		//$to = "00123456789";
+		$to = $data['mobile'];
+
+		// auth call
+		$url = "$baseurl/http/auth?user=$user&password=$password&api_id=$api_id";
+
+		// do auth call
+		$ret = file($url);
+
+		// explode our response. return string is on first line of the data returned
+		$sess = explode(":",$ret[0]);
+		if ($sess[0] == "OK") {
+
+		    $sess_id = trim($sess[1]); // remove any whitespace
+		    $url = "$baseurl/http/sendmsg?session_id=$sess_id&to=$to&text=$text";
+
+		    // do sendmsg call
+		    $ret = file($url);
+		    $send = explode(":",$ret[0]);
+
+		    if ($send[0] == "ID") {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		} else {
+		    return false;
+		}
+		
+	}
 
 	/*
 	* Credit Card Luhn algorithm

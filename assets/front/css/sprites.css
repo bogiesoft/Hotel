@@ -75,6 +75,13 @@
 .flag-70{background-position:-60px -680px}
 .flag-71{background-position:-60px -700px}
 
+.credit-card{background:transparent url(credit-cards.png) no-repeat;display:inline-block}
+
+.visa{background-position:-5px 0;width:45px;height:28px}
+.master{background-position:-55px 0;width:45px;height:28px}
+.maestro{background-position:-105px 0;width:45px;height:28px}
+.discover{background-position:-156px 0;width:45px;height:28px}
+.club{background-position:-207px 0;width:45px;height:28px}
 
 .sprite{background:transparent url(main-sprite.png) no-repeat;display:inline-block}
 .tick-green{background-position:-23px -202px}
@@ -128,3 +135,9 @@
 .bed-black{background-position:-144px -607px;width:14px;height:14px}
 
 .bed2-black{background-position:-172px -607px;width:14px;height:14px}
+
+.check-rblue{background-position:-101px -61px;width:32px;height:32px}
+
+.check-sblue{background-position:-9px -204px;width:10px;height:10px}
+
+.check-green{background-position:-22px -203px;width:16px;height:12px}

@@ -309,3 +309,6 @@ img.ui-datepicker-trigger{cursor:pointer}
   box-shadow: 0 0 100px rgba(0,0,0,0.5);
   overflow: hidden;
 }
+
+#dLabel{background-image:url(mnu-down.png);padding-left:66px;background-position: 10px center;background-repeat:no-repeat}
+.open #dLabel{background-image:url(mnu-up.png)}
