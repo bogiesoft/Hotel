@@ -238,13 +238,15 @@ class Hotel extends RA_Controller {
 		
 		$total_room = 0;
 		foreach ($rooms as $r => $room) {
-			//$room_id = explode('-', $r);
-			$room_id = $room->room_id;
+
+			$room_id = explode('-', $r);
+			$room_id = $room_id['0'];
+
 			@$rooms->booked->$room_id = $room;
 			$rooms->booked->$room_id->details = $this->front_model->get_room_details($room_id);
 			$rooms->booked->$room_id->photos = $this->front_model->get_room_photos($room_id);
 			$total_room += $room->qty;
-			
+
 			unset($rooms->$r);
 		}
 
