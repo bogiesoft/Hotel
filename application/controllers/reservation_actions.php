@@ -1126,8 +1126,8 @@ class Reservation_actions extends ADMIN_Controller {
 		$config['max_height']    =   "2400";
 
 		$config['maintain_ratio']   = FALSE;      
-        $config['width'] = "655";      
-        $config['height'] = "255";
+        $config['width'] = "845";      
+        $config['height'] = "245";
         $config2['overwrite'] = TRUE;
 		$file_name = $hotel_id.'_cover';
 		$config['file_name'] = $file_name;
@@ -1145,8 +1145,8 @@ class Reservation_actions extends ADMIN_Controller {
 			$config2['image_library'] = 'gd2';
 			$config2['source_image'] = $finfo['full_path'];
 			$config2['maintain_ratio'] = FALSE;
-			$config2['width'] = 655;
-			$config2['height'] = 255;
+			$config2['width'] = 845;
+			$config2['height'] = 245;
 			$config2['overwrite'] = TRUE;
 			$this->load->library('image_lib',$config2); 
 

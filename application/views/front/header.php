@@ -41,6 +41,7 @@
                     <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
                     <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
                 </div>
+                <?php $settings = is_object(json_decode($hotel_info->settings)) ? json_decode($hotel_info->settings) : []; ?>
                 <div class="row" style="background: #333;color: #fff;">
                     <div class="pull-left">
                         <div class="head-part">
@@ -65,58 +66,59 @@
                                             <?php endforeach; ?>
                                         </div>
                                         <div class="hsd-title-o">
-                                            Why stay a {hotel name}
+                                            Why stay at <?php echo $hotel_info->name; ?> ?
                                         </div>
                                         <div style="line-height:1.6em">
+                                        
+                                        <?php 
+                                        @$why_stay_at = explode(PHP_EOL,$settings->why_stay_at);
+                                        foreach ($why_stay_at as $reason) :
+                                        ?>
                                             <span class="bold">
-                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;Best Price Guaranteed
+                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;<?php echo $reason; ?>
                                             </span>
                                             <br>
-                                            <span class="bold">
-                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;Low rates
-                                            </span>
-                                            <br>
-                                            <span class="bold">
-                                                <span class="sprite check-green"></span>&nbsp;&nbsp;&nbsp;The best of Istanbul
-                                            </span>
-                                            <br>
+                                        <?php endforeach; ?>
 
                                         </div>
                                         <div class="hsd-ta-logo">
-                                            <div id="TA_cdsratingsonlynarrow706" class="TA_cdsratingsonlynarrow"><div id="CDSRATINGWIDGET706" class="cdsROW white    narrow "> <div id="CDSROWCONTAINER706" class="cdsROWContainer"> <div id="CDSROWLOC706" class="cdsComponent cdsLocName"> <a id="CDSLOCINNER" target="_blank" href="http://www.tripadvisor.com/Hotel_Review-g293974-d1732739-Reviews-Hotel_Sultania-Istanbul.html" onclick="ta.cds.handleTALink($cdsConfig.getMcid()); return true;">Hotel Sultania</a> </div> <div id="CDSROWRATING706" class="cdsComponent cdsRating"> <img src="http://e2.tacdn.com/img2/t4b/bldashboard/bubbleratings/5.0.png" alt="5.0 of 5 stars"> <span> 2,069 Reviews </span> </div> <div id="CDSROWLOGO706" class="cdsComponent logo"> <a target="_blank" href="http://www.tripadvisor.com/"><img src="http://www.tripadvisor.com/img/cdsi/img2/branding/tripadvisor_logo_transp_340x80-18034-2.png" alt="TripAdvisor"></a> </div> </div> </div>  </div>
-                                            <script src="http://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=706&amp;locationId=1732739&amp;lang=en_US&amp;border=false&amp;display_version=2"></script><script src="http://www.tripadvisor.com/WidgetEmbed-cdsratingsonlynarrow?border=false&amp;display_version=2&amp;locationId=1732739&amp;uniq=706&amp;lang=en_US"></script>
+                                           <?php echo @$settings->trip_connect_widget; ?>
                                         </div>
                                         <div class="hsd-title-b">
                                             Show map | <span style="font-weight:normal;font-style:italic">Were we are</span>
                                         </div>
                                         <div class="hsd-map">
-
+                                        <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=235x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C<?php echo @$settings->map_lat; ?>,<?php echo @$settings->map_long; ?>"; ?>
                                         </div>
-                                        <img src="img/adv.jpg">
+                                        <!-- <img src="img/adv.jpg"> -->
                                     </div>
                                     <div class="hrd-cont">
                                         <div class="hrd-desc">
-                                            <span class="bold hrd-title">WELCOME TO HOTEL SULTANIA HOTEL ISTANBUL</span><br>
-                                            “Feel like a Sultan” in Hotel Sultania, a luxury boutique hotel in the old city Istanbul.<br>
-                                            Hotel Sultania will make you "feel like a sultan" in its 42 luxury rooms, each of which harmonizes the modern lifestyle with traditional Ottoman touch.
-                                        </div>
+                                            <span class="bold hrd-title">WELCOME TO HOTEL <?php echo $hotel_info->name; ?></span>
+                                          </div>
                                         <div class="hrd-cover">
-                                            <img src="img/hrd-img.jpg">
+                                            <img src="<?php echo $hotel_info->cover_photo; ?>">
                                         </div>
                                         <div style="padding:0 0 0 20px">
                                             <br>
-                                            The Sultania's guests have free access to the hotel's indoor pool and well-equipped gym. A traditional Turkish hammam and sauna are also available, and staff at the 24-hour reception desk can arrange car rental service.<br>
-                                            <br>
-                                            Hotel Sultania is less than a 5-minute walk from many central Istanbul attractions including Topkapi Palace and Gülhane Park. Many restaurants and boutiques are within a 10-minute walk. The tram station is within a 4-minute walking distance.<br>
-
-                                            <div class="hrd-title2">3 reasons to choose  { hotel name }</div>
+                                            <?php echo $hotel_info->description; ?>
+                                            <div class="hrd-title2">3 reasons to choose  <?php echo $hotel_info->name; ?></div>
 
                                             <div class="hrd-box">
                                                 <div class="col-md-6 hrd-rsn">
                                                     <span class="sprite check-rblue pull-left"></span>
                                                     <span class="hrd-rsn-text">
-                                                        <span class="bold">The staff speak English</span><br>
-                                                        Hotel Sultania's staff speak: Arabic, English, Russian and Spanish<br>
+                                                        <span class="bold">We speak;</span>
+                                                        <br>
+                                                        <?php echo $hotel_info->name; ?>'s staff speak:
+
+                                                        <?php 
+                                                        @$spoken_languages = $settings->spoken_languages;
+                                                        foreach ($spoken_languages as $lang) {
+                                                           $langs = languages();
+                                                           echo $langs[$lang]['name'].',';
+                                                        }?>
+                                                        <br>
                                                     </span>
                                                 </div>
                                                 <div class="col-md-6 hrd-rsn">
@@ -134,71 +136,48 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="hrd-title2">Facilities of  { hotel name }</div>
+                                            <div class="hrd-title2">Facilities of  <?php echo $hotel_info->name; ?></div>
                                             <div style="overflow:hidden">
                                                 <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
                                                     <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    <?php 
+                                                    $specs = explode(',', $hotel_info->hotel_specs);
+                                                    foreach ($specs as $spec) : 
+                                                    ?>
+                                                    <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo hotel_specs($spec); ?></li>
+                                                    <?php endforeach; ?>
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
                                                     <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    <?php 
+                                                    $specs = explode(',', $hotel_info->restourant_specs);
+                                                    foreach ($specs as $spec) : 
+                                                    ?>
+                                                    <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo restourant_specs($spec); ?></li>
+                                                    <?php endforeach; ?>
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
                                                     <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
+                                                    <?php 
+                                                    $specs = explode(',', $hotel_info->sport_specs);
+                                                    foreach ($specs as $spec) : 
+                                                    ?>
+                                                    <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo sport_specs($spec); ?></li>
+                                                    <?php endforeach; ?>
                                                     </ul>
                                                 </div>
-                                                <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
-                                                    <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
-                                                    <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-4 fac">
-                                                    <span class="bold fac-title">Bathroom</span>
-                                                    <ul>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Free Toiletires</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Hair Dryer</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Slippers</li>
-                                                        <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;Bathrobe</li>
-                                                    </ul>
-                                                </div>
+
                                             </div>
                                             <div class="hrd-box">
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Check-in</span>
-                                                    <span class="hrd-val">From 13:00 hours </span>
+                                                    <span class="hrd-val">From <?php echo @$settings->checkin_time; ?> </span>
                                                 </div>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Check-out</span>
-                                                    <span class="hrd-val">From 13:00 hours </span>
+                                                    <span class="hrd-val">From <?php echo @$settings->checkout_time; ?> hours </span>
                                                 </div>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Cancellation / prepayment</span>
@@ -218,16 +197,20 @@
                                                 </div>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Pets</span>
+                                                    <?php if(isset($settings->pets_allowed) and $settings->pets_allowed == 'yes') : ?>
+                                                    <span class="hrd-val">Pets are allowed.</span>
+                                                    <?php else: ?>
                                                     <span class="hrd-val">Pets are not allowed.</span>
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Cards accepted at this property</span>
                                                     <span class="hrd-val">
-                                                        <span class="credit-card visa"></span>
-                                                        <span class="credit-card master"></span>
-                                                        <span class="credit-card maestro"></span>
-                                                        <span class="credit-card club"></span>
-                                                        <span class="credit-card discover"></span>
+                                                        <?php 
+                                                        @$credit_cards = $settings->credit_cards;
+                                                        foreach ($credit_cards as $card) {
+                                                            echo '<span class="credit-card '.$card.'"></span>';
+                                                        }?>
                                                         <br>
                                                         <br>
                                                         Hover over the cards for more details

@@ -484,7 +484,7 @@
                 <div class="form-group">
                 <label class="col-sm-3 control-label">
                 <?php echo lang('cover'); ?>
-                <p>655x255 JPG or PNG</p>
+                <p>845x245 JPG or PNG</p>
                 </label>
                 <div class="col-sm-6">
                 <div id="cover_image"><?php if($hotel->cover_photo) {echo '<img src="'.$hotel->cover_photo.'" />'; } ?></div>
@@ -593,6 +593,14 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('stay_at'); ?></label>
+                <div class="col-sm-6">
+                  <textarea name="settings[why_stay_at]" class="form-control">
+                  <?php echo (isset($settings->why_stay_at)) ? $settings->why_stay_at : ''; ?>
+                  </textarea>
+                </div>
+              </div>
 
             </div> <!-- settings end -->
 

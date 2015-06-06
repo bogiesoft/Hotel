@@ -129,3 +129,4 @@ $lang['checkout_time']		= 'Checkout Time';
 $lang['spoken_languages']	= 'Spoken Languages';
 $lang['credit_cards']		= 'Accepted Credit Cards';
 $lang['pets_allowed']		= 'Pets Allowed';
+$lang['stay_at']			= 'Why stay at hotel?';

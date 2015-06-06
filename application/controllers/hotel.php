@@ -7,6 +7,7 @@ class Hotel extends RA_Controller {
 		parent::__construct();
 		$this->load->helper('general_helper');
 		$this->load->helper('room_helper');
+		$this->load->helper('specs_helper');
 		$this->load->model('front_model');
 		$this->load->library('session');
 
@@ -15,6 +16,7 @@ class Hotel extends RA_Controller {
 
 
 	function index(){
+		$this->lang->load('reservation/hotels','en');
 		//print_r($this->total_room_price);
 		$hotel_id = $this->input->get('hotel_id');
 
