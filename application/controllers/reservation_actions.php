@@ -59,6 +59,8 @@ class Reservation_actions extends ADMIN_Controller {
 		'bank_beneficiary2' => $this->input->post('bank_beneficiary2'),
 		'bank_iban2'	=> $this->input->post('bank_iban2'),
 		'hotel_logo'	=> $this->input->post('logo_image_value'),
+		'cover_photo'	=> $this->input->post('cover_image_value'),
+		'settings'		=> json_encode($this->input->post('settings')),
 		'code'			=> $code
 		);
 
@@ -1105,6 +1107,63 @@ class Reservation_actions extends ADMIN_Controller {
 		}
 
 	}
+
+	/*
+	* Upload Hotel Cover
+	*/
+
+	function upload_hotel_cover_image(){
+		$hotel_id = $this->session->userdata('hotel_id');
+		$config['upload_path']   =   "uploads/".$hotel_id."/logos/";
+
+		if (!is_dir($config['upload_path'])) {
+		    mkdir($config['upload_path'], 0777, TRUE);
+		}
+
+		$config['allowed_types'] =   "gif|jpg|jpeg|png"; 
+		$config['max_size']      =   "1024";
+		$config['max_width']     =   "2400";
+		$config['max_height']    =   "2400";
+
+		$config['maintain_ratio']   = FALSE;      
+        $config['width'] = "655";      
+        $config['height'] = "255";
+        $config2['overwrite'] = TRUE;
+		$file_name = $hotel_id.'_cover';
+		$config['file_name'] = $file_name;
+
+		$this->load->library('upload',$config);
+
+
+		if(!$this->upload->do_upload('userfile',$file_name)){
+		   echo $this->upload->display_errors();
+		}else{
+
+			$finfo=$this->upload->data();
+
+			//$image_data = $this->upload->data();
+			$config2['image_library'] = 'gd2';
+			$config2['source_image'] = $finfo['full_path'];
+			$config2['maintain_ratio'] = FALSE;
+			$config2['width'] = 655;
+			$config2['height'] = 255;
+			$config2['overwrite'] = TRUE;
+			$this->load->library('image_lib',$config2); 
+
+			if ( !$this->image_lib->resize()){
+				echo json_encode(array('status'=>'error'));  
+			}else{
+				$file_name =$finfo['raw_name'].$finfo['file_ext'];
+				$response = site_url('uploads/'.$hotel_id.'/logos/'.$file_name);
+
+				echo json_encode(array('status'=>'success','image'=>$response));
+			}
+
+
+		}
+
+	}
+
 
 	function _createThumbnail($filename){
         $config['image_library']    = "gd2";      

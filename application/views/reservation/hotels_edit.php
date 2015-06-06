@@ -39,6 +39,7 @@
           <li class=""><a href="#accounts" data-toggle="tab"><strong><?php echo lang('bank_accounts'); ?></strong></a></li>
           <li class=""><a href="#photos" data-toggle="tab"><strong><?php echo lang('hotel_photos'); ?></strong></a></li>
           <li class=""><a href="#logo" data-toggle="tab"><strong><?php echo lang('logo'); ?></strong></a></li>
+          <li class=""><a href="#settings" data-toggle="tab"><strong><?php echo lang('settings'); ?></strong></a></li>
       </ul>
     
       <div class="row">
@@ -466,7 +467,11 @@
             <div class="tab-pane" id="logo">
             <div class="row">
                 <div class="form-group">
-                <label class="col-sm-3 control-label"><?php echo lang('logo'); ?></label>
+                <label class="col-sm-3 control-label">
+                <?php echo lang('logo'); ?>
+                <p>200x100 JPG or PNG</p>
+                </label>
+
                 <div class="col-sm-6">
                 <div id="logo_image"><?php if($hotel->hotel_logo) {echo '<img src="'.$hotel->hotel_logo.'" />'; } ?></div>
                 <input type="file" name="userfile" id="uploadedfile">
@@ -474,7 +479,124 @@
                 </div>
               </div>
             </div>
+
+            <div class="row">
+                <div class="form-group">
+                <label class="col-sm-3 control-label">
+                <?php echo lang('cover'); ?>
+                <p>655x255 JPG or PNG</p>
+                </label>
+                <div class="col-sm-6">
+                <div id="cover_image"><?php if($hotel->cover_photo) {echo '<img src="'.$hotel->cover_photo.'" />'; } ?></div>
+                <input type="file" name="userfile" id="uploadcover">
+                <input type="hidden" name="cover_image_value" id="cover_image_value" value="<?php echo $hotel->cover_photo; ?>">
+                </div>
+              </div>
+            </div>
+
+
             </div> <!-- logo end -->
+
+
+            <div class="tab-pane" id="settings">
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('map_coordinates'); ?></label>
+                <div class="col-sm-3">
+                  <input type="text" name="settings[map_lat]" placeholder="<?php echo lang('map_lat'); ?>"  value="<?php echo @$settings->map_lat; ?>" class="form-control input-sm">
+                </div>
+                <div class="col-sm-3">
+                  <input type="text" name="settings[map_long]" placeholder="<?php echo lang('map_long'); ?>" value="<?php echo @$settings->map_long; ?>" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('trip_connect_widget'); ?></label>
+                <div class="col-sm-6">
+                  <textarea name="settings[trip_connect_widget]" class="form-control">
+                  <?php echo (isset($settings->trip_connect_widget)) ? $settings->trip_connect_widget : ''; ?>
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-3">
+                <?php echo lang('checkin_time'); ?>
+                  <input type="text" name="settings[checkin_time]" placeholder="14:00"  value="<?php echo @$settings->checkin_time; ?>" class="form-control input-sm">
+                </div>
+                <div class="col-sm-3">
+                <?php echo lang('checkout_time'); ?>
+                  <input type="text" name="settings[checkout_time]" placeholder="11:00" value="<?php echo @$settings->checkout_time; ?>" class="form-control input-sm">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('spoken_languages'); ?></label>
+
+                <div class="col-sm-6">
+                <div class="row">
+                <?php 
+                $languages = (isset($settings->spoken_languages) and is_array($settings->spoken_languages) )? $settings->spoken_languages : [] ;
+                $i = 0;
+                foreach (languages() as $key => $lang) :
+                $i++;
+                $checked = in_array($key, $languages) ? 'checked' : '' ;
+                ?>
+                <div class="col-sm-4">
+                    <div class="ckbox ckbox-success">
+                    <input type="checkbox" name="settings[spoken_languages][]" id="langauges_<?php echo $lang['code'];?>" value="<?php echo $key; ?>" <?php echo $checked; ?>>
+                    <label for="langauges_<?php echo $lang['code'];?>"><?php echo $lang['name']; ?></label>
+                    </div>
+                </div>
+                <?php if($i % 3 == 0) { echo '</div><div class="row">'; } ?>
+                <?php endforeach; ?>
+                </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('credit_cards'); ?></label>
+
+                <div class="col-sm-6">
+                <div class="row">
+                  <?php 
+                  $cards = (isset($settings->credit_cards) and is_array($settings->credit_cards) )? $settings->credit_cards : [] ;
+                  $i=0;
+                  foreach (credit_cards() as $key => $card) :
+                  $i++;
+                  $checked = in_array($card['class'], $cards) ? 'checked' : '' ;
+                  ?>
+                  <div class="col-sm-4">
+                      <div class="ckbox ckbox-success">
+                      <input type="checkbox" name="settings[credit_cards][]" id="ccards_<?php echo $card['class'];?>" value="<?php echo $card['class']; ?>" <?php echo $checked; ?>>
+                      <label for="ccards_<?php echo $card['class'];?>"><?php echo $card['name']; ?></label>
+                      </div>
+                  </div>
+                  <?php if($i % 3 == 0) { echo '</div><div class="row">'; } ?>
+                  <?php endforeach; ?>
+                </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label"><?php echo lang('pets_allowed'); ?></label>
+                <div class="col-sm-3">
+                  <select name="settings[pets_allowed]" size="1" class="form-control input-sm">
+                    <option value="yes" <?php echo @$settings->pets_allowed == 'yes' ? 'selected="selected"' : ''; ?>>
+                      <?php echo lang('yes'); ?>
+                    </option>
+                    <option value="no" <?php echo @$settings->pets_allowed == 'no' ? 'selected="selected"' : ''; ?>>
+                      <?php echo lang('no'); ?>
+                    </option>       
+                  </select>
+                </div>
+              </div>
+
+
+            </div> <!-- settings end -->
+
+
           
             </div> <!-- tab content end -->
 
@@ -709,6 +831,15 @@ function delete_photos(){
             html = '<img src="'+obj.image+'" />';
             $('#logo_image').html(html);
             $('#logo_image_value').val(obj.image);
+          }, 'html');
+      });
+
+      $('#uploadcover').change(function() {
+          $(this).upload(base_url + 'reservation_actions/upload_hotel_cover_image', function(res) {
+            var obj = jQuery.parseJSON( res );
+            html = '<img src="'+obj.image+'" />';
+            $('#cover_image').html(html);
+            $('#cover_image_value').val(obj.image);
           }, 'html');
       });
   });

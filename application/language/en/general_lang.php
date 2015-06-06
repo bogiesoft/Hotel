@@ -55,3 +55,6 @@ $lang['wednesday']	= 'Wednesday';
 $lang['thursday']	= 'Thursday';
 $lang['friday']		= 'Friday';
 $lang['saturday']	= 'Saturday';
+
+$lang['yes']		= 'Yes';
+$lang['no']			= 'No';

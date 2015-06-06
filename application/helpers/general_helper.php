@@ -35,10 +35,24 @@ function languages(){
 	$langs = array(
 		'1' => array('name' => 'English', 'code' => 'en'),
 		'2' => array('name' => 'Türkçe', 'code' => 'tr'),
-		'3' => array('name' => 'Deutsch', 'code' => 'de'));
+		'3' => array('name' => 'Deutsch', 'code' => 'de'),
+		'4' => array('name' => 'Italian', 'code' => 'it'),
+		);
 
 	return $langs;
 	
+}
+
+function credit_cards(){
+	$cards = array(
+		'1' => array('name' => 'MasterCard', 'class' => 'master'),
+		'2' => array('name' => 'Visa', 'class' => 'visa'),
+		'3' => array('name' => 'Maestro', 'class' => 'maestro'),
+		'4' => array('name' => 'Discover', 'class' => 'discover'),
+		'5' => array('name' => 'Club', 'class' => 'club'),
+		);
+
+	return $cards;
 }
 
 /*

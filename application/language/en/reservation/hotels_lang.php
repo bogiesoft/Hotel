@@ -21,6 +21,10 @@ $lang['translations']	= 'Translations';
 $lang['bank_accounts']	= 'Bank Accounts';
 $lang['hotel_photos']	= 'Photos';
 $lang['logo']			= 'Logo';
+$lang['settings']		= 'Settings';
+
+
+$lang['cover']			= 'Cover Photo';
 
 $lang['category']		= 'Category';
 $lang['cat_0_star']		= 'Undifened';
@@ -100,7 +104,7 @@ $lang['add_field']		= 'Add Field';
 $lang['remove']			= 'Remove';
 
 $lang['bank_name']		= 'Bank Name %s';
-$lang['bank_office']		= 'Bank Office %s';
+$lang['bank_office']	= 'Bank Office %s';
 $lang['bank_swift']		= 'Bank Swift %s';
 $lang['bank_account']	= 'Bank Account %s';
 $lang['bank_beneficiary']= 'Bank Beneficiary %s';
@@ -114,3 +118,14 @@ $lang['upload_photos']	= 'Upload Photos';
 $lang['save_photos']	= 'Save Photos';
 $lang['added']			= 'Added:';
 $lang['make_default']	= 'Make Default';
+
+
+$lang['map_coordinates'] 	= "Map Coordinates";
+$lang['map_lat']			= 'Latitude';
+$lang['map_long']			= 'Longtitude';
+$lang['trip_connect_widget']= 'Trip Connect Widget';
+$lang['checkin_time']		= 'Checkin Time';
+$lang['checkout_time']		= 'Checkout Time';
+$lang['spoken_languages']	= 'Spoken Languages';
+$lang['credit_cards']		= 'Accepted Credit Cards';
+$lang['pets_allowed']		= 'Pets Allowed';

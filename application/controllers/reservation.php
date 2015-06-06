@@ -42,6 +42,11 @@ class Reservation extends ADMIN_Controller {
 			$data['description'] = $this->reservation_model->hotel_description($id);
 			$data['countries'] 	 = $this->reservation_model->countries();
 			$data['photos']		 = $this->reservation_model->hotel_photos($id);
+			$data['settings']	 = '[]';
+
+			if (is_object(json_decode($data['hotel']->settings))) {
+				$data['settings'] = json_decode($data['hotel']->settings);
+			}
 
 			$this->load->view('reservation/hotels_edit',$data);
 
