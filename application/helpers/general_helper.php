@@ -187,7 +187,7 @@ function currency_rates($cur,$cur2){
 			curl_close($ch);
 			$cache = $json_response_content;
 	 		$ci->cache->file->save('currency-rates-'.$cur, $json_response_content, 5000);
-	 		
+	 		log_message('error','Rate oluşturulmadı');
 	 	}
 
 	$data = json_decode($cache,true);
