@@ -305,4 +305,23 @@ class RA_Controller extends MY_Controller{
 
 	}
 
+	/*
+	* Change room / promo availability on reservation
+	*/
+	function change_availablity($data,$start,$end){
+		$this->load->model('front_model');
+		foreach ($data as $key => $room) {
+			
+			//promotion availabity düşür
+			if ($room->promotion > 0) {
+				$this->front_model->change_promotion_availability($room->promotion,$room->room_id,$start,$end);
+			}
+
+			//her bir odanın availablity düşür
+			$this->front_model->change_room_availability($room->room_id,$start,$end);
+
+		}
+
+	}
+
 }

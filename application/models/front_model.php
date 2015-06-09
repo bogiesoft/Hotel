@@ -158,4 +158,24 @@ class Front_Model extends CI_Model{
 
 	}
 	
+
+	function change_promotion_availability($promotion,$room_id,$start,$end){
+		
+		$this->db->set('available', 'available-1', FALSE);
+		$this->db->where('price_plan_id', $promotion);
+		$this->db->where('room_id', $room_id);
+		$this->db->where('price_date >=', $start);
+		$this->db->where('price_date <', $end);
+		$this->db->update('price_plans_availability');
+
+	}
+
+	function change_room_availability($room_id,$start,$end){
+
+		$this->db->set('available', 'available-1', FALSE);
+		$this->db->where('room_id', $room_id);
+		$this->db->where('price_date >=', $start);
+		$this->db->where('price_date <', $end);
+		$this->db->update('prices');
+	}
 }

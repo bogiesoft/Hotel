@@ -331,6 +331,8 @@ class Actions extends RA_Controller {
 				$insert = $this->db->insert('reservations',$data);
         		$data['res_id'] = $this->db->insert_id();
 
+        		//change available days
+        		$this->change_availablity($data['rooms'],$data['checkin'],$data['checkout']);
 			}
         	
 
@@ -340,6 +342,8 @@ class Actions extends RA_Controller {
         	//$insert = true;
         	if ($insert) {
         		echo json_encode(array('status'=>'success','data'=>$data));
+
+
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
 
