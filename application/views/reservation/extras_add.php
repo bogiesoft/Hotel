@@ -143,8 +143,8 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('basic_description'); ?></label>
                 <div class="col-sm-6">
-                <textarea class="form-control" name="basic_desc"></textarea>
-                   
+                <textarea id="desc" onkeyup="TextAreaKarakterSayisiDogrula('desc')" class="form-control" name="basic_desc"></textarea>
+                <span id="KalanKarakterSayac">250</span>
                 </div>
               </div>
 
@@ -328,6 +328,18 @@ function price_type(type){
   }
 }
 
+function TextAreaKarakterSayisiDogrula(divId){
+    var sonSayi = 250 - document.getElementById(divId).value.length;
+    if (sonSayi >= 0)
+    {
+      document.getElementById("KalanKarakterSayac").innerHTML = sonSayi;
+    }
+    else
+    {
+      document.getElementById(divId).value = document.getElementById(divId).value.substring(0, 250);
+      document.getElementById("KalanKarakterSayac").innerHTML = 0;
+    }
+}
 </script>
 <script src="<?php echo site_url('assets/back'); ?>/js/jupload.js"></script>
 <script type="text/javascript">
