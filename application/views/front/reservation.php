@@ -52,22 +52,31 @@
                     BOOKING NUMBER: <span class="bold"><?php echo $reservation->reservation_code; ?></span> 
                     PIN CODE: <span class="bold"><?php echo $reservation->pincode; ?></span>
                 </div>
+                <?php $settings = is_object(json_decode($hotel->settings)) ? json_decode($hotel->settings,TRUE) : []; ?>
                 <div class="booking-info-cont">
                     <div class="booking-info-head">
-                        <img src="<?php echo site_url('assets/front'); ?>/img/b-h.jpg" />
+                    <?php if (NULL != $hotel->cover_photo) : ?>
+                        <img src="<?php echo $hotel->cover_photo; ?>" style="width:100%"/>
+                    <?php else: ?>
+                        <img src="<?php echo site_url('assets/front'); ?>/img/b-h.jpg" style="width:100%"/>
+                    <?php endif; ?>
                         <div class="b-info-address">
                             <span class="address bold">
-                                1335 Avenue of Americas<br />
-                                New York City<br />
-                                NY10019<br />
-                                United States of America
+                            <?php echo $hotel->adress; ?>
+                            <br />
+                            <?php echo $hotel->city; ?>
                             </span>
                             <br />
-                            <a href="#">Show map with directions</a>
+                            <?php if (isset($settings['map_lat']) or isset($settings['map_long'])) : ?>
+                            <a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $settings['map_lat']; ?>+<?php echo $settings['map_long']; ?>" target="_blank">
+                                Show map with directions
+                            </a>
+                            <?php endif; ?>
+
                             <div class="map-sep"></div>
-                            <span style="font-weight:normal">Phone:</span> <span class="bold">+90 212 518 44 02</span><br />
-                            <a class="bold underline" href="#">Email property</a><br />
-                            <a class="bold underline" href="#">View policies</a><br />
+                            <span style="font-weight:normal">Phone:</span> <span class="bold"><?php echo $hotel->phone; ?></span><br />
+                            <a class="bold underline" href="<?php echo $hotel->email; ?>">Email property</a><br />
+                            
                         </div>
                     </div>
                     <div style="background-color:#f8f8f8;border:solid 1px #ddd;padding:26px 15px">
