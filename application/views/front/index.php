@@ -694,8 +694,8 @@ $this->load->view('front/header');
                         <?php $countries = countries(); ?>
                             <select name="country"  class="w-220 b1s-000 mtb-5">
                             <?php foreach ($countries as $key => $country) {
-                                $selected = ($reservation->country == $country->code) ? 'selected="selected"' : ''; 
-                                echo '<option value="'.$country->code.'" '.$selected.'>'.$country->name.'</option>';
+                                $selected = ($reservation->country == $country->iso) ? 'selected="selected"' : ''; 
+                                echo '<option value="'.$country->iso.'" '.$selected.'>'.$country->name.'</option>';
                             } ?>
                             </select>
                         </div>

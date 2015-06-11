@@ -82,7 +82,7 @@ class Hotel extends RA_Controller {
 		}
 
 		//clear cart
-		if (NULL != $this->input->get('checkin')) {
+		if (NULL != $this->input->get('checkin') and !$data['reservation']) {
 			$this->session->unset_userdata('user_cart');
 		}
 
