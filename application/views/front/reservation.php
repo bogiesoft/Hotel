@@ -76,7 +76,7 @@
                             <div class="map-sep"></div>
                             <span style="font-weight:normal">Phone:</span> <span class="bold"><?php echo $hotel->phone; ?></span><br />
                             <a class="bold underline" href="<?php echo $hotel->email; ?>">Email property</a><br />
-                            
+
                         </div>
                     </div>
                     <div style="background-color:#f8f8f8;border:solid 1px #ddd;padding:26px 15px">
@@ -86,14 +86,22 @@
                                 <span style="font-size:68px;font-weight:bold;line-height:1em"><?php echo date('d',strtotime($reservation->checkin)); ?></span><br />
                                 <span class="bold"><?php echo date('F-Y',strtotime($reservation->checkin)); ?></span><br />
                                 <span style="font-size:12px;font-style:italic"><?php echo date('D',strtotime($reservation->checkin)); ?></span><br />
-                                <span style="font-size:12px;">15:00 - 23:00</span><br />
+                                
+                                <?php if (isset($settings['checkin_time'])) : ?>
+                                <span style="font-size:12px;"><?php echo $settings['checkin_time']; ?></span>
+                                <?php endif; ?>
+                                <br />
                             </span>
                             <span style="line-height:1.2em;display:inline-block;padding:0 30px;height:135px">
                                 CHECK OUT<br />
                                 <span style="font-size:68px;font-weight:bold;line-height:1em"><?php echo date('d',strtotime($reservation->checkout)); ?></span><br />
                                 <span class="bold"><?php echo date('F-Y',strtotime($reservation->checkout)); ?></span><br />
                                 <span style="font-size:12px;font-style:italic"><?php echo date('D',strtotime($reservation->checkout)); ?></span><br />
-                                <span style="font-size:12px;">15:00 - 23:00</span><br />
+                                
+                                <?php if (isset($settings['checkout_time'])) : ?>
+                                <span style="font-size:12px;"><?php echo $settings['checkout_time']; ?></span>
+                                <?php endif; ?>
+                                <br />
                             </span>
                             <!--
                             <button id="changeDates" class="c-btn">
