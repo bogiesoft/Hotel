@@ -816,15 +816,15 @@
         </div>
     </div><!-- /tabs controls -->
     <div class="row top2" id="mdate">
-    <?php 
-    if (NULL != $this->input->get('res_code')) {
-       $action_url = site_url('hotel?res_code=').$this->input->get('res_code');
-    }else{
-        $action_url = site_url('hotel');
-    }
-    ?>
-        <form method="get" action="<?php echo $action_url; ?>">
+    
+        <form method="get" action="<?php echo site_url('hotel'); ?>">
         <input type="hidden" name="hotel_id" value="<?php echo $this->input->get('hotel_id'); ?>" />
+        <?php 
+        if (NULL != $this->input->get('res_code')) {
+          echo '<input type="hidden" name="res_code" value="'.$this->input->get("res_code").'" />';
+        }
+        ?>
+
             <div class="col-md-2">
                 Check-In Date<br />
                 <span class="glyphicon glyphicon-calendar calendar"></span><input id="check-in" name="checkin" type="text" class="datepicker" value="<?php echo date('d-m-Y', strtotime($options['checkin'])); ?>"/>
