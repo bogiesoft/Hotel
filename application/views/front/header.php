@@ -825,6 +825,7 @@
         }
         ?>
 
+
             <div class="col-md-2">
                 Check-In Date<br />
                 <span class="glyphicon glyphicon-calendar calendar"></span><input id="check-in" name="checkin" type="text" class="datepicker" value="<?php echo date('d-m-Y', strtotime($options['checkin'])); ?>"/>
@@ -870,6 +871,8 @@
                 <?php endforeach; ?>
 
             <?php endif; ?>
+            <input type="hidden" name="time" value="<?php echo time(); ?>">
+            
             <div id="children-ages"></div>
             <div class="col-md-2">
                 <br />
@@ -881,6 +884,7 @@
                 <span>Best Price Guarantee</span> 
                 <img src="<?php echo site_url('assets/front');?>/img/guarantee.png" />
             </div>-->
+
         </form>
     </div>
 <style type="text/css">

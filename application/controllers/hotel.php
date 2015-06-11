@@ -31,11 +31,7 @@ class Hotel extends RA_Controller {
 			exit('Hotel not found.');
 		}
 
-		//clear cart
-		if (NULL != $this->input->get('checkin')) {
-			$this->session->unset_userdata('user_cart');
-		}
-
+		
 		//set reservation info false
 		$data['reservation'] = false;
 
@@ -86,6 +82,10 @@ class Hotel extends RA_Controller {
 			exit('Checkin Date Error');
 		}
 
+		//clear cart
+		if (NULL != $this->input->get('time')) {
+			$this->session->unset_userdata('user_cart');
+		}
 	
 		//load languages
 		$this->lang->load('reservation/rooms',$default_lang);
