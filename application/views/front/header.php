@@ -816,7 +816,14 @@
         </div>
     </div><!-- /tabs controls -->
     <div class="row top2" id="mdate">
-        <form method="get" action="<?php echo site_url('hotel'); ?>">
+    <?php 
+    if (isset($this->input->get('res_code'))) {
+       $action_url = site_url('hotel?res_code=').$this->input->get('res_code');
+    }else{
+        $action_url = site_url('hotel');
+    }
+    ?>
+        <form method="get" action="<?php echo $action_url; ?>">
         <input type="hidden" name="hotel_id" value="<?php echo $this->input->get('hotel_id'); ?>" />
             <div class="col-md-2">
                 Check-In Date<br />
