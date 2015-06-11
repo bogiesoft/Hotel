@@ -27,6 +27,9 @@
                     <div class="confirm-msg">
                         Thanks <?php echo $reservation->first_name; ?> <?php echo $reservation->last_name; ?>! Your booking is now confirmed.
                     </div>
+                    <button class="c-btn btn-cancel-booking pull-right" data-toggle="modal" data-target="#cancel_modal">
+                        <span class="sprite cancel-white"></span>&nbsp;&nbsp;&nbsp;Cancel Reservation
+                    </button>
                     <button class="c-btn pull-right">
                         <span class="sprite printer-white"></span>&nbsp;&nbsp;&nbsp;Print Confirmation
                     </button>
@@ -317,9 +320,29 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade" id="cancel_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cancel Reservation</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to cancel your reservation?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="cancel_reservation">Cancel Reservation</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
     <script>
         $(function () {
             var base_url = '<?php echo site_url(); ?>';
+
             $('.edit-btn').click(function () {
                 var url = base_url + 'hotel?hotel_id=<?php echo $reservation->hotel_id; ?>&checkin=<?php echo $reservation->checkin; ?>&checkout=<?php echo $reservation->checkout;?>&adults=<?php echo $reservation->adults; ?>&res_code=<?php echo $reservation->reservation_code; ?>';
                 window.Location.replace(url);
@@ -388,6 +411,16 @@
                 return false;
             });
 
+            $('#cancel_reservation').on('click',function(){
+                var val = {id : <?php echo $reservation->id; ?>, code : '<?php echo $reservation->reservation_code; ?>'}
+                jQuery.post( base_url + "actions/cancel_reservation",val,function(data){
+                    data = $.parseJSON(data);
+                    if (data.status == 'success') {
+                      //alert('success');
+                      $('#cancel_modal').modal('hide');
+                    }
+                });
+            });
         })
     </script>
 

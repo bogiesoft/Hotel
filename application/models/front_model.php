@@ -161,22 +161,22 @@ class Front_Model extends CI_Model{
 
 	function change_promotion_availability($promotion,$room_id,$start,$end){
 		
-		$this->db->set('available', 'available-1', FALSE);
-		$this->db->where('price_plan_id', $promotion);
-		$this->db->where('room_id', $room_id);
-		$this->db->where('price_date >=', $start);
-		$this->db->where('price_date <', $end);
-		$this->db->update('price_plans_availability');
+		$this->db->set('available', 'available-1', FALSE)
+			->where('price_plan_id', $promotion)
+			->where('room_id', $room_id)
+			->where('price_date >=', $start)
+			->where('price_date <', $end)
+			->update('price_plans_availability');
 
 	}
 
 	function change_room_availability($room_id,$start,$end){
 
-		$this->db->set('available', 'available-1', FALSE);
-		$this->db->where('room_id', $room_id);
-		$this->db->where('price_date >=', $start);
-		$this->db->where('price_date <', $end);
-		$this->db->update('prices');
+		$this->db->set('available', 'available-1', FALSE)
+			->where('room_id', $room_id)
+			->where('price_date >=', $start)
+			->where('price_date <', $end)
+			->update('prices');
 	}
 
 	function get_country_phone_code($code){
@@ -187,4 +187,13 @@ class Front_Model extends CI_Model{
 
 		return $country->phonecode;
 	}
+
+	function cancel_reservation($id,$code){
+
+		return $this->db->set('status', '0')
+			->where('id', $id)
+			->where('reservation_code', $code)
+			->update('reservations');
+	}
+
 }

@@ -491,4 +491,19 @@ class Actions extends RA_Controller {
 		$response = array('code'=>$this->front_model->get_country_phone_code($code));
 		echo json_encode($response);
 	}
+
+
+	function cancel_reservation(){
+		$id = $this->input->post('id');
+		$code = $this->input->post('code');
+
+		$cancel = $this->front_model->cancel_reservation($id,$code);
+
+		if ($cancel) {
+			echo json_encode(array('status'=>'success'));
+		}else{
+			echo json_encode(array('status'=>'error'));
+		}
+
+	}
 }
