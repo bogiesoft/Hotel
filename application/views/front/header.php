@@ -12,7 +12,6 @@
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/c_style.css" media="all" />
     <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/front'); ?>/css/animate.min.css" media="all" />
    
-   
     <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
@@ -41,7 +40,9 @@
                     <a href=""><span class="glyphicon glyphicon-chevron-right"></span> See Our Hotels</a>
                     <a href=""><span class="glyphicon glyphicon-chevron-right"></span> Travel Agents </a>
                 </div>
-                <?php $settings = is_object(json_decode($hotel_info->settings)) ? json_decode($hotel_info->settings) : []; ?>
+                <?php $settings = is_object(json_decode($hotel_info->settings)) ? json_decode($hotel_info->settings,TRUE) : []; 
+                //print_r($settings); exit;
+                ?>
                 <div class="row" style="background: #333;color: #fff;">
                     <div class="pull-left">
                         <div class="head-part">
@@ -70,8 +71,10 @@
                                         </div>
                                         <div style="line-height:1.6em">
                                         
-                                        <?php 
-                                        @$why_stay_at = explode(PHP_EOL,$settings->why_stay_at);
+                                        <?php
+                                        if (isset($settings['why_stay_at'])) :
+                                        $why_stay_at = explode(PHP_EOL,$settings['why_stay_at']);
+                                        
                                         foreach ($why_stay_at as $reason) :
                                         ?>
                                             <span class="bold">
@@ -79,17 +82,24 @@
                                             </span>
                                             <br>
                                         <?php endforeach; ?>
+                                        <?php endif; ?>
 
                                         </div>
+                                        <?php if (isset($settings['trip_connect_widget'])) : ?>
                                         <div class="hsd-ta-logo">
-                                           <?php echo @$settings->trip_connect_widget; ?>
+                                           <?php echo $settings['trip_connect_widget']; ?>
                                         </div>
+                                        <?php endif; ?>
+
+                                        <?php if (isset($settings['map_lat']) or isset($settings['map_long'])) : ?>
                                         <div class="hsd-title-b">
                                             Show map | <span style="font-weight:normal;font-style:italic">Were we are</span>
                                         </div>
                                         <div class="hsd-map">
-                                        <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=235x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C<?php echo @$settings->map_lat; ?>,<?php echo @$settings->map_long; ?>"; ?>
+                                        <img src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=235x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C<?php echo $settings['map_lat']; ?>,<?php echo $settings['map_long']; ?>"; ?>
                                         </div>
+
+                                        <?php endif; ?>
                                         <!-- <img src="img/adv.jpg"> -->
                                     </div>
                                     <div class="hrd-cont">
@@ -112,12 +122,15 @@
                                                         <br>
                                                         <?php echo $hotel_info->name; ?>'s staff speak:
 
-                                                        <?php 
-                                                        @$spoken_languages = $settings->spoken_languages;
-                                                        foreach ($spoken_languages as $lang) {
+                                                        <?php
+                                                        if (isset($settings['spoken_languages'])) :
+                                                        foreach ($settings['spoken_languages'] as $lang) {
                                                            $langs = languages();
                                                            echo $langs[$lang]['name'].',';
-                                                        }?>
+                                                        }
+                                                        endif;
+
+                                                        ?>
                                                         <br>
                                                     </span>
                                                 </div>
@@ -140,45 +153,60 @@
                                             <div style="overflow:hidden">
                                                 <div class="col-md-4 fac">
                                                     <ul>
-                                                    <?php 
+                                                    <?php
+                                                    if (NULL != $hotel_info->hotel_specs) :
+
                                                     $specs = explode(',', $hotel_info->hotel_specs);
                                                     foreach ($specs as $spec) : 
                                                     ?>
                                                     <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo hotel_specs($spec); ?></li>
                                                     <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-4 fac">
                                                     <ul>
                                                     <?php 
+                                                    if (NULL != $hotel_info->restourant_specs) :
                                                     $specs = explode(',', $hotel_info->restourant_specs);
                                                     foreach ($specs as $spec) : 
                                                     ?>
                                                     <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo restourant_specs($spec); ?></li>
                                                     <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-4 fac">
                                                     <ul>
                                                     <?php 
+                                                    if (NULL != $hotel_info->sport_specs) :
                                                     $specs = explode(',', $hotel_info->sport_specs);
                                                     foreach ($specs as $spec) : 
                                                     ?>
                                                     <li><span class="sprite check-sblue"></span>&nbsp;&nbsp;<?php echo sport_specs($spec); ?></li>
                                                     <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                     </ul>
                                                 </div>
 
                                             </div>
+                                            
                                             <div class="hrd-box">
+
+                                            <?php if (isset($settings['checkin_time'])) : ?>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Check-in</span>
-                                                    <span class="hrd-val">From <?php echo @$settings->checkin_time; ?> </span>
+                                                    <span class="hrd-val">From <?php echo $settings['checkin_time']; ?> </span>
                                                 </div>
+                                            <?php endif; ?>
+
+                                            <?php if (isset($settings['checkout_time'])) : ?>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Check-out</span>
-                                                    <span class="hrd-val">From <?php echo @$settings->checkout_time; ?> hours </span>
+                                                    <span class="hrd-val">From <?php echo $settings['checkout_time']; ?> hours </span>
                                                 </div>
+                                            <?php endif; ?>
+
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Cancellation / prepayment</span>
                                                     <span class="hrd-val">
@@ -197,7 +225,7 @@
                                                 </div>
                                                 <div class="hrd-row">
                                                     <span class="hrd-label">Pets</span>
-                                                    <?php if(isset($settings->pets_allowed) and $settings->pets_allowed == 'yes') : ?>
+                                                    <?php if(isset($settings['pets_allowed']) and $settings['pets_allowed'] == 'yes') : ?>
                                                     <span class="hrd-val">Pets are allowed.</span>
                                                     <?php else: ?>
                                                     <span class="hrd-val">Pets are not allowed.</span>
@@ -207,10 +235,12 @@
                                                     <span class="hrd-label">Cards accepted at this property</span>
                                                     <span class="hrd-val">
                                                         <?php 
-                                                        @$credit_cards = $settings->credit_cards;
-                                                        foreach ($credit_cards as $card) {
+                                                        if (isset($settings['credit_cards'])) :
+                                                        foreach ($settings['credit_cards'] as $card) {
                                                             echo '<span class="credit-card '.$card.'"></span>';
-                                                        }?>
+                                                        }
+                                                        endif;
+                                                        ?>
                                                         <br>
                                                         <br>
                                                         Hover over the cards for more details
