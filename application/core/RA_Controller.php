@@ -23,8 +23,7 @@ class RA_Controller extends MY_Controller{
 
 		//generate session id
 		if (!$this->session->userdata('my_session_id')) {
-			$uniqueId = uniqid($this->input->ip_address(), TRUE);
-    		$uniqidId = md5($uniqueId);
+			$uniqueId = md5(sha1($this->input->ip_address()));
 			$this->session->set_userdata("my_session_id", $uniqueId);
 		}
     	
