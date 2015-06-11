@@ -817,7 +817,7 @@
     </div><!-- /tabs controls -->
     <div class="row top2" id="mdate">
     <?php 
-    if (isset($this->input->get('res_code'))) {
+    if (NULL != $this->input->get('res_code')) {
        $action_url = site_url('hotel?res_code=').$this->input->get('res_code');
     }else{
         $action_url = site_url('hotel');
