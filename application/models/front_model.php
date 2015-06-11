@@ -178,4 +178,13 @@ class Front_Model extends CI_Model{
 		$this->db->where('price_date <', $end);
 		$this->db->update('prices');
 	}
+
+	function get_country_phone_code($code){
+		$country = $this->db->select('phonecode')
+			->from('country')
+			->where('iso',$code)
+			->get()->row();
+
+		return $country->phonecode;
+	}
 }

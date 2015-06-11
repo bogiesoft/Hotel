@@ -135,6 +135,21 @@ $this->load->view('front/header');
         isVisible = false;
     });
 
+    /*
+    * Set country phone code
+    */
+    $('.countryName').on('change',function(){
+        var val = $(this).val();
+        $('.telephone').val('');
+        $('.mobile').val('');
+
+        jQuery.post( base_url + "actions/get_country_code",{ code:val },function(data){
+            data = $.parseJSON(data);
+            $('.telephone').val('+'+data.code);
+            $('.mobile').val('+'+data.code);
+        });
+    });
+
 });
 
 </script>
@@ -846,7 +861,7 @@ $this->load->view('front/header');
                         $countries = countries(); 
                         ?>
                         <?php $user_country = user_location($this->input->ip_address()); ?> 
-                            <select name="country"  class="w-220 b1s-000 mtb-5">
+                            <select name="country"  class="w-220 b1s-000 mtb-5 countryName">
                             <?php foreach ($countries as $key => $country) {
                                 if ($user_country == $country->iso) {
                                     $selected   = 'selected="selected"';
@@ -866,7 +881,7 @@ $this->load->view('front/header');
                         </div>
                        
                         <div class="col-md-8">
-                            <input type="text" name="phone" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="phone" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5 telephone" />
                         </div>
                     </div>
                     <div class="row">
@@ -875,7 +890,7 @@ $this->load->view('front/header');
                         </div>
                        
                         <div class="col-md-8">
-                            <input type="text" name="mobile" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5" />
+                            <input type="text" name="mobile" value="+<?php echo $phone_code; ?>" class="w-220 b1s-000 mtb-5 mobile" />
                         </div>
                     </div>
                     <div class="row">

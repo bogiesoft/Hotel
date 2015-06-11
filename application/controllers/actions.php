@@ -481,4 +481,14 @@ class Actions extends RA_Controller {
 	    return false;
 	}
 
+	/*
+	* Update country phone code
+	* Used in front country select on change (Ajax)
+	*/
+	function get_country_code(){
+		$code = $this->input->post('code');
+
+		$response = array('code'=>$this->front_model->get_country_phone_code($code));
+		echo json_encode($response);
+	}
 }
