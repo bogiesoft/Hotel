@@ -35,7 +35,7 @@ class Hotel extends RA_Controller {
 		$data['reservation'] = false;
 
 		//if change reservation
-		if ($this->input->get('res_code') or $this->session->userdata('res_code')) {
+		if (NULL != $this->input->get('res_code') or NULL != $this->session->userdata('res_code')) {
 			$reservation = $this->front_model->get_reservation($this->input->get('res_code'),$hotel_id);
 			if ($reservation) {
 				$data['reservation'] = $reservation;
