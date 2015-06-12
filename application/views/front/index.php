@@ -486,7 +486,7 @@ $this->load->view('front/header');
                             <input class="bb-no" id="reserve_button" type="submit" value="Reserve" />
                         </div>
                         <p class="cent">Confirmation is immediate</p>
-                        <?php  if (NULL != $user_cart) : $cart_info = cart_info(); ?>
+                        <?php  if (NULL != $user_cart) : $cart_info = cart_info($options,$user_cart,$user_extras); ?>
                         <div class="best-price">
                             <p>
                             <input class="price hh1" id="rom" type="text" name="val[1][rooms]" value="<?php echo $cart_info['cart']['total_room']; ?>" readonly="" /> 
@@ -581,7 +581,7 @@ $this->load->view('front/header');
                         </div>
                         <?php endif; ?>
 
-                        <?php  if (NULL != $user_cart) : $cart_info = cart_info(); ?>
+                        <?php  if (NULL != $user_cart) : $cart_info = cart_info($options,$user_cart,$user_extras); ?>
                         <div class="avrg">
                             <div>TOTAL</div>
                             <div class="c-090 avrgtotal"><?php echo $cart_info['total_price']; ?> <?php echo $options['currency']; ?></div>

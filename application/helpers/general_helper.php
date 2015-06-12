@@ -651,20 +651,18 @@ function checkCartRoom($room_id,$qty,$promo){
 
 }
 
-function cart_info(){
+function cart_info($options,$user_cart,$user_extras){
 	$response = array();
-	$ci =& get_instance();
 
-	$options = $ci->session->userdata('options');
 	$response['extras']['total_user_price'] = 0;
 	$response['extras']['total_price'] = 0;
 
-	if ($ci->session->userdata('user_cart')) {
+	if ($user_cart) {
 		
 		$total_price = 0;
 		$total_user_price = 0;
 		$total_room  = 0;
-		foreach ($ci->session->userdata('user_cart') as $key => $cart) {
+		foreach ($user_cart as $key => $cart) {
 			$total_price += $cart['price'] * $cart['qty'] * $options['nights'];
 			$total_user_price += $cart['user_price'] * $cart['qty'] * $options['nights'];
 			$total_room += $cart['qty'];
@@ -675,9 +673,9 @@ function cart_info(){
 		$response['cart']['total_room'] = $total_room;
 	}
 
-	if ($ci->session->userdata('user_extras')) {
+	if ($user_extras) {
 		$total_extra_price = 0;
-		foreach ($ci->session->userdata('user_extras') as $key => $cart) {
+		foreach ($user_extras as $key => $cart) {
 			$total_extra_price += $cart['price'];
 		}
 
