@@ -202,7 +202,7 @@ class Hotel extends RA_Controller {
 		$data['prices'] 		= $this->session->userdata('prices_all');
 		$data['user_cart'] 		= $this->session->userdata('user_cart');
 		$data['user_extras'] 	= $this->session->userdata('user_extras');
-		
+		$data['guest']			= $this->session->userdata('guest');
 		echo '<!--';
 		echo '<pre>';
 		print_r($data);
@@ -427,6 +427,15 @@ class Hotel extends RA_Controller {
 			if (!$check) {
 				echo json_encode(array('status' =>'error','message'=> 'No Reservation Found, Please check your pincode.'));
 			}else{
+				$guest_data = array(
+					'guest_name' => $check->first_name, 
+					'guest_surname'=>$check->last_name, 
+					'hash'=>$check->rhash,
+					'res_id' => $check->id,
+					'res_code' => $check->reservation_code);
+
+				$this->session->set_userdata('guest',$guest_data);
+
 				echo json_encode(array('status' =>'success',
 					'hash'=> $check->rhash,
 					'code'=> $check->id,
@@ -465,7 +474,9 @@ class Hotel extends RA_Controller {
 		
 	}
 
-
+	public function clear_session(){
+		$this->session->unset_userdata('guest');
+	}
 	
 
 }

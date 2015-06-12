@@ -270,7 +270,13 @@
                             <div id="reservation-menu" class="drop-menu">
                                 <div class="reserv-manage">
                                     <div class="drop-menu-title">Manage An Exsiting Booking</div>
-                                    <div class="reserror">No registration required</div>
+                                    
+                                    <?php if ($guest) :?>
+                                    Hi <?php echo $guest['guest_name']; ?> <?php echo $guest['guest_surname']; ?>
+                                    <?php $res_url = site_url('hotel/reservation').'?code='.$guest['res_id'].'&hash='.$guest['hash']; ?>
+                                    <a style="margin-top:10px" href="<?php echo $res_url; ?>" class="btn btn-default">View Reservation</a>
+                                    <?php else : ?>
+                                        <div class="reserror">No registration required</div>
                                     <form name="reserv-login" method="POST">
                                     <div class="reserv-form">
                                         <input type="text" name="code" placeholder="Booking Number" />
@@ -284,6 +290,7 @@
                                         </div>
                                     </div>
                                     </form>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="reserv-info">
                                     <span class="sprite tick-green">Change dates</span><br />
@@ -294,10 +301,7 @@
                                     <span class="sprite tick-green">And more...</span>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="email-confirm">
-                                    Can't find your confirmation email?&nbsp;
-                                    <span class="sprite email-blue-sized"></span>&nbsp;<a href="http://google.com">We'll resend it to you</a>
-                                </div>
+                                <div class="email-confirm"></div>
                             </div>
 
                         </div>
