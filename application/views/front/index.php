@@ -466,7 +466,10 @@ $this->load->view('front/header');
                             $units = explode(',', $room['units']);
                             foreach ($units as $key => $unit) :
                             ?>
-                            <span class="dtl"><?php echo room_specs($unit); ?></span>
+                            <span class="dtl">
+                            <span class="sprite check-sblue"></span>
+                            <?php echo room_specs($unit); ?></span>
+                            
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -710,6 +713,27 @@ $this->load->view('front/header');
                     </div>
                     <div class="row">
                         <div class="col-md-4 text-right">
+                        Mobile:
+                        </div>
+                       
+                        <div class="col-md-8">
+                            <input type="text" name="mobile" value="<?php echo $reservation->mobile; ?>" class="w-220 b1s-000 mtb-5" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        Send Information Sms: 
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" name="sendsms" value="1" class="b1s-000 mtb-5" checked /> Yes
+                        </div>
+                        <div class="col-md-1">
+                            <input type="radio" name="sendsms" value="0" class="b1s-000 mtb-5" /> No
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
                         Email: <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
@@ -748,7 +772,11 @@ $this->load->view('front/header');
                         Credit card number <span class="c-f00">*</span>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="ccnumber" value="<?php echo rand_uniqid($reservation->ccnumber,TRUE); ?>" class="w-220 b1s-000 mtb-5 cc_number" />
+                        <?php 
+                        $cc = rand_uniqid($reservation->ccnumber,TRUE); 
+                        $cc = substr_replace($cc, '************', 0,12);
+                        ?>
+                            <input type="text" name="ccnumber" value="<?php echo $cc; ?>" class="w-220 b1s-000 mtb-5 cc_number" />
                             <div class="showThis"></div>
                         </div>
                         

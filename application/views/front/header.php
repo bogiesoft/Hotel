@@ -150,9 +150,10 @@
                                                 </div>
                                             </div>
                                             <div class="hrd-title2">Facilities of  <?php echo $hotel_info->name; ?></div>
-                                            <div style="overflow:hidden">
+                                            <div style="overflow:hidden; margin-bottom:20px">
                                                 <div class="col-md-4 fac">
                                                     <ul>
+                                                    <li class="bold">Amenities</li>
                                                     <?php
                                                     if (NULL != $hotel_info->hotel_specs) :
 
@@ -166,6 +167,7 @@
                                                 </div>
                                                 <div class="col-md-4 fac">
                                                     <ul>
+                                                    <li class="bold">Restaurant</li>
                                                     <?php 
                                                     if (NULL != $hotel_info->restourant_specs) :
                                                     $specs = explode(',', $hotel_info->restourant_specs);
@@ -178,6 +180,7 @@
                                                 </div>
                                                 <div class="col-md-4 fac">
                                                     <ul>
+                                                    <li class="bold">Sports & Entertainment</li>
                                                     <?php 
                                                     if (NULL != $hotel_info->sport_specs) :
                                                     $specs = explode(',', $hotel_info->sport_specs);

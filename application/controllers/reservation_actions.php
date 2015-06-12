@@ -1216,7 +1216,7 @@ class Reservation_actions extends ADMIN_Controller {
 
 
 
-    	$query = "SELECT id,name_title,first_name,last_name,checkin,checkout 
+    	$query = "SELECT id,name_title,first_name,last_name,checkin,checkout,status 
     	FROM reservations WHERE hotel_id=$hotel_id $whr ORDER BY $jtSorting LIMIT $jtStartIndex,$jtPageSize";
 
     	//echo $query; exit;

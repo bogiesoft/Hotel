@@ -115,6 +115,22 @@
                     title: '<?php echo lang('checkout'); ?>',
                     width: '12%'
                 },
+                res_status:{
+                    title: 'Status',
+                    width: '12%',
+                    sorting : false,                    
+                    display: function (data) { 
+                      console.log($(this).parent());
+                      
+                      if (data.record.status == false) {
+                        $(this).parent( "tr" ).css( "background", "yellow" );
+                        return 'Canceled';
+                      }else{
+                        return 'Approved';
+                      }
+                      
+                  }
+                },
                 detail:{
                   title: '',
                   width: '2%',
@@ -123,7 +139,18 @@
                       return $('<a href="'+base_url+'reservation/reservations/view/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }
                 }
-            }
+            },
+
+            /*
+            recordUpdated: function (event, data) {
+
+                    if (data.record.status == 1) {
+                        $(".jtable tbody tr:eq(" + i + ") td:eq(9)").css({ 'background-color': '#b75c5c', 'color': 'white' });
+                    } else {
+                        $(".jtable tbody tr:eq(" + i + ") td:eq(9)").css({ 'background-color': '#4cae4c', 'color': 'white' });
+                    }
+            }*/
+            
         });
         
          //Re-load records when user click 'load records' button.

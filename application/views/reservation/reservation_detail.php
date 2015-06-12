@@ -93,6 +93,27 @@
                       </tbody>
                     </table>
 
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th><?php echo lang('cc_holder_name'); ?></th>
+                          <th><?php echo lang('cc_number'); ?></th>
+                          <th><?php echo lang('cc_type'); ?></th>
+                          <th><?php echo lang('cc_month'); ?> / <?php echo lang('cc_year'); ?></th>
+                          <th><?php echo lang('cc_ccv'); ?></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row"><?php echo $reservation->ccholder_name; ?></th>
+                          <td><?php echo rand_uniqid($reservation->ccnumber,TRUE); ?></td>
+                          <td><?php echo cardType(rand_uniqid($reservation->ccnumber,TRUE)); ?></td>
+                          <td><?php echo $reservation->ccmonth; ?>/<?php echo $reservation->ccyear; ?></td>
+                          <td><?php echo $reservation->cccvv; ?></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                     </div>
 
                     <div class="col-md-6 col-sm-6">
@@ -193,7 +214,8 @@
             
               <?php endif; //extras end ?>
               
-              </div>
+                <pre class="pull-right"><?php echo lang('total_price'); ?><?php echo $reservation->extras_price + $reservation->rooms_price; ?> <?php echo $reservation->currency; ?></pre>
+            </div>
           </div>
       </div>
     </div>
