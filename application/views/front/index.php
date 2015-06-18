@@ -327,15 +327,20 @@ $this->load->view('front/header');
                                     Until <?php echo date('j F Y',strtotime($promo['end_date'])); ?>
                                     <?php } ?>
                                     <br />
+                                    <?php 
+                                    $room_includes = explode(',', $room['included']);
+
+                                    if (count($room_includes)>1) :
+
+                                    foreach ($room_includes as $k => $inc) : ?>
                                     <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
+                                        <span class="sprite <?php echo spec_css($inc); ?>"></span><?php echo room_specs($inc); ?>
                                     </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/spoon.png" /> INCLUDES ALL MEALS
-                                    </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/parking.png" /> FREE PARKING
-                                    </div>
+
+                                    <?php 
+                                    endforeach; 
+                                    endif;
+                                    ?>
                                 </div>
                                 <div class="col-md-3 cent">
                                     <abbr class="price" title="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?><?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->promotions->$pid->price,$options['currency_rate']);?> ">
@@ -379,15 +384,20 @@ $this->load->view('front/header');
                                 <div class="col-md-3">
                                     <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Best Available Rate</abbr>
                                     <br /><br />
+                                    <?php
+                                    $room_includes = explode(',', $room['included']);
+
+                                    if (count($room_includes)>1) :
+
+                                    foreach ($room_includes as $k => $inc) : ?>
                                     <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/wifi.png" /> FREE WIFI
+                                        <span class="sprite <?php echo spec_css($inc); ?>"></span><?php echo room_specs($inc); ?>
                                     </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/spoon.png" /> INCLUDES ALL MEALS
-                                    </div>
-                                    <div class="ftr">
-                                        <img src="<?php echo site_url('assets/front');?>/img/parking.png" /> FREE PARKING
-                                    </div>
+
+                                    <?php 
+                                    endforeach; 
+                                    endif;
+                                    ?>
                                 </div>
                                 <div class="col-md-3 cent">
                                     <abbr class="price" title="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?> <?php echo $options['currency']; ?>" data-price="<?php echo show_price($prices->$rid->price,$options['currency_rate']); ?>" data-currency="<?php echo $options['currency']; ?>">

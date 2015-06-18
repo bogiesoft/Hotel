@@ -114,6 +114,7 @@ class Hotel extends RA_Controller {
 					$arr['rooms'][$r->id]['title'] 		= $r->title;
 					$arr['rooms'][$r->id]['content'] 	= $r->content;
 					$arr['rooms'][$r->id]['units'] 		= $r->room_units;
+					$arr['rooms'][$r->id]['included'] 	= $r->included;
 					$arr['rooms'][$r->id]['max_capacity']= $r->max_capacity;
 					$arr['rooms'][$r->id]['max_adult']	= $r->max_adult;
 					$arr['rooms'][$r->id]['max_child']	= $r->max_child;
