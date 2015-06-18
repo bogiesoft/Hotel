@@ -108,6 +108,11 @@
 .cafe{background-position:-151px -177px;width:24px;height:24px}
 /*.cafe:hover{background-position:-176px -177px}*/
 
+.wifi-light{background-position:-1px -177px;width:24px;height:24px}
+.food-light{background-position:-51px -177px;width:24px;height:24px;}
+.parking-light{background-position:-101px -177px;width:24px;height:24px}
+.cafe-light{background-position:-151px -177px;width:24px;height:24px}
+
 .printer-white{background-position:-303px -910px;width:15px;height:14px}
 
 .pencil-white{background-position:-254px -636px;width:14px;height:13px}
@@ -141,3 +146,110 @@
 .check-sblue{background-position:-9px -204px;width:10px;height:10px}
 
 .check-green{background-position:-22px -203px;width:16px;height:12px}
+
+.modify-dark{background-position:-59px -152px;width:20px;height:19px}
+
+.modify-light{background-position:-37px -152px;width:20px;height:19px}
+
+.calendar-dark{background-position:-19px -151px;width:16px;height:16px}
+
+.calendar-light{background-position:-1px -151px;width:16px;height:16px}
+
+.adult{background-position:-1px -25px;width:11px;height:20px}
+
+.child{background-position:-78px -30px;width:8px;height:15px}
+
+.guarantee{background-position:-289px -25px;width:17px;height:17px}
+
+.info-small{background-position:-274px -30px;width:13px;height:13px}
+
+.close-dark{background-position:-149px -427px;width:24px;height:24px}
+
+.world-light{background-position:-308px -26px;width:34px;height:16px}
+
+.world-dark{background-position:-346px -26px;width:34px;height:16px}
+
+.arrow-light-down{background-position:-103px -37px;width:12px;height:8px}
+
+.arrow-light-right{background-position:-150px -30px;width:8px;height:12px}
+
+.room-info-right{background-position:-1px -228px;width:6px;height:6px}
+
+
+/* 1st row */
+.ACTIVITIES_OLDER_CHILDREN{background-position:-725px -1px;width:24px;height:24px}
+.ACTIVITIES_YOUNG_CHILDREN{background-position:-750px -1px;width:24px;height:24px}
+.ADJOINING_ROOMS{background-position:-775px -1px;width:24px;height:24px}
+.ALL_INCLUSIVE{background-position:-800px -1px;width:24px;height:24px}
+.ALL_SUITES{background-position:-800px -1px;width:24px;height:24px}
+.APARTMENTS{background-position:-825px -1px;width:24px;height:24px}
+.BAR_LOUNGE{background-position:-850px -1px;width:24px;height:24px}
+.BATHROOMS{background-position:-875px -1px;width:24px;height:24px}
+.BEACH{background-position:-900px -1px;width:24px;height:24px}
+.BED_AND_BREAKFAST{background-position:-925px -1px;width:24px;height:24px}
+.BUSINESS_SERVICES{background-position:-950px -1px;width:24px;height:24px}
+.CAR_RENTAL_DESK{background-position:-975px -1px;width:24px;height:24px}
+/* end 1st row */
+/* 2nd row */
+.CASTLE{background-position:-700px -26px;width:24px;height:24px}
+.CONVENTIONS{background-position:-725px -26px;width:24px;height:24px}
+.CREDIT_CARDS_ACCEPTED{background-position:-750px -26px;width:24px;height:24px}
+.DATA_PORT{background-position:-775px -26px;width:24px;height:24px}
+.DINING{background-position:-800px -26px;width:24px;height:24px}
+.DRY_CLEANING{background-position:-825px -26px;width:24px;height:24px}
+.EARLY_ARRIVAL{background-position:-850px -26px;width:24px;height:24px}
+.ECONOMY{background-position:-875px -26px;width:24px;height:24px}
+.ELDER_ACCESS{background-position:-900px -26px;width:24px;height:24px}
+.EXTENDED_STAY{background-position:-925px -26px;width:24px;height:24px}
+.FAMILY_ROOMS{background-position:-950px -26px;width:24px;height:24px}
+.FARM_RANCH{background-position:-975px -26px;width:24px;height:24px}
+/* end 2nd row */
+/* 3rd row */
+.FIRST_CLASS{background-position:-700px -51px;width:24px;height:24px}
+.FITNESS_CENTER{background-position:-725px -51px;width:24px;height:24px}
+.FOOD_AVAILABLE{background-position:-750px -51px;width:24px;height:24px}
+.FREE_BREAKFAST{background-position:-775px -51px;width:24px;height:24px}
+.FREE_CANCELATION{background-position:-800px -51px;width:24px;height:24px}
+.FREE_INTERNET{background-position:-825px -51px;width:24px;height:24px}
+.FREE_LOCAL_CALLS{background-position:-850px -51px;width:24px;height:24px}
+.FREE_PARKING{background-position:-875px -51px;width:24px;height:24px}
+.FREE_WIFI{background-position:-900px -51px;width:24px;height:24px}
+.GAME_ROOM{background-position:-925px -51px;width:24px;height:24px}
+.GOLF{background-position:-950px -51px;width:24px;height:24px}
+.HOT_TUB{background-position:-975px -51px;width:24px;height:24px}
+/* end 3rd row */
+/* 4th row */
+.KIDS_ACTIVITIES{background-position:-700px -76px;width:24px;height:24px}
+.KITCHEN_KITCHENETTE{background-position:-725px -76px;width:24px;height:24px}
+.KITCHENETTE{background-position:-750px -76px;width:24px;height:24px}
+.LATE_ARRIVAL{background-position:-775px -76px;width:24px;height:24px}
+.LATE_CHECK_OUT{background-position:-800px -76px;width:24px;height:24px}
+.LOCKERS_STORAGE{background-position:-825px -76px;width:24px;height:24px}
+.LOYALTY_REWARDS_AVAILABLE{background-position:-850px -76px;width:24px;height:24px}
+.LUXURY{background-position:-875px -76px;width:24px;height:24px}
+.MEALS_INCLUDED{background-position:-900px -76px;width:24px;height:24px}
+.MEETING_ROOM{background-position:-925px -76px;width:24px;height:24px}
+.MOTEL{background-position:-950px -76px;width:24px;height:24px}
+.NON_SMOKING{background-position:-975px -76px;width:24px;height:24px}
+/* end 4th row */
+/* 5th row */
+.PARKING_AVAILABLE{background-position:-700px -101px;width:24px;height:24px}
+.PAID_PARKING{background-position:-725px -101px;width:24px;height:24px}
+.PETS_ALLOWED{background-position:-750px -101px;width:24px;height:24px}
+.PRIVATE_BATH{background-position:-775px -101px;width:24px;height:24px}
+.RESORT{background-position:-800px -101px;width:24px;height:24px}
+.RESTAURANT{background-position:-825px -101px;width:24px;height:24px}
+.ROOM_SERVICE{background-position:-850px -101px;width:24px;height:24px}
+.ROOM_WITH_A_VIEW{background-position:-875px -101px;width:24px;height:24px}
+.SHARED_BATH{background-position:-900px -101px;width:24px;height:24px}
+.SHUTTLE{background-position:-925px -101px;width:24px;height:24px}
+.STAIRS_ELEVATOR{background-position:-950px -101px;width:24px;height:24px}
+.STROLLER_PARKING{background-position:-975px -101px;width:24px;height:24px}
+/* end 5th row */
+/* 6th row */
+.SUITES{background-position:-700px -126px;width:24px;height:24px}
+.SWIMMING_POOL{background-position:-725px -101px;width:24px;height:24px}
+.TENNIS_COURT{background-position:-750px -101px;width:24px;height:24px}
+.VALET_PARKING{background-position:-775px -101px;width:24px;height:24px}
+.WHEELCHAIR_ACCESS{background-position:-800px -101px;width:24px;height:24px}
+/* end 6th row */

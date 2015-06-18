@@ -42,7 +42,8 @@ $lang['close']			= 'Close';
 $lang['default_policy'] = 'Default Policy';
 $lang['no_policy'] 		= 'You have not added policy yet. Please Add a policy first.';
 
-//specs
+//specs old
+/*
 $lang['room_service']	= 'Room Service';
 $lang['air_condition']	= 'Air Condition';
 $lang['loundry_service']= 'Loundry Service';
@@ -87,6 +88,74 @@ $lang['pay_tv']			= 'Pay TV';
 $lang['pet_friendly']	= 'Pets friendly';
 $lang['hifi']			= 'Hi-Fi';
 $lang['balcony']		= 'Balcony';
+*/
+
+$lang['ACTIVITIES_OLDER_CHILDREN'] 	= 'ACTIVITIES_OLDER_CHILDREN';
+$lang['ACTIVITIES_YOUNG_CHILDREN'] 	= 'ACTIVITIES_YOUNG_CHILDREN';
+$lang['ADJOINING_ROOMS'] 			= 'ADJOINING_ROOMS';
+$lang['ALL_INCLUSIVE'] 				= 'ALL_INCLUSIVE';
+$lang['ALL_SUITES']					= 'ALL_SUITES';
+$lang['APARTMENTS']					= 'ALL_SUITES';
+$lang['BAR_LOUNGE']			        = 'BAR_LOUNGE';
+$lang['BATHROOMS']					= 'BATHROOMS';
+$lang['BEACH']						= 'BEACH';
+$lang['BED_AND_BREAKFAST']			= 'BED_AND_BREAKFAST';
+$lang['BUSINESS_SERVICES']			= 'BUSINESS_SERVICES';
+$lang['CAR_RENTAL_DESK']			= 'CAR_RENTAL_DESK';
+$lang['CASTLE']						= 'CASTLE';
+$lang['CONVENTIONS']				= 'CONVENTIONS';
+$lang['CREDIT_CARDS_ACCEPTED']		= 'CREDIT_CARDS_ACCEPTED';
+$lang['DATA_PORT']					= 'DATA_PORT';
+$lang['DINING']						= 'DINING';
+$lang['DRY_CLEANING']				= 'DRY_CLEANING';
+$lang['EARLY_ARRIVAL']				= 'EARLY_ARRIVAL';
+$lang['ECONOMY']					= 'ECONOMY';
+$lang['ELDER_ACCESS']				= 'ELDER_ACCESS';
+$lang['EXTENDED_STAY']				= 'EXTENDED_STAY';
+$lang['FAMILY_ROOMS']				= 'FAMILY_ROOMS';
+$lang['FARM_RANCH']					= 'FARM_RANCH';
+$lang['FIRST_CLASS']				= 'FIRST_CLASS';
+$lang['FITNESS_CENTER']				= 'FITNESS_CENTER';
+$lang['FOOD_AVAILABLE']				= 'FOOD_AVAILABLE';
+$lang['FREE_BREAKFAST']				= 'FREE_BREAKFAST';
+$lang['FREE_CANCELATION']			= 'FREE_CANCELATION';
+$lang['FREE_INTERNET']				= 'FREE_INTERNET';
+$lang['FREE_LOCAL_CALLS']			= 'FREE_LOCAL_CALLS';
+$lang['FREE_PARKING']				= 'FREE_PARKING';
+$lang['FREE_WIFI']					= 'FREE_WIFI';
+$lang['GAME_ROOM']					= 'GAME_ROOM';
+$lang['GOLF']						= 'GOLF';
+$lang['HOT_TUB']					= 'HOT_TUB';
+$lang['KIDS_ACTIVITIES']			= 'KIDS_ACTIVITIES';
+$lang['KITCHEN_KITCHENETTE']		= 'KITCHEN_KITCHENETTE';
+$lang['KITCHENETTE']				= 'KITCHENETTE';
+$lang['LATE_ARRIVAL']				= 'LATE_ARRIVAL';
+$lang['LATE_CHECK_OUT']				= 'LATE_CHECK_OUT';
+$lang['LOCKERS_STORAGE']			= 'LOCKERS_STORAGE';
+$lang['LOYALTY_REWARDS_AVAILABLE']	= 'LOYALTY_REWARDS_AVAILABLE';
+$lang['LUXURY']						= 'LUXURY';
+$lang['MEETING_ROOM']				= 'MEETING_ROOM';
+$lang['MOTEL']						= 'MOTEL';
+$lang['NON_SMOKING']				= 'NON_SMOKING';
+$lang['PARKING_AVAILABLE']			= 'PARKING_AVAILABLE';
+$lang['PAID_PARKING']				= 'PAID_PARKING';
+$lang['PETS_ALLOWED']				= 'PETS_ALLOWED';
+$lang['PRIVATE_BATH']				= 'PRIVATE_BATH';
+$lang['RESORT']						= 'RESORT';
+$lang['RESTAURANT']					= 'RESTAURANT';
+$lang['ROOM_SERVICE']				= 'ROOM_SERVICE';
+$lang['SHARED_BATH']				= 'SHARED_BATH';
+$lang['SHUTTLE']					= 'SHUTTLE';
+$lang['STAIRS_ELEVATOR']			= 'STAIRS_ELEVATOR';
+$lang['STROLLER_PARKING']			= 'STROLLER_PARKING';
+$lang['SUITES']						= 'SUITES';
+$lang['SWIMMING_POOL']				= 'SWIMMING_POOL';
+$lang['ROOM_WITH_A_VIEW']			= 'ROOM_WITH_A_VIEW';
+$lang['TENNIS_COURT']				= 'TENNIS_COURT';
+$lang['VALET_PARKING']				= 'VALET_PARKING';
+$lang['WHEELCHAIR_ACCESS']			= 'WHEELCHAIR_ACCESS';
+$lang['MEALS_INCLUDED']				= 'MEALS_INCLUDED';
+
 
 $lang['warning_room_id']= 'WARNING! This room is not belong to hotel that you are editing. Changes will be saved under <b>%s</b> property.';
 $lang['warning_wrong_room'] = 'Oops. You are trying to edit a room does not belong to you.';
