@@ -152,6 +152,7 @@ class Reservation_actions extends ADMIN_Controller {
 			'max_child' 	=> $this->input->post('max_child'),
 			'default_policy'=> $this->input->post('default_policy'),
 			'room_units' 	=> null!==$this->input->post('room_units') ? implode(',',$this->input->post('room_units')) : '0',
+			'included' 		=> null!==$this->input->post('room_included') ? implode(',',$this->input->post('room_included')) : '0',
 			'preferences' 	=> empty($this->input->post('forms')) ? '[]' : $this->input->post('forms'),
 			'hotel_id'		=> $hotel_id,
 			'code'			=> $code);

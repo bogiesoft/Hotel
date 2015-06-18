@@ -184,6 +184,81 @@
               </div>
 
               <div class="form-group">
+              <?php 
+              $included = explode(',', $room->included);
+              $included = is_array($included) ? arr_val_to_key($included) :  array();
+              ?>
+                <label class="col-sm-3 control-label"><?php echo lang('included'); ?></label>
+                <div class="col-md-9">
+                <div class="row">
+                <?php if (count($included)>1) { 
+                  foreach ($included as $inc) { ?>
+                   
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <select name="room_included[]">
+                      <option>Choose</option>
+                      <?php foreach (room_specs() as $k => $v) {
+                        $selected = $k == $inc ? 'selected="selected"' :'';
+                        echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                      }
+                      ?>
+                      </select>
+                    </div>
+                  </div><!-- col-sm-6 -->
+                <?php } //foreach ?>
+                
+                <?php }else{ 
+
+                for ($i=1; $i <= 3; $i++) { ?>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <select name="room_included[]">
+                      <option>Choose</option>
+                      <?php foreach (room_specs() as $k => $v) {
+                        echo '<option value="'.$k.'">'.$v.'</option>';
+                      }
+                      ?>
+                      </select>
+                    </div>
+                  </div><!-- col-sm-6 -->
+                <?php } //endfor?>
+
+                <?php } //endif?>
+
+                <!--
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <select name="room_included[]">
+                      <option>Choose</option>
+                      <?php foreach (room_specs() as $k => $v) {
+
+                        echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                      }
+                      ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <select name="room_included[]">
+                      <option>Choose</option>
+                      <?php foreach (room_specs() as $k => $v) {
+
+                        echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+
+                      }
+                      ?>
+                      </select>
+                    </div>
+                  </div><!-- col-sm-6 -->
+                  </div>
+
+                  </div>
+              </div>
+
+              <div class="form-group">
                 <label class="col-sm-3 control-label"><?php echo lang('default_policy'); ?></label>
                  <div class="row">
                   <div class="col-sm-2">
@@ -201,11 +276,6 @@
                     <?php endif; ?>
                     </div>
                   </div><!-- col-sm-6 -->
-                  </div>
-                  <div id="child-ages" style="display:none">
-                  <label class="col-sm-3 control-label"><?php echo lang('children_ages'); ?></label>
-                  <div id="child-ages-content"></div>
-
                   </div>
 
               </div>

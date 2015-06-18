@@ -42,6 +42,8 @@ $lang['close']			= 'Close';
 $lang['default_policy'] = 'Default Policy';
 $lang['no_policy'] 		= 'You have not added policy yet. Please Add a policy first.';
 
+$lang['included']		= 'Included';
+
 //specs old
 /*
 $lang['room_service']	= 'Room Service';
