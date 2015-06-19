@@ -214,7 +214,7 @@
                         <span class="sprite add-blue va-middle"></span>&nbsp;&nbsp;&nbsp;Add another room
                     </a>
 
-                    <?php if ($reservation->extras): ?> 
+                    <?php if ($reservation->extras != 'false'): ?> 
                     <div style="font-weight:bold;margin:20px 0">Enhance your stay</div>
                     <div class="enhance-cont">
                         <?php foreach (json_decode($reservation->extras,TRUE) as $eid => $extra) : ?>
