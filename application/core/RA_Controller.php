@@ -309,7 +309,7 @@ class RA_Controller extends MY_Controller{
 	*/
 	function change_availablity($data,$start,$end){
 		$this->load->model('front_model');
-		foreach ($data as $key => $room) {
+		foreach (json_encode($data) as $key => $room) {
 			
 			//promotion availabity düşür
 			if ($room->promotion > 0) {
