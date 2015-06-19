@@ -435,9 +435,9 @@ $this->load->view('front/header');
                                 //print_r($available_error);
 
                                 if ($stoped_a) {
-                                   echo 'Bu tarihte checkin olmaz';
+                                   echo 'You can not check in on this date.';
                                 }elseif($stoped_d){
-                                    echo 'Bu tarihte checkout olmaz';
+                                    echo 'You can not check out on this date.';
                                 }elseif($available_error){
                                     echo $available_error.' dates are not available';
                                 }else{
