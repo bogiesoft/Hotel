@@ -79,11 +79,35 @@
 
 .visa{background-position:-5px 0;width:45px;height:28px}
 .master{background-position:-55px 0;width:45px;height:28px}
-.maestro{background-position:-105px 0;width:45px;height:28px}
-.discover{background-position:-156px 0;width:45px;height:28px}
-.club{background-position:-207px 0;width:45px;height:28px}
+.maestro{background-position:-105px 0;width:46px;height:28px}
+.discover{background-position:-156px 0;width:46px;height:28px}
+.club{background-position:-207px 0;width:46px;height:28px}
+.jcb{background-position:-258px 0;width:46px;height:28px}
+.aexpress{background-position:-309px 0;width:46px;height:28px}
+.switch{background-position:-359px 0;width:46px;height:28px}
+.union-pay{background-position:-410px 0;width:46px;height:28px}
+.ec{background-position:-461px 0;width:46px;height:28px}
+.hiper{background-position:-512px 0;width:46px;height:28px}
+.carte-bleue{background-position:-563px 0;width:46px;height:28px}
+.a-card{background-position:-614px 0;width:46px;height:28px}
+.solo{background-position:-665px 0;width:46px;height:28px}
+.cartasi{background-position:-716px 0;width:44px;height:28px}
+.blancho{background-position:-765px 0;width:46px;height:28px}
+.eftpos{background-position:-816px 0;width:46px;height:28px}
+.uc{background-position:-867px 0;width:46px;height:28px}
+.bancontact{background-position:-918px 0;width:46px;height:28px}
+.nicos{background-position:-969px 0;width:46px;height:28px}
+.red-card{background-position:-1020px 0;width:46px;height:28px}
+.bc{background-position:-1071px 0;width:46px;height:28px}
+.cabal{background-position:-1122px 0;width:46px;height:28px}
+.b-card{background-position:-1173px 0;width:46px;height:28px}
+.xcard1{background-position:-1224px 0;width:46px;height:28px}
+.xcard2{background-position:-1275px 0;width:46px;height:28px}
+.xcard3{background-position:-1326px 0;width:46px;height:28px}
+.xcard4{background-position:-1377px 0;width:44px;height:28px}
+.xcard5{background-position:-1426px 0;width:30px;height:28px}
 
-.sprite{background:transparent url(main-sprite.png) no-repeat;display:inline-block}
+.sprite{background:transparent url(main-sprite.png) no-repeat;display:inline-block;}
 .tick-green{background-position:-23px -202px}
 
 .email-blue{background-position:-205px -25px}
@@ -253,4 +277,3 @@
 .VALET_PARKING{background-position:-775px -101px;width:24px;height:24px}
 .WHEELCHAIR_ACCESS{background-position:-800px -101px;width:24px;height:24px}
 /* end 6th row */
-asdasd

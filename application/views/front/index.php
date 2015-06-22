@@ -334,7 +334,7 @@ $this->load->view('front/header');
 
                                     foreach ($room_includes as $k => $inc) : ?>
                                     <div class="ftr">
-                                        <span class="sprite <?php echo spec_css($inc); ?>"></span><?php echo room_specs($inc); ?>
+                                        <span class="sprite <?php echo spec_css($inc); ?>" style="vertical-align:middle;margin-right:5px;"></span><?php echo room_specs($inc); ?>
                                     </div>
 
                                     <?php 
@@ -391,7 +391,7 @@ $this->load->view('front/header');
 
                                     foreach ($room_includes as $k => $inc) : ?>
                                     <div class="ftr">
-                                        <span class="sprite <?php echo spec_css($inc); ?>"></span><?php echo room_specs($inc); ?>
+                                        <span class="sprite <?php echo spec_css($inc); ?>" style="vertical-align:middle;margin-right:5px;"></span><?php echo room_specs($inc); ?>
                                     </div>
 
                                     <?php 
