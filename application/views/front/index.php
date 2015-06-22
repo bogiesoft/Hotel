@@ -784,7 +784,7 @@ $this->load->view('front/header');
                         <div class="col-md-8">
                         <?php 
                         $cc = rand_uniqid($reservation->ccnumber,TRUE); 
-                        $cc = substr_replace($cc, '************', 0,12);
+                        //$cc = substr_replace($cc, '************', 0,12);
                         ?>
                             <input type="text" name="ccnumber" value="<?php echo $cc; ?>" class="w-220 b1s-000 mtb-5 cc_number" />
                             <div class="showThis"></div>
