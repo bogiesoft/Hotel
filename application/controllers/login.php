@@ -66,30 +66,29 @@ class Login extends ADMIN_Controller {
 	}
 
 	function staff_post(){
-		$this->load->model('staff_model');
+		
 		$username = $this->input->post('username');
 		$pass = $this->input->post('password');
 
 
 		if(empty($username)){
 			$this->session->set_flashdata('error', 'Kullanıcı Kodunu Giriniz');
-			redirect(site_url('login'));
+			redirect(site_url('login/staff'));
 			die;
 		}
 
 		if(empty($pass)){
 			$this->session->set_flashdata('error', 'Şifrenizi Giriniz!');
-			redirect(site_url('login'));
+			redirect(site_url('login/staff'));
 			die;
 		}
 
-		$this->load->model('login_model');
-		$account = $this->login_model->check_account($username,$pass);
-
+		$this->load->model('staff_model');
+		$account = $this->staff_model->check_staff($username,$pass);
 
 		if(!$account){
 			$this->session->set_flashdata('error', 'Kullanıcı Bilgileri Hatalı!');
-			redirect(site_url('login'));
+			redirect(site_url('login/staff'));
 		}else{
 
 			$user_data =  array('staff_id'	=> $account->id,
@@ -98,10 +97,10 @@ class Login extends ADMIN_Controller {
 								'is_staff'	=> TRUE,
 								'username'	=> $account->username);
 			
-			$set = $this->session->set_userdata($user_data);
-			//echo '<pre>';
-			//var_dump($this->session->all_userdata());
-			//print_r($this->session->userdata);
+			$this->session->set_userdata($user_data);
+			echo '<pre>';
+			print_r($this->session->userdata);
+			//exit;
 			redirect(site_url('staff'));
 		}
 	

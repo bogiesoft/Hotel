@@ -1,9 +1,9 @@
 <?php
 
 /**
-* Dashboard Model
+* Staff Model
 */
-class Dashboard_Model extends CI_Model{
+class Staff_Model extends CI_Model{
 
 	function check_staff($username,$pass){
 		$query = $this->db->select('*')
@@ -13,6 +13,13 @@ class Dashboard_Model extends CI_Model{
 			->get()->row();
 
 		return $query;
+
+	}
+
+	function get_hotels(){
+		return $this->db->select('*')
+			->from('hotels')
+			->get()->result();
 
 	}
 }

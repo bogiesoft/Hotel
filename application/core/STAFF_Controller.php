@@ -7,7 +7,7 @@ class STAFF_Controller extends MY_Controller
 
 		parent::__construct();
 
-		if ($this->session->userdata('is_staff')) {
+		if (!$this->session->userdata('is_staff')) {
 			redirect(site_url('login/staff'));
 		}
 		
