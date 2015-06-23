@@ -22,7 +22,7 @@ class Reservation_actions extends ADMIN_Controller {
 		//load language
 		$this->lang->load('reservation/hotels',$this->language);
 
-		$code = $this->session->userdata('code');
+		$is_staff = $this->session->userdata('is_staff');
 
 		$arr = array(
 		'name' 			=> $this->input->post('name'),
@@ -61,38 +61,55 @@ class Reservation_actions extends ADMIN_Controller {
 		'hotel_logo'	=> $this->input->post('logo_image_value'),
 		'cover_photo'	=> $this->input->post('cover_image_value'),
 		'settings'		=> json_encode($this->input->post('settings')),
-		'code'			=> $code
 		);
 
 		//update mi yeni mi?
 		if ($this->input->post('update') == 1) {
 			$hotel_id = $this->input->post('hotel_id');
 
+			//staff ise comission oranı
+			if ($is_staff) {
+				$arr['commision'] = $this->input->post('commision');
+			}
+
 			$update = $this->db->update('hotels',$arr,array('id' => $hotel_id));
 			//diğer dillerdeki açıklamalar
-			$this->db->delete('hotel_contents',array('hotel_id'=>$hotel_id,'code'=>$code));
+			$this->db->delete('hotel_contents',array('hotel_id'=>$hotel_id));
 			$description	= $this->input->post('description');
 
 			foreach ($description as $key => $value) {
 				$this->db->insert('hotel_contents',array(
-					'lang'		=>$value['lang'],
+					'lang'		=> $value['lang'],
 					'content'	=> $value['desc'],
-					'hotel_id'	=> $hotel_id,
-					'code'		=> $code));
+					'hotel_id'	=> $hotel_id
+					));
 			}
 
 			if ($update) {
 				$this->session->set_flashdata('success',lang('update_success'));
-				redirect('reservation/hotels/edit/'.$hotel_id);
+				if ($is_staff) {
+					redirect('staff/hotel_edit/'.$hotel_id);
+				}else{
+					redirect('reservation/hotels/edit/'.$hotel_id);
+				}
+				
 			}else{
 				$this->session->set_flashdata('error',lang('update_error'));
-				redirect('reservation/hotels/add_new');
+
+				if ($is_staff) {
+					redirect('staff/hotels/add_new');
+				}else{
+					redirect('reservation/hotels/add_new');
+				}
+				
 
 				//echo json_encode(array('status' => 'danger','message' => 'Otel Eklenemedi, Lütfen Tekrar Deneyin.'));
 			}
 
 
 		}else{
+
+			$code = $this->session->userdata('code');
 
 			$insert = $this->db->insert('hotels',$arr);
 			$hotel_id = $this->db->insert_id();

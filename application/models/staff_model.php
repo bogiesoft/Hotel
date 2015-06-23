@@ -22,4 +22,12 @@ class Staff_Model extends CI_Model{
 			->get()->result();
 
 	}
+
+	function hotel_detail($id){
+		return $this->db->select('*')
+			->from('hotels')
+			->where('id',$id)
+			->get()->row();
+
+	}	
 }

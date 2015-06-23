@@ -9,6 +9,7 @@ class Staff extends STAFF_Controller {
 		/* ip control yapılacak */
 		
 		$this->load->model('staff_model');
+
 	}
 
 	function index(){
@@ -31,6 +32,29 @@ class Staff extends STAFF_Controller {
 		
 
 		
+	}
+
+	function hotel_edit($id = NULL){
+
+		if (NULL == $id) {
+			echo 'url\'yi değiştirme';
+			exit;
+		}
+
+		$hotel = $this->staff_model->hotel_detail($id);
+
+		if (!$hotel) {
+			echo 'otel bulunamadı';
+			exit;
+		}	
+
+
+
+		$data['hotel'] = $hotel;
+
+		
+		$this->load->helper('general');
+		$this->load->view('staff/hotel_edit',$data);
 	}
 
 	function users(){
