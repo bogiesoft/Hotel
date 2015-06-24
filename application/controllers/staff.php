@@ -48,13 +48,30 @@ class Staff extends STAFF_Controller {
 			exit;
 		}	
 
+		$reservations = $this->staff_model->hotel_reservations($id);
 
+		//create data
+		$rez = array();
+		foreach ($reservations as $key => $res) {
+			$month = $res->month;
+			$year  = $res->year;
+
+			$rez[$year][$month]['month']	= $res->month;
+			$rez[$year][$month]['year'] 	= $res->year;
+
+			if ($res->status == 1) {
+				$rez[$year][$month]['total_res'] 	= $res->total; 
+			}else{
+				$rez[$year][$month]['canceled'] 	= $res->total;
+			}
+		}
 
 		$data['hotel'] = $hotel;
-
+		$data['reservations'] = $rez;
 		
 		$this->load->helper('general');
 		$this->load->view('staff/hotel_edit',$data);
+
 	}
 
 	function users(){

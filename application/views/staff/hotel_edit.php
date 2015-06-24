@@ -20,6 +20,8 @@
 
       <ul class="nav nav-tabs">
           <li class="active"><a href="#general" data-toggle="tab"><strong>Otel Bilgileri</strong></a></li>
+          <li class=""><a href="#reservations" data-toggle="tab"><strong>Rezervasyon</strong></a></li>
+          
           <!--
           <li class=""><a href="#info" data-toggle="tab"><strong><?php echo lang('hotel_specs'); ?></strong></a></li>
           <li class=""><a href="#description" data-toggle="tab"><strong><?php echo lang('translations'); ?></strong></a></li>
@@ -136,6 +138,35 @@
 
             </div> <!-- general end -->
             
+            <div class="tab-pane" id="reservations">
+
+            <div class="col-md-12">
+            <?php foreach ($reservations as $year => $reservation) : ?>
+            <div class="table-responsive">
+                <table class="table table-primary mb30">
+                    <thead>
+                      <tr>
+                        <th colspan="2"><?php echo $year; ?></th>
+                        <th>Ay</th>
+                        <th>Toplam Rezervasyon</th>
+                        <th>Iptal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($reservation as $month => $res) : ?>
+                      <tr>
+                        <td colspan="2"></td>
+                        <td><?php echo $month; ?></td>
+                        <td><?php echo isset($res['total_res']) ? $res['total_res'] : 0 ; ?></td>
+                        <td><?php echo isset($res['canceled']) ? $res['canceled'] : 0 ; ?></td>
+                      </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div><!-- table-responsive -->
+          <?php endforeach; ?>
+        </div>
+            </div> <!-- reservations -->
 
            
           

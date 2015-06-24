@@ -1,7 +1,7 @@
 <h5 class="sidebartitle">Navigation</h5>
 <ul class="nav nav-pills nav-stacked nav-bracket">
 <li>
-	<a href="<?php echo site_url('dashboard'); ?>">
+	<a href="<?php echo site_url('staff'); ?>">
   	<i class="fa fa-home"></i> <span>Anasayfa</span></a>
 </li>
 
