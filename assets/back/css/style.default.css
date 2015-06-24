@@ -1694,6 +1694,49 @@ div.error label.error:before {
 	margin-right: 0;
 }
 
+.table-primary thead tr th {
+    background-color: #428BCA;
+}
+
+.table-success thead tr th {
+    background-color: #1CAF9A;
+}
+
+.table-warning thead tr th {
+    background-color: #F0AD4E;
+}
+
+.table-danger thead tr th {
+    background-color: #D9534F;
+}
+
+.table-info thead tr th {
+    background-color: #5BC0DE;
+}
+
+.table-dark thead tr th {
+    background-color: #1D2939;
+}
+
+.table.table-primary thead tr th,
+.table.table-success thead tr th,
+.table.table-danger thead tr th,
+.table.table-warning thead tr th,
+.table.table-info thead tr th,
+.table.table-dark thead tr th {
+    color: #fff;
+    border-bottom: 0;
+}
+
+.table-bordered.table-primary thead tr th,
+.table-bordered.table-success thead tr th,
+.table-bordered.table-warning thead tr th,
+.table-bordered.table-danger thead tr th,
+.table-bordered.table-info thead tr th,
+.table-bordered.table-dark thead tr th {
+    border-color: rgba(255,255,255,0.2);
+}
+
 /***** PAGES *****/
 /*****************/
 

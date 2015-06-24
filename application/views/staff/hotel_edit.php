@@ -143,11 +143,10 @@
             <div class="col-md-12">
             <?php foreach ($reservations as $year => $reservation) : ?>
             <div class="table-responsive">
-                <table class="table table-primary mb30">
+                <table class="table table-success mb30">
                     <thead>
                       <tr>
                         <th colspan="2"><?php echo $year; ?></th>
-                        <th>Ay</th>
                         <th>Toplam Rezervasyon</th>
                         <th>Iptal</th>
                       </tr>
@@ -155,8 +154,7 @@
                     <tbody>
                     <?php foreach ($reservation as $month => $res) : ?>
                       <tr>
-                        <td colspan="2"></td>
-                        <td><?php echo $month; ?></td>
+                        <td colspan="2"><?php echo $month; ?></td>
                         <td><?php echo isset($res['total_res']) ? $res['total_res'] : 0 ; ?></td>
                         <td><?php echo isset($res['canceled']) ? $res['canceled'] : 0 ; ?></td>
                       </tr>
