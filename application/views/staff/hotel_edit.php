@@ -37,7 +37,7 @@
           <div class="panel-body">
             <div class="col-md-12 col-sm-3">            
            
-           <form id="save_hotel_details2" method="POST" action="<?php echo site_url('reservation_actions/save_hotel'); ?>">
+           <form id="save_hotel_details2" method="POST" action="<?php echo site_url('staff_actions/save_hotel'); ?>">
             <div class="tab-content mb30">
             
             <div class="tab-pane active" id="general">
