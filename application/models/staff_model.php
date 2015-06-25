@@ -31,6 +31,12 @@ class Staff_Model extends CI_Model{
 
 	}
 
+	function get_users(){
+		return $this->db->select('*')
+			->from('accounts')
+			->get()->result();
+	}
+
 	function hotel_reservations($id){
 
 		//sql kodu şu

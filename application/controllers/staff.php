@@ -9,6 +9,7 @@ class Staff extends STAFF_Controller {
 		/* ip control yapılacak */
 		
 		$this->load->model('staff_model');
+		$this->lang->load('general','en');
 
 	}
 
@@ -75,6 +76,17 @@ class Staff extends STAFF_Controller {
 	}
 
 	function users(){
+
+		if ($this->uri->segment('3') == 'get_users') {
+
+			$result = array();
+			$result['Result'] = "OK";
+			$result['TotalRecordCount'] = '100';
+			$result['Records'] = $this->staff_model->get_users();
+			print json_encode($result);
+		}else{
+			$this->load->view('staff/users');
+		}
 
 	}
 }
