@@ -523,6 +523,7 @@ $this->load->view('front/header');
                         </div>
                         <?php endif; ?>
                     </form>
+                    <!--
                     <div class="all-green cent f-b">
                         <p>
                         FREE cancellation 
@@ -530,6 +531,7 @@ $this->load->view('front/header');
                         Breakfast included
                         </p>
                     </div>
+                    -->
                 </div>
                 </div>
             </div><!-- main row of results -->
@@ -619,12 +621,13 @@ $this->load->view('front/header');
                             <div class="price_information"></div>
                         </div>
                         <?php endif; ?>
+                        <!--
                         <div class="cancellation">
                             <div>Cancellation policy:</div>
                             <div>Cancel by 6 PM local hotel time on Feb 11, 2015 to avoid a penalty charge of EUR 367.20</div>
                             <div>Guarantee Policy:</div>
                             <div>A Guarantee is mandatory to reserve the room</div>
-                        </div>
+                        </div>-->
                         <div id="change-search">
                             <a class="m-date" id="tc1">Need to Change Your Search ?</a>
                             <img src="<?php echo site_url('assets/front');?>/img/arr-rit.png" class="fl-r mtb-5" width="" alt="" />

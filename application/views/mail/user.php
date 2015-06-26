@@ -259,6 +259,7 @@ a:hover {text-decoration: none;color: #fff;}
                 <span class="val1 col-xs-6 bold"> En İyi Fiyat Garantisi</span>
             </div>
             <br/>
+            <!--
             <div>
                 <?php echo sprintf(lang('payment_box'),$hotel_info->name); ?>
                 <br/>
@@ -267,6 +268,7 @@ a:hover {text-decoration: none;color: #fff;}
                 Önemli: İlave özellikler (ek yatak gibi) bu toplama eklenmemektedir.<br />
                 Gösterilen toplam fiyat tesise ödeyeceğiniz miktardır. Booking.com hiçbir rezervasyon ücreti, idari veya başka herhangi bir ücret almaz.
             </div>
+            -->
         </div>
 
         <?php foreach (json_decode($rooms) as $key => $room) : ?>
