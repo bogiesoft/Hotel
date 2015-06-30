@@ -367,7 +367,7 @@ class Actions extends RA_Controller {
 
 	}
 
-	function send_information_mail($data,$res_code){
+	function send_information_mail($data,$res_code=false){
 		//send mail to user
 		$this->lang->load('reservation/policies','en');
 		$this->lang->load('reservation/mail','en');
@@ -504,6 +504,11 @@ class Actions extends RA_Controller {
 
 		if ($cancel) {
 			echo json_encode(array('status'=>'success'));
+
+			//Send cancallation mail
+			$data = $this->front_model->get_reservation_by_id($id)
+			$this->send_information_mail($data);
+
 		}else{
 			echo json_encode(array('status'=>'error'));
 		}

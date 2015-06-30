@@ -196,4 +196,11 @@ class Front_Model extends CI_Model{
 			->update('reservations');
 	}
 
+	function get_reservation_by_id($id){
+		return $this->db->select('*')
+			->from('reservations')
+			->where('id',$id)
+			->get()->row_array();
+	}
+
 }
