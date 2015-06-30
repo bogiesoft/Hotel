@@ -379,10 +379,10 @@ class Actions extends RA_Controller {
 
 		    $config = array(
 			  'protocol' => 'smtp',
-			  'smtp_host' => '176.31.162.93',
-			  'smtp_port' => 25,
-			  'smtp_user' => 'info@rabooking.com', 
-			  'smtp_pass' => '1234az!1', 
+			  'smtp_host' => 'smtp.mandrillapp.com',
+			  'smtp_port' => 587,
+			  'smtp_user' => 'selam@bencagri.com', 
+			  'smtp_pass' => '9V3ej0F71DJJiMyPse1g_g', 
 			  'mailtype' => 'html',
 			  'charset' => 'UTF-8',
 			  'wordwrap' => TRUE);
