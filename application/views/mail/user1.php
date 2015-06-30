@@ -181,17 +181,46 @@ font-size:12px;line-height:17px;
        </td>
       </tr>
 
+
+      <tr><td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top"></td> </tr>
+
+      <?php if($status == 1) : ?>
       <tr>
-       <td style="padding-top:20px; padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
-        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_reassurance" style="margin:0px; padding:0px; border:0px;" width="100%">
-         <tbody><tr>
-          <td style="text-align:left;font-size:18px;line-height:22px;font-family: arial;color:#003580;page-break-after: avoid;font-weight:bold;" valign="top">
-            Your modified booking is now confirmed
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mod_summary" style="margin:0px; padding:0px; border:0px;" width="100%">
+            <tbody><tr>
+              <td style="background-color: #59CB7F;border:1px solid #d3d3d3;padding:15px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                <tbody><tr>
+                  <td style="text-align:left;font-family: arial;color:#333;font-size:12px;line-height:17px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                    <tbody><tr>
+                      <td style="text-align:left;font-size:18px;line-height:22px;font-family: arial;color:#fff;page-break-after: avoid;font-weight:bold;" valign="top"> Your reservation is approved</td>
+                      </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </tbody></table>
           </td>
-         </tr>
-        </tbody></table>
-       </td>
       </tr>
+    <?php elseif ($status == 0) : ?>
+    <tr>
+        <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mod_summary" style="margin:0px; padding:0px; border:0px;" width="100%">
+            <tbody><tr>
+              <td style="background-color: #E27575;border:1px solid #d3d3d3;padding:15px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                <tbody><tr>
+                  <td style="text-align:left;font-family: arial;color:#333;font-size:12px;line-height:17px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                    <tbody><tr>
+                      <td style="text-align:left;font-size:18px;line-height:22px;font-family: arial;color:#fff;page-break-after: avoid;font-weight:bold;" valign="top"> Your reservation has been canceled </td>
+                      </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </tbody></table>
+          </td>
+      </tr>
+    <?php endif; ?>
 
       <!-- Your Changes
       <tr>

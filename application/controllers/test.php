@@ -8,7 +8,7 @@ class Test Extends RA_Controller{
         $this->lang->load('reservation/policies','en');
 
         $data = $this->front_model->get_reservation('BUVDY9673',14);
-        $data['hotel_info'] = $this->front_model->hotel_info(14);
+        $data->hotel_info = $this->front_model->hotel_info(14);
 
         $this->load->view('mail/user1',$data);
 
