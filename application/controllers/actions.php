@@ -370,9 +370,9 @@ class Actions extends RA_Controller {
 		$this->lang->load('reservation/mail','en');
 
 		if ($res_code) {
-			$subject = 'Rezervayon Düzenleme - '.$res_code;
+			$subject = 'Edit Reservation - '.$res_code;
 		}else{
-			$subject = 'Yeni Rezervayon';
+			$subject = 'Your Reservation';
 		}
 
 		$user_mail = $data['email'];
