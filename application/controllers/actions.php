@@ -387,7 +387,7 @@ class Actions extends RA_Controller {
 			  'charset' => 'UTF-8',
 			  'wordwrap' => TRUE);
 
-			$message = $this->load->view('mail/user',$data,TRUE);
+			$message = $this->load->view('mail/user1',$data,TRUE);
 
 			$this->load->library('email', $config);
 			$this->email->set_newline("\r\n");
