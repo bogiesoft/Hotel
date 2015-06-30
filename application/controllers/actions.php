@@ -503,11 +503,14 @@ class Actions extends RA_Controller {
 		$cancel = $this->front_model->cancel_reservation($id,$code);
 
 		if ($cancel) {
+			//Send cancallation mail
+			$data = $this->front_model->get_reservation_by_id($id);
+			$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
+			$this->send_information_mail($data);
+
 			echo json_encode(array('status'=>'success'));
 
-			//Send cancallation mail
-			$data = $this->front_model->get_reservation_by_id($id)
-			$this->send_information_mail($data);
+
 
 		}else{
 			echo json_encode(array('status'=>'error'));
