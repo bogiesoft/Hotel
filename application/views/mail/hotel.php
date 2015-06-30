@@ -180,7 +180,7 @@ a:hover {text-decoration: none;color: #fff;}
             <img src="<?php echo $hotel_info->hotel_logo; ?>" />
             <a class="print-btn pull-right bold" href="#" style="">
                 <span class="glyphicon glyphicon-print"></span>&nbsp;
-                Print
+                Yazdırılabilir versiyonu alın
             </a>
         </div>
         <div class="title1 row">
@@ -188,14 +188,14 @@ a:hover {text-decoration: none;color: #fff;}
         </div>
         <div class="contact-block row bold" style="">
             <div style="margin-bottom:3px">
-                <span class="label1">Adress:</span>
+                <span class="label1">Adres:</span>
                 <span class="val1">
                     <?php echo $hotel_info->adress; ?> <br/>
                     
                 </span>
             </div>
             <div style ="margin-bottom:3px">
-                <span class="label1">Phone:</span>
+                <span class="label1">Telefon:</span>
                 <span class="val1">
                     <?php echo $hotel_info->phone; ?>
                 </span>
@@ -217,11 +217,7 @@ a:hover {text-decoration: none;color: #fff;}
                 <span class="val1 col-xs-9 right-align"><?php echo $reservation_code; ?></span>
             </div>
             <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">PIN kodu</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $pincode; ?></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Rezervasyonunuz</span>
+                <span class="label1 col-xs-3 bold">Rezervasyon</span>
                 <span class="val1 col-xs-9 right-align"></span>
             </div>
             <div class="t-row clearfix">
