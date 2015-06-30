@@ -241,6 +241,7 @@ class Actions extends RA_Controller {
         	echo json_encode(array('status'=>'error','errors'=>$data));
 
         }else{
+        	$data['status'] = 1;
         	//if reservation changes
 			$res_code = $this->session->userdata('res_code');
 
@@ -248,6 +249,7 @@ class Actions extends RA_Controller {
 
         	if ($res_code) {
         		$data['reservation_code']=$res_code;
+        		$data['status'] = 2;
         	}else{
         		$data['reservation_code']= rand_uniqid((int)$this->input->post('phone').$pincode); //cuz, phone numbers is kinda unique :p, last 4 chars come random
         	}
@@ -335,6 +337,7 @@ class Actions extends RA_Controller {
         		$this->change_availablity($data['rooms'],$data['checkin'],$data['checkout']);
 			}
         	
+			$data['id']	= $data['res_id'];
 
 
 			$data['ip'] = $this->input->ip_address();
@@ -346,7 +349,7 @@ class Actions extends RA_Controller {
 
         		//send mail
         		$data['hotel_info'] = $this->front_model->hotel_info($data['hotel_id']);
-
+        		$data['reservation_date'] = date('Y-m-d H:i:s');
         		//send mail
         		$this->send_information_mail($data,$res_code);
         		

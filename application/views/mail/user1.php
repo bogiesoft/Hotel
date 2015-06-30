@@ -743,7 +743,7 @@ padding-bottom:5px;
  color:#003580;" valign="top"><b style="white-space:nowrap;"><?php echo $room->price; ?> <?php echo $hotel_info->currency; ?></b></td>
             </tr>
           <?php endforeach; ?>
-
+          <?php if(count(json_decode($extras)) > 0) : ?>
           <?php foreach (json_decode($extras) as $key => $extra) : ?>
             <tr>
              <td style="
@@ -771,7 +771,7 @@ padding-bottom:5px;
  color:#003580;" valign="top"><b style="white-space:nowrap;"><?php echo $extra->price; ?> <?php echo $hotel_info->currency; ?></b></td>
             </tr>
           <?php endforeach; ?>
-
+          <?php endif; ?>
             <tr>
              <td style="
 text-align:left;
