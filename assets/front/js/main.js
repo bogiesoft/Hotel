@@ -140,7 +140,8 @@ $(function() {
   		closeEffect: 'elastic'
    	});
     $(".magni").hover(function(){
-        $(".magnify").show();
+        var magnid = $(this).data('id');
+        $(".magnify_"+magnid).show();
     },function(){
         $(".magnify").hide();
     });

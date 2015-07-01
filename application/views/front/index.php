@@ -237,8 +237,8 @@ $this->load->view('front/header');
                             <?php echo $room['title'] != '' ? $room['title'] : $room['name'];?>
                             </div>
                             <!-- slider -->
-                            <div id="carousel_<?php echo $rid;?>" class="carousel slide magni">
-                                <div class="magnify">
+                            <div id="carousel_<?php echo $rid;?>" data-id="<?php echo $rid;?>" class="carousel slide magni">
+                                <div class="magnify magnify_<?php echo $rid;?>">
                                     <img src="<?php echo site_url('assets/front');?>/img/magnify.png" />
                                 </div>
                                 <div class="carousel-inner">
