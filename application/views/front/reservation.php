@@ -24,9 +24,11 @@
             <div class="container">
                 <br />
                 <div>
+                <?php if ($reservation->status == 1) :?>
                     <div class="confirm-msg">
                         Thanks <?php echo $reservation->first_name; ?> <?php echo $reservation->last_name; ?>! Your booking is now confirmed.
                     </div>
+
                     <button class="c-btn btn-cancel-booking pull-right" data-toggle="modal" data-target="#cancel_modal">
                         <span class="sprite cancel-white"></span>&nbsp;&nbsp;&nbsp;Cancel Reservation
                     </button>
@@ -36,13 +38,34 @@
                     <button id="editConf" class="c-btn pull-right">
                             <span class="sprite pencil-white"></span>&nbsp;Edit
                     </button>
+                    
+                <?php elseif ($reservation->status == 0) : ?>
+
+                    <div class="error-msg">
+                        This Reservation has been cancalled.
+                    </div>
+
+                    <button class="c-btn pull-right">
+                        <span class="sprite printer-white"></span>&nbsp;&nbsp;&nbsp;Print Confirmation
+                    </button>
+
+                <?php endif; ?>
+
                     <div class="clearfix"></div>
                 </div>
                 <div class="confirm-actions">
+                <?php if ($reservation->status == 1) :?>
                     <div class="a-text col-md-6">
                         <span>We sent the confirmation email to <?php echo $reservation->email; ?> </span><br />
                         <span>We notified <?php echo $hotel->name; ?> of your upcoming stay </span>
                     </div>
+                <?php elseif($reservation->status == 2) : ?>
+                    <div class="a-text col-md-6">
+                        <span>We sent the update email to <?php echo $reservation->email; ?> </span><br />
+                        <span>We notified <?php echo $hotel->name; ?> for your update </span>
+                    </div>
+                <?php endif; ?>
+
                     <div class="col-md-6">
                         
                     </div>
@@ -435,6 +458,14 @@
                     if (data.status == 'success') {
                       //alert('success');
                       $('#cancel_modal').modal('hide');
+                      var html = '<div class="error-msg">Your reservation has been canceled.</div>';
+
+                      $('.confirm-msg').after(html);
+                      $('.confirm-msg').fadeOut();
+                      $('.btn-cancel-booking').fadeOut();
+                      $('#editConf').fadeOut();
+                      
+
                     }
                 });
             });
