@@ -297,7 +297,14 @@ $this->load->view('front/header');
                             <?php if($promo['rule'] == 1) : ?>
                             <div class="row data-row">
                                 <div class="col-md-3 cent">
-                                    <img src="<?php echo site_url('assets/front');?>/img/2persons.png" />
+                                    <?php // adult sayısı sprite
+                                    for ($i=0; $i < $room['max_adult']; $i++) { 
+                                        echo '<div class="sprite adult"></div>';
+                                    }?>
+                                    <?php // child sayısı sprite
+                                    for ($i=0; $i < $room['max_child']; $i++) { 
+                                        echo '<div class="sprite child"></div>';
+                                    }?>
                                 </div>
                                 <div class="col-md-3">
                                     <abbr id="free-cancellation" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="You can cancel this booking right up to Feb 2, 2015 for free. You may be charged if you cancel or change your booking after that. And we can’t refund you if you check out early or don’t turn up at the hotel."><?php echo $promo['promotion_name']; ?></abbr>
@@ -379,7 +386,14 @@ $this->load->view('front/header');
                             <!-- promotions of room end -->
                              <div class="row data-row">
                                 <div class="col-md-3 cent">
-                                    <img src="<?php echo site_url('assets/front');?>/img/3persons.png" />
+                                    <?php // adult sayısı sprite
+                                    for ($i=0; $i < $room['max_adult']; $i++) { 
+                                        echo '<div class="sprite adult"></div>';
+                                    }?>
+                                    <?php // child sayısı sprite
+                                    for ($i=0; $i < $room['max_child']; $i++) { 
+                                        echo '<div class="sprite child"></div>';
+                                    }?>
                                 </div>
                                 <div class="col-md-3">
                                     <abbr id="non-refundable" class="white-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Special non-refundable rate</b><br /> This special discounted rate is non-refundable. If you choose to change or cancel this booking you will not be refunded any of the payment.">Best Available Rate</abbr>
