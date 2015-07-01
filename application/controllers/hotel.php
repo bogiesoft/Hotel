@@ -283,7 +283,7 @@ class Hotel extends RA_Controller {
 		
 		$options = $this->session->userdata('options');
 		
-		$user_cart = $this->session->userdata('user_cart');
+		$user_cart = $this->session->userdata('user_cart') ? $this->session->userdata('user_cart') : array();
 		$room_id 	= $this->input->post('room');
 		$policy 	= $this->input->post('policy');
 		$qty 		= $this->input->post('qty');
@@ -307,12 +307,12 @@ class Hotel extends RA_Controller {
 		//add item
 		}else{
 
-			/*
+			
 			foreach ($user_cart as $key => $c) {
 				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
-					unset($user_cart[$key]);
+					unset($key);
 				}
-			}*/
+			}
 
 			if ($promotion != 0) {
 				$price = $room_prices->$room_id->promotions->$promotion->price;
