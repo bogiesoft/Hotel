@@ -352,6 +352,7 @@ class Actions extends RA_Controller {
         		$data['reservation_date'] = date('Y-m-d H:i:s');
         		//send mail
         		$this->send_information_mail($data,$res_code);
+        		$this->send_information_mail_to_hotel($data,$res_code);
         		
         		//send sms
         		if ($this->input->post('sendsms')) {
@@ -391,6 +392,43 @@ class Actions extends RA_Controller {
 			  'wordwrap' => TRUE);
 
 			$message = $this->load->view('mail/user1',$data,TRUE);
+
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+			$this->email->from($data['hotel_info']->email); 
+			$this->email->to($user_mail);
+			$this->email->subject($subject);
+			$this->email->message($message);
+
+
+			$this->email->send();
+
+	}
+
+	function send_information_mail_to_hotel($data,$res_code=false){
+		//send mail to user
+		$this->lang->load('reservation/policies','en');
+		$this->lang->load('reservation/mail','en');
+
+		if ($res_code) {
+			$subject = 'Edit Reservation - '.$res_code;
+		}else{
+			$subject = 'Your Reservation';
+		}
+
+		$user_mail = $data['hotel_info']->email;
+
+		    $config = array(
+			  'protocol' => 'smtp',
+			  'smtp_host' => 'smtp.mandrillapp.com',
+			  'smtp_port' => 587,
+			  'smtp_user' => 'selam@bencagri.com', 
+			  'smtp_pass' => '9V3ej0F71DJJiMyPse1g_g', 
+			  'mailtype' => 'html',
+			  'charset' => 'UTF-8',
+			  'wordwrap' => TRUE);
+
+			$message = $this->load->view('mail/hotel',$data,TRUE);
 
 			$this->load->library('email', $config);
 			$this->email->set_newline("\r\n");

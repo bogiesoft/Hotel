@@ -1,298 +1,903 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <!-- <link type="text/css" rel="stylesheet" href="<?php echo site_url('assets/mail'); ?>/css/style.css" media="all" /> -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="<?php echo site_url('assets/mail'); ?>/js/jquery.carouFredSel-6.0.4-packed.js"></script>
-    <script src="<?php echo site_url('assets/mail'); ?>/js/main.js"></script>
-</head>
-<style type="text/css">
-/* ------------------------------------------------------------------- controls */
-body{color:#333;}
-a {color: #4393ff;}
-a:hover {}
-p{font-size:13px}
-
-.bold{font-weight:bold}
-.no-border{border:none !important}
-
-.header{padding-top:17px;margin-bottom:30px}
-.print-btn{display:block;background-color:#0896ff;color:#fff;padding:4px 8px;margin-top:52px}
-.right-align{text-align:right}
-
-.title1{font-size:20px;margin-bottom:18px}
-
-.contact-block{margin-bottom:40px}
-.contact-block .title{font-size:22px;display:inline-block;width:200px;vertical-align:middle}
-.contact-block .label1{display:inline-block;width:200px;padding-left:100px;vertical-align:top}
-.contact-block .val1{display:inline-block;vertical-align:top}
-
-.title2{font-size:16px;color:#4393ff;text-align:center;margin-bottom:18px}
-
-.details-block{margin-bottom:29px}
-.details-block .t-row{border-bottom:dotted 1px #333}
-.details-block .label1{padding:0 4px;display:inline-block;}
-.details-block .val1{padding:0 4px;display:inline-block;}
-
-.blue-box{background-color:#e6edf6;border:solid 1px #b3cae6;padding:12px;margin-bottom:22px}
-.blue-box .t-row{border-bottom:dotted 1px #333}
-.blue-box .label1{padding:0 4px;display:inline-block;font-size:13px}
-.blue-box .val1{padding:0 4px;display:inline-block;text-align:right;font-size:13px}
-.blue-box .toplam{font-size:18px}
-
-.title4{font-size:20px;margin-bottom:7px}
-
-
-fieldset.table-legend {
-border: 1px groove #ddd !important;
-padding: 0 1.4em 1.4em 1.4em !important;
-margin: 0 0 1.5em 0 !important;
--webkit-box-shadow: 0px 0px 0px 0px #000;
-box-shadow: 0px 0px 0px 0px #000;
+<?php $settings = is_object(json_decode($hotel_info->settings)) ? json_decode($hotel_info->settings,TRUE) : []; ?>
+<?php $manage_url = site_url('hotel/reservation').'/?code='.$id.'&hash='.$rhash; ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+ <head>
+ <meta charset="UTF-8">
+  <style>
+@media print {
+.noPrint {display: none;}
 }
-legend.table-legend {
-font-size: 1.2em !important;
-font-weight: bold !important;
-text-align: left !important;
-width: auto;
-padding: 0 10px;
-border-bottom: none;
-    }
-
-/* ------------------------------------------------------------------- controls */
-* {padding: 0;margin: 0;/*border: 1px solid red;*/}
-a {color: #fff;}
-a:hover {text-decoration: none;color: #fff;}
-.f-b {font-weight: bold;}
-.fl-r {float: right;}
-.w-70 {width: 70px;}/* width */
-.w-95 {width: 95px;}
-.w-120 {width: 120px;}
-.w-220 {width: 220px;}
-.b1s-000 {border: 1px solid #000;}/* borders */
-.mtp-5 {margin: 5px 0;}
-.v-mdl {vertical-align: middle;}
-.cent {text-align: center;}
-.c-fff {color: #fff;}/* font colors */
-.c-f00 {color: #f00;}
-.c-f00 {color: #f00;}
-.c-090 {color: #090;}
-.c-898 {color: #898989;} /**/
-.bg-000 {background: #000;}/* backgrounds *//*delete delete class */
-.nopadding {padding: 0 !important;margin: 0 !important;}
-/* ------------------------------------------------------------------- end controls */
-.details {padding: 5px;border-bottom: 2px solid #e2e2dd;margin: 5px 0;font-weight: bold;font-size: 17px;}
-.welcome {border: 1px solid #000;background: #ededec;padding: 20px 10px;margin: 10px;}
-.sbt-btn {text-align: center;color: #fff;background: #026dc5;margin: 5px auto;width: 170px;font-weight: bold;padding: 5px 0;}
-.agree a {color: #00f;text-decoration: underline;}
-/* ------------------------------------------------------------------- header */
-.head-part {display: inline-block;vertical-align: middle;margin-top: 5px;}
-.sqr {display: inline-block;vertical-align: middle;border: 1px solid #fff;color: #fff;margin: 0 0 5px 0;padding:0 5px;}
-.m1 {left: -15px;padding: 5px 10px;margin:0;width: 260px;background-color: #000;color: #fff;border-radius: 0px;box-shadow: 0px 0px 0px;}
-.m1 a {display:block;}
-#money-link:active {color: #fff !important;background: #000;}
-#money-link:focus {color: #fff !important;}
-.m2, .m3 {position: absolute;top: 41px;left: 0;display: none;z-index: 1000;width: 100% !important;padding: 5px 10px;margin: 0px;font-size: 14px;text-align: left;background-color: #000;color: #fff;}
-/* ------------------------------------------------------------------- end header */
-.top1 {background: #f3f3f3;text-align: center;padding: 10px;}
-.top1 a {color: #000;}
-#mdate {display: none;}
-.top2 {background: #f3f3f3;padding: 10px;border-top: 1px solid #fff;}
-.top2 input {text-align: center;font-weight: bold;height: 36px;}
-.top2 .calendar {margin-right: -20px;}
-.top2 .srch-btn {width: 80%;border: 3px solid #fff;background: #008cff;color: #fff;font-weight: bold;height: 37px;}
-.data-row {padding: 10px 0;border-bottom: 1px solid #ccc;}
-.data-row:last-child {border-bottom: none;}
-.ftr {padding: 5px 0;}
-#reserve {text-align: center;color: #fff;background: #008cff;margin: 10px auto;width: 160px;font-weight: bold;}
-.best-price {text-align: center;border:1px solid #00f;width: 160px;margin: auto;}
-.price {font-weight: bold;font-size: 20px;}
-.all-green {border: 1px solid #078924;color: #078924;width: 160px;margin:20px auto;padding: 10px 0;}
-.room-dtl {margin-top: 30px;}
-.dtl {display: inline-block;vertical-align: top;width: 200px;font-size: 12px;}
-#dtl-show1,#dtl-show2 {cursor: pointer;}
-.dtl1, .dtl2 {display: none;border-bottom: 1px solid #000;padding: 10px 0;}
-.sl-menu {width: 120px;}
-/* ---------------------------------------------------- booking form */
-.mail-msg {font-size: 10px;color: #f00;border-bottom: 1px solid #ccc;border-top: 1px solid #ccc;padding: 10px 0;margin: 5px 0;font-weight: bold;}
-.deposit {border-bottom: 3px solid #000;border-top: 3px solid #000;padding:15px 20px;}
-/* ---------------------------------------------------- end booking form */
-
-.accordion {position: relative;width: 910px;}
-.stay {display: inline-block;vertical-align: top;width: 140px;max-height: 150px;background: #000;overflow: hidden;margin-left: -3px;color:#fff;/**/}
-.stay-show, .stay-hide {display: inline-block;vertical-align: top;}
-.stay-show {width: 140px;}
-.expanded {position: absolute;left: 0;z-index: 1000;width: 700px;}
-.stay-txt {}
-.stay-hide {width: 556px;}
-
-#free-cancellation {color: #090;}
-.tooltip.top .tooltip-inner {background-color:#fff;color: #000;}
-.tooltip.top .tooltip-arrow {border-top-color: #fff;}
-.tooltip.in {opacity: 1;filter: alpha(opacity=100);}
-.tooltip-inner {max-width: 350px;width: 350px;}
-.tooltip-inner {text-align: left;border-radius: 0;
-    background-color: rgb(20,20,20,); /* Needed for IEs */
-    -moz-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.4);
-    -webkit-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.4);
-    box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.4);
-    zoom: 1;
-    }
-.foo-btm, .foo-top {padding: 30px 0;}
-/* ------------------------------------------------------- fixed-part */
-#fixed-part {width: 220px;}
-.fexed-part {position: fixed;top: 60px;}
-#lc-a {background: #fdb300;color: #fff;padding: 5px 10px;font-size: 12px;font-weight: bold;}
-#lc-a-in,#lc-b-in,.cancellation {background: #ededec;font-size: 12px;padding: 10px;}
-.cancellation {border-bottom: 3px solid #b3b3b3;}
-#lc-b {background: #333;color: #fff;padding: 5px 10px;font-size: 12px;font-weight: bold;}
-.park-view {background: #ededec;border-top: 3px solid #b3b3b3;border-bottom: 3px solid #b3b3b3;padding-left: 15px;}
-.avrg {background: #d6d6d5;padding: 10px;text-align: right;border-bottom: 3px solid #b3b3b3;}
-#change-search {background: #333;color: #fff;padding: 5px 10px;font-size: 12px;font-weight: bold;}
-.scured-black {text-align: right;padding: 10px;}
-/* ------------------------------------------------------- end fixed-part */
-
-#footer {font-size: .9em;}/**/
-#footer a {text-decoration: underline;color: #898989;}/**/
-
-#slider-content,#slider-content2 {font-size: 14px;position: relative;}
-#red-offer {position: absolute;top: 50px;background: #f00;color: #fff;padding: 5px;z-index: 1001;margin-left: -20px;text-transform: uppercase;}
-#green-offer {position: absolute;top: 30px;background: #078924;color: #fff;padding: 5px;z-index: 1001;margin-left: -20px;text-transform: uppercase;}
-/* ------------------------------------------------------- Style over carousel */
-.carousel-inner {border-radius: 0 0 2em 2em;box-shadow: 0px 0px 5px #333;}
-.carousel-control.left,.carousel-control.right {background: none !important;}
-.carousel-indicators {bottom: -30px !important;}
-.carousel-indicators img {display: inline-block;box-shadow: 0px 0px 5px #333;width: 60px;height: 60px;margin: 1px;cursor: pointer;border-radius: 60px;}
-.carousel-indicators .active {width: 70px;height: 70px;margin: 0;background-color: #ddd;}
-/* ------------------------------------------------------- Style over carousel */
 </style>
-<body style="color:#333;font-size:12px">
-    <div class="container">
-        <div class="row header">
-            <img src="<?php echo $hotel_info->hotel_logo; ?>" />
-            <a class="print-btn pull-right bold" href="#" style="">
-                <span class="glyphicon glyphicon-print"></span>&nbsp;
-                Yazdırılabilir versiyonu alın
-            </a>
-        </div>
-        <div class="title1 row">
-            <?php echo sprintf(lang('thank_you'),$name_title.' '.$first_name.' '.$last_name); ?>
-        </div>
-        <div class="contact-block row bold" style="">
-            <div style="margin-bottom:3px">
-                <span class="label1">Adres:</span>
-                <span class="val1">
-                    <?php echo $hotel_info->adress; ?> <br/>
-                    
-                </span>
-            </div>
-            <div style ="margin-bottom:3px">
-                <span class="label1">Telefon:</span>
-                <span class="val1">
-                    <?php echo $hotel_info->phone; ?>
-                </span>
-            </div>
-            <div style="margin-bottom:3px">
-                <span class="label1">Seyahat bilgisi::</span>
-                <span class="val1">
-                    <a href="#">Ulaşım talimatlarını göster</a>
-                </span>
-            </div>
-        </div>
-        <div class="title2">
-            <img src="<?php echo site_url('assets/mail'); ?>/img/gear.png" />&nbsp;
-            Rezervasyonunuzu yönetin 
-        </div>
-        <div class="details-block">
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Rezervasyon numarası</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $reservation_code; ?></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Rezervasyon</span>
-                <span class="val1 col-xs-9 right-align"></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Check-in</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $checkin; ?></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Check-out</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $checkout; ?></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Rezervasyonu yapan</span>
-                <span class="val1 col-xs-9 right-align"><?php echo $first_name; ?> <?php echo $last_name; ?></span>
-            </div>
-        </div>
-        
-        <div class="blue-box">
-            <div class="t-row clearfix">
-                <?php foreach (json_decode($rooms) as $key => $room) : ?>
-                <span class="label1 col-xs-6 bold"><?php echo $room->name; ?> (x <?php echo $room->qty; ?>)</span>
-                <span class="val1 col-xs-6 bold"><?php echo $room->price; ?> <?php echo $hotel_info->currency; ?></span>
-                <?php endforeach; ?>
+  <style>
+.mg_conf_explorer_entry_point_empty_td {
+width:15%!important;
+}
+.mg_conf_explorer_entry_point_main_td {
+width: 70%!important;
+}
+</style>
+  <style>
+/* Reset */
+#outlook a {padding:0;}
+body {width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+.ExternalClass {width:100%;}
+.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+/* Link color on iOS */
+a {color:#0896ff;}
+a[x-apple-data-detectors] {
+color: inherit !important;
+text-decoration: none !important;
+font-size: inherit !important;
+font-family: inherit !important;
+font-weight: inherit !important;
+line-height: inherit !important;
+}
+/* Make layout fluid on smaller screens */
+@media only screen and (max-width: 619px) {
+*[class~=responsive_table] {
+width: 100%!important;
+}
+*[class~=responsive_img] {
+height:auto !important;
+max-width:600px !important;
+width: 100% !important;
+}
+}
+/* General layout choreography for mobile */
+@media only screen and (max-width: 480px) {
+/* Make cells full width */
+*[class~=responsive_td] {
+display: block;
+width: 100%!important;
+}
+/* Key - value list design */
+*[class~=responsive_key] {
+padding-top:7px!important;
+padding-bottom:0!important;
+padding-right:0!important;
+border:0!important;
+}
+*[class~=responsive_value] {
+text-align:left!important;
+padding-bottom:7px!important;
+padding-top:0!important;
+}
+*[class~=lang_is_rtl] *[class~=responsive_value] {
+text-align: right!important;
+}
+*[class~=responsive_td_ge] {
+display: block;
+width: auto !important;
+padding-left: 15px !important;
+padding-top: 5px !important;
+padding-bottom: 0 !important;
+}
+*[class~=responsive_td_ge_int] {
+display: block;
+width: auto !important;
+padding-left: 15px !important;
+padding-top: 0 !important;
+padding-bottom: 10px !important;
+}
+*[class~=responsive_td_ge_logo] {
+display: block;
+width: auto !important;
+padding-left: 15px !important;
+padding-top: 15px !important;
+}
+/* Helpers */
+*[class~=noborder_on_mobile] {
+border:0!important;
+}
+*[class~=nopadding_on_mobile] {
+padding:0!important;
+}
+*[class~=pushdown_on_mobile] {
+padding-bottom:10px!important;
+}
+*[class~=center_on_mobile] {
+text-align: center!important;
+}
+*[class~=center_on_mobile] img,
+*[class~=center_on_mobile] *[class~=book_again_btn] {
+margin: 0 auto;
+}
+*[class~=center_on_mobile] table {
+margin:0 auto;
+}
+*[class~=hide_on_mobile] {
+display: none !important;
+}
+*[class~=single_row_cell] {
+overflow: hidden;
+border-bottom: 1px dotted #aaaaaa;
+padding-bottom: 5px;
+}
+.mg_conf_explorer_entry_point_empty_td {
+width:2.5%!important;
+}
+.mg_conf_explorer_entry_point_main_td {
+width: 95%!important;
+}
+}
+</style>
+  <title>Your modified booking at <?php echo $hotel_info->name; ?></title>
+ </head>
+ <body class=" en-us" style="
+margin:0;
+padding:0;
+background-color:#fff;
+font-family: arial;
+" yahoo="fix">
 
-                <?php foreach (json_decode($extras) as $key => $extra) : ?>
-                <span class="label1 col-xs-6 bold"><?php echo $extra->name; ?></span>
-                <span class="val1 col-xs-6 bold"><?php echo $extra->price; ?> <?php echo $hotel_info->currency; ?></span>
-                <?php endforeach; ?>
-            </div>
-            <div class="t-row clearfix no-border">
-                <span class="label1 col-xs-6 bold toplam">Toplam ücret</span>
-                <span class="val1 col-xs-6 bold toplam"><?php echo $total_price; ?> <?php echo $hotel_info->currency; ?></span>
-            </div>
-            <div class="t-row clearfix no-border">
-                <span class="label1 col-xs-6 bold">&nbsp;</span>
-                <span class="val1 col-xs-6 bold"> En İyi Fiyat Garantisi</span>
-            </div>
-            <br/>
-            <!--
-            <div>
-                <?php echo sprintf(lang('payment_box'),$hotel_info->name); ?>
-                <br/>
-                %14,75 Vergi hariçtir.<br />
-                Gecelik 3,50 US$ şehir vergisi hariçtir.<br />
-                Önemli: İlave özellikler (ek yatak gibi) bu toplama eklenmemektedir.<br />
-                Gösterilen toplam fiyat tesise ödeyeceğiniz miktardır. Booking.com hiçbir rezervasyon ücreti, idari veya başka herhangi bir ücret almaz.
-            </div>
-            -->
-        </div>
+  <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_container" height="100%" style="
+margin:0px; padding:0px; border:0px;
+ 
+margin:0;
+padding:0;
+background-color:#fff;
+font-family: arial;
+" width="100%">
+   <tr>
+    <td align="center" valign="top">
+     <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_canvas responsive_table" style="width:580px; 
+margin:0;
+padding:0;
+background:#ffffff;
+font-family: arial;
+">
+      <tr>
+       <td style="padding-top:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_header" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td class="responsive_td center_on_mobile" style="
+text-align:left;
+ font-size:0;" valign="top"><a href="<?php echo $hotel_info->website; ?>" target="_blank" title="Booking.com">
+<img  alt="rabooking" height="100" src="<?php  echo $hotel_info->hotel_logo; ?>" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none;" width="200" />
+</a></td>
+          <td class="td-action-print--header" style="
+text-align:right;
+" valign="middle"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify;print_confirmation=1" style="display:block;text-decoration:none;" target="_blank"><table align="right" border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+background-color:#0896ff;border-radius:3px;padding:5px 10px;margin-left:15px;">
+             <tr>
+              <td style="
+text-align:left;
+" valign="middle" width="25"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify;print_confirmation=1" target="_blank"><img  height="19" src="https://r.bstatic.com/static/img/conf_email/print.gif" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" width="19" /></a></td>
+              <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="middle"><a href="#" style="color:#fff;text-decoration:none;" target="_blank"><span style="white-space:nowrap;">Get the print version</span></a></td>
+             </tr>
+            </table></a></td>
+         </tr>
+        </table>
+       </td>
+      </tr>
 
-        <?php foreach (json_decode($rooms) as $key => $room) : ?>
-        <?php $p = get_policy($room->policy);?>
-        <fieldset class="table-legend">
-        <legend class="table-legend"><?php echo $room->name; ?></legend>
-        
-        <div class="details-block">
-            <?php if (isset($room->preferences->guest_name)) { ?>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold">Konuk adı</span>
-                <span class="val1 col-xs-9"><?php echo $room->preferences->guest_name; ?></span>
-            </div>
-            <?php } ?>
-        </div>
-       
-        <div class="title4 bold">Önemli Bilgiler</div>
-        <p>
-            Havaalanı servisi sadece belirli saatlerde hizmet vermektedir. Bu hizmet ek ücrete tabi olabilir. Ayrıntılı bilgi için tesisle irtibata geçiniz.<br/>
-            Check-in sırasında konukların fotoğraflı kimlik belgesi ve kredi kartı göstermesi gerekmektedir. Özel İsteklerin doluluk durumuna bağlı olduğunu ve ek ücrete tabi olabileceğini lütfen unutmayın.
-        </p>
-        <p>
-            <?php echo $p->extra; ?>
-        </p>
-        <br/>
-        <div class="title4 bold"><?php echo lang('sales_policy'); ?></div>
-        <p>
-        <?php if(checkbox_selected(@$p->sales->policy_note)){
+
+      <tr><td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top"></td> </tr>
+
+      <?php if($status == 1) : ?>
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mod_summary" style="margin:0px; padding:0px; border:0px;" width="100%">
+            <tbody><tr>
+              <td style="background-color: #59CB7F;border:1px solid #d3d3d3;padding:15px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                <tbody><tr>
+                  <td style="text-align:left;font-family: arial;color:#333;font-size:12px;line-height:17px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                    <tbody><tr>
+                      <td style="text-align:left;font-size:18px;line-height:22px;font-family: arial;color:#fff;page-break-after: avoid;font-weight:bold;" valign="top"> Your reservation is approved</td>
+                      </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </tbody></table>
+          </td>
+      </tr>
+    <?php elseif ($status == 0) : ?>
+    <tr>
+        <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mod_summary" style="margin:0px; padding:0px; border:0px;" width="100%">
+            <tbody><tr>
+              <td style="background-color: #E27575;border:1px solid #d3d3d3;padding:15px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                <tbody><tr>
+                  <td style="text-align:left;font-family: arial;color:#333;font-size:12px;line-height:17px;" valign="top"><table border="0" cellpadding="0" cellspacing="0" style="margin:0px; padding:0px; border:0px;" width="100%">
+                    <tbody><tr>
+                      <td style="text-align:left;font-size:18px;line-height:22px;font-family: arial;color:#fff;page-break-after: avoid;font-weight:bold;" valign="top"> Your reservation has been canceled </td>
+                      </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </tbody></table>
+          </td>
+      </tr>
+    <?php endif; ?>
+
+      <!-- Your Changes
+      <tr>
+       <td style="padding-top:20px; padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_reassurance" style="
+margin:0px; padding:0px; border:0px;
+ " width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+" valign="top">
+Your modified booking is now confirmed
+</td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mod_summary" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+background-color:#feffe0;
+border:1px solid #d3d3d3;
+ padding:15px;" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <tr>
+             <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+" valign="top">
+Your changes
+</td>
+            </tr>
+            <tr>
+             <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top">
+              <table cellpadding="0" cellspacing="0" style="line-height:17px;">
+               <tr>
+                <td colspan="2" style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding:.6em 0 0;" valign="top"><b>
+Classic King or Queen Bed
+for guest <u>Mizgin Uzan1</u>
+</b></td>
+               </tr>
+               <tr>
+                <td style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:10px; white-space: nowrap;" valign="top">Guest Name:</td>
+                <td style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top">
+Mizgin Uzan1
+ (was Mizgin Uzan)
+</td>
+               </tr>
+              </table>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      -->
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_hotel_preview" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+
+        <?php if($hotel_info->cover_photo) : ?>
+         <tr>
+          <td valign="top">
+          <img  border="0" class="responsive_img" height="185" src="<?php echo $hotel_info->cover_photo; ?>" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" width="580" />
+          </td>
+         </tr>
+       <?php endif; ?>
+
+         <tr>
+          <td style="padding-top:5px; 
+text-align:left;
+" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_hotel_photo_and_contacts" style="
+margin:0px; padding:0px; border:0px;
+">
+            <tr>
+             <td class="responsive_td" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ " valign="top">
+              <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_hotel_contacts" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+               <tr>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:10px;" valign="top"><b>Address:</b></td>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top"><span><?php echo $hotel_info->adress; ?></span><br />
+<span><?php echo $hotel_info->city; ?></span></td>
+               </tr>
+               <tr>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:10px;" valign="top"><b>Phone:</b></td>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top"><span><?php echo $hotel_info->phone; ?> </span></td>
+               </tr>
+
+               <tr>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:10px;" valign="top"><b>Email:</b></td>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="bottom"><?php echo $hotel_info->email; ?></td>
+               </tr>
+
+               <?php if (isset($settings['map_lat']) or isset($settings['map_long'])) : ?>
+               <tr>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:10px;" valign="top"><b>Getting there:</b></td>
+                <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="bottom"><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $settings['map_lat']; ?>+<?php echo $settings['map_long']; ?>">Show directions</a></td>
+               </tr>
+             <?php endif; ?>
+              </table>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td class="td--no-padding" style="padding-top:5px; padding-bottom:20px; padding-left:10px; padding-right:10px; padding-top: 0 !important;padding-bottom: 10px !important;" valign="top">
+        <style>
+*[class~=td-with-right-border] {
+/*border-right:1px solid #c3c3c3;*/
+}
+@media only screen and (max-width: 480px) {
+*[class~=td-with-right-border] {
+border-right:none !important;
+}
+*[class~=td-action-print--header] {
+display: none !important;
+}
+*[class~=td-action-print--body] {
+display:table-cell !important; width: 100% !important; overflow: visible !important; float: none !important;
+}
+*[class~=td--has-bg] {
+background: #e6edf6 !important;
+padding: 10px 0 !important;
+border: 2px solid #fff !important;
+border-radius: 2px;
+}
+*[class~=td--no-padding] {
+}
+}
+@media only screen and (min-width: 480px) {
+*[class~=td-with-right-border] {
+border-right:none;
+}
+}
+</style>
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_actions" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td class="responsive_td pushdown_on_mobile td-with-right-border td--has-bg" style="padding:5px 0;width: 100%;" valign="top" width="100%"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify" style="display:block;text-decoration:none;" target="_blank"><table border="0" cellpadding="0" cellspacing="0" class="mg_conf_btn" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+             <tr>
+              <td align="center" valign="top">
+               <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+">
+                <tr>
+                 <td style="
+text-align:left;
+" valign="middle" width="30"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify" target="_blank"><img  height="25" src="https://r.bstatic.com/static/img/conf_email/cog-blue.gif" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" width="25" /></a></td>
+                 <td style="
+text-align:left;
+ 
+font-size:14px;line-height:19px;
+font-family: arial;
+color:#333;
+page-break-after: avoid;
+" valign="middle"><a href="<?php echo $manage_url; ?>" style="color:#0896ff;" target="_blank">
+Manage your booking
+</a></td>
+                </tr>
+               </table>
+              </td>
+             </tr>
+            </table></a></td>
+          <td class="hide_on_mobile"></td>
+          <td class="responsive_td td--has-bg" style="padding:5px 0;width: 100%;" valign="top" width="100%"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify;print_confirmation=1" style="display:block;text-decoration:none;" target="_blank"><table border="0" cellpadding="0" cellspacing="0" class="mg_conf_btn" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+             <tr>
+              <td align="center" class="td-action-print--body" style="width:0; overflow:hidden;float:left; display:none;" valign="top">
+               <table border="0" cellpadding="0" cellspacing="0" class="td-action-print--body" style="
+margin:0px; padding:0px; border:0px;
+width:0; overflow:hidden;float:left; display:none;">
+                <tr>
+                 <td style="
+text-align:left;
+" valign="middle" width="30"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify;print_confirmation=1" target="_blank"><img  height="25" src="https://r.bstatic.com/static/img/conf_email/print-blue.gif" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" width="25" /></a></td>
+                 <td style="
+text-align:left;
+ 
+font-size:14px;line-height:19px;
+font-family: arial;
+color:#333;
+page-break-after: avoid;
+" valign="middle"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;source=conf_email;pbsource=conf_email_modify;print_confirmation=1" style="color:#0896ff;" target="_blank"><span style="white-space:nowrap;">Get the print version</span></a></td>
+                </tr>
+               </table>
+              </td>
+             </tr>
+            </table></a></td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_booking_summary" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><b>Booking number</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><?php echo $reservation_code; ?></td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><b>Your reservation</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top">
+<?php echo $nights ?> night,
+<?php echo count(json_decode($rooms)); ?> room
+</td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><b>Check-in</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><time datetime="2015-09-03T15:00:00-04:00"><?php echo date('l F, l, Y',strtotime($checkin)); ?></time>
+<span style="color:#777777; white-space:nowrap;">
+(15:00 - 23:00)
+</span></td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ " valign="top"><b>Check-out</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ " valign="top"><time datetime="2015-09-04T12:00:00-04:00"><?php echo date('l F, l, Y',strtotime($checkout)); ?></time>
+<span style="color:#777777; white-space:nowrap;">
+(until 12:00)
+</span></td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ " valign="top"><b>Booked by</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ " valign="top"><span><?php echo $name_title.' '.$first_name.' '.$last_name; ?></span> (<span><?php echo $email; ?></span>)
+</td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><b>Booking first made on</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+" valign="top"><?php echo $reservation_date; ?></td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_price" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+background-color:#e6edf6;
+border:1px solid #cfd6e0;
+ padding:15px;" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_price_breakdown" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <?php foreach (json_decode($rooms) as $key => $room) : ?>
+            <tr>
+             <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ color:#003580;" valign="top"><b>
+<?php echo $room->name; ?> (x <?php echo $room->qty; ?>)
+</b></td>
+             <td style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ color:#003580;" valign="top"><b style="white-space:nowrap;"><?php echo $room->price; ?> <?php echo $hotel_info->currency; ?></b></td>
+            </tr>
+          <?php endforeach; ?>
+          <?php if(count(json_decode($extras)) > 0 and $extras != 'false') : ?>
+          <?php foreach (json_decode($extras) as $key => $extra) : ?>
+            <tr>
+             <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ color:#003580;" valign="top"><b><?php echo $extra->name; ?>
+</b></td>
+             <td style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px dotted #aaaaaa;
+padding-top:5px;
+padding-bottom:5px;
+ color:#003580;" valign="top"><b style="white-space:nowrap;"><?php echo $extra->price; ?> <?php echo $hotel_info->currency; ?></b></td>
+            </tr>
+          <?php endforeach; ?>
+          <?php endif; ?>
+            <tr>
+             <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-top:5px;" valign="top"><b>
+Total Price
+</b></td>
+             <td style="
+text-align:right;
+ 
+font-size:16px;line-height:21px;
+font-family: arial;
+color:#333;
+page-break-after: avoid;
+ padding-top:5px; color:#003580; padding-left:5px;" valign="top"><b style="white-space:nowrap;"><?php echo $total_price; ?> <?php echo $hotel_info->currency; ?></b></td>
+            </tr>
+            <tr>
+             <td colspan="2" style="
+text-align:right;
+ 
+font-family: arial;
+color:#333;
+font-size:11px;line-height:15px;
+ vertical-align:middle;" valign="middle"><img  src="https://q.bstatic.com/static/img/conf_email/congrats_transparent_bg.png" style="padding-right:5px; vertical-align: middle; outline:none; border:none;" />Best Price Guaranteed</td>
+            </tr>
+           </table>
+           <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_price_extra" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <tr>
+             <td>&nbsp;</td>
+            </tr>
+            
+            
+           </table>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td style="padding-bottom:10px; padding-left:10px; padding-right:10px;" valign="top">
+       </td>
+      </tr>
+
+      <?php if (isset($settings['map_lat']) or isset($settings['map_long'])) : ?>
+      <tr>
+       <td style="padding-top:10px; padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_map" style="
+margin:0px; padding:0px; border:0px;
+ " width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:22px;line-height:24px;
+font-family: arial;
+color:#b0b0b0;
+page-break-after: avoid;
+ color:#003580; padding-bottom:10px;" valign="top"><b>
+ <?php echo $hotel_info->name; ?> On Map</b></td>
+         </tr>
+         <tr>
+          <td valign="top"><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $settings['map_lat']; ?>+<?php echo $settings['map_long']; ?>" target="_blank" title="New York Hilton Midtown">
+<img border="0" class="responsive_img" height="185" src="https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x185&maptype=roadmap&markers=color:blue%7Clabel:S%7C<?php echo $settings['map_lat']; ?>,<?php echo $settings['map_long']; ?>" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" title="Can't see this map? Click here to view location and directions." width="580" />
+</a></td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <?php endif; ?>
+
+<?php foreach (json_decode($rooms) as $key => $room) : ?>
+<?php if($room->policy != 0) : ?>
+<?php $p = get_policy($room->policy);?>
+
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_room_name_and_description" style="
+margin:0px; padding:0px; border:0px;
+ " width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:10px;" valign="top">
+Room Details (<?php echo $room->name; ?>)
+</td>
+         </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_room_policies" style="
+margin:0px; padding:0px; border:0px;
+ " width="100%">
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>Guest name</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+<?php echo $first_name.' '.$last_name; ?>
+</td>
+         </tr>
+         <tr>
+          <td class="responsive_td responsive_key" style="text-align:left;font-family: arial;color:#333;font-size:12px;line-height:17px;border-bottom:1px solid #d3d3d3;padding-top:5px;padding-bottom:5px;padding-right:20px;" valign="top">
+          <b><?php echo lang('sales_policy'); ?></b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+<?php if(checkbox_selected(@$p->sales->policy_note)){
             echo lang('policy_note');
         }
         if(checkbox_selected(@$p->sales->credit_card)){
@@ -347,12 +952,42 @@ a:hover {text-decoration: none;color: #fff;}
             echo lang('taxes');
         }
         ?>
-        </p>
-        <br/>
+</td>
+         </tr>
 
-        <div class="title4 bold"><?php echo lang('cancellation_policy'); ?></div>
-        <p>
-        <?php if(checkbox_selected(@$p->cancel->cancellation_time->status)){
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b><?php echo lang('cancellation_policy'); ?></b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ margin-bottom:5px;">
+  <?php if(checkbox_selected(@$p->cancel->cancellation_time->status)){
             echo sprintf(lang('cancellation_time'),$p->cancel->cancellation_time->value);
         }
         if(checkbox_selected(@$p->cancel->no_show_value->status)){
@@ -365,37 +1000,565 @@ a:hover {text-decoration: none;color: #fff;}
         }
 
         ?>
-        </p>
-        <br/>
-        </fieldset>
-        <?php endforeach; ?>
-        <br />
-        <div class="title4 bold"><?php echo lang('need_support'); ?></div>
-        <div class="details-block">
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold"><?php echo lang('contact_to_hotel'); ?></span>
-                <span class="val1 col-xs-9"><?php echo lang('phone'); ?>: <?php echo $hotel_info->phone; ?></span>
-            </div>
-            <div class="t-row clearfix">
-                <span class="label1 col-xs-3 bold"><?php echo lang('manage_reservation'); ?></span>
-                <span class="val1 col-xs-9 bold">
-                    Dilediğiniz zaman çevrimiçi olarak rezervasyonunuzu görüntüleyebilir veya<br/>
-                    <a href="<?php echo $hotel_info->website; ?>"> değişiklik yapabilirsiniz.<br /></a>
-                    <br/>
-                    <a href="mailto:<?php echo $hotel_info->email; ?>"> Müşteri hizmetlerine e-posta gönderin.</a>
-                </span>
-            </div>
-            <div class="t-row clearfix no-border">
-                <span class="label1 col-xs-3 bold"></span>
-                <span class="label1 col-xs-9 bold">
-                    Sabit veya IP telefondan ararken: 00800 448 826 367<br/>
-                    Cep telefonundan arama yaparken lütfen uluslararası numarayı girin.<br/>
-                    Yurtdışından veya Amerika Birleşik Devletleri içinden: +44 20 3320 2641
-                </span>
-            </div>
         </div>
+          </td>
+         </tr>
+
+         <?php if(NULL != $p->extra) : ?>
+         <tr>
+          <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>
+Other
+</b></td>
+          <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ ">
+<?php echo @$p->extra; ?>
+</div>
+          </td>
+         </tr>
+       <?php endif; ?>
 
 
-    </div>
-</body>
+        </table>
+       </td>
+      </tr>
+
+
+    <?php endif; ?>
+  <?php endforeach; ?>
+ <!--  is everything correct
+   <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_mybooking_widget" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:10px;" valign="top">
+Is everything correct?
+</td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-bottom:5px;" valign="top">
+You can always view or change your booking online Ã¢â‚¬â€œ no registration required.
+</td>
+         </tr>
+         <tr>
+          <td>
+           <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-right:15px;" valign="top">
+              <ul style="margin:0px; padding:0px; border:0px; padding-left:15px;">
+               <li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_changeccdetails" style="color: #0dacee;">
+Edit credit card details
+</a><li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_doCheckinTime" style="color: #0dacee;">
+Request early check-in or late check-out
+</a><li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_changeRequests" style="color: #0dacee;">
+Contact the property
+</a></ul>
+             </td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top">
+              <ul style="margin:0px; padding:0px; border:0px; padding-left:15px;">
+               <li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_changeDates" style="color: #0dacee;">
+Change dates
+</a><li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_changeInfo" style="color: #0dacee;">
+Edit guest details
+</a><li style="margin-bottom:5px;"><a href="https://secure.booking.com/myreservations.en-us.html?bn=991546491;pincode=8213;pbsource=email_doChangeRoom" style="color: #0dacee;">
+Change your room
+</a></ul>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr> -->
+
+
+<!--    Special Requests  
+    <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_special_request" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:10px;" valign="top">
+Special Requests
+</td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ " valign="top">
+Ground-level room request: this booker requests ground-level room(s) - based on availability
+<br />Hello
+</td>
+         </tr>
+        </table>
+       </td>
+      </tr> -->
+
+
+
+<!-- Important Information
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_important_info" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ padding-bottom:10px;" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+">
+            <tr>
+             <td style="
+text-align:left;
+" valign="middle" width="30"><img  height="24" src="https://r.bstatic.com/static/img/conf_email/important_info.gif" style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; border:none; display:block;" width="24" /></td>
+             <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+" valign="middle">
+Important Information
+</td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+" valign="top">
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ margin-bottom:5px;">Please note that the airport shuttle service has limited hours of operation. Charges may be applicable. Contact the property for details.</div>
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ ">Guests are required to show a photo ID and credit card upon check-in. Please note that all Special Requests are subject to availability and additional charges may apply.</div>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr> -->
+
+
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_payment" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:5px;" valign="top">Payment</td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-top:5px;" valign="top">
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ margin-bottom:5px;">You have now confirmed and guaranteed your reservation by credit card.</div>
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ margin-bottom:5px;">
+All payments are to be made at the property during your stay, unless otherwise stated in the policies.
+</div>
+           <div style="
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+">
+The hotel reserves the right to pre-authorize credit cards prior to arrival. 
+</div>
+          </td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-top:5px;" valign="top">
+ <?php if(isset($settings['credit_cards'])) : ?>
+           <div><b>This property accepts the following forms of payment:</b></div>
+           <div>
+<?php foreach ($settings['credit_cards'] as $card) {
+  echo ucfirst($card).',';
+}?>
+</div>
+<?php endif; ?>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+
+
+<!-- Booking Conditions 
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_hotel_policies" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:5px;" valign="top">
+Booking Conditions
+</td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>Guest parking</b></td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+Private parking is available on site (reservation is not needed) and costs  USD 55 per  day.
+</td>
+            </tr>
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>Internet</b></td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+WiFi is available in public areas and is free of charge.
+</td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ padding-top:5px;"><a href="https://www.booking.com/hotel/us/hilton-new-york.html?aid=304142;checkin=2015-09-03;checkout=2015-09-04;label=postbooking_confemail#policies">See all Booking Conditions</a></td>
+         </tr>
+        </table>
+       </td>
+      </tr> -->
+      <tr>
+       <td style="padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_hotel_policies" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td style="
+text-align:left;
+ 
+font-size:18px;line-height:22px;
+font-family: arial;
+color:#003580;
+page-break-after: avoid;
+font-weight:bold;
+ padding-bottom:5px;" valign="top">
+Need help with your reservation?
+</td>
+         </tr>
+         <tr>
+          <td style="
+text-align:left;
+" valign="top">
+           <table border="0" cellpadding="0" cellspacing="0" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>Contact the property</b></td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+Phone: <?php echo $hotel_info->phone;?>
+</td>
+            </tr>
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top"><b>Manage your booking</b></td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+
+              <div style="margin-bottom:10px;">You can <a href="<?php echo $manage_url; ?>" target="_blank">view your reservation</a> or <a href="<?php echo $manage_url; ?>" target="_blank">make changes</a> online anytime.</div>
+
+             </td>
+            </tr>
+            <tr>
+             <td class="responsive_td responsive_key" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+padding-right:20px;
+" valign="top">
+             </td>
+             <td class="responsive_td responsive_value" style="
+text-align:left;
+ 
+font-family: arial;
+color:#333;
+font-size:12px;line-height:17px;
+ 
+border-bottom:1px solid #d3d3d3;
+padding-top:5px;
+padding-bottom:5px;
+ 
+width:70%;
+" valign="top">
+              <div>
+When calling from a landline or IP phone: <span style="direction: ltr; unicode-bidi:bidi-override;"><?php echo $hotel_info->phone; ?></span><br />
+Please dial the International number when calling from a cell phone. 
+<br />
+When abroad or from United States of America:: <span style="direction: ltr; unicode-bidi:bidi-override;"><?php echo $hotel_info->phone; ?></span><br />
+              </div>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+
+      <tr>
+       <td style="
+text-align:left;
+ 
+color:#333;
+font-style:italic;
+font-family: Georgia, Serif;
+ padding-top:5px; padding-bottom:20px; padding-left:10px; padding-right:10px; " valign="top">
+        <div style="font-size:16px;line-height:21px;">Have a great trip!</div>
+        <div style="font-size:13px;line-height:18px;"><?php echo $hotel_info->name; ?>  Customer Service Team</div>
+       </td>
+      </tr>
+      <tr>
+       <td style="padding-top:20px; padding-bottom:20px; padding-left:10px; padding-right:10px;" valign="top">
+        <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_footer" style="
+margin:0px; padding:0px; border:0px;
+" width="100%">
+         <tr>
+          <td align="center" style="
+font-family: arial;
+font-size:11px;line-height:15px;
+color: #687485;
+ padding-bottom:10px; padding-top:15px; border-top:1px solid #d3d3d3;" valign="top">
+           <div>
+Copyright © 1996 - 2015 Rabooking.com.
+All rights reserved.<br />
+This email was sent by rabooking.com, <?php echo $hotel_info->email; ?>
+</div>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </body>
 </html>
