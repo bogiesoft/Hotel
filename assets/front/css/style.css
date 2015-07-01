@@ -44,7 +44,7 @@ a:hover {text-decoration: none;color: #fff;}
 .tc {background: #000;color: #fff;}
 .tc a {color: #fff !important;}
 .top1 {background: #f3f3f3;text-align: center;padding:0 0 0 10px;}
-#mdate {display: none;}
+ /* #mdate {display: none;} */
 .top2 {background: #f3f3f3;padding: 10px;border-top: 1px solid #fff;}
 .top2 input,.top2 select {border: none;text-align: right;font-weight: bold;height: 36px;border:1px solid #000;font-size: .8em;padding-right: 10px;}
 .top2 .small-input {width: 60px;text-align: center;}

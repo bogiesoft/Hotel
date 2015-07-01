@@ -71,15 +71,18 @@ class Hotel extends RA_Controller {
 		$this->start_date = date('Y-m-d', strtotime($this->start_date));
 		$this->end_date = date('Y-m-d', strtotime($this->end_date));
 
-		//salaklar start date'i end date'den sonrası bir tarihe girerse falan
-		if (strtotime($this->start_date) >= strtotime($this->end_date)) {
-			exit('Checkout Date Error');
-		}
+		
 
 		//salaklar geçmişe dönük rezervasyon yapmak isterse
-		
 		if (strtotime($this->start_date) < strtotime(date('Y-m-d'))) {
-			exit('Checkin Date Error');
+			$this->start_date = date('Y-m-d');
+			//exit('Checkin Date Error');
+		}
+
+		//salaklar start date'i end date'den sonrası bir tarihe girerse falan
+		if (strtotime($this->start_date) >= strtotime($this->end_date)) {
+			//$this->end_date = date('d-m-Y',strtotime('+1 day',strtotime($this->start_date)));
+			exit('Checkout Date Error');
 		}
 
 		//clear cart

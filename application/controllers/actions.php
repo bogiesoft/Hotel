@@ -353,7 +353,7 @@ class Actions extends RA_Controller {
         		//send mail
         		$this->send_information_mail($data,$res_code);
         		//send mail to hotel
-        		//$this->send_information_mail_to_hotel($data,$res_code);
+        		$this->send_information_mail_to_hotel($data,$res_code);
         		
         		//send sms
         		if ($this->input->post('sendsms')) {
