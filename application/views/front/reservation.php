@@ -38,7 +38,23 @@
                     <button id="editConf" class="c-btn pull-right">
                             <span class="sprite pencil-white"></span>&nbsp;Edit
                     </button>
-                    
+
+                <?php elseif ($reservation->status == 2) : ?>
+
+                 <div class="confirm-msg">
+                      Your reservation has been modified
+                    </div>
+
+                    <button class="c-btn btn-cancel-booking pull-right" data-toggle="modal" data-target="#cancel_modal">
+                        <span class="sprite cancel-white"></span>&nbsp;&nbsp;&nbsp;Cancel Reservation
+                    </button>
+                    <button class="c-btn pull-right">
+                        <span class="sprite printer-white"></span>&nbsp;&nbsp;&nbsp;Print Confirmation
+                    </button>
+                    <button id="editConf" class="c-btn pull-right">
+                            <span class="sprite pencil-white"></span>&nbsp;Edit
+                    </button>
+
                 <?php elseif ($reservation->status == 0) : ?>
 
                     <div class="error-msg">
@@ -53,6 +69,7 @@
 
                     <div class="clearfix"></div>
                 </div>
+
                 <div class="confirm-actions">
                 <?php if ($reservation->status == 1) :?>
                     <div class="a-text col-md-6">
@@ -98,7 +115,7 @@
 
                             <div class="map-sep"></div>
                             <span style="font-weight:normal">Phone:</span> <span class="bold"><?php echo $hotel->phone; ?></span><br />
-                            <a class="bold underline" href="<?php echo $hotel->email; ?>">Email property</a><br />
+                            <a class="bold underline" href="mailto:<?php echo $hotel->email; ?>">Email property</a><br />
 
                         </div>
                     </div>
