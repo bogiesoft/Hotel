@@ -291,7 +291,7 @@ class Hotel extends RA_Controller {
 		$rate 		= $this->input->post('rate');
 		$currency 	= $this->input->post('currency');
 		$default_currency = $this->input->post('default_currency');
-		$room_prices = $this->session->userdata('prices_all');
+		
 
 		//print_r($room_prices);
 		//exit;
@@ -307,17 +307,18 @@ class Hotel extends RA_Controller {
 		//add item
 		}else{
 
+			$room_prices = $this->session->userdata('prices_all');
 			
 			foreach ($user_cart as $key => $c) {
 				if ($c['room_id'] == $room_id and $c['promotion'] == $promotion) {
-					unset($key);
+					unset($user_cart[$key]);
 				}
 			}
 
 			if ($promotion != 0) {
-				$price = $room_prices->$room_id->promotions->$promotion->price;
+				$price = @$room_prices->$room_id->promotions->$promotion->price;
 			}else{
-				$price = $room_prices->$room_id->price;
+				$price = @$room_prices->$room_id->price;
 			}
 
 			$arr =  array('room_id'=>$room_id, 
@@ -477,6 +478,7 @@ class Hotel extends RA_Controller {
 
 	public function clear_session(){
 		$this->session->unset_userdata('guest');
+		$this->session->sess_destroy();
 	}
 	
 
