@@ -313,3 +313,5 @@ img.ui-datepicker-trigger{cursor:pointer}
 
 #dLabel{background-image:url(mnu-down.png);padding-left:66px;background-position: 10px center;background-repeat:no-repeat}
 .open #dLabel{background-image:url(mnu-up.png)}
+
+.font-s-13{font-size: 13px;}

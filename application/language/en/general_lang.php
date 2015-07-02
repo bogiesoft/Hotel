@@ -58,3 +58,4 @@ $lang['saturday']	= 'Saturday';
 
 $lang['yes']		= 'Yes';
 $lang['no']			= 'No';
+$lang['0']			= '';

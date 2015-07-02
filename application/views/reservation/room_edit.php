@@ -197,7 +197,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <select name="room_included[]">
-                      <option>Choose</option>
+                      <option value="0">Choose</option>
                       <?php foreach (room_specs() as $k => $v) {
                         $selected = $k == $inc ? 'selected="selected"' :'';
                         echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';

@@ -331,7 +331,9 @@ $this->load->view('front/header');
                                     });
                                     </script>
                                     <?php }else{ ?>
+                                    <div class="font-s-13">
                                     Until <?php echo date('j F Y',strtotime($promo['end_date'])); ?>
+                                    </div>
                                     <?php } ?>
                                     <br />
                                     <?php 
