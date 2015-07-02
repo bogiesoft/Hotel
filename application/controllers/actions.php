@@ -375,9 +375,14 @@ class Actions extends RA_Controller {
 		$this->lang->load('reservation/mail','en');
 
 		if ($res_code) {
-			$subject = 'Edit Reservation - '.$res_code;
+			$subject = 'Modified Reservation - '.$res_code;
 		}else{
-			$subject = 'Your Reservation';
+			$subject = 'New Reservation - '.$data['reservation_code'];
+		}
+
+		//if cancelled
+		if (isset($data['status']) and $data['status'] == 0) {
+			$subject = 'Cancelled Reservation - '.$data['reservation_code'];
 		}
 
 		$user_mail = $data['email'];
@@ -412,9 +417,14 @@ class Actions extends RA_Controller {
 		$this->lang->load('reservation/mail','en');
 
 		if ($res_code) {
-			$subject = 'Edit Reservation - '.$res_code;
+			$subject = 'Modified Reservation - '.$res_code;
 		}else{
-			$subject = 'Your Reservation';
+			$subject = 'New Reservation'.$data['reservation_code'];
+		}
+
+		//if cancelled
+		if (isset($data['status']) and $data['status'] == 0) {
+			$subject = 'Cancelled Reservation - '.$data['reservation_code'];
 		}
 
 		$user_mail = $data['hotel_info']->email;
