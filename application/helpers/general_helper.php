@@ -713,6 +713,26 @@ function get_policy($id){
 	return json_decode($p->policy_details);
 }
 
+function get_hotel_policy($hotel_id){
+	$ci =& get_instance();
+	$query = "SELECT policy_details FROM policies WHERE hotel_id=$hotel_id ORDER BY id LIMIT 1";
+
+	$p = $ci->db->select('policy_details')
+		->from('policies')
+		->where('hotel_id',$hotel_id)
+		->order_by('id')
+		->limit('1')
+		->get();
+
+
+	if ($p->num_rows() > 0) {
+		return json_decode($p->row()->policy_details);
+	}else{
+		return false;
+	}
+	
+}
+
 function checkbox_selected($value){
 	if (isset($value)) {
 		return true;

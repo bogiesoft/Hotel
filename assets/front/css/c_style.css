@@ -1,5 +1,6 @@
 ﻿.extra-cont{position:relative;width:840px}
-.extra-placeholder{height:210px;float:left;width:140px;color:#e2e1dd;background-color:#2A2C30}
+.extra-placeholder{height:210px;float:left;width:140px;color:#e2e1dd;background-color:#2A2C30;  margin-top: 10px;
+  margin-bottom: 10px;}
 .extra-pack{position:relative;height:210px;float:left;width:140px;background-color:#2A2C30;overflow:hidden}
 .extra-pack .p-btn{font-size:11px;height:20px;display:inline-block;cursor:pointer;text-align:center;background:#797979;line-height:18px;text-transform:uppercase}
 .extra-pack .p-btn-confirm{position:absolute;right:20px;bottom:20px;width:100px;}

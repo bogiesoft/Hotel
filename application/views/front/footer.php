@@ -1,3 +1,4 @@
+<?php $this->load->view('front/policy'); ?>
 <div id="footer">
 <div class="container bg-333" style="margin-top:200px;">
 

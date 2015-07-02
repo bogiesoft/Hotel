@@ -306,6 +306,7 @@
 
                         </div>
                     </div>
+                    <!--
                     <div class="pull-right">
                         <div class="head-part">
                             <a id="lang-link" href="#" data-toggle="dropdown" class="dropdown-toggle">
@@ -529,7 +530,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="pull-right">
                         <div class="head-part">
                             <a id="currency-link" href="#" data-toggle="dropdown" class="dropdown-toggle">

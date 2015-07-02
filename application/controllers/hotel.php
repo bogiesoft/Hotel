@@ -92,6 +92,7 @@ class Hotel extends RA_Controller {
 	
 		//load languages
 		$this->lang->load('reservation/rooms',$default_lang);
+		$this->lang->load('reservation/policies',$default_lang);
 
 
 		//get rooms

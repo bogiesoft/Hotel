@@ -1244,8 +1244,8 @@ $this->load->view('front/header');
                             <input type="checkbox" name="confirmation" />
                         </div>
                         <div class="col-md-8 agree">
-                        I have understood and agree to the <a href="#">Booking Conditions</a> and agree to 
-                        <?php echo $hotel_info->name; ?> <a href="#">Privacy Policy</a> .
+                        I have understood and agree to the <a href="#" data-toggle="modal" data-target="#policyModal">Booking Conditions</a> and agree to 
+                        <?php echo $hotel_info->name; ?> <a href="#" data-toggle="modal" data-target="#policyModal">Privacy Policy</a> .
                         </div>
                     </div>
                 </div><!-- end of right column -->
