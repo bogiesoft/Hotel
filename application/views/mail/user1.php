@@ -800,7 +800,7 @@ text-align:right;
 font-family: arial;
 color:#333;
 font-size:11px;line-height:15px;
- vertical-align:middle;" valign="middle"><a href="http://www.booking.com/general.html?tmpl=doc/rate_guarantee&amp;via_bpg_link"><img  src="https://q.bstatic.com/static/img/conf_email/congrats_transparent_bg.png" style="padding-right:5px; vertical-align: middle; outline:none; border:none;" />Best Price Guaranteed</a></td>
+ vertical-align:middle;" valign="middle"><img  src="https://q.bstatic.com/static/img/conf_email/congrats_transparent_bg.png" style="padding-right:5px; vertical-align: middle; outline:none; border:none;" />Best Price Guaranteed</td>
             </tr>
            </table>
            <table border="0" cellpadding="0" cellspacing="0" class="mg_conf_price_extra" style="
