@@ -11,9 +11,6 @@
     </div>
     
     <div class="contentpanel">
-      <div class="row">
-        <a href="<?php echo site_url('reservation/rooms/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle</a>
-      </div>
     
       <div class="row">
         <div class="panel panel-default">

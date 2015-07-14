@@ -14,3 +14,8 @@
 	<a href="<?php echo site_url('staff/users'); ?>">
   	<i class="fa fa-user"></i> <span>Kullanıcılar</span></a>
 </li>
+
+<li <?php echo $this->uri->segment('2') == 'add_new' ? 'class="active"' : ''; ?>>
+	<a href="<?php echo site_url('staff/add_new'); ?>">
+  	<i class="fa fa-plus"></i> <span>Yeni Hesap Ekle</span></a>
+</li>

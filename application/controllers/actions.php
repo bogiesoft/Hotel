@@ -544,6 +544,11 @@ class Actions extends RA_Controller {
 		echo json_encode($response);
 	}
 
+	function get_reservation_detail(){
+		$result = $this->front_model->get_reservation_detail($this->input->get('id'));
+		echo json_encode(array('status' => 'ok', 'data' => $result ));
+	}
+
 
 	function cancel_reservation(){
 		$id = $this->input->post('id');

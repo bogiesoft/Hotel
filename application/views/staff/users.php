@@ -12,7 +12,7 @@
     
     <div class="contentpanel">
       <div class="row">
-        <a href="<?php echo site_url('reservation/rooms/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle</a>
+        <a href="<?php echo site_url('staff/add_new'); ?>" class="btn btn-info pull-right"> Yeni Ekle</a>
       </div>
     
       <div class="row">
@@ -91,7 +91,7 @@
                   width: '2%',
                   sorting: false,
                   display: function (data) {
-                      return $('<a href="'+base_url+'staff/user_edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
+                      return $('<a href="'+base_url+'staff/users/edit/' + data.record.id + '"><img  style="opacity:0.4; width:16px; height:16px; margin-bottom:3px; padding:0;" src="<?php echo site_url("assets/jtable/themes/metro/edit.png"); ?>" /></a>');
                   }
                 }
 

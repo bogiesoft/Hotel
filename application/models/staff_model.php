@@ -63,4 +63,11 @@ class Staff_Model extends CI_Model{
 			GROUP BY month,status
 			ORDER BY year DESC,month DESC")->result();
 	}
+
+	function get_user($id){
+		return $this->db->select('*')
+			->from('accounts')
+			->where('id',$id)
+			->get()->row();
+	}
 }

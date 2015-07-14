@@ -84,9 +84,17 @@ class Staff extends STAFF_Controller {
 			$result['TotalRecordCount'] = '100';
 			$result['Records'] = $this->staff_model->get_users();
 			print json_encode($result);
+		}elseif($this->uri->segment('3') == 'edit'){
+			$user_id = $this->uri->segment('4');
+			$data['user'] = $this->staff_model->get_user($user_id);
+			$this->load->view('staff/user_edit',$data);
 		}else{
 			$this->load->view('staff/users');
 		}
 
+	}
+
+	function add_new(){
+		$this->load->view('staff/add_new');
 	}
 }

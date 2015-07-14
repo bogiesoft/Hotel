@@ -203,4 +203,17 @@ class Front_Model extends CI_Model{
 			->get()->row_array();
 	}
 
+	/*
+	Üsttekinden farklı
+	*/
+	function get_reservation_detail($id){
+		$this->db->select('*');
+		$this->db->from('reservations');
+		if (!empty($id) or NULL != $id) {
+			$this->db->where('id',$id);
+		}
+
+		return $this->db->get()->result();
+
+	}
 }
